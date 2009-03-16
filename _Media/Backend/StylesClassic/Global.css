@@ -1,0 +1,355 @@
+
+/*
+ *
+ * COLORS
+ * ----------------
+ * darkblue    #069
+ * liteblue    #69c
+ * yellow    #cf0
+ * grey        #666
+ * litegrey    #eee
+ *
+ */
+
+
+/*
+ *
+ * Hide font size keywords from ns 4 by putting them into an imported stylesheet
+ *
+ */
+@import url(/_sites/_backend/styles/ns4_toxins.css);
+
+
+
+body {
+    background-color: #eee;
+    color: #666;
+    margin: 0px;
+    text-align: left;
+    font-size: small;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: normal;
+}
+
+h1, h2, h3, form {
+    margin: 0px;
+}
+/*
+ul, ol {
+    margin: 0pt 0pt 0pt 20pt;
+}
+*/
+a {
+    color: #069;
+    text-decoration: none;
+}
+
+a:visited {
+    color: #069;
+    text-decoration: none;
+}
+
+
+
+
+#screen {
+    background-color: #fff;
+    border-bottom: dotted 1px #666;
+    margin: 0px;
+    padding: 5px;
+}
+
+
+
+
+#logoBg {
+    background-color: #069;
+    padding: 10px 2px 5px 10px;
+}
+
+
+
+#logo {
+    display: inline;
+    color: #cf0;
+    font-size: 20pt;
+    font-family: Helvetica, Arial;
+    font-weight: bold;
+    margin: 100px 0px 0px 0px;
+}
+
+#logoText {
+    display: inline;
+    color: #eee;
+    font-size: 6pt;
+    font-family: Helvetica, Arial;
+    font-weight: bold;
+}
+
+
+#header {
+    background-color: #069;
+    width: 100%;
+    padding: 0px 2px 0px 0px;
+    margin: 0px 0px 0px 0px;
+}
+
+
+
+
+
+
+
+
+#sysinfo {
+    color: #eee;
+    width: 100%;
+    margin: 0px;
+    padding: 2px;
+    font-size: x-small;
+    font-weight: normal;
+}
+
+#sysinfo a {
+    color: #cf0;
+    font-weight: bold;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+#breadcrumbs {
+    background-color: #69c;
+    border-width: 0px 1px 1px 1px;
+    border-style: dotted;
+    border-color: #666;
+    padding: 2px;
+    margin: 0px;
+    font-size: x-large;
+}
+
+.breadcrumbsTitle {
+    color: #eee;
+    font-weight: bold;
+}
+
+.breadcrumbsEntityTitle {
+    color: #cf0;
+    font-weight: bold;
+}
+
+.breadcrumbsEntityTitle:visited {
+    color: #cf0;
+}
+
+.breadcrumbsEntityName {
+    color: #eee;
+    font-weight: bold;
+}
+
+.breadcrumbsEntityName:visited {
+    color: #eee;
+}
+
+.breadcrumbsSeparator {
+    color: #069;
+    font-weight: bold;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+#abstract {
+    background-color: #fff;
+    border-width: 0px 1px 0px 1px;
+    border-style: dotted;
+    border-color: #666;
+    padding: 5px 0px 0px 5px;
+    margin: 0px;
+}
+
+#abstract h1 {
+    display: inline;
+}
+#abstract h2 {
+    color: #999;
+    display: inline;
+}
+#abstract p {
+    margin: 0px;
+    font-weight: normal;
+}
+
+
+
+
+
+
+.actions {
+    background-color: #fff;
+    border-width: 0px 1px 1px 1px;
+    border-style: dotted;
+    border-color: #666;
+    padding: 0px 5px 5px 5px;
+    margin-bottom: 10px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#errorStatus {
+    background-color: #c00;
+    border: dotted 1px #666;
+    margin: 20px 0px 20px 30px;
+    padding: 5px;
+}
+#errorStatus h2 {
+    color: #fff;
+    margin: 0px;
+    font-size: medium;
+    font-weight: bold;
+}
+#errorStatus ul {
+    color: #eee;
+    margin: 0px;
+    list-style: square;
+}
+
+
+
+#successStatus {
+    background-color: #699;
+    border: dotted 1px #666;
+    margin: 20px 0px 20px 30px;
+    padding: 5px;
+}
+#successStatus h2 {
+    color: #fff;
+    margin: 0px;
+    font-size: medium;
+    font-weight: bold;
+}
+#successStatus ul {
+    color: #eee;
+    margin: 0px;
+    list-style: square;
+}
+
+
+
+
+
+
+
+
+.mainSectionLevel0 {
+    margin-top: 10px;
+    margin-left: 0px;
+}
+
+.mainSectionLevel1 {
+    margin-top: 3px;
+    margin-left: 30px;
+}
+
+.mainSectionLevel2 {
+    margin-top: 10px;
+    margin-left: 60px;
+}
+
+.mainSectionHeader {
+    background-color: #fff;
+}
+
+
+
+
+
+
+
+
+#footer {
+    background-color: #069;
+    color: #eee;
+    width: 100%;
+    margin-top: 15px;
+}
+
+#backdoor {
+    text-align: right;
+    margin: 15px 0px 50px 0px;
+}
+
+
+#poweredBy {
+    text-align: right;
+    margin: 15px 0px 0px 0px;
+}
+
+
+
+
+
+
+
+
+
+
+.threadSection {
+    background-color: #fff;
+    margin-top: 0px;
+    border: dotted 1px #666;
+    padding: 5px 5px 5px 0px;
+}
+
+.parentSection {
+    background-color: #fff;
+    margin: 0px;
+    color: #666;
+    padding: 0px;
+    border: dotted 1px #666;
+}
+
+.parentActions {
+    background-color: #fff;
+    color: #666;
+    margin: 5px 10px 5px 10px;
+}
+
+

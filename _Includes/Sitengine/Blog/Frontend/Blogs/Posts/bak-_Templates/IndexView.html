@@ -1,0 +1,255 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<!-- Document Created By Christian Hoegl - sitengine.org -->
+
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<meta http-equiv="Pragma" content="no-cache" />
+<meta name="robots" content="noindex, nofollow" />
+
+<title>Sitengine - <?=$this->html($this->DICTIONARY->LABELS->pageTitle);?></title>
+
+<link rel="stylesheet" type="text/css" href="<?=$this->_controller->getEnv()->getMediaRequestDir();?>/Frontend/Styles/Global.css" />
+<link rel="stylesheet" type="text/css" href="<?=$this->_controller->getEnv()->getMediaRequestDir();?>/Frontend/Styles/Lists.css" />
+<script language="JavaScript" type="text/JavaScript" src="<?=$this->_controller->getEnv()->getMediaRequestDir();?>/Global.js"></script>
+
+</head>
+<body>
+
+
+
+<?require 'Sitengine/Env/_Templates/BreadcrumbsSection.html';?>
+<?require 'Sitengine/Env/_Templates/AbstractSection.html';?>
+<?require 'Sitengine/Env/_Templates/StatusSection.html';?>
+
+
+
+
+
+
+
+
+
+
+
+<form method="get" action="<?=$this->_controller->getEnv()->getUriSelfSubmit();?>" name="filterform" class="filterform">
+<?=$this->SECTIONS->POSTS->FILTER->hiddens;?>
+<?foreach($this->SECTIONS->POSTS->FILTER->ELEMENTS as $v):?><?=$v;?><?endforeach;?>
+
+<input type="button" value="<?=$this->html($this->DICTIONARY->LABELS->filterSectionSubmit);?>" onclick="document.filterform.submit();" />
+<input type="button" value="<?=$this->html($this->DICTIONARY->LABELS->filterSectionReset);?>" onclick="window.location = '<?=$this->SECTIONS->POSTS->FILTER->uriReset;?>';" />
+
+</form>
+
+
+
+
+<hr />
+
+
+
+
+<?if(!sizeof($this->SECTIONS->POSTS->DATA)):?>
+
+
+<div class="listformNoRecords">
+<?if($this->SECTIONS->POSTS->FILTER->isActive):?>
+    <span><?=$this->html($this->DICTIONARY->LABELS->listformNoMatchingRecords);?></span><br />
+    <?=$this->html($this->DICTIONARY->LABELS->listformFilterIsActive);?>
+<?else:?>
+    <span><?=$this->html($this->DICTIONARY->LABELS->listformNoRecords);?></span>
+<?endif;?>
+</div>
+
+
+<?else:?>
+
+
+
+
+
+Sort By:
+
+<a href="<?=$this->SECTIONS->POSTS->SORTING->QUERIES->title;?>"><?=$this->html($this->DICTIONARY->COLUMNS->title);?></a>
+&nbsp;<img src="<?=$this->_controller->getEnv()->getMediaRequestDir();?>/Backend/Pics/Sort_<?=$this->SECTIONS->POSTS->SORTING->COLUMNS->title;?>.gif" width="8" height="10" border="0" alt="" />
+
+<a href="<?=$this->SECTIONS->POSTS->SORTING->QUERIES->type;?>"><?=$this->html($this->DICTIONARY->COLUMNS->type);?></a>
+&nbsp;<img src="<?=$this->_controller->getEnv()->getMediaRequestDir();?>/Backend/Pics/Sort_<?=$this->SECTIONS->POSTS->SORTING->COLUMNS->type;?>.gif" width="8" height="10" border="0" alt="" />
+
+<a href="<?=$this->SECTIONS->POSTS->SORTING->QUERIES->publish;?>"><?=$this->html($this->DICTIONARY->COLUMNS->publish);?></a>
+&nbsp;<img src="<?=$this->_controller->getEnv()->getMediaRequestDir();?>/Backend/Pics/Sort_<?=$this->SECTIONS->POSTS->SORTING->COLUMNS->publish;?>.gif" width="8" height="10" border="0" alt="" />
+
+<a href="<?=$this->SECTIONS->POSTS->SORTING->QUERIES->cdate;?>"><?=$this->html($this->DICTIONARY->COLUMNS->cdate);?></a><img src="<?=$this->_controller->getEnv()->getMediaRequestDir();?>/Backend/Pics/Sort_<?=$this->SECTIONS->POSTS->SORTING->COLUMNS->cdate;?>.gif" width="8" height="10" border="0" alt="" /></a>
+
+
+
+
+
+
+<?$pagerAction = $this->_controller->getEnv()->getUriSelfSubmit();?>
+<?$pagerHiddens = $this->SECTIONS->POSTS->PAGER->hiddens;?>
+<?$pagerCurrPageInput = $this->SECTIONS->POSTS->PAGER->currPageInput;?>
+<?$pagerCurrPage = $this->SECTIONS->POSTS->PAGER->currPage;?>
+<?$pagerNextPage = $this->SECTIONS->POSTS->PAGER->nextPage;?>
+<?$pagerPrevPage = $this->SECTIONS->POSTS->PAGER->prevPage;?>
+<?$pagerNumPages = $this->SECTIONS->POSTS->PAGER->numPages;?>
+<?$pagerNumItems = $this->SECTIONS->POSTS->PAGER->numItems;?>
+<?$pagerFirstItem = $this->SECTIONS->POSTS->PAGER->firstItem;?>
+<?$pagerLastItem = $this->SECTIONS->POSTS->PAGER->lastItem;?>
+<?$pagerUriPrevPage = $this->SECTIONS->POSTS->PAGER->uriPrevPage;?>
+<?$pagerUriNextPage = $this->SECTIONS->POSTS->PAGER->uriNextPage;?>
+<?$pagerPrevLabel = $this->DICTIONARY->LABELS->pagerPreviousPage;?>
+<?$pagerNextLabel = $this->DICTIONARY->LABELS->pagerNextPage;?>
+<?$pagerOfLabel = $this->DICTIONARY->LABELS->pagerOf;?>
+<?$pagerPageLabel = $this->DICTIONARY->LABELS->pagerPage;?>
+<?$pagerPagesLabel = $this->DICTIONARY->LABELS->pagerPages;?>
+<?$pagerEntityLabel = $this->DICTIONARY->LABELS->pagerEntity;?>
+<?$pagerValClass = "pagerVal";?>
+<?$pagerTextClass = "pagerText";?>
+<?$pagerHrefPrevClass = "pagerHrefPrev";?>
+<?$pagerHrefNextClass = "pagerHrefNext";?>
+<?$pagerFormName = "pagerTop";?>
+<?$pagerFormClass = "pagerTop";?>
+
+<?require 'Sitengine/Env/_Templates/PagerSection.html';?>
+
+
+
+
+
+<hr />
+
+
+
+
+<?foreach($this->SECTIONS->POSTS->DATA as $row):?>
+<?$cdate = $row->cdate;?>
+<?$title = $this->html($row->title);?>
+<?$markup = $this->html($row->markup);?>
+<?$type = $this->html($row->type);?>
+<?$fileCount = $this->html($row->fileCount);?>
+<?$commentCount = $this->html($row->commentCount);?>
+
+<?$file1OriginalSource = $row->file1OriginalSource;?>
+
+<?$uriView = $row->uriView;?>
+<?$uriFileIndex = $row->uriFileIndex;?>
+<?$uriCommentIndex = $row->uriCommentIndex;?>
+<?$uriCommentInsert = $row->uriCommentInsert;?>
+
+
+<?if($type == Sitengine_Blog_Posts_Table::TYPE_PHOTO):?>
+	Type: <a href="<?=$uriView;?>"><?=$row->type;?></a><br />
+	File: <?=$row->file1OriginalUri;?><br />
+	Caption (html): <?=$row->markup;?><br />
+	Onclick Url: <?=$row->url;?><br />
+	<?=$row->file1OriginalTag;?><br />
+<?elseif($type == Sitengine_Blog_Posts_Table::TYPE_GALLERY):?>
+	Type: <a href="<?=$uriView;?>"><?=$row->type;?></a><br />
+	Title: <?=$row->title;?><br />
+	Description (html): <?=$row->markup;?><br />
+<?elseif($type == Sitengine_Blog_Posts_Table::TYPE_QUOTE):?>
+	Type: <a href="<?=$uriView;?>"><?=$row->type;?></a><br />
+	Source: <?=$row->title;?><br />
+	Quote: <?=$row->markup;?><br />
+<?elseif($type == Sitengine_Blog_Posts_Table::TYPE_LINK):?>
+	Type: <a href="<?=$uriView;?>"><?=$row->type;?></a><br />
+	Name: <?=$row->title;?><br />
+	Url: <?=$row->url;?><br />
+	<a href="<?=$row->url;?>"><?=$this->html($row->title);?></a><br />
+<?elseif($type == Sitengine_Blog_Posts_Table::TYPE_AUDIO):?>
+	Type: <a href="<?=$uriView;?>"><?=$row->type;?></a><br />
+	File: <?=$row->file1OriginalUri;?><br />
+	Description (html): <?=$row->markup;?><br />
+	
+	<?
+		$mp3 = preg_replace('/&amp;/', '&', $row->file1OriginalUri);
+		$escapedProjectDir = preg_replace('/\//', '\/', $this->_controller->getEnv()->getMyProjectDir());
+		$escapedProjectDir = preg_replace('/\./', '\.', $escapedProjectDir);
+		$xsendPath  = $this->_controller->getEnv()->getMyProjectRequestDir();
+		$xsendPath .= '/'.preg_replace('/'.$escapedProjectDir.'\//', '', $row->file1OriginalPath);
+	?>
+	
+<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,47,0" width="30" height="30" id="wimpy_button_45225" name="wimpy_button_45225" >
+<param name="movie" value="<?=$this->_controller->getEnv()->getContribRequestDir();?>/Wimpy/Button/wimpy_button.swf?theFile=<?=$xsendPath;?>" />
+<param name="quality" value="high" />
+<param name="bgcolor" value="#ffffff" />
+<embed src="<?=$this->_controller->getEnv()->getContribRequestDir();?>/Wimpy/Button/wimpy_button.swf?theFile=<?=$xsendPath;?>" width="30" height="30" quality="high" bgcolor="#ffffff" pluginspage="http://www.macromedia.com/go/getflashplayer" type="application/x-shockwave-flash"  name="wimpy_button_45225" /></object><br />
+
+<?elseif($type == Sitengine_Blog_Posts_Table::TYPE_VIDEO):?>
+	Type: <a href="<?=$uriView;?>"><?=$row->type;?></a><br />
+	Embed Tag: <?=$this->html($row->embedTag);?><br />
+	Caption: <?=$row->markup;?><br />
+	<?=$row->embedTag;?><br />
+<?else:?>
+	Type: <a href="<?=$uriView;?>"><?=$row->type;?></a><br />
+	Title: <?=$row->title;?><br />
+	Body (html): <?=$row->markup;?><br />
+<?endif;?>
+
+
+
+<!--
+<?if($type == Sitengine_Blog_Posts_Table::TYPE_GALLERY):?>
+<a href="<?=$uriFileIndex;?>" class="listformDataHref"><?=$this->html($this->DICTIONARY->LABELS->listformGalleryFilesIndex);?></a> (<?=$fileCount;?>)
+<?elseif($type == Sitengine_Blog_Posts_Table::TYPE_TEXT):?>
+<a href="<?=$uriFileIndex;?>" class="listformDataHref"><?=$this->html($this->DICTIONARY->LABELS->listformTextpostFilesIndex);?></a> (<?=$fileCount;?>)
+<?else:?>
+<?=$this->html($this->DICTIONARY->LABELS->listformFilesIndex);?>
+<?endif;?>
+-->
+
+<a href="<?=$uriCommentInsert;?>" class="listformDataHref"><?=$this->html($this->DICTIONARY->LABELS->listformCommentsInsert);?></a> - 
+<a href="<?=$uriCommentIndex;?>" class="listformDataHref"><?=$this->html($this->DICTIONARY->LABELS->listformCommentsIndex);?></a> (<?=$commentCount;?>)
+<?=$cdate;?><br />
+<hr />
+<?endforeach;?>
+
+
+
+
+<hr />
+
+
+
+<?$pagerFormName = "pagerBottom";?>
+<?$pagerFormClass = "pagerBottom";?>
+<?require 'Sitengine/Env/_Templates/PagerSection.html';?>
+
+
+
+
+
+
+
+<form method="get" action="<?=$this->_controller->getEnv()->getUriSelfSubmit();?>" name="settingsForm" class="settingsForm">
+<?=$this->SECTIONS->POSTS->SETTINGS->hiddens;?>
+<?foreach($this->SECTIONS->POSTS->SETTINGS->ELEMENTS as $v):?><?=$v;?><?endforeach;?>
+
+<script type="text/javascript" language="Javascript">
+//<![CDATA[
+//<!--
+if(document.settingsForm.ipp) {
+	document.settingsForm.ipp.onchange = function() { document.settingsForm.submit(); }
+}
+if(document.settingsForm.t) {
+	document.settingsForm.t.onchange = function() { document.settingsForm.submit(); }
+}
+//-->
+//]]>
+</script>
+
+</form>
+
+
+<?endif;?>
+
+
+<hr />
+
+<?require 'Sitengine/Env/_Templates/FooterSection.html';?>
+</body>
+</html>
+
+<!-- Document Created By Christian Hoegl - sitengine.org -->

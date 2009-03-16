@@ -1,0 +1,94 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<!-- Document Created By Christian Hoegl - sitengine.org -->
+
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<meta http-equiv="Pragma" content="no-cache" />
+<meta name="robots" content="noindex, nofollow" />
+
+<title>Sitengine - <?=$this->html($this->DICTIONARY->FORMTEXTVIEW->pageTitle);?></title>
+
+<link rel="stylesheet" type="text/css" href="<?=$this->_controller->getEnv()->getMediaRequestDir();?>/Frontend/Styles/Global.css" />
+<link rel="stylesheet" type="text/css" href="<?=$this->_controller->getEnv()->getMediaRequestDir();?>/Frontend/Styles/Forms.css" />
+<script language="JavaScript" type="text/JavaScript" src="<?=$this->_controller->getEnv()->getMediaRequestDir();?>/Global.js"></script>
+
+</head>
+<body>
+
+
+
+<?require 'Sitengine/Env/_Templates/BreadcrumbsSection.html';?>
+<?require 'Sitengine/Env/_Templates/AbstractSection.html';?>
+<?require 'Sitengine/Env/_Templates/StatusSection.html';?>
+
+
+
+<?foreach($this->SECTIONS->POST as $field => $val):?>
+	<?=$field;?> = <?=$val;?><br />
+<?endforeach;?>
+
+
+<hr />
+
+<h2>Photos</h2>
+
+<?if(!sizeof($this->SECTIONS->FILES)):?>
+
+
+No Photos in this Gallery
+
+
+<?else:?>
+
+<?foreach($this->SECTIONS->FILES as $row):?>
+<?$cdate = $row->cdate;?>
+<?$uriView = $row->uriView;?>
+<?$file1ThumbnailTag = $row->file1ThumbnailTag;?>
+
+<a href="<?=$uriView;?>"><?=$file1ThumbnailTag;?></a>
+
+<?endforeach;?>
+<?endif;?>
+
+
+
+
+
+<hr />
+
+<h2>Comments</h2>
+
+<?if(!sizeof($this->SECTIONS->COMMENTS)):?>
+
+
+<a href="<?=$this->SECTIONS->COMMENTACTIONS->commentInsert->uri;?>">Be the first to write a comment</a>
+
+
+<?else:?>
+
+<a href="<?=$this->SECTIONS->COMMENTACTIONS->commentInsert->uri;?>">Post a comment</a><br />
+
+<?foreach($this->SECTIONS->COMMENTS as $row):?>
+<?$id = $this->html($row->id);?>
+<?$cdate = $row->cdate;?>
+<?$comment = $this->html($this->truncate($row->comment));?>
+<?$name = $this->html($row->name);?>
+<?$firstname = $this->html($row->firstname);?>
+<?$lastname = $this->html($row->lastname);?>
+
+<?=$firstname;?> <?=$lastname;?> @ <?=$cdate;?>
+<h3><?=$comment;?></h3>
+
+<?endforeach;?>
+<?endif;?>
+
+
+<hr />
+
+<?require 'Sitengine/Env/_Templates/FooterSection.html';?>
+</body>
+</html>
+
+<!-- Document Created By Christian Hoegl - sitengine.org -->

@@ -1,0 +1,409 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<!-- Document Created By Christian Hoegl - sitengine.org -->
+
+<html>
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<meta http-equiv="Pragma" content="no-cache" />
+		<meta name="robots" content="noindex, nofollow" />
+		
+		<title>Sitengine - <?=$this->html($this->DICTIONARY->LABELS->pageTitle);?></title>
+		
+		<link rel="stylesheet" type="text/css" href="<?=$this->_controller->getEnv()->getMediaRequestDir();?>/Backend/Styles/Global.css" />
+		<link rel="stylesheet" type="text/css" href="<?=$this->_controller->getEnv()->getMediaRequestDir();?>/Backend/Styles/Forms.css" />
+		<script language="JavaScript" type="text/JavaScript" src="<?=$this->_controller->getEnv()->getMediaRequestDir();?>/Global.js"></script>
+	</head>
+	
+	
+	<body>
+		<div id="screen">
+			<?require 'Sitengine/Env/_Templates/HeaderSection.html';?>
+			<?require 'Sitengine/Env/_Templates/BreadcrumbsSection.html';?>
+			<?require 'Sitengine/Env/_Templates/AbstractSection.html';?>
+			<?require 'Sitengine/Env/_Templates/ActionsSection.html';?>
+			<?require 'Sitengine/Env/_Templates/StatusSection.html';?>
+			
+			
+			<div class="main">
+				<div class="mainSectionLevel1">
+				
+				
+					<div class="mainSectionHeader">
+						<h2 class="mainSectionTitle">
+							<?if($this->SECTIONS->VIEWFORM->inputMode == Sitengine_Env::INPUTMODE_UPDATE):?>
+								<a href="<?=$this->SECTIONS->VIEWFORM->queryUpdate;?>">
+									<?=$this->html($this->SECTIONS->VIEWFORM->title);?>
+								</a>
+							<?else:?>
+								<?=$this->html($this->SECTIONS->VIEWFORM->title);?>
+							<?endif;?>
+						</h2>
+					</div>
+					
+					
+					
+					
+					
+					<form method="post" action="<?=$this->SECTIONS->VIEWFORM->submitUri;?>" enctype="multipart/form-data" name="viewform" class="viewform">
+						<?=$this->SECTIONS->VIEWFORM->hiddens;?>
+						
+						
+						<?if($this->SECTIONS->VIEWFORM->inputMode == Sitengine_Env::INPUTMODE_UPDATE):?>
+							
+							<div class="viewformChildActions">
+							
+								<?$count = 0;?>
+								<?foreach($this->SECTIONS->VIEWFORM->CHILDACTIONS as $navItem):?>
+									<?if($count > 0):?> &#x2022; <?endif;?>
+									<a href="<?=$navItem->uri;?>"><?=$navItem->label;?></a>
+									<?if($navItem->postfix):?><?=$navItem->postfix;?><?endif;?>
+									<?$count++;?>
+								<?endforeach;?>
+							
+							</div>
+						
+						<?else:?>
+							
+							<div class="viewformMain">
+								
+								<?$field = 'notifyNewUser';?>
+								<div class="viewformContainer">
+									<div class="viewformLabelContainer">
+										<label for="<?=$field;?>" class="viewformDefaultLabel">
+											<?=$this->html($this->DICTIONARY->FORMVIEWFIELDS->$field);?>
+										</label>
+									</div>
+									<div class="viewformInputContainer">
+										<?
+											print
+												($this->_controller->getRequest()->get($field)) ?
+												$this->formCheckbox($field, null, array('checked' => true)) :
+												$this->formCheckbox($field)
+											;
+										?>
+									</div>
+								</div>
+						
+							</div>
+						
+						<?endif;?>
+						
+						
+						
+						<div class="viewformMain">
+						
+							<?$field = 'name';?>
+							<div class="viewformContainer">
+								<div class="viewformLabelContainer">
+									<label for="<?=$field;?>" class="viewformRequiredLabel">
+										<?=$this->html($this->DICTIONARY->FORMVIEWFIELDS->$field);?>
+									</label>
+								</div>
+								<div class="viewformInputContainer">
+									<?=$this->formText($field, $this->SECTIONS->VIEWFORM->DATA->$field, array('size' => 30));?>
+								</div>
+							</div>
+							
+							
+							<?$field = 'nickname';?>
+							<div class="viewformContainer">
+								<div class="viewformLabelContainer">
+									<label for="<?=$field;?>" class="viewformRequiredLabel">
+										<?=$this->html($this->DICTIONARY->FORMVIEWFIELDS->$field);?>
+									</label>
+								</div>
+								<div class="viewformInputContainer">
+									<?=$this->formText($field, $this->SECTIONS->VIEWFORM->DATA->$field, array('size' => 30));?>
+								</div>
+							</div>
+							
+							
+							<?$field = 'firstname';?>
+							<div class="viewformContainer">
+								<div class="viewformLabelContainer">
+									<label for="<?=$field;?>" class="viewformRequiredLabel">
+										<?=$this->html($this->DICTIONARY->FORMVIEWFIELDS->$field);?>
+									</label>
+								</div>
+								<div class="viewformInputContainer">
+									<?=$this->formText($field, $this->SECTIONS->VIEWFORM->DATA->$field, array('size' => 30));?>
+								</div>
+							</div>
+							
+							
+							<?$field = 'lastname';?>
+							<div class="viewformContainer">
+								<div class="viewformLabelContainer">
+									<label for="<?=$field;?>" class="viewformRequiredLabel">
+										<?=$this->html($this->DICTIONARY->FORMVIEWFIELDS->$field);?>
+									</label>
+								</div>
+								<div class="viewformInputContainer">
+									<?=$this->formText($field, $this->SECTIONS->VIEWFORM->DATA->$field, array('size' => 30));?>
+								</div>
+							</div>
+							
+							
+							<?$field = 'timezone';?>
+							<div class="viewformContainer">
+								<div class="viewformLabelContainer">
+									<label for="<?=$field;?>" class="viewformRequiredLabel">
+										<?=$this->html($this->DICTIONARY->FORMVIEWFIELDS->$field);?>
+									</label>
+								</div>
+								<div class="viewformInputContainer">
+									<?=
+										$this->formSelect(
+											$field,
+											$this->SECTIONS->VIEWFORM->DATA->$field,
+											array(),
+											$this->_controller->getEnv()->getTimezones()
+										);
+									?>
+								</div>
+							</div>
+							
+							
+							<?$field = 'country';?>
+							<div class="viewformContainer">
+								<div class="viewformLabelContainer">
+									<label for="<?=$field;?>" class="viewformRequiredLabel">
+										<?=$this->html($this->DICTIONARY->FORMVIEWFIELDS->$field);?>
+									</label>
+								</div>
+								<div class="viewformInputContainer">
+									<?=
+										$this->formSelect(
+											$field,
+											$this->SECTIONS->VIEWFORM->DATA->$field,
+											array(),
+											$this->SECTIONS->VIEWFORM->DATA->countryOptions->toArray()
+										);
+									?>
+								</div>
+							</div>
+							
+							<br />
+						
+						</div>
+						
+						
+						
+						<div class="viewformMain">
+							
+							<?$field = 'password';?>
+							<div class="viewformContainer">
+								<div class="viewformLabelContainer">
+									<label for="<?=$field;?>" class="viewformRequiredLabel">
+										<?=$this->html($this->DICTIONARY->FORMVIEWFIELDS->$field);?>
+									</label>
+								</div>
+								<div class="viewformInputContainer">
+									<?=
+										$this->formPassword(
+											$field,
+											$this->_controller->getRequest()->getPost($field),
+											array('size' => 30)
+										);
+									?>
+								</div>
+							</div>
+							
+							
+							<?$field = 'passwordConfirm';?>
+							<div class="viewformContainer">
+								<div class="viewformLabelContainer">
+									<label for="<?=$field;?>" class="viewformRequiredLabel">
+										<?=$this->html($this->DICTIONARY->FORMVIEWFIELDS->$field);?>
+									</label>
+								</div>
+								<div class="viewformInputContainer">
+									<?=
+										$this->formPassword(
+											$field,
+											$this->_controller->getRequest()->getPost($field),
+											array('size' => 30)
+										);
+									?>
+								</div>
+							</div>
+							<br />
+							
+						</div>
+						
+						
+						
+						
+						<div class="viewformMain">
+						
+							<?
+								$path = $this->_controller->getEnv()->getIncludesDir().'/Sitengine/Env/_Templates/FormFileSection.html';
+								$this->setScriptPath(dirname($path));
+								$vars = array(
+									'name' => 'avatarOriginal',
+									'displayDeleteCheckbox' => 1,
+									'fileSource' => $this->SECTIONS->VIEWFORM->DATA->avatarOriginalSource,
+									'fileName' => $this->SECTIONS->VIEWFORM->DATA->avatarOriginalName,
+									'fileWidth' => $this->SECTIONS->VIEWFORM->DATA->avatarOriginalWidth,
+									'fileHeight' => $this->SECTIONS->VIEWFORM->DATA->avatarOriginalHeight,
+									'fileIsImage' => $this->SECTIONS->VIEWFORM->DATA->avatarOriginalIsImage,
+									'fileSizeKb' => $this->SECTIONS->VIEWFORM->DATA->avatarOriginalSizeKb,
+									'fileMime' => $this->SECTIONS->VIEWFORM->DATA->avatarOriginalMime,
+									'filePath' => $this->SECTIONS->VIEWFORM->DATA->avatarOriginalUri,
+									'fileInfoFilesize' => $this->DICTIONARY->VIEWFORM->fileInfoFilesize,
+									'fileInfoDoctype' => $this->DICTIONARY->VIEWFORM->fileInfoDoctype,
+									'fileInfoWidth' => $this->DICTIONARY->VIEWFORM->fileInfoWidth,
+									'fileInfoHeight' => $this->DICTIONARY->VIEWFORM->fileInfoHeight,
+									'fileInfoSourcename' => $this->DICTIONARY->VIEWFORM->fileInfoSourcename,
+									'fileInfoFilename' => $this->DICTIONARY->VIEWFORM->fileInfoFilename,
+									'fileInfoRemoveFile' => $this->DICTIONARY->VIEWFORM->fileInfoRemoveFile,
+									'fileInfoFilesize' => $this->DICTIONARY->VIEWFORM->fileInfoFilesize,
+									'fileInfoFilesize' => $this->DICTIONARY->VIEWFORM->fileInfoFilesize,
+									'fileInfoFilesize' => $this->DICTIONARY->VIEWFORM->fileInfoFilesize,
+									'fileNewWidth' => 200
+								);
+							?>
+							
+							<div class="viewformContainer">
+								<div class="viewformLabelContainer">
+									<label for="avatarOriginal" class="viewformDefaultLabel">
+										<?=$this->html($this->DICTIONARY->FORMVIEWFIELDS->avatarOriginal);?>
+									</label>
+									<div><?=$this->html($this->DICTIONARY->FORMVIEWFIELDS->avatarOriginalHint);?></div>
+								</div>
+								<div class="viewformInputContainer">
+									<?=$this->partial(basename($path), $vars);?>
+								</div>
+							</div>
+						
+						</div>
+						
+						
+						
+						
+						
+						<div class="viewformMeta">
+						
+							<div class="viewformSectionTitle"><?=$this->html($this->DICTIONARY->VIEWFORM->metaSectionTitle);?></div>
+							
+							
+							<div class="viewformContainer">
+								<div class="viewformLabelContainer">
+									<label for="newsletter" class="viewformDefaultLabel">
+										<?=$this->html($this->DICTIONARY->FORMVIEWFIELDS->newsletter);?>
+									</label>
+								</div>
+								<div class="viewformInputContainer">
+									<?
+										print
+											($this->SECTIONS->VIEWFORM->DATA->newsletter) ?
+											$this->formCheckbox('newsletter', null, array('checked' => true)) :
+											$this->formCheckbox('newsletter')
+										;
+									?>
+								</div>
+							</div>
+							
+							
+							<div class="viewformContainer">
+								<div class="viewformLabelContainer">
+									<label for="enabled" class="viewformDefaultLabel">
+										<?=$this->html($this->DICTIONARY->FORMVIEWFIELDS->enabled);?>
+									</label>
+								</div>
+								<div class="viewformInputContainer">
+									<?
+										print
+											($this->SECTIONS->VIEWFORM->DATA->enabled) ?
+											$this->formCheckbox('enabled', null, array('checked' => true)) :
+											$this->formCheckbox('enabled')
+										;
+									?>
+								</div>
+							</div>
+							
+							
+							<div class="viewformContainer">
+								<div class="viewformLabelContainer">
+									<label for="locked" class="viewformDefaultLabel">
+										<?=$this->html($this->DICTIONARY->FORMVIEWFIELDS->locked);?>
+									</label>
+								</div>
+								<div class="viewformInputContainer">
+									<?
+										print
+											($this->SECTIONS->VIEWFORM->DATA->locked) ?
+											$this->formCheckbox('locked', null, array('checked' => true)) :
+											$this->formCheckbox('locked')
+										;
+									?>
+								</div>
+							</div>
+						
+						</div>
+						
+						
+						
+						<?if($this->SECTIONS->VIEWFORM->inputMode == Sitengine_Env::INPUTMODE_UPDATE):?>
+						
+							<?
+								require_once 'Zend/Date.php';
+								$date = new Zend_Date($this->SECTIONS->VIEWFORM->DATA->cdate, 'yyyy-MM-dd HH:mm:ss');
+								$date->setTimezone($this->_controller->getPreferences()->getTimezone());
+								$cdate  = $date->get(Zend_Date::DATE_LONG, $this->_controller->getLocale());
+								$cdate .= ' '.$date->get(Zend_Date::TIME_LONG, $this->_controller->getLocale());
+								
+								$date = new Zend_Date($this->SECTIONS->VIEWFORM->DATA->mdate, 'yyyy-MM-dd HH:mm:ss');
+								$date->setTimezone($this->_controller->getPreferences()->getTimezone());
+								$mdate  = $date->get(Zend_Date::DATE_LONG, $this->_controller->getLocale());
+								$mdate .= ' '.$date->get(Zend_Date::TIME_LONG, $this->_controller->getLocale());
+								
+								$lastLogin = '---';
+								if(Zend_Date::isDate($this->SECTIONS->VIEWFORM->DATA->lastLogin, 'yyyy-MM-dd HH:mm:ss'))
+								{
+									$date = new Zend_Date($this->SECTIONS->VIEWFORM->DATA->lastLogin, 'yyyy-MM-dd HH:mm:ss');
+									$date->setTimezone($this->_controller->getPreferences()->getTimezone());
+									$lastLogin  = $date->get(Zend_Date::DATE_LONG, $this->_controller->getLocale());
+									$lastLogin .= ' '.$date->get(Zend_Date::TIME_LONG, $this->_controller->getLocale());
+								}
+							?>
+							
+							<div class="viewformDate">
+								<span class="viewformDateLabel"><?=$this->html($this->DICTIONARY->VIEWFORM->dateSectionCdate);?></span>
+								<span class="viewformDateValue"><?=$this->html($cdate);?></span>
+								&nbsp;&nbsp;
+								
+								<span class="viewformDateLabel"><?=$this->html($this->DICTIONARY->VIEWFORM->dateSectionMdate);?></span>
+								<span class="viewformDateValue"><?=$this->html($mdate);?></span>
+								&nbsp;&nbsp;
+								
+								<span class="viewformDateLabel"><?=$this->html($this->DICTIONARY->FORMVIEW->dateSectionLastLogin);?></span>
+								<span class="viewformDateValue"><?=$this->html($lastLogin);?></span>
+								&nbsp;&nbsp;
+							</div>
+						
+						<?endif;?>
+						
+						
+						
+						<div class="viewformSubmit">
+							<?if($this->SECTIONS->VIEWFORM->inputMode == Sitengine_Env::INPUTMODE_UPDATE):?>
+								<input type="submit" value="<?=$this->html($this->DICTIONARY->FORMVIEW->updateSubmit);?>" />
+							<?else:?>
+								<input type="submit" value="<?=$this->html($this->DICTIONARY->FORMVIEW->insertSubmit);?>" />
+							<?endif;?>
+						</div>
+					
+					
+					
+					</form>
+				</div>
+			</div>
+			
+			<?require 'Sitengine/Env/_Templates/FooterSection.html';?>
+		</div>
+	</body>
+</html>
+
+<!-- Document Created By Christian Hoegl - sitengine.org -->

@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+
+<dictionary name="dictionary">
+    
+    <group name="LABELS">
+        <item name="currentOrganization">Organisation</item>
+        <item name="currentUser">Eingeloggt als:</item>
+        <item name="lastLogin">Letztes Login</item>
+        <item name="signOut">Abmelden</item>
+        <item name="statusSectionTitle">Status</item>
+    </group>
+    
+    <group name="VIEWFORM">
+        <item name="metaSectionTitle">Einstellungen</item>
+        <item name="metaSectionEnabledField">Aktiviert</item>
+        <item name="metaSectionLockedField">Gesperrt</item>
+        <item name="dateSectionCdate">Erstellt</item>
+        <item name="dateSectionMdate">Geändert</item>
+        <item name="fileInfoDoctype">Dokument Typ</item>
+        <item name="fileInfoFilesize">Dateigrösse</item>
+        <item name="fileInfoSourcename">Ursprünglicher Name</item>
+        <item name="fileInfoFilename">Dateiname</item>
+        <item name="fileInfoWidth">Breite</item>
+        <item name="fileInfoHeight">Höhe</item>
+        <item name="fileInfoRemoveFile">Datei entfernen</item>
+        <item name="permissionSectionTitle">Besitzer und Zugriffsrechte</item>
+        <item name="permissionSectionUid">Besitzer</item>
+        <item name="permissionSectionGid">Gruppe</item>
+        <item name="permissionSectionRead">Anzeigen</item>
+        <item name="permissionSectionUpdate">Aktualisieren</item>
+        <item name="permissionSectionDelete">Löschen</item>
+        <item name="permissionSectionWorld">Jedermann</item>
+    </group>
+    
+    <group name="STATUS">
+        <item name="unauthorized">Authorisierung erforderlich</item>
+        <item name="notFound">Das verlangte Dokument konnte nicht gefunden werden</item>
+        <item name="badRequest">Ungültige Anfrage</item>
+        <item name="error">Ein Systemfehler ist aufgetreten</item>
+        <item name="notSupported">Diese Funktion ist nicht unterstützt</item>
+        <item name="errorInput">Eingabefehler</item>
+        <item name="okInput">Eingaben Ok</item>
+        <item name="errorImport">Datei konnte nicht importiert werden</item>
+        <item name="okImport">Datei wurde erfolgreich importiert</item>
+        <item name="errorInsert">Eintrag konnte nicht erstellt werden</item>
+        <item name="okInsert">Eintrag erfolgreich erstellt</item>
+        <item name="errorUpdate">Eintrag konnte nicht aktualisiert werden</item>
+        <item name="okUpdate">Eintrag erfolgreich aktualisiert</item>
+        <item name="errorDelete">Eintrag konnte nicht gelöscht werden</item>
+        <item name="okDelete">Eintrag erfolgreich gelöscht</item>
+        <item name="errorUnlink">Datei konnte nicht gelöscht werden</item>
+        <item name="okUnlink">Datei erfolgreich gelöscht</item>
+        <item name="errorBatchDelete">Ein oder mehrere Einträge konnten nicht gelöscht werden</item>
+        <item name="okBatchDelete">Ein oder mehrere Einträge erfolgreich gelöscht</item>
+        <item name="errorBatchUnlink">Eine oder mehrere Dateien konnten nicht gelöscht werden</item>
+        <item name="okBatchUnlink">Eine oder mehrere Dateien erfolgreich gelöscht</item>
+        <item name="errorBatchUpdate">Ein oder mehrere Einträge konnten nicht aktualisiert werden</item>
+        <item name="okBatchUpdate">Ein oder mehrere Einträge erfolgreich aktualisiert</item>
+        <item name="errorBatchAssign">Ein oder mehrere Files konnten nicht zugeordnet werden</item>
+        <item name="okBatchAssign">Ein oder mehrere Files erfolgreich zugeordnet</item>
+        <item name="errorUploadExists">Datei existiert</item>
+        <item name="errorUploadSizeExceeded">Maximale Grösse überschritten</item>
+        <item name="errorUploadIncomplete">Upload unvollständig</item>
+        <item name="errorUploadNoFile">Keine Upload Datei</item>
+        <item name="errorUpload">Upload Fehler</item>
+    </group>
+    
+    <group name="HINTS">
+        <item name="invalidAction">Unerlaubte Aktion</item>
+        <item name="dataExpired">Die Version der Daten die Sie zu aktualisieren versuchen ist abgelaufen. Bitte fordern Sie die Daten neu an.</item>
+    </group>
+    
+    <group name="LANGUAGES">
+        <item name="en">Englisch</item>
+        <item name="de">Deutsch</item>
+        <item name="fr">Französisch</item>
+        <item name="it">Italienisch</item>
+        <item name="es">Spanisch</item>
+    </group>
+
+    <group name="WEEKDAYS">
+        <item name="mon">Montag</item>
+        <item name="tue">Dienstag</item>
+        <item name="wed">Mittwoch</item>
+        <item name="thu">Donnerstag</item>
+        <item name="fri">Freitag</item>
+        <item name="sat">Samstag</item>
+        <item name="sun">Sonntag</item>
+    </group>
+
+    <group name="MONTHS">
+        <item name="jan">Januar</item>
+        <item name="feb">Februar</item>
+        <item name="mar">März</item>
+        <item name="apr">April</item>
+        <item name="mai">Mai</item>
+        <item name="jun">Juni</item>
+        <item name="jul">Juli</item>
+        <item name="aug">August</item>
+        <item name="sep">September</item>
+        <item name="oct">Oktober</item>
+        <item name="nov">November</item>
+        <item name="dec">Dezember</item>
+    </group>
+    
+</dictionary>

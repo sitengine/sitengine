@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<locale>
+	<!-- error messages -->
+	<error>Error!</error>
+	<io_error>IO Error!</io_error>
+	<sec_error>Security Error!</sec_error>
+	<error_browse>Unable to browse for files!</error_browse>
+	<error_upload>Unable to upload files!</error_upload>
+	<error_http>HTTP Error (%1)</error_http>
+
+	<!-- warnings -->					
+	<warning>Warning!</warning>
+	<warning_tooManyFiles>You can not add more than %0 files!</warning_tooManyFiles>
+	<warning_filesize>File is too big!</warning_filesize>
+		
+	<!-- labels of the progressbars -->
+	<progressFile>%0 of %1 transfered</progressFile>
+	<progressTotal>Uploading file %0 of %1</progressTotal>
+	
+	<!-- headlines of the grid -->
+	<file>File</file>
+	<type>Type</type>
+	<size>Size</size>
+	<status>Status</status>
+	
+	<!-- buttons -->
+	<browse>Browse</browse>
+	<remove>Remove</remove>
+	<upload>Upload</upload>
+	<stop>Stop</stop>
+</locale>

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+
+<dictionary name="dictionary">
+
+    <group name="COUNTRIES">
+        <item name="dz">Algeria</item>
+        <item name="ar">Argentina</item>
+        <item name="au">Australia</item>
+        <item name="be">Belgium</item>
+        <item name="br">Brazil</item>
+        <item name="bg">Bulgaria</item>
+        <item name="cl">Chile</item>
+        <item name="cn">China</item>
+        <item name="tw">Taiwan</item>
+        <item name="dk">Denmark</item>
+        <item name="de">Germany</item>
+        <item name="fi">Finland</item>
+        <item name="fr">France</item>
+        <item name="gr">Greece</item>
+        <item name="gb">Great Britain</item>
+        <item name="hk">Hong Kong</item>
+        <item name="in">India</item>
+        <item name="ie">Ireland</item>
+        <item name="is">Iceland</item>
+        <item name="il">Israel</item>
+        <item name="it">Italy</item>
+        <item name="jp">Japan</item>
+        <item name="ca">Canada</item>
+        <item name="co">Colombia</item>
+        <item name="kr">South Korea</item>
+        <item name="hr">Croatia</item>
+        <item name="lv">Latvia</item>
+        <item name="lu">Luxembourg</item>
+        <item name="my">Malaysia</item>
+        <item name="ma">Morocco</item>
+        <item name="nz">New Zealand</item>
+        <item name="nl">Netherlands</item>
+        <item name="no">Norway</item>
+        <item name="at">Austria</item>
+        <item name="pe">Peru</item>
+        <item name="ph">Philippines</item>
+        <item name="pl">Poland</item>
+        <item name="pt">Portugal</item>
+        <item name="ro">Romania</item>
+        <item name="ru">Russian Federation</item>
+        <item name="se">Sweden</item>
+        <item name="cs">Serbia / Montenegro</item>
+        <item name="sg">Singapur</item>
+        <item name="sk">Slovak Republic</item>
+        <item name="si">Slovenia</item>
+        <item name="es">Spain</item>
+        <item name="za">South Africa</item>
+        <item name="th">Thailand</item>
+        <item name="cz">Czech Republic</item>
+        <item name="tn">Tunisia</item>
+        <item name="tr">Turkey</item>
+        <item name="ua">Ukraine</item>
+        <item name="hu">Hungary</item>
+        <item name="us">United States of America</item>
+        <item name="ch">Switzerland</item>
+    </group>
+    
+    
+    
+    <group name="HINTS">
+        <item name="invalidRequest">Invalid request</item>
+        <!--
+        <item name="accessDenied">Access denied</item>
+        <item name="languageRequired">Language: input required</item>
+        -->
+        <item name="timezoneRequired">Timezone: input required</item>
+        <item name="firstnameRequired">First Name: input required</item>
+        <item name="lastnameRequired">Last Name: input required</item>
+        <item name="nameExists">Username/E-Mail already taken</item>
+        <item name="nameRequired">E-Mail: input required</item>
+        <item name="nameValidEmailRequired">Valid E-Mail address required</item>
+        <item name="nicknameExists">Nickname already taken</item>
+        <item name="nicknameRequired">Nickname: input required</item>
+        <item name="passwordRequired">Password: input required</item>
+        <item name="passwordsDontMatch">Passwords don&apos;t match</item>
+        <item name="passwordTooShort">Password is too short</item>
+        <item name="countryRequired">Country is required</item>
+        <item name="avatarOriginalFiletype">Avatar: Wrong format</item>
+        <item name="avatarOriginalFilesize">Avatar: Filesize exceeded</item>
+    </group>
+
+</dictionary>

@@ -1,0 +1,326 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+
+<dictionary name="dictionary">
+
+    <group name="LABELS">
+        <item name="pageTitle">Blog - Posts</item>
+        <item name="entityTitle">Blog - Posts</item>
+        <item name="actionsSectionIndex">Show Posts</item>
+        <item name="actionsSectionInsert">Add Post to this Blog</item>
+        <item name="actionsSectionInsertText">Text</item>
+        <item name="actionsSectionInsertPhoto">Photo</item>
+        <item name="actionsSectionInsertGallery">Gallery</item>
+        <item name="actionsSectionInsertQuote">Quote</item>
+        <item name="actionsSectionInsertLink">Link</item>
+        <item name="actionsSectionInsertAudio">Audio</item>
+        <item name="actionsSectionInsertVideo">Video</item>
+        <item name="childActionsSectionCommentsIndex">Show Comments</item>
+        <item name="childActionsSectionCommentsInsert">Add Comment</item>
+        <item name="listformTitle">Posts</item>
+        <item name="assignformTitle">Uploads</item>
+        <item name="listformGalleryFilesIndex">Photos</item>
+        <item name="listformTextpostFilesIndex">Files</item>
+        <item name="listformFilesIndex">n/a</item>
+        <item name="listformFilesInsert">New</item>
+        <item name="listformCommentsIndex">Show Comments</item>
+        <item name="listformCommentsInsert">New Comment</item>
+        <item name="listformColumnSortHref">Click to sort the list by this column</item>
+        <item name="listformBatchDeleteSubmit">Delete selected</item>
+        <item name="listformBatchUpdateSubmit">Update list</item>
+        <item name="listformFilterIsActive">Filtering is active for the current view</item>
+        <item name="listformNoRecords">No Posts in database</item>
+        <item name="listformNoMatchingRecords">No Posts match your criteria</item>
+        <item name="listformConfirmDelete">Do you really want to delete the selected Posts?</item>
+        <item name="listformConfirmUpdate">Do you really want to update all Posts in the list?</item>
+        <item name="viewformInsertTitle">New Post</item>
+        <item name="viewformUpdateTitle">Update Post</item>
+        <item name="viewformPayloadNavTitleMain">Overview</item>
+        <item name="viewformContentSectionTitleDefault">Content</item>
+        <item name="viewformInsertSubmit">Save</item>
+        <item name="viewformUpdateSubmit">Save changes</item>
+        <item name="viewformInputRequired">Fields marked with red are required</item>
+        <item name="filterSectionTitle">Filter</item>
+        <item name="filterSectionSubmit">Find</item>
+        <item name="filterSectionReset">Reset</item>
+        <item name="settingsSectionTitle">Settings</item>
+        <item name="settingsSectionSubmit">Set</item>
+        <item name="settingsSectionReset">Reset</item>
+        <item name="settingsSectionItemsPerPage">Items per page</item>
+        <item name="pagerPage">Page</item>
+        <item name="pagerPages">Pages</item>
+        <item name="pagerOf">of</item>
+        <item name="pagerEntity">Posts</item>
+        <item name="pagerPreviousPage">Previous</item>
+        <item name="pagerNextPage">Next</item>
+    </group>
+    
+    <group name="BREADCRUMBS">
+    	<!--
+        <item name="title">Blog</item>
+        -->
+        <item name="blogEntity">Blog</item>
+        <item name="postEntity">Posts</item>
+    </group>
+    
+    
+    <group name="FORMTEXTVIEW">
+    	<item name="pageTitle">Blog - Text Post</item>
+        <item name="insertTitle">New Text Post</item>
+        <item name="updateTitle">Update Text Post</item>
+        <item name="insertSubmit">Save</item>
+        <item name="updateSubmit">Save changes</item>
+        <item name="contentSectionTitleDefault">Content</item>
+        <item name="payloadNavTitleMain">Overview</item>
+        <item name="metaSectionTitle">Settings</item>
+        <item name="childActionsSectionFilesIndex">Show Files</item>
+        <item name="childActionsSectionFilesInsert">Add File</item>
+    </group>
+    
+    <group name="FORMTEXTVIEWFIELDS">
+        <item name="publish">Publish</item>
+        <item name="title">Title</item>
+        <item name="markup">Body</item>
+    </group>
+    
+    
+    
+    
+    <group name="FORMPHOTOVIEW">
+    	<item name="pageTitle">Blog - Photo Post</item>
+        <item name="insertTitle">New Photo Post</item>
+        <item name="updateTitle">Update Photo Post</item>
+        <item name="insertSubmit">Save</item>
+        <item name="updateSubmit">Save changes</item>
+        <item name="contentSectionTitleDefault">Content</item>
+        <item name="payloadNavTitleMain">Overview</item>
+        <item name="metaSectionTitle">Settings</item>
+    </group>
+    
+    <group name="FORMPHOTOVIEWFIELDS">
+        <item name="publish">Publish</item>
+        <item name="markup">Caption</item>
+        <item name="url">Clickthrough URL</item>
+        <item name="file1Original">Photo Upload</item>
+        <item name="file1OriginalHint">gif, jpg, png</item>
+    </group>
+    
+    
+    
+    
+    <group name="FORMGALLERYVIEW">
+    	<item name="pageTitle">Blog - Gallery Post</item>
+        <item name="insertTitle">New Gallery Post</item>
+        <item name="updateTitle">Update Gallery Post</item>
+        <item name="insertSubmit">Save</item>
+        <item name="updateSubmit">Save changes</item>
+        <item name="contentSectionTitleDefault">Content</item>
+        <item name="payloadNavTitleMain">Overview</item>
+        <item name="metaSectionTitle">Settings</item>
+        <item name="childActionsSectionFilesIndex">Show Photos</item>
+        <item name="childActionsSectionFilesInsert">Add Photo</item>
+    </group>
+    
+    <group name="FORMGALLERYVIEWFIELDS">
+        <item name="publish">Publish</item>
+        <item name="title">Title</item>
+        <item name="markup">Description</item>
+        <item name="file1Original">Photo Upload</item>
+        <item name="file1OriginalHint">gif, jpg, png</item>
+    </group>
+    
+    
+    
+    <group name="FORMQUOTEVIEW">
+    	<item name="pageTitle">Blog - Quote Post</item>
+        <item name="insertTitle">New Quote Post</item>
+        <item name="updateTitle">Update Quote Post</item>
+        <item name="insertSubmit">Save</item>
+        <item name="updateSubmit">Save changes</item>
+        <item name="contentSectionTitleDefault">Content</item>
+        <item name="payloadNavTitleMain">Overview</item>
+        <item name="metaSectionTitle">Settings</item>
+    </group>
+    
+    <group name="FORMQUOTEVIEWFIELDS">
+        <item name="publish">Publish</item>
+        <item name="title">Source</item>
+        <item name="markup">Quote</item>
+    </group>
+    
+    
+    
+    <group name="FORMLINKVIEW">
+    	<item name="pageTitle">Blog - Link Post</item>
+        <item name="insertTitle">New Link Post</item>
+        <item name="updateTitle">Update Link Post</item>
+        <item name="insertSubmit">Save</item>
+        <item name="updateSubmit">Save changes</item>
+        <item name="contentSectionTitleDefault">Content</item>
+        <item name="payloadNavTitleMain">Overview</item>
+        <item name="metaSectionTitle">Settings</item>
+    </group>
+    
+    <group name="FORMLINKVIEWFIELDS">
+        <item name="publish">Publish</item>
+        <item name="title">Name</item>
+        <item name="markup">Description</item>
+        <item name="url">URL</item>
+    </group>
+    
+    
+    
+    <group name="FORMAUDIOVIEW">
+    	<item name="pageTitle">Blog - Audio Post</item>
+        <item name="insertTitle">New Audio Post</item>
+        <item name="updateTitle">Update Audio Post</item>
+        <item name="insertSubmit">Save</item>
+        <item name="updateSubmit">Save changes</item>
+        <item name="contentSectionTitleDefault">Content</item>
+        <item name="payloadNavTitleMain">Overview</item>
+        <item name="metaSectionTitle">Settings</item>
+    </group>
+    
+    <group name="FORMAUDIOVIEWFIELDS">
+        <item name="publish">Publish</item>
+        <item name="markup">Description</item>
+        <item name="file1Original">Audio File Upload</item>
+        <item name="file1OriginalHint">mp3</item>
+    </group>
+    
+    
+    
+    <group name="FORMVIDEOVIEW">
+    	<item name="pageTitle">Blog - Video Post</item>
+        <item name="insertTitle">New Video Post</item>
+        <item name="updateTitle">Update Video Post</item>
+        <item name="insertSubmit">Save</item>
+        <item name="updateSubmit">Save changes</item>
+        <item name="contentSectionTitleDefault">Content</item>
+        <item name="payloadNavTitleMain">Overview</item>
+        <item name="metaSectionTitle">Settings</item>
+    </group>
+    
+    <group name="FORMVIDEOVIEWFIELDS">
+        <item name="publish">Publish</item>
+        <item name="title">Name</item>
+        <item name="titleHint">Not displayed publicly</item>
+        <item name="markup">Caption</item>
+        <item name="embedTag">Embed-Tag</item>
+    </group>
+    
+    
+    
+    
+    
+    
+    
+    
+    <group name="HELPS">
+        <item name="_index"> </item>
+        <item name="_update"> </item>
+        <item name="_insert"> </item>
+    </group>
+
+    <group name="COLUMNS">
+        <item name="title">Title</item>
+        <item name="type">Type</item>
+        <item name="locked">Locked</item>
+        <item name="publish">Publish</item>
+        <item name="cdate">Created</item>
+        <item name="sorting">Sorting</item>
+        <item name="displayThis">Homepage</item>
+        <item name="commentAction">Comments</item>
+        <item name="fileAction">Files</item>
+    </group>
+    
+    <group name="FIELDS">
+        <item name="type">Type</item>
+        <item name="locked">Locked</item>
+        <item name="publish">Publish</item>
+        <item name="title">Title</item>
+        <item name="markup">Text</item>
+        <item name="displayThis">Show on homepage</item>
+        <item name="transColor">Transparent Color</item>
+        <item name="transColorHint">RGB Value (For Gif's and Png's only)</item>
+        <item name="file1Original">File Upload</item>
+        <item name="file2Original">File Upload</item>
+        <item name="file1OriginalHint">Format gif, jpg, doc, xls oder pdf</item>
+        <item name="file2OriginalHint">Format gif, jpg, doc, xls oder pdf</item>
+        <item name="sorting">Sorting</item>
+        <item name="sortingHint">Smaller numbers appear at the end</item>
+    </group>
+
+    <group name="FIELDVALS">
+        <group name="gid">
+            <item name="noneSelected">Select group</item>
+        </group>
+        
+        <group name="filterByType">
+            <item name="noneSelected">Filter by type</item>
+            <item name="markup">Text</item>
+            <item name="photo">Photo</item>
+            <item name="gallery">Gallery</item>
+            <item name="quote">Quote</item>
+            <item name="link">Link</item>
+            <item name="audio">Audio</item>
+            <item name="video">Video</item>
+        </group>
+        <!--
+        <group name="filterByUid">
+            <item name="noneSelected">Filter by owner</item>
+        </group>
+
+        <group name="filterByGid">
+            <item name="noneSelected">Filter by group</item>
+        </group>
+        -->
+    </group>
+    
+    <group name="TEXTPOSTHINTS">
+        <item name="gidRequired">Please select a group</item>
+        <item name="titleRequired">Title: Input required</item>
+        <item name="markupRequired">Text: Input required</item>
+    </group>
+    
+    <group name="PHOTOPOSTHINTS">
+        <item name="gidRequired">Please select a group</item>
+        <item name="file1OriginalRequired">Photo required</item>
+        <item name="file1OriginalFiletype">Photo: Wrong format</item>
+        <item name="file1OriginalFilesize">Photo: Filesize exceeded</item>
+    </group>
+    
+    <group name="GALLERYPOSTHINTS">
+        <item name="gidRequired">Please select a group</item>
+        <item name="titleRequired">Title: Input required</item>
+        <item name="markupRequired">Text: Input required</item>
+        <item name="file1OriginalRequired">Photo required</item>
+        <item name="file1OriginalFiletype">Photo: Wrong format</item>
+        <item name="file1OriginalFilesize">Photo: Filesize exceeded</item>
+    </group>
+    
+    <group name="QUOTEPOSTHINTS">
+        <item name="gidRequired">Please select a group</item>
+        <item name="markupRequired">Quote: Input required</item>
+    </group>
+    
+    <group name="LINKPOSTHINTS">
+        <item name="gidRequired">Please select a group</item>
+        <item name="urlRequired">URL: Input required</item>
+        <item name="titleRequired">Title: Input required</item>
+    </group>
+    
+    <group name="AUDIOPOSTHINTS">
+        <item name="gidRequired">Please select a group</item>
+        <item name="file1OriginalRequired">Audio File required</item>
+        <item name="file1OriginalFiletype">Audio File: Wrong format</item>
+        <item name="file1OriginalFilesize">Audio File: Filesize exceeded</item>
+    </group>
+    
+    <group name="VIDEOPOSTHINTS">
+        <item name="gidRequired">Please select a group</item>
+        <item name="titleRequired">Name: Input required</item>
+        <item name="embedTagRequired">Embed-Tag: Input required</item>
+    </group>
+    
+</dictionary>
+

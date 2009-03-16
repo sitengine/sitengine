@@ -1,0 +1,11 @@
+<div id="abstract">
+	<h1>
+		<?if(isset($this->SECTIONS->ABSTRACT->uri) && $this->SECTIONS->ABSTRACT->uri):?><a href="<?=$this->SECTIONS->ABSTRACT->uri;?>"><?endif;?>
+		<?if(isset($this->SECTIONS->ABSTRACT->title)):?><?=$this->html($this->truncate($this->SECTIONS->ABSTRACT->title));?><?endif;?>
+		<?if(isset($this->SECTIONS->ABSTRACT->uri) && $this->SECTIONS->ABSTRACT->uri):?></a><?endif;?>
+	</h1>
+	
+	<?if(isset($this->SECTIONS->ABSTRACT->help)):?>
+		<p><?=$this->html($this->SECTIONS->ABSTRACT->help);?></p>
+	<?endif;?>
+</div>

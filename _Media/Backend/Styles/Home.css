@@ -1,0 +1,48 @@
+#main {
+    padding: 3px;
+}
+
+.chapter {
+    margin-bottom: 15px;
+}
+.chapter h3 {
+    background-color: #eee;
+    padding: 3px;
+    margin: 0px;
+}
+.chapter div {
+    padding: 1px;
+    margin: 0px;
+}
+
+
+
+#leftCol {
+    float: left;
+    width: 33%;
+}
+
+#middleCol {
+    float: left;
+    width: 33%;
+}
+
+#rightCol {
+}
+
+#bottom {
+    clear: both;
+}
+
+.chapter {
+    margin-bottom: 15px;
+}
+.chapter h3 {
+    background-color: #eee;
+    padding: 3px;
+    margin: 0px;
+}
+.chapter div {
+    padding: 3px;
+    margin: 0px;
+}

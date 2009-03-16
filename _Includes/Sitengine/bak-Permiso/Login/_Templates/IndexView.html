@@ -1,0 +1,69 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<!-- Document Created By Christian Hoegl - sitengine.org -->
+
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Pragma" content="no-cache" />
+<meta name="robots" content="noindex, nofollow" />
+<title><?=$this->html($this->DICTIONARY->LABELS->pageTitle);?></title>
+
+<?if(isset($this->STYLESHEETS->default)):?>
+<link rel="stylesheet" type="text/css" href="<?=$this->STYLESHEETS->default;?>" />
+<?endif;?>
+
+</head>
+
+<body>
+<div id="outer">
+
+
+<?if (isset($this->SECTIONS->LANGUAGE)):?>
+<!--
+<form method="get" action="<?=$this->_controller->getEnv()->getUriSelfSubmit();?>" name="language" id="language">
+<?=$this->SECTIONS->LANGUAGE->hiddens;?>
+<?=$this->SECTIONS->LANGUAGE->ELEMENTS->l;?>
+</form>
+-->
+<?endif?>
+
+
+
+<form method="post" action="<?=$this->SECTIONS->LOGIN->handler;?>" name="login" id="login">
+<?=$this->SECTIONS->LOGIN->hiddens;?>
+
+<h1><?=$this->html($this->DICTIONARY->LABELS->pageTitle);?></h1>
+<p><?=$this->html($this->DICTIONARY->LABELS->info);?><br /><br />
+<!--
+<label><?=$this->SECTIONS->LOGIN->ELEMENTS->org;?>&nbsp;<?=$this->html($this->DICTIONARY->LABELS->orgField);?></label><br />
+-->
+<label><?=$this->SECTIONS->LOGIN->ELEMENTS->loginu;?>&nbsp;<?=$this->html($this->DICTIONARY->LABELS->loginuField);?></label><br />
+<label><?=$this->SECTIONS->LOGIN->ELEMENTS->loginp;?>&nbsp;<?=$this->html($this->DICTIONARY->LABELS->loginpField);?></label><br />
+<br />
+
+</p>
+
+
+<div id="submit">
+<input type="submit" value="<?=$this->html($this->DICTIONARY->LABELS->submit);?>" />
+</div>
+
+</form>
+
+
+<script type="text/javascript" language="Javascript">
+//<![CDATA[
+//<!--
+document.language.l.onchange = function() { document.language.submit(); }
+document.login.loginu.focus();
+//-->
+//]]>
+</script>
+
+
+</div>
+</body>
+</html>
+
+<!--DOCUMENT CREATED BY BACKDOOR FREESTYLE TECHNOLOGIES - backdoor.ch-->

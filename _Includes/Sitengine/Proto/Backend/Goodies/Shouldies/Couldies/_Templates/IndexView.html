@@ -1,0 +1,506 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<!-- Document Created By Christian Hoegl - sitengine.org -->
+
+<html>
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<meta http-equiv="Pragma" content="no-cache" />
+		<meta name="robots" content="noindex, nofollow" />
+		
+		<title>Sitengine - <?=$this->html($this->DICTIONARY->LABELS->pageTitle);?></title>
+		
+		<link rel="stylesheet" type="text/css" href="<?=$this->_controller->getEnv()->getMediaRequestDir();?>/Backend/Styles/Global.css" />
+		<link rel="stylesheet" type="text/css" href="<?=$this->_controller->getEnv()->getMediaRequestDir();?>/Backend/Styles/Lists.css" />
+		<script language="JavaScript" type="text/JavaScript" src="<?=$this->_controller->getEnv()->getMediaRequestDir();?>/Global.js"></script>
+	</head>
+	
+	
+	<body>
+	
+	
+		<div id="screen">
+			<?require 'Sitengine/Env/_Templates/HeaderSection.html';?>
+			<?require 'Sitengine/Env/_Templates/BreadcrumbsSection.html';?>
+			<?require 'Sitengine/Env/_Templates/AbstractSection.html';?>
+			<?require 'Sitengine/Env/_Templates/ActionsSection.html';?>
+			<?require 'Sitengine/Env/_Templates/StatusSection.html';?>
+			
+			
+			
+			
+			
+			
+			<div class="mainSectionLevel1">
+				
+				
+				
+				
+				<div class="mainSectionHeader">
+					<h2 class="mainSectionTitle"><?=$this->html($this->SECTIONS->COULDIES->title);?></h2>
+				</div>
+				
+				
+				
+				
+				
+				
+				<div class="filter">
+					<?if($this->SECTIONS->COULDIES->FILTER->isActive):?>
+						<div class="filterOn">
+					<?else:?>
+						<div class="filterOff">
+					<?endif;?>
+					
+						<form method="get" action="<?=$this->_controller->getEnv()->getUriSelfSubmit();?>" name="filterform" class="filterform">
+							<?=$this->SECTIONS->COULDIES->FILTER->hiddens;?>
+							
+							<?	
+								$name = Sitengine_Proto_Backend_Goodies_Shouldies_Couldies_Controller::PARAM_FILTER_BY_UID;
+								print $this->formSelect(
+									$name,
+									$this->SECTIONS->COULDIES->FILTER->DATA->$name->value,
+									array(),
+									$this->SECTIONS->COULDIES->FILTER->USERS->toArray()
+								);
+							?>
+							
+							<?
+								$name = Sitengine_Proto_Backend_Goodies_Shouldies_Couldies_Controller::PARAM_FILTER_BY_GID;
+								print $this->formSelect(
+									$name,
+									$this->SECTIONS->COULDIES->FILTER->DATA->$name->value,
+									array(),
+									$this->SECTIONS->COULDIES->FILTER->GROUPS->toArray()
+								);
+							?>
+							
+							<?
+								$name = Sitengine_Proto_Backend_Goodies_Shouldies_Couldies_Controller::PARAM_FILTER_BY_FIND;
+								print $this->formText(
+									$name,
+									$this->SECTIONS->COULDIES->FILTER->DATA->$name->value,
+									array('size' => 20)
+								);
+							?>
+							
+							<?
+								print $this->formButton(
+									'submit',
+									$this->DICTIONARY->INDEXVIEW->filterSectionSubmit,
+									array('onclick' => 'document.filterform.submit();')
+								);
+							?>
+							
+							<?
+								print $this->formButton(
+									'reset',
+									$this->DICTIONARY->INDEXVIEW->filterSectionReset,
+									array('onclick' => "window.location = '".$this->SECTIONS->COULDIES->FILTER->uriReset."';")
+								);
+							?>
+							
+						</form>
+					</div>
+				</div>
+				
+				
+				
+				
+				
+				
+				
+				<?if(!sizeof($this->SECTIONS->COULDIES->DATA)):?>
+				
+				
+					<div class="listformNoRecords">
+						<?if($this->SECTIONS->COULDIES->FILTER->isActive):?>
+							<span><?=$this->html($this->DICTIONARY->INDEXVIEW->noMatchingRecords);?></span><br />
+							<?=$this->html($this->DICTIONARY->INDEXVIEW->filterIsActive);?>
+						<?else:?>
+							<span><?=$this->html($this->DICTIONARY->INDEXVIEW->noRecords);?></span>
+						<?endif;?>
+					</div>
+				
+				
+				<?else:?>
+				
+				
+					<div class="listformAndControlsWrap">
+					
+					
+						<table width="100%" class="listControlsTop">
+							<tr>
+								<td valign="bottom"></td><td align="right" valign="bottom">
+									<?$pagerAction = $this->_controller->getEnv()->getUriSelfSubmit();?>
+									<?$pagerHiddens = $this->SECTIONS->COULDIES->PAGER->hiddens;?>
+									<?/*$pagerCurrPageInput = $this->SECTIONS->COULDIES->PAGER->currPageInput;*/?>
+									<?$pagerCurrPage = $this->SECTIONS->COULDIES->PAGER->currPage;?>
+									<?$pagerNextPage = $this->SECTIONS->COULDIES->PAGER->nextPage;?>
+									<?$pagerPrevPage = $this->SECTIONS->COULDIES->PAGER->prevPage;?>
+									<?$pagerNumPages = $this->SECTIONS->COULDIES->PAGER->numPages;?>
+									<?$pagerNumItems = $this->SECTIONS->COULDIES->PAGER->numItems;?>
+									<?$pagerFirstItem = $this->SECTIONS->COULDIES->PAGER->firstItem;?>
+									<?$pagerLastItem = $this->SECTIONS->COULDIES->PAGER->lastItem;?>
+									<?$pagerUriPrevPage = $this->SECTIONS->COULDIES->PAGER->uriPrevPage;?>
+									<?$pagerUriNextPage = $this->SECTIONS->COULDIES->PAGER->uriNextPage;?>
+									<?$pagerPrevLabel = $this->DICTIONARY->PAGER->previousPage;?>
+									<?$pagerNextLabel = $this->DICTIONARY->PAGER->nextPage;?>
+									<?$pagerOfLabel = $this->DICTIONARY->PAGER->of;?>
+									<?$pagerPageLabel = $this->DICTIONARY->PAGER->page;?>
+									<?$pagerPagesLabel = $this->DICTIONARY->PAGER->pages;?>
+									<?$pagerEntityLabel = $this->DICTIONARY->PAGER->entity;?>
+									<?$pagerValClass = "pagerVal";?>
+									<?$pagerTextClass = "pagerText";?>
+									<?$pagerHrefPrevClass = "pagerHrefPrev";?>
+									<?$pagerHrefNextClass = "pagerHrefNext";?>
+									<?$pagerFormName = "pagerTop";?>
+									<?$pagerFormClass = "pagerTop";?>
+									
+									<?require 'Sitengine/Env/_Templates/PagerSection.html';?>
+								</td>
+							</tr>
+						</table>
+						
+						
+						
+						
+						
+						
+						
+						
+						<form method="post" action="<?=$this->_controller->getEnv()->getUriSelfSubmit();?>" name="listform" class="listform">
+							<?=$this->SECTIONS->COULDIES->hiddens;?>
+							<table class="listformTable" cellpadding="0" cellspacing="0">
+							
+							
+								<tr class="listformTitleRow">
+									<th valign="top" class="listformCheckboxCell">
+										<input type="checkbox" onclick="setCheckboxes(this.checked,document.listform,'SELECTROWITEM');" />
+									</th>
+									
+									<th valign="top">
+										<a href="<?=$this->SECTIONS->COULDIES->SORTING->QUERIES->title;?>" title="<?=$this->html($this->DICTIONARY->LABELS->columnSortHref);?>">
+											<?=$this->html($this->DICTIONARY->INDEXVIEWCOLUMNS->title);?>
+										</a>
+										&nbsp;<img src="<?=$this->_controller->getEnv()->getMediaRequestDir();?>/Backend/Pics/Sort_<?=$this->SECTIONS->COULDIES->SORTING->COLUMNS->title;?>.gif" width="8" height="10" border="0" alt="" />
+									</th>
+									
+									<th valign="top">
+										<a href="<?=$this->SECTIONS->COULDIES->SORTING->QUERIES->type;?>" title="<?=$this->html($this->DICTIONARY->LABELS->columnSortHref);?>">
+											<?=$this->html($this->DICTIONARY->INDEXVIEWCOLUMNS->type);?>
+										</a>
+										&nbsp;<img src="<?=$this->_controller->getEnv()->getMediaRequestDir();?>/Backend/Pics/Sort_<?=$this->SECTIONS->COULDIES->SORTING->COLUMNS->type;?>.gif" width="8" height="10" border="0" alt="" />
+									</th>
+									
+									<th valign="top">
+										<a href="<?=$this->SECTIONS->COULDIES->SORTING->QUERIES->sorting;?>" title="<?=$this->html($this->DICTIONARY->LABELS->columnSortHref);?>">
+											<?=$this->html($this->DICTIONARY->INDEXVIEWCOLUMNS->sorting);?>
+										</a>
+										&nbsp;<img src="<?=$this->_controller->getEnv()->getMediaRequestDir();?>/Backend/Pics/Sort_<?=$this->SECTIONS->COULDIES->SORTING->COLUMNS->sorting;?>.gif" width="8" height="10" border="0" alt="" />
+									</th>
+									
+									<th valign="top">
+										<a href="<?=$this->SECTIONS->COULDIES->SORTING->QUERIES->displayThis;?>" title="<?=$this->html($this->DICTIONARY->LABELS->columnSortHref);?>">
+											<?=$this->html($this->DICTIONARY->INDEXVIEWCOLUMNS->displayThis);?>
+										</a>
+										&nbsp;<img src="<?=$this->_controller->getEnv()->getMediaRequestDir();?>/Backend/Pics/Sort_<?=$this->SECTIONS->COULDIES->SORTING->COLUMNS->displayThis;?>.gif" width="8" height="10" border="0" alt="" />
+									</th>
+									
+									<th valign="top">
+										<a href="<?=$this->SECTIONS->COULDIES->SORTING->QUERIES->publish;?>" title="<?=$this->html($this->DICTIONARY->LABELS->columnSortHref);?>">
+											<?=$this->html($this->DICTIONARY->INDEXVIEWCOLUMNS->publish);?>
+										</a>
+										&nbsp;<img src="<?=$this->_controller->getEnv()->getMediaRequestDir();?>/Backend/Pics/Sort_<?=$this->SECTIONS->COULDIES->SORTING->COLUMNS->publish;?>.gif" width="8" height="10" border="0" alt="" />
+									</th>
+									
+									<th valign="top">
+										<a href="<?=$this->SECTIONS->COULDIES->SORTING->QUERIES->locked;?>" title="<?=$this->html($this->DICTIONARY->LABELS->columnSortHref);?>">
+											<?=$this->html($this->DICTIONARY->INDEXVIEWCOLUMNS->locked);?>
+										</a>
+										&nbsp;<img src="<?=$this->_controller->getEnv()->getMediaRequestDir();?>/Backend/Pics/Sort_<?=$this->SECTIONS->COULDIES->SORTING->COLUMNS->locked;?>.gif" width="8" height="10" border="0" alt="" />
+									</th>
+									
+									<th valign="top" class="listformNumberCell" title="<?=$this->html($this->DICTIONARY->LABELS->columnSortHref);?>">
+										<img src="<?=$this->_controller->getEnv()->getMediaRequestDir();?>/Backend/Pics/Sort_<?=$this->SECTIONS->COULDIES->SORTING->COLUMNS->cdate;?>.gif" width="8" height="10" border="0" alt="" />&nbsp;
+										<a href="<?=$this->SECTIONS->COULDIES->SORTING->QUERIES->cdate;?>">
+											<?=$this->html($this->DICTIONARY->INDEXVIEWCOLUMNS->cdate);?>
+										</a>&nbsp;
+									</th>
+								</tr>
+								
+								
+								
+								
+								<?foreach($this->SECTIONS->COULDIES->DATA as $row):?>
+									<?$title = $this->html($row->title);?>
+									<?$type = $this->html($row->type);?>
+									
+									<?$file1ThumbnailTag = $row->file1ThumbnailTag;?>
+									<?$uriUpdate = $row->uriUpdate;?>
+									<?$isMarked = $row->isMarked;?>
+									<?$translationMissing = $row->translationMissing;?>
+									<?$translationsIncomplete = $row->translationsIncomplete;?>
+									
+									<?if($isMarked):?>
+										<?$rowClass = "listformMarkedRow";?>
+									<?else:?>
+										<?$rowClass = "listformDataRow";?>
+									<?endif;?>
+									
+									<?if($translationMissing):?>
+										<?$titleClass = "listformDataTitleError";?>
+									<?else:?>
+										<?$titleClass = "listformDataTitle";?>
+									<?endif;?>
+									
+									<tr class="<?=$rowClass;?>">
+										<td valign="top">
+											<?
+												if(sizeof($row->rowSelectCheckbox))
+												{
+													$name = $row->rowSelectCheckbox->name;
+													print
+														($row->rowSelectCheckbox->checked) ?
+														$this->formCheckbox($name, null, array('checked' => true)) :
+														$this->formCheckbox($name)
+													;
+												}
+											?>
+											&nbsp;
+										</td>
+										
+										<td valign="top">
+											<a href="<?=$uriUpdate;?>" class="<?=$titleClass;?>"><?=$title;?></a>
+											<?if($file1ThumbnailTag):?>
+												<br /><a href="<?=$uriUpdate;?>"><?=$file1ThumbnailTag;?></a>
+											<?endif;?>
+										</td>
+										
+										<td valign="top"><?=$type;?></td>
+										
+										<td valign="top">
+											<?
+												print $row->sortingText->current;
+												print $this->formText(
+													$row->sortingText->name,
+													$row->sortingText->value,
+													array('size' => 5)
+												);
+											?>
+										</td>
+										
+										<td valign="top">
+											<?
+												print $row->displayThisSelect->current;
+												print $this->formSelect(
+													$row->displayThisSelect->name,
+													$row->displayThisSelect->value,
+													array(),
+													$row->displayThisSelect->OPTIONS->toArray()
+												);
+											?>
+										</td>
+										
+										<td valign="top">
+											<?
+												$name = $row->publishCheckbox->name;
+												print $row->publishCheckbox->current;
+												print
+													($row->publishCheckbox->checked) ?
+													$this->formCheckbox($name, null, array('checked' => true)) :
+													$this->formCheckbox($name)
+												;
+											?>
+										</td>
+										
+										<td valign="top">
+											<?
+												$name = $row->lockedCheckbox->name;
+												print $row->lockedCheckbox->current;
+												print
+													($row->lockedCheckbox->checked) ?
+													$this->formCheckbox($name, null, array('checked' => true)) :
+													$this->formCheckbox($name)
+												;
+											?>
+										</td>
+										
+										<td valign="top" class="listformNumberCell">
+											<?
+												require_once 'Zend/Date.php';
+												$date = new Zend_Date($row->cdate, 'yyyy-MM-dd HH:mm:ss');
+												$date->setTimezone($this->_controller->getPreferences()->getTimezone());
+												print $date->get(Zend_Date::DATE_LONG, $this->_controller->getLocale());
+												print ' '.$date->get(Zend_Date::TIME_LONG, $this->_controller->getLocale());
+											?>
+										</td>
+									</tr>
+								
+								<?endforeach;?>
+								
+								
+								
+								
+								<tr class="listformTitleRow">
+									<th valign="top" class="listformCheckboxCell">
+										<input type="checkbox" onclick="setCheckboxes(this.checked,document.listform,'SELECTROWITEM');" />
+									</th>
+									
+									<th valign="top">
+										<a href="<?=$this->SECTIONS->COULDIES->SORTING->QUERIES->title;?>" title="<?=$this->html($this->DICTIONARY->LABELS->columnSortHref);?>">
+											<?=$this->html($this->DICTIONARY->INDEXVIEWCOLUMNS->title);?>
+										</a>
+										&nbsp;<img src="<?=$this->_controller->getEnv()->getMediaRequestDir();?>/Backend/Pics/Sort_<?=$this->SECTIONS->COULDIES->SORTING->COLUMNS->title;?>.gif" width="8" height="10" border="0" alt="" />
+									</th>
+									
+									<th valign="top">
+										<a href="<?=$this->SECTIONS->COULDIES->SORTING->QUERIES->type;?>" title="<?=$this->html($this->DICTIONARY->LABELS->columnSortHref);?>">
+											<?=$this->html($this->DICTIONARY->INDEXVIEWCOLUMNS->type);?>
+										</a>
+										&nbsp;<img src="<?=$this->_controller->getEnv()->getMediaRequestDir();?>/Backend/Pics/Sort_<?=$this->SECTIONS->COULDIES->SORTING->COLUMNS->type;?>.gif" width="8" height="10" border="0" alt="" />
+									</th>
+									
+									<th valign="top">
+										<a href="<?=$this->SECTIONS->COULDIES->SORTING->QUERIES->sorting;?>" title="<?=$this->html($this->DICTIONARY->LABELS->columnSortHref);?>">
+											<?=$this->html($this->DICTIONARY->INDEXVIEWCOLUMNS->sorting);?>
+										</a>
+										&nbsp;<img src="<?=$this->_controller->getEnv()->getMediaRequestDir();?>/Backend/Pics/Sort_<?=$this->SECTIONS->COULDIES->SORTING->COLUMNS->sorting;?>.gif" width="8" height="10" border="0" alt="" />
+									</th>
+									
+									<th valign="top">
+										<a href="<?=$this->SECTIONS->COULDIES->SORTING->QUERIES->displayThis;?>" title="<?=$this->html($this->DICTIONARY->LABELS->columnSortHref);?>">
+											<?=$this->html($this->DICTIONARY->INDEXVIEWCOLUMNS->displayThis);?>
+										</a>
+										&nbsp;<img src="<?=$this->_controller->getEnv()->getMediaRequestDir();?>/Backend/Pics/Sort_<?=$this->SECTIONS->COULDIES->SORTING->COLUMNS->displayThis;?>.gif" width="8" height="10" border="0" alt="" />
+									</th>
+									
+									<th valign="top">
+										<a href="<?=$this->SECTIONS->COULDIES->SORTING->QUERIES->publish;?>" title="<?=$this->html($this->DICTIONARY->LABELS->columnSortHref);?>">
+											<?=$this->html($this->DICTIONARY->INDEXVIEWCOLUMNS->publish);?>
+										</a>
+										&nbsp;<img src="<?=$this->_controller->getEnv()->getMediaRequestDir();?>/Backend/Pics/Sort_<?=$this->SECTIONS->COULDIES->SORTING->COLUMNS->publish;?>.gif" width="8" height="10" border="0" alt="" />
+									</th>
+									
+									<th valign="top">
+										<a href="<?=$this->SECTIONS->COULDIES->SORTING->QUERIES->locked;?>" title="<?=$this->html($this->DICTIONARY->LABELS->columnSortHref);?>">
+											<?=$this->html($this->DICTIONARY->INDEXVIEWCOLUMNS->locked);?>
+										</a>
+										&nbsp;<img src="<?=$this->_controller->getEnv()->getMediaRequestDir();?>/Backend/Pics/Sort_<?=$this->SECTIONS->COULDIES->SORTING->COLUMNS->locked;?>.gif" width="8" height="10" border="0" alt="" />
+									</th>
+									
+									<th valign="top" class="listformNumberCell" title="<?=$this->html($this->DICTIONARY->LABELS->columnSortHref);?>">
+										<img src="<?=$this->_controller->getEnv()->getMediaRequestDir();?>/Backend/Pics/Sort_<?=$this->SECTIONS->COULDIES->SORTING->COLUMNS->cdate;?>.gif" width="8" height="10" border="0" alt="" />&nbsp;
+										<a href="<?=$this->SECTIONS->COULDIES->SORTING->QUERIES->cdate;?>">
+											<?=$this->html($this->DICTIONARY->INDEXVIEWCOLUMNS->cdate);?>
+										</a>&nbsp;
+									</th>
+								</tr>
+							</table>
+						</form>
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						<table width="100%" class="listControlsBottom">
+							<tr>
+								<td valign="top">
+								
+									<?
+										$onclick  = "assignConfirmSubmit(";
+										$onclick .= "document.listform,";
+										$onclick .= "'".$this->SECTIONS->COULDIES->METHODS->doBatchUpdate."',";
+										$onclick .= "'".$this->SECTIONS->COULDIES->URIS->submitDoBatchUpdate."',";
+										$onclick .= "'".$this->DICTIONARY->INDEXVIEW->confirmUpdate."'";
+										$onclick .= ");";
+										
+										print $this->formButton(
+											'update',
+											$this->DICTIONARY->INDEXVIEW->batchUpdateSubmit,
+											array('onclick' => $onclick)
+										);
+									?>
+									
+									<?
+										$onclick  = "assignConfirmSubmit(";
+										$onclick .= "document.listform,";
+										$onclick .= "'".$this->SECTIONS->COULDIES->METHODS->doBatchDelete."',";
+										$onclick .= "'".$this->SECTIONS->COULDIES->URIS->submitDoBatchDelete."',";
+										$onclick .= "'".$this->DICTIONARY->INDEXVIEW->confirmDelete."'";
+										$onclick .= ");";
+										
+										print $this->formButton(
+											'delete',
+											$this->DICTIONARY->INDEXVIEW->batchDeleteSubmit,
+											array('onclick' => $onclick)
+										);
+									?>
+									
+								</td>
+								
+								<td valign="top" align="right">
+									<?$pagerFormName = "pagerBottom";?>
+									<?$pagerFormClass = "pagerBottom";?>
+									<?require 'Sitengine/Env/_Templates/PagerSection.html';?>
+								</td>
+							</tr>
+						</table>
+						
+						
+					</div>
+					
+					
+					
+					
+					<div class="settings">
+						<?if($this->SECTIONS->COULDIES->SETTINGS->isActive):?>
+							<div class="settingsOn">
+						<?else:?>
+							<div class="settingsOff">
+						<?endif;?>
+						
+							<form method="get" action="<?=$this->_controller->getEnv()->getUriSelfSubmit();?>" name="settingsForm" class="settingsForm">
+								<?=$this->SECTIONS->COULDIES->SETTINGS->hiddens;?>
+								
+								<?
+									$name = Sitengine_Env::PARAM_TRANSLATION;
+									print $this->formSelect(
+										$name,
+										$this->SECTIONS->COULDIES->SETTINGS->$name,
+										array('onchange' => 'document.settingsForm.submit();'),
+										$this->SECTIONS->COULDIES->SETTINGS->TRANSLATIONS->toArray()
+									);
+								?>
+								
+								<?
+									$name = Sitengine_Env::PARAM_IPP;
+									print $this->formSelect(
+										$name,
+										$this->SECTIONS->COULDIES->SETTINGS->$name,
+										array('onchange' => 'document.settingsForm.submit();'),
+										$this->SECTIONS->COULDIES->SETTINGS->IPPS->toArray()
+									);
+								?>
+								
+							</form>
+						</div>
+					</div>
+						
+						
+				<?endif;?>
+			</div>
+			
+			
+			<?require 'Sitengine/Env/_Templates/FooterSection.html';?>
+		</div>
+	</body>
+</html>
+
+<!-- Document Created By Christian Hoegl - sitengine.org -->

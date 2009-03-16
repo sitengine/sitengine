@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+
+<dictionary name="dictionary">
+    
+    <group name="LABELS">
+    	<item name="backendHome">Home</item>
+        <item name="sitemapBackend">Sitemap</item>
+        
+        <item name="entityTitle">Sitemap</item>
+        <item name="actionsSearch">Suchen</item>
+        <item name="actionsBack">Zurück</item>
+        <item name="actionsList">Elemente</item>
+        <item name="actionsNewSnippet">Snippet</item>
+        <item name="actionsNewFile">File</item>
+        <item name="actionsNewPage">Page</item>
+        <item name="actionsNewMask">Maske</item>
+        <item name="actionsNewLayer">Ebene</item>
+        <item name="childActionsListFiles">Files anzeigen</item>
+        <item name="childActionsInsertFile">File hinzufügen</item>
+        <item name="viewformNewSnippetTitle">Neues Snippet</item>
+        <item name="viewformNewFileTitle">Neues File</item>
+        <item name="viewformNewPageTitle">Neue Page</item>
+        <item name="viewformNewMaskTitle">Neue Maske</item>
+        <item name="viewformNewLayerTitle">Neue Ebene</item>
+        
+        <item name="viewformUpdateSnippetTitle">Snippet bearbeiten</item>
+        <item name="viewformUpdateFileTitle">File bearbeiten</item>
+        <item name="viewformUpdatePageTitle">Page bearbeiten</item>
+        <item name="viewformUpdateMaskTitle">Maske bearbeiten</item>
+        <item name="viewformUpdateLayerTitle">Ebene bearbeiten</item>
+        
+        <item name="viewformCpyPasteUriTitle">Kopieren / Einsetzen</item>
+        
+        <item name="viewformPayloadNavTitleMain">Einstellungen</item>
+        <item name="viewformContentSectionTitleDefault">Inhalt</item>
+        
+        
+        <item name="viewformDescription">Vermerke</item>
+        <item name="viewformInsertSubmit">Sichern</item>
+        <item name="viewformUpdateSubmit">Änderungen sichern</item>
+        <item name="viewformInputRequired">Mit rot markierte Felder müssen ausgefüllt werden</item>
+        <item name="listformRootTitle">Elemente</item>
+        <item name="listformTitle">Elemente</item>
+        <item name="listformElementActionTitleFiles">Files/Snippets</item>
+        <item name="listformElementActionTitle">Elemente</item>
+        <item name="listformElementActionUpdate">Bearbeiten</item>
+        <item name="listformElementActionChildIndex">Elemente</item>
+        <item name="listformElementActionNewSnippet">Neues Snippet</item>
+        <item name="listformElementActionNewFile">Neues File</item>
+        <item name="listformElementActionNewPage">Neue Page</item>
+        <item name="listformElementActionNewMask">Neue Maske</item>
+        <item name="listformElementActionNewLayer">Neue Ebene</item>
+        <item name="listformColumnSortHref">Liste nach dieser Spalte sortieren</item>
+        <item name="listformBatchDeleteSubmit">Einträge löschen</item>
+        <item name="listformBatchUpdateSubmit">Liste aktualisieren</item>
+        <item name="listformFilterIsActive">Für die aktuelle Ansicht ist der Filter aktiviert</item>
+        <item name="listformNoRecords">Keine Elemente in der Datenbank</item>
+        <item name="listformNoMatchingRecords">Es konnten keine Elemente gefunden werden</item>
+        <item name="listformConfirmDelete">Wollen Sie wirklich alle angewählten Elemente löschen?</item>
+        <item name="listformConfirmUpdate">Wollen Sie wirklich alle geänderten Elemente aktualisieren?</item>
+        <item name="searchFormTitle">Suche</item>
+        <item name="searchFormSubmit">Jetzt finden</item>
+        <item name="searchFormReset">Reset</item>
+        <item name="filterSectionTitle">Filter</item>
+        <item name="filterSectionSubmit">Finde</item>
+        <item name="filterSectionReset">Reset</item>
+        <item name="settingsSectionTitle">Einstellungen</item>
+        <item name="settingsSectionSubmit">Speichern</item>
+        <item name="settingsSectionReset">Reset</item>
+        <item name="settingsSectionItemsPerPage">Einträge pro Seite</item>
+        <item name="pagerPage">Seite</item>
+        <item name="pagerPages">Seiten</item>
+        <item name="pagerOf">von</item>
+        <item name="pagerEntity">Einträgen</item>
+        <item name="pagerPreviousPage">Vorherige</item>
+        <item name="pagerNextPage">Nächste</item>
+    </group>
+    
+    <group name="HELPS">
+        <item name="index"> </item>
+        <item name="updateSnippet"> </item>
+        <item name="updateFile"> </item>
+        <item name="updatePage"> </item>
+        <item name="updateMask"> </item>
+        <item name="updateLayer"> </item>
+        <item name="newSnippet"> </item>
+        <item name="newFile"> </item>
+        <item name="newPage"> </item>
+        <item name="newMask"> </item>
+        <item name="newLayer"> </item>
+        <item name="search"> </item>
+    </group>
+    
+    <group name="BREADCRUMBS">
+        <item name="pageEntity">Sitemap</item>
+    </group>
+    
+    <group name="COLUMNS">
+        <item name="locked">Gesperrt</item>
+        <item name="enabled">Aktiviert</item>
+        <item name="cdate">Erstellt</item>
+        <item name="keyword">Keyword</item>
+        <item name="type">Typ</item>
+        <item name="title">Titel</item>
+        <item name="indexAction">Aktionen</item>
+        <item name="fileAction">Files</item>
+        <item name="sectionAction">Sektionen</item>
+    </group>
+    
+    <group name="FIELDS">
+        <item name="type">Typ</item>
+        <item name="keyword">Keyword</item>
+        <item name="title">Pagetitle</item>
+        <item name="metaKeywords">Meta Keywords</item>
+        <item name="metaDescription">Meta Description</item>
+        <item name="description">wird nicht angezeigt</item>
+        
+        <item name="html">Seiteninhalt</item>
+        
+        <item name="transColor">Transparente Farbe</item>
+        <item name="transColorHint">RGB Wert (Nur bei Gif's und Png's)</item>
+        <item name="file1Original">File Upload</item>
+        <item name="file1OriginalHint">Format gif, jpg, png, js, xml, doc, xls oder pdf</item>
+        <item name="cpyPasteUri">Adresse</item>
+    </group>
+    
+    <group name="FIELDVALS">
+        <group name="gid">
+            <item name="noneSelected">Select group</item>
+        </group>
+        
+        <group name="filterByType">
+            <item name="noneSelected">Nach Typ</item>
+            <item name="file">File</item>
+            <item name="page">Page</item>
+            <item name="layer">Ebene</item>
+            <item name="snippet">Snippet</item>
+        </group>
+        
+        <group name="searchByType">
+            <item name="noneSelected">Nach Typ</item>
+            <item name="file">File</item>
+            <item name="page">Page</item>
+            <item name="layer">Ebene</item>
+            <item name="snippet">Snippet</item>
+        </group>
+    </group>
+    
+    <group name="HINTS">
+        <item name="typeRequired">Typ: Eingabe benötigt</item>
+        <item name="keywordExists">Dieses Keyword existiert bereits</item>
+        <item name="keywordRequired">Keyword: Eingabe benötigt</item>
+        <item name="keywordInvalid">Keyword: Das Keyword kann nur A-Z, a-z, 0-9 und _ enthalten</item>
+        <item name="keywordUnauthorized">Das Keyword kann nur vom Administrator geändert werden</item>
+        <item name="typeUnauthorized">Der Typ kann nur vom Administrator geändert werden</item>
+        
+        <item name="transColorInvalid">Ungültiger RGB Wert für Feld: Transparente Farbe</item>
+        <item name="file1OriginalRequired">Bitte File auswählen</item>
+        <item name="file1OriginalFiletype">File Upload: Falsches Format</item>
+        <item name="file1OriginalFilesize">File Upload: Zulässige Dateigrösse überschritten</item>
+    </group>
+    
+</dictionary>
+

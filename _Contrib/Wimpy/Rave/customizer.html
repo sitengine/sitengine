@@ -1,0 +1,2163 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<title>Wimpy Rave Customizer Tool - Menu</title>
+<script language='javascript' src='rave.js'></script>
+<script language='javascript'>
+//<//////////////////////////////////////////////////////////////
+//                                                             //
+//                                                             //
+//                                                             //
+//                       Wimpy Player                          //
+//                                                             //
+//           by Mike Gieson <info@wimpyplayer.com>             //
+//          available at http://www.wimpyplayer.com            //
+//                     2002-2007 Plaino                        //
+//                                                             //
+//                                                             //
+//                                                             //
+/////////////////////////////////////////////////////////////////
+//                                                             //
+//                    USE AT YOUR OWN RISK                     //
+//                                                             //
+/////////////////////////////////////////////////////////////////
+
+
+var newline = "\r\n";
+var wimpyBase = "rave";
+var wimpyBaseApp = ".php";
+var wimpySWFbasename = wimpyBase + ".swf";
+var wimpyJSbasename = "rave.js";
+var wimpyInstallURL = location.href;
+var OwimpyInstallURL = new Object();
+var wimpyConfigs_c_ = new Object();
+var wimpyConfigs_c_Default = new Object();
+var wimpyConfigs_c_Write = new Object();
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+/////
+/////             System checkers (PHP, ASP, CFM)
+/////
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+var Asystems = Array("php", "asp", "cfm");
+var sysCheckCount = 0;
+var sysCheckFail = false;
+
+function init(){
+	sysCheckNext();
+}
+function sysCheckParsePlaylist(theXML){
+	if(!theXML){
+		//alert("failed: " + sysCheckCount + " : " + tempPath);
+		sysCheckNext();
+	} else {
+		//alert(theXML);
+		var sysList_in = theXML.getElementsByTagName("playlist")[0];
+		var Aret = new Array();
+		var count = 0;
+		if(sysList_in){
+			for (var aNode = sysList_in.firstChild; aNode != null; aNode = aNode.nextSibling) {
+				for (var aNodeA = aNode.firstChild; aNodeA != null; aNodeA = aNodeA.nextSibling) {
+					if(aNodeA.nodeName == "filename"){
+						count++;
+					}
+				}
+			}
+		}
+		if(count > 0){
+			sysCheckDone();
+		} else {
+			sysCheckNext();
+		}
+	}
+}
+tempPath = "";
+function sysCheckNext(){
+	//alert( Asystems[sysCheckCount]);
+	if(Asystems.length > sysCheckCount-1){
+		var myPath = wimpyBase + "." + Asystems[sysCheckCount] + "?action=getstartupdirlist";
+		tempPath = myPath;
+		//alert("attempt: " + tempPath);
+		sysCheckCount++;
+		XMLimport(myPath, "sysCheckParsePlaylist");
+	} else {
+		sysCheckError();
+	}
+}
+function sysCheckDone(){
+	wimpyBaseApp = "." + Asystems[sysCheckCount-1];
+	setup(wimpyInstallURL);
+	//writeHTML("Found " + Asystems[sysCheckCount-1] + "<BR>","skinlistA")
+}
+function sysCheckError(){
+	sysCheckFail = true;
+	setup(wimpyInstallURL);
+	//alert (ck++);
+	//writeHTML("ERROR: Could not load a playlist<BR>","skinlistA")
+}
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+/////
+/////             Cookies
+/////
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+/*
+WM_setCookie(), WM_readCookie(), WM_killCookie()
+A set of functions that eases the pain of using cookies.
+
+Source: Webmonkey Code Library
+(http://www.hotwired.com/webmonkey/javascript/code_library/)
+
+Author: Nadav Savio
+Author Email: nadav@wired.com
+*/
+
+var WM_acceptsCookies = false;
+if(document.cookie == '') {
+    document.cookie = 'WM_acceptsCookies=yes';
+    if(document.cookie.indexOf('WM_acceptsCookies=yes') != -1) {
+	WM_acceptsCookies = true;
+    }
+} else {
+  WM_acceptsCookies = true;
+}
+
+
+function WM_setCookie (name, value, hours, path, domain, secure) {
+    if (WM_acceptsCookies) {
+	var not_NN2 = (navigator && navigator.appName
+		       && (navigator.appName == 'Netscape')
+		       && navigator.appVersion
+		       && (parseInt(navigator.appVersion) == 2))?false:true;
+
+	if(hours && not_NN2) {
+	    if ( (typeof(hours) == 'string') && Date.parse(hours) ) {
+		var numHours = hours;
+	    } else if (typeof(hours) == 'number') {
+		var numHours = (new Date((new Date()).getTime() + hours*3600000)).toGMTString();
+	    }
+	}
+	document.cookie = name + '=' + escape(value) + ((numHours)?(';expires=' + numHours):'') + ((path)?';path=' + path:'') + ((domain)?';domain=' + domain:'') + ((secure && (secure == true))?'; secure':'');
+    }
+}
+
+
+function WM_readCookie(name) {
+    if(document.cookie == '') {
+		return false;
+    } else {
+		var firstChar, lastChar;
+		var theBigCookie = document.cookie;
+		firstChar = theBigCookie.indexOf(name);
+		var NN2Hack = firstChar + name.length;
+		if((firstChar != -1) && (theBigCookie.charAt(NN2Hack) == '=')) {
+			firstChar += name.length + 1;
+			lastChar = theBigCookie.indexOf(';', firstChar);
+			if(lastChar == -1) lastChar = theBigCookie.length;
+			return unescape(theBigCookie.substring(firstChar, lastChar));
+		} else {
+			return false;
+		}
+    }
+}
+
+function WM_killCookie(name, path, domain) {
+  var theValue = WM_readCookie(name);
+  if(theValue) {
+      document.cookie = name + '=' + theValue + '; expires=Fri, 13-Apr-1970 00:00:00 GMT' + ((path)?';path=' + path:'') + ((domain)?';domain=' + domain:'');
+  }
+}
+
+function makeCookie(){
+	var Aretval = new Array();
+	for(prop in wimpyConfigs_c_Write){
+		var val = wimpyConfigs_c_Write[prop];
+		if(!isNull(val)){
+			Aretval[Aretval.length] = prop + "^" + wimpyConfigs_c_Write[prop];
+		}
+	}
+	var myCookieValue = Aretval.join("__c__");
+	WM_setCookie ("wimpyConfigOptions", myCookieValue, 8765);
+}
+
+function getCookie(){
+	var cookieRead = WM_readCookie('wimpyConfigOptions');
+	if(cookieRead){
+		var AcookieReadA = cookieRead.split("__c__");
+		for(i=0;i<AcookieReadA.length;i++){
+			var myCookieOption = AcookieReadA[i].split("^");
+			wimpyConfigs_c_[myCookieOption[0]] = myCookieOption[1];
+
+		}
+		return true;
+	}
+	return false;
+}
+
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+/////
+/////             Form Validation
+/////
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+
+function changeSortField(){
+	document.form1.sortField.value = document.form1.set_sortField.value;
+}
+
+function randomNumber(minNum, maxNum) {
+	var retval = minNum + Math.floor(Math.random() * (maxNum - minNum + 1));
+	return retval;
+}
+
+function checkButtonState(theKind){
+	if(theKind == "randomPlayback"){
+		if(document.form1.loopTrack.checked){
+			document.form1.loopTrack.checked = false;
+			//alert('We have un-checked "Turn on Loop Track button" for you because Wimpy can not select a random track if the current track is looping.');
+
+		}
+	}
+	if(theKind == "loopTrack"){
+		if(document.form1.randomPlayback.checked){
+			document.form1.randomPlayback.checked = false;
+			//alert('We have un-checked "Turn on Random button" for you because the track can not loop if the "Random" button is turned on.');
+		}
+	}
+	if(theKind == "skin_auto"){
+		if(!document.form1.use_wimpySkin.checked){
+			document.form1.use_wimpySkin.checked = true;
+			alert('We have checked "Use skin" for you (above). \n\nDouble check that you have entered a URL to an XML skin file.');
+		}
+	}
+	if(theKind == "skin_use"){
+		if(!document.form1.use_wimpySkin.checked){
+			for(var i=0;i<document.form1.set_size.length;i++){
+				var name = document.form1.set_size[i].value;
+				if(name == "auto"){
+					document.form1.set_size[i].checked = false;
+				}
+				if(name == "man"){
+					document.form1.set_size[i].checked = true;
+				}
+			}
+		} else {
+			for(var i=0;i<document.form1.set_size.length;i++){
+				var name = document.form1.set_size[i].value;
+				if(name == "man"){
+					document.form1.set_size[i].checked = false;
+				}
+				if(name == "auto"){
+					document.form1.set_size[i].checked = true;
+				}
+			}
+		}
+	}
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+/////
+/////             Static / Default Configs
+/////
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+var firstLoad = 1
+
+function setup(installURL){
+	makeColorPicker();
+	closePlaylistFields();
+	wimpyInstallURL = installURL;
+	if(wimpyInstallURL.substr(0, 4) == "file"){
+		wimpyInstallURL = "";
+	}
+	OwimpyInstallURL = path_parts(wimpyInstallURL);
+	setDefaultConfigs();
+	var look4cookie = getCookie();
+
+	if(firstLoad == 1 && !isNull(look4cookie)){
+		applySettings();
+		firstLoad = 0;
+	} else {
+		applySettings();
+	}
+
+}
+
+function changeInstallPath(){
+	wimpyInstallURL = document.form1.wimpyInstall.value;
+	if(wimpyInstallURL.substr(0, 4) == "file"){
+		wimpyInstallURL = "";
+	}
+	OwimpyInstallURL = path_parts(wimpyInstallURL);
+	setDefaultConfigs();
+	applySettings();
+}
+
+function setDefaultConfigs(){
+	wimpyConfigs_c_.wimpyReg = "";
+	wimpyConfigs_c_.wimpyInstall = OwimpyInstallURL.basepath;
+	wimpyConfigs_c_.wimpySwf = OwimpyInstallURL.basepath + wimpySWFbasename;
+	wimpyConfigs_c_.wimpyApp = OwimpyInstallURL.basepath + wimpyBase + wimpyBaseApp;
+	wimpyConfigs_c_.wimpyJS = OwimpyInstallURL.basepath + wimpyJSbasename;
+	wimpyConfigs_c_.wimpySkin = OwimpyInstallURL.basepath + "the_file_name.xml";
+
+	wimpyConfigs_c_.startPlayingOnload = "no";
+	wimpyConfigs_c_.startOnTrack = "";
+	wimpyConfigs_c_.autoAdvance = "yes";
+	wimpyConfigs_c_.loopTrack = "off";
+	wimpyConfigs_c_.repeatPlaylist = "off";
+	wimpyConfigs_c_.randomPlayback = "off";
+	wimpyConfigs_c_.randomOnLoad = "no";
+	wimpyConfigs_c_.sortField = "title";
+	wimpyConfigs_c_.sortOrder = "asc";
+	wimpyConfigs_c_.bufferSeconds = "10";
+	wimpyConfigs_c_.theVolume = "100";
+	wimpyConfigs_c_.limitPlaytime = "30";
+
+	wimpyConfigs_c_.scrollFormat = "1 - 2";
+	wimpyConfigs_c_.timeFormat = "1";
+	wimpyConfigs_c_.infoDisplaySpeed = "3";
+	wimpyConfigs_c_.fsMode = "fullscreen";
+	wimpyConfigs_c_.setAspectRatio = "fit";
+	wimpyConfigs_c_.clickWindowAction = "playPause";
+	wimpyConfigs_c_.infoButtonAction = "link";
+	wimpyConfigs_c_.linkToWindow = "_blank";
+	wimpyConfigs_c_.coverartBasename = "coverart.jpg";
+	wimpyConfigs_c_.popUpHelp = "yes";
+	wimpyConfigs_c_.enableDownloads = "no";
+	wimpyConfigs_c_.useSysCodePage = "no";
+	wimpyConfigs_c_.wimpyHTMLpageTitle = "Wimpy Player";
+	wimpyConfigs_c_.tptBkgd = "no";
+	wimpyConfigs_c_.bkgdColor = "#000010";
+	wimpyConfigs_c_.wimpyWidth = "250";
+	wimpyConfigs_c_.wimpyHeight = "290";
+	wimpyConfigs_c_.debugMode = "no";
+	wimpyConfigs_c_.resume = "";
+
+	wimpyConfigs_c_.startupLogo = OwimpyInstallURL.basepath + "the_file_name.jpg";
+	wimpyConfigs_c_.defaultImage = OwimpyInstallURL.basepath + "the_file_name.jpg";
+	wimpyConfigs_c_.videoOverlay = OwimpyInstallURL.basepath + "the_file_name.png";
+	wimpyConfigs_c_.onTrackComplete = "gotoURL";
+	wimpyConfigs_c_.onTrackCompleteURL = "http://www.google.com/";
+	wimpyConfigs_c_.plugPlaylist = OwimpyInstallURL.basepath + "the_file_name.xml";
+	wimpyConfigs_c_.plugEvery = "3";
+
+	wimpyConfigs_c_.getMyid3info = "no";
+	wimpyConfigs_c_.findAllMedia = "no";
+	wimpyConfigs_c_.hide_folders = "_notes,skins,getid3,_private,_private,_vti_bin,_vti_cnf,_vti_pvt,_vti_txt,cgi-bin";
+	wimpyConfigs_c_.hide_files = "wimpyConfigs_c_.xml,wimpyAVConfigs.xml,raveConfigs.xml,wimpy.swf,rave.swf,wimpyAV.swf,wasp.swf,wimpy_button.swf";
+
+	wimpyConfigs_c_.playlist = OwimpyInstallURL.basepath + "example1.mp3\n" + OwimpyInstallURL.basepath + "example2.mp3\n";
+
+	for(var prop in wimpyConfigs_c_){
+		wimpyConfigs_c_Default[prop] = wimpyConfigs_c_[prop];
+		wimpyConfigs_c_Write[prop] = wimpyConfigs_c_[prop];
+	}
+
+}
+
+
+
+
+
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+/////
+/////             List, Radio and Special Field Manipulation
+/////
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+
+function setListValue(theList, theValue) {
+	if (!isNull(theList) && !isNull(theValue) && document.form1[theList].length > 0) {
+		for (var i = 0; i < document.form1[theList].length; i++) {
+			var myData = document.form1[theList][i].value;
+			if (theValue == myData) {
+				document.form1[theList][i].selected = true;
+				break;
+			}
+		}
+	}
+}
+
+function closePlaylistFields(){
+
+	var x=document.getElementById("playlistType_playlist");
+	x.style.display = "none";
+	x=document.getElementById("playlistType_wimpyApp");
+	x.style.display = "none";
+
+}
+
+function setPlaylistType(){
+	var fieldVal = document.form1.playlistType.value;
+	//writeitAppend("jp : " + fieldVal, "see");
+	closePlaylistFields();
+
+	if(fieldVal == "embed"){
+		var x=document.getElementById("playlistType_playlist");
+		x.style.display = "block";
+		var html = "";
+		html += '<br />' + newline;
+		html += 'Enter URL to each file on a seperate line <br>-- OR -- <br>copy and paste an XML playlist into the field below:<br />' + newline;
+		html += '<textarea name="playlist" cols="41" rows="4" wrap="virtual" id="playlist">';
+		html += wimpyConfigs_c_Default.playlist
+		html += '</textarea>' + newline;
+
+
+	} else if(fieldVal == "auto"){
+		var setWA = OwimpyInstallURL.basepath + wimpyBase + wimpyBaseApp
+		var html = "";
+		html += '<input name="wimpyApp" type="text" id="wimpyApp" value="' + setWA + '" size="54" />' + newline;
+		writeHTML(html, "playlistType_wimpyApp");
+		//wimpyConfigs_c_.wimpyApp = setWA;
+		//wimpyConfigs_c_.playlist = "";
+
+
+	} else {
+
+		var x=document.getElementById("playlistType_wimpyApp");
+		x.style.display = "block";
+
+		var html = "";
+		html += '<br />' + newline;
+		if(fieldVal == "auto"){
+			html += '';
+		} else if(fieldVal == "xml"){
+			html += 'URL to XML Playlist File: <div id="playlistList">&nbsp;</div><br />' + newline;
+		} else if(fieldVal == "rss"){
+			html += 'URL to PodCast Feed: <br />' + newline;
+		} else if(fieldVal == "m3u"){
+			html += 'URL to M3U or PLS File: <br />' + newline;
+		} else if(fieldVal == "txt"){
+			html += 'URL to Text File: <br />' + newline;
+		}
+
+		var setName = OwimpyInstallURL.basepath + "playlist." + fieldVal;
+		if(wimpyConfigs_c_.wimpyApp != wimpyConfigs_c_Default.wimpyApp){
+			setName = wimpyConfigs_c_.wimpyApp;
+		}
+		html += '<input name="wimpyApp" type="text" id="wimpyApp" value="' + setName + '" size="54" />' + newline;
+
+		writeHTML(html, "playlistType_wimpyApp");
+
+		if(fieldVal == "xml"){
+			XMLimport(OwimpyInstallURL.basepath + wimpyBase + wimpyBaseApp + "?action=getList&theKind=playlist", "parsePlaylist_c_List");
+			//loadPlaylist_c_List();
+		}
+
+	}
+
+
+}
+
+function setRadioValue(theRadio, theValue) {
+	for (var i = 0; i < document.form1[theRadio].length; i++) {
+		var myData = document.form1[theRadio][i].value;
+		if (theValue == myData) {
+			document.form1[theRadio][i].checked = true;
+			break;
+		}
+	}
+}
+
+function getRadioValue(theRadio) {
+	for (var i = 0; i < document.form1[theRadio].length; i++) {
+		var myValue = document.form1[theRadio][i].value;
+		var myCheck = document.form1[theRadio][i].checked
+		if (myCheck) {
+			return myValue;
+		}
+	}
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+/////
+/////             Collect and Apply Settings
+/////
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// -------------------------------------
+//
+//     Apply Settings
+//
+// -------------------------------------
+
+function applySettings() {
+
+	document.form1.wimpyReg.value = wimpyConfigs_c_.wimpyReg;
+	document.form1.wimpyInstall.value = wimpyConfigs_c_.wimpyInstall;
+	document.form1.wimpyApp.value = wimpyConfigs_c_.wimpyApp;
+	document.form1.playlist.value = wimpyConfigs_c_.playlist;
+
+	if(isNull(wimpyConfigs_c_.playlist) || wimpyConfigs_c_.playlist == wimpyConfigs_c_Default.playlist){
+		document.form1.wimpyApp.value = wimpyConfigs_c_.wimpyApp;
+		var OwimpyApp = path_parts(wimpyConfigs_c_.wimpyApp);
+		if(OwimpyApp.extension == "txt" || OwimpyApp.extension == "rss" || OwimpyApp.extension == "xml" || OwimpyApp.extension == "m3u" || OwimpyApp.extension == "pls"){
+			document.form1.playlistType.value = OwimpyApp.extension;
+		} else {
+			document.form1.playlistType.value = "auto";
+		}
+	} else {
+		document.form1.wimpyApp.value = wimpyConfigs_c_.playlist;
+		document.form1.playlistType.value = "embed";
+	}
+
+	setPlaylistType();
+	setRadioValue("set_size", "man");
+
+	// -------------------------------------
+	//
+	//     URLs / Use
+	//
+	// -------------------------------------
+
+	delete Atodo;
+	var Atodo = new Array();
+
+	Atodo[Atodo.length] = "wimpySkin";
+	Atodo[Atodo.length] = "startupLogo";
+	Atodo[Atodo.length] = "videoOverlay";
+	Atodo[Atodo.length] = "defaultImage";
+	Atodo[Atodo.length] = "hide_folders";
+	Atodo[Atodo.length] = "hide_files";
+	Atodo[Atodo.length] = "startOnTrack";
+	Atodo[Atodo.length] = "limitPlaytime";
+	Atodo[Atodo.length] = "resume";
+
+	for (var i = 0; i < Atodo.length; i++) {
+		var myName = Atodo[i];
+
+		if (isNull(wimpyConfigs_c_[myName]) || wimpyConfigs_c_[myName] == wimpyConfigs_c_Default[myName]) {
+			document.form1["use_" + myName].checked = false;
+			document.form1[myName].value = wimpyConfigs_c_Default[myName];
+		} else {
+			document.form1["use_" + myName].checked = true;
+			document.form1[myName].value = wimpyConfigs_c_[myName];
+		}
+	}
+
+	//
+	// plugPlaylist
+	//
+	if (isNull(wimpyConfigs_c_["plugPlaylist"]) || wimpyConfigs_c_["plugPlaylist"] == wimpyConfigs_c_Default["plugPlaylist"]) {
+		document.form1.use_plugPlaylist.checked = false;
+	} else {
+		document.form1.use_plugPlaylist.checked = true;
+	}
+	document.form1.plugPlaylist.value = wimpyConfigs_c_["plugPlaylist"];
+	document.form1.plugEvery.value = wimpyConfigs_c_["plugEvery"];
+	//
+	// onTrackCompleteURL
+	//
+	if (isNull(wimpyConfigs_c_["onTrackCompleteURL"]) || wimpyConfigs_c_["onTrackCompleteURL"] == wimpyConfigs_c_Default["onTrackCompleteURL"]) {
+		document.form1.use_onTrackComplete.checked = false;
+	} else {
+		document.form1.use_onTrackComplete.checked = true;
+
+	}
+	document.form1.onTrackCompleteURL.value = wimpyConfigs_c_["onTrackCompleteURL"];
+	setListValue("onTrackComplete", wimpyConfigs_c_["onTrackComplete"]);
+
+	// -------------------------------------
+	//
+	//     Strings
+	//
+	// -------------------------------------
+
+	delete Atodo;
+	var Atodo = new Array();
+	Atodo[Atodo.length] = "bkgdColor";
+	Atodo[Atodo.length] = "theVolume";
+	Atodo[Atodo.length] = "bufferSeconds";
+	Atodo[Atodo.length] = "infoDisplaySpeed";
+	Atodo[Atodo.length] = "scrollFormat";
+	Atodo[Atodo.length] = "timeFormat";
+	Atodo[Atodo.length] = "bkgdColor";
+	Atodo[Atodo.length] = "theVolume";
+	Atodo[Atodo.length] = "coverartBasename";
+	Atodo[Atodo.length] = "linkToWindow";
+	Atodo[Atodo.length] = "wimpyHTMLpageTitle";
+	Atodo[Atodo.length] = "wimpyWidth";
+	Atodo[Atodo.length] = "wimpyHeight";
+	for (var i = 0; i < Atodo.length; i++) {
+		var myName = Atodo[i];
+		if (isNull(wimpyConfigs_c_[myName])) {
+			document.form1[myName].value = wimpyConfigs_c_Default[myName];
+		} else {
+			document.form1[myName].value = wimpyConfigs_c_[myName];
+		}
+	}
+
+	// set preview page color:
+	if (isNull(wimpyConfigs_c_.bkgdColor)) {
+		ColorPicker_highlightColor(wimpyConfigs_c_Default.bkgdColor);
+	} else {
+		ColorPicker_highlightColor(wimpyConfigs_c_.bkgdColor);
+	}
+
+
+	// -------------------------------------
+	//
+	//     Lists
+	//
+	// -------------------------------------
+
+	delete Atodo;
+	var Atodo = new Array();
+	Atodo[Atodo.length] = "sortField";
+	Atodo[Atodo.length] = "sortOrder";
+	Atodo[Atodo.length] = "setAspectRatio";
+	Atodo[Atodo.length] = "fsMode";
+	Atodo[Atodo.length] = "infoButtonAction";
+	Atodo[Atodo.length] = "debugMode";
+	Atodo[Atodo.length] = "clickWindowAction";
+	for (var i = 0; i < Atodo.length; i++) {
+		var myName = Atodo[i];
+		if (isNull(wimpyConfigs_c_[myName])) {
+			setListValue(myName, wimpyConfigs_c_Default[myName]);
+		} else {
+			setListValue(myName, wimpyConfigs_c_[myName]);
+		}
+	}
+
+	// -------------------------------------
+	//
+	//     Check Boxes
+	//
+	// -------------------------------------
+
+	delete Atodo;
+	var Atodo = new Array();
+	Atodo[Atodo.length] = "startPlayingOnload";
+	Atodo[Atodo.length] = "autoAdvance";
+	var c =  document.getElementsByName("startPlayingOnload");
+
+	for (var i = 0; i < Atodo.length; i++) {
+		var myName = Atodo[i];
+
+		if (isNull(wimpyConfigs_c_[myName]) || wimpyConfigs_c_[myName] == "yes") {
+			c.checked = true;
+		} else {
+			c.checked = false;
+		}
+	}
+
+	delete Atodo;
+	var Atodo = new Array();
+
+	Atodo[Atodo.length] = "randomPlayback";
+	Atodo[Atodo.length] = "loopTrack";
+	Atodo[Atodo.length] = "repeatPlaylist";
+	for (var i = 0; i < Atodo.length; i++) {
+		var myName = Atodo[i];
+		if (wimpyConfigs_c_[myName] == "on") {
+			document.form1[myName].checked = true;
+		} else {
+			document.form1[myName].checked = false;
+		}
+	}
+
+	delete Atodo;
+	var Atodo = new Array();
+	Atodo[Atodo.length] = "randomOnLoad";
+	Atodo[Atodo.length] = "enableDownloads";
+	Atodo[Atodo.length] = "popUpHelp";
+	Atodo[Atodo.length] = "getMyid3info";
+	Atodo[Atodo.length] = "findAllMedia";
+	Atodo[Atodo.length] = "useSysCodePage";
+	Atodo[Atodo.length] = "tptBkgd";
+	for (var i = 0; i < Atodo.length; i++) {
+		var myName = Atodo[i];
+		if (wimpyConfigs_c_[myName] == "yes") {
+			document.form1[myName].checked = true;
+		} else {
+			document.form1[myName].checked = false;
+		}
+	}
+	if(OwimpyInstallURL.basepath.substr(0,4) != "file"){
+		
+		var myPath = OwimpyInstallURL.basepath + wimpyBase + wimpyBaseApp + "?action=getList&theKind=skin";
+		XMLimport(myPath, "parseWimpySkin_c_List");
+	} else {
+		collectSettings();
+	}
+
+
+
+}
+
+// -------------------------------------
+//
+//     Collect
+//
+// -------------------------------------
+function collectSettings() {
+
+
+	wimpyInstallURL = document.form1.wimpyInstall.value;
+	if(wimpyInstallURL.substring(wimpyInstallURL.length-1, wimpyInstallURL.length) != "/"){
+		wimpyInstallURL += "/";
+	}
+
+
+	wimpyConfigs_c_Write.wimpyReg = document.form1.wimpyReg.value
+	wimpyConfigs_c_Write.wimpySwf = wimpyInstallURL + wimpySWFbasename;
+	wimpyConfigs_c_Write.wimpyJS = wimpyInstallURL + wimpyJSbasename;
+
+
+	var PLtype = document.form1.playlistType.value;
+	if(PLtype == "embed"){
+		wimpyConfigs_c_Write.wimpyApp = "";
+		wimpyConfigs_c_Write.playlist = preparePlaylist(document.form1.playlist.value);
+	} else {
+		wimpyConfigs_c_Write.wimpyApp = document.form1.wimpyApp.value;
+		wimpyConfigs_c_Write.playlist = "";
+	}
+
+	////////////////////////////////////
+	////////////////////////////////////
+	//
+	//     URLs / Use
+	//
+	////////////////////////////////////
+	////////////////////////////////////
+
+	var Atodo = new Array();
+	Atodo[Atodo.length] = "wimpySkin";
+	Atodo[Atodo.length] = "startupLogo";
+	Atodo[Atodo.length] = "videoOverlay";
+
+	Atodo[Atodo.length] = "defaultImage";
+	Atodo[Atodo.length] = "hide_folders";
+	Atodo[Atodo.length] = "hide_files";
+
+	//Atodo[Atodo.length] = "plugPlaylist";
+	//Atodo[Atodo.length] = "onTrackComplete";
+	Atodo[Atodo.length] = "startOnTrack";
+	Atodo[Atodo.length] = "resume";
+	Atodo[Atodo.length] = "limitPlaytime";
+
+	for (var i = 0; i < Atodo.length; i++) {
+		var myName = Atodo[i];
+		var myField = "use_" + myName;
+		if (document.form1[myField].checked == false) {
+			wimpyConfigs_c_Write[myName] = "";
+		} else {
+			wimpyConfigs_c_Write[myName] = document.form1[myName].value;
+		}
+	}
+
+	// plugPlaylist
+	if (document.form1.use_plugPlaylist.checked == false) {
+		wimpyConfigs_c_Write["plugPlaylist"] = "";
+		wimpyConfigs_c_Write["plugEvery"] = "";
+	} else {
+		wimpyConfigs_c_Write["plugPlaylist"] = document.form1.plugPlaylist.value;
+		wimpyConfigs_c_Write["plugEvery"] = document.form1.plugEvery.value;
+	}
+
+	// onTrackCompleteURL
+	if (document.form1.use_onTrackComplete.checked == false) {
+		wimpyConfigs_c_Write["onTrackComplete"] = "";
+		wimpyConfigs_c_Write["onTrackCompleteURL"] = "";
+	} else {
+		wimpyConfigs_c_Write["onTrackComplete"] = document.form1.onTrackComplete.value;
+		wimpyConfigs_c_Write["onTrackCompleteURL"] = document.form1.onTrackCompleteURL.value;
+	}
+
+	////////////////////////////////////
+	////////////////////////////////////
+	//
+	//     Strings
+	//
+	////////////////////////////////////
+	////////////////////////////////////
+
+	var Atodo = new Array();
+	Atodo[Atodo.length] = "bkgdColor";
+	Atodo[Atodo.length] = "theVolume";
+	Atodo[Atodo.length] = "bufferSeconds";
+	Atodo[Atodo.length] = "infoDisplaySpeed";
+	Atodo[Atodo.length] = "scrollFormat";
+	Atodo[Atodo.length] = "timeFormat";
+	Atodo[Atodo.length] = "bkgdColor";
+	Atodo[Atodo.length] = "theVolume";
+	Atodo[Atodo.length] = "coverartBasename";
+	Atodo[Atodo.length] = "linkToWindow";
+	Atodo[Atodo.length] = "wimpyHTMLpageTitle";
+	Atodo[Atodo.length] = "wimpyWidth";
+	Atodo[Atodo.length] = "wimpyHeight";
+	Atodo[Atodo.length] = "bkgdColor";
+
+	for (var i = 0; i < Atodo.length; i++) {
+		var myName = Atodo[i];
+		var myVal = document.form1[myName].value;
+		if (isNull(myVal)) {
+			wimpyConfigs_c_Write[myName] = "";
+		} else {
+			wimpyConfigs_c_Write[myName] = myVal;
+		}
+	}
+
+	////////////////////////////////////
+	////////////////////////////////////
+	//
+	//     Lists
+	//
+	////////////////////////////////////
+	////////////////////////////////////
+
+	var Atodo = new Array();
+	Atodo[Atodo.length] = "sortField";
+	Atodo[Atodo.length] = "sortOrder";
+	Atodo[Atodo.length] = "setAspectRatio";
+	Atodo[Atodo.length] = "fsMode";
+	Atodo[Atodo.length] = "infoButtonAction";
+	Atodo[Atodo.length] = "debugMode";
+	Atodo[Atodo.length] = "clickWindowAction";
+	for (var i = 0; i < Atodo.length; i++) {
+		var myName = Atodo[i];
+		var myVal = document.form1[myName].value;
+		wimpyConfigs_c_Write[myName] = myVal;
+	}
+
+	////////////////////////////////////
+	////////////////////////////////////
+	//
+	//     Check Boxes
+	//
+	////////////////////////////////////
+	////////////////////////////////////
+
+	var Atodo = new Array();
+	Atodo[Atodo.length] = "tptBkgd";
+	Atodo[Atodo.length] = "startPlayingOnload";
+	Atodo[Atodo.length] = "autoAdvance";
+	for (var i = 0; i < Atodo.length; i++) {
+		var myName = Atodo[i];
+		if (document.form1[myName].checked == true) {
+			wimpyConfigs_c_Write[myName] = "yes";
+		} else {
+			wimpyConfigs_c_Write[myName] = "no";
+		}
+	}
+
+	var Atodo = new Array();
+	Atodo[Atodo.length] = "randomPlayback";
+	Atodo[Atodo.length] = "loopTrack";
+	Atodo[Atodo.length] = "repeatPlaylist";
+	for (var i = 0; i < Atodo.length; i++) {
+		var myName = Atodo[i];
+		if (document.form1[myName].checked == true) {
+			wimpyConfigs_c_Write[myName] = "on";
+		} else {
+			wimpyConfigs_c_Write[myName] = "off";
+		}
+	}
+
+	var Atodo = new Array();
+	Atodo[Atodo.length] = "randomOnLoad";
+	Atodo[Atodo.length] = "enableDownloads";
+	Atodo[Atodo.length] = "popUpHelp";
+	Atodo[Atodo.length] = "getMyid3info";
+	Atodo[Atodo.length] = "findAllMedia";
+	Atodo[Atodo.length] = "useSysCodePage";
+	for (var i = 0; i < Atodo.length; i++) {
+		var myName = Atodo[i];
+		if (document.form1[myName].checked == true) {
+			wimpyConfigs_c_Write[myName] = "yes";
+		} else {
+			wimpyConfigs_c_Write[myName] = "no";
+		}
+	}
+
+	var temp = getRadioValue("set_size")
+
+	if(!isNull(wimpyConfigs_c_Write.wimpySkin) && temp == "auto"){
+		XMLimport(wimpyConfigs_c_Write.wimpySkin, "parseWimpySkin_c_");
+	} else {
+		doOutput();
+	}
+
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+/////
+/////              Skin Read
+/////
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+function parseWimpySkin_c_(theXML){
+	wimpyConfigs_c_Write.wimpyWidth = theXML.getElementsByTagName("bkgd_main")[0].getAttribute("width");
+	wimpyConfigs_c_Write.wimpyHeight = theXML.getElementsByTagName("bkgd_main")[0].getAttribute("height");
+	doOutput();
+}
+
+
+function parseWimpySkin_c_List(theXML){
+	var xmlDocList_in = theXML.getElementsByTagName("list")[0];
+	var Aret = new Array();
+	var ret = "";
+	ret += '<select name="skinSelector" id="skinSelector" onchange="updateSkinData()" >' + "\n";
+	ret += '  <option value="" selected="selected">-- select --</option>' + "\n";
+	for (var aNode = xmlDocList_in.firstChild; aNode != null; aNode = aNode.nextSibling) {
+		if(aNode.nodeName == "item"){
+			var theURL = aNode.firstChild.data;
+			var Ourl = path_parts(theURL);
+			ret += '<option value="' + theURL + '">' + Ourl.filename + '</option>' + "\n";
+		}
+	}
+	ret += '</select>' + "\n";
+	writeHTML(ret, "skinlist");
+	collectSettings();
+}
+
+
+function updateSkinData(){
+	var newURL = document.form1.skinSelector.value;
+	wimpyConfigs_c_["wimpySkin"] = newURL;
+	document.form1.wimpySkin.value = newURL;
+	document.form1.use_wimpySkin.checked = true;
+	for(var i=0;i<document.form1.set_size.length;i++){
+		var name = document.form1.set_size[i].value;
+		if(name == "auto"){
+			document.form1.set_size[i].checked = true;
+		}
+	}
+	collectSettings();
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+/////
+/////              Get Available playlists
+/////
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+function parsePlaylist_c_List(theXML){
+
+	var xmlDocList_in = theXML.getElementsByTagName("list")[0];
+	var Aret = new Array();
+	var ret = "";
+	ret += '<select name="playlistSelector" id="playlistSelector" onchange="updatePlaylistData()" >' + "\n";
+	ret += '  <option value="" selected="selected">-- select --</option>' + "\n";
+
+	for (var aNode = xmlDocList_in.firstChild; aNode != null; aNode = aNode.nextSibling) {
+		if(aNode.nodeName == "item"){
+			var theURL = aNode.firstChild.data;
+			var Ourl = path_parts(theURL);
+			ret += '<option value="' + theURL + '">' + Ourl.filename + '</option>' + "\n";
+		}
+	}
+	ret += '</select>' + "\n";
+	writeHTML(ret, "playlistList");
+	//collectSettings();
+}
+
+function updatePlaylistData(){
+	var newURL = document.form1.playlistSelector.value;
+	wimpyConfigs_c_["wimpyApp"] = newURL;
+	document.form1.wimpyApp.value = newURL;
+	collectSettings();
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+/////
+/////              Output
+/////
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+
+function doOutput() {
+	makeCookie();
+	outputFullpage();
+	outputSnippet();
+	outputConfigsXML();
+	makeWimpyPlayer(wimpyConfigs_c_Write);
+
+}
+
+//////////////////////////////////////////////////
+//
+//                HTML
+//
+//////////////////////////////////////////////////
+
+function makeWimpyHTML() {
+
+	var Aconfigs = new Array();
+	var AdontDo = new Array("wimpyInstall", "wimpyHTMLpageTitle", "wimpyJS", "wimpySwf", "wimpyWidth", "wimpyHeight", "hide_files", "hide_folders", "tptBkgd", "bkgdColor", "playlist");
+
+	Aconfigs[Aconfigs.length] = 'wimpyApp=' + wimpyConfigs_c_Write.wimpyApp;
+	for (prop in wimpyConfigs_c_Write) {
+		var val = wimpyConfigs_c_Write[prop];
+		if(!isNull(val) && val != wimpyConfigs_c_Default[prop]){
+			if (!in_array(AdontDo, prop)) {
+				Aconfigs[Aconfigs.length] = prop + '=' + val;
+				if(prop == "plugPlaylist"){
+					Aconfigs[Aconfigs.length] = 'plugEvery=' + wimpyConfigs_c_Write.plugEvery;
+				}
+				if(prop == "onTrackCompleteURL"){
+					Aconfigs[Aconfigs.length] = 'onTrackComplete=' + wimpyConfigs_c_Write.onTrackComplete;
+				}
+			}
+		}
+	}
+	/*
+	if(!isNull(wimpyConfigs_c_Write.onTrackCompleteURL)){
+		Aconfigs[Aconfigs.length] = 'onTrackComplete=' + wimpyConfigs_c_Write.onTrackComplete;
+	}
+	*/
+	//Aconfigs[Aconfigs.length] = 'onTrackComplete=' + wimpyConfigs_c_Write.onTrackComplete;
+	if (!isNull(wimpyConfigs_c_Write.playlist)) {
+		var Aplaylist = wimpyConfigs_c_Write.playlist.split(newline);
+		for (var i = 0; i < Aplaylist.length; i++) {
+			Aplaylist[i] = Aplaylist[i];
+		}
+		Aconfigs[Aconfigs.length] = Aplaylist.join("|");
+	}
+	var configs = Aconfigs.join("&");
+	var useTpt_param = "";
+	var useTpt_embed = "";
+	if (wimpyConfigs_c_Write.tptBkgd == "yes") {
+		useTpt_param = '<param name="wmode" value="transparent" />' + newline;
+		useTpt_embed = ' wmode="transparent"';
+	}
+	var wimpyRan = "wimpy" + randomNumber(1, 10000);
+	var outText = "";
+	outText += '<table width="100%" height="100%" border="0" cellpadding="0" cellspacing="0" bgcolor="' + wimpyConfigs_c_Write.bkgdColor + '">';
+	outText += '<tr>';
+	outText += '<td align="center" valign="middle">';
+	outText += '<object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=8,0,0,0" width="' + wimpyConfigs_c_Write.wimpyWidth + '" height="' + wimpyConfigs_c_Write.wimpyHeight + '" id="' + wimpyRan + '" align="center">' + newline;
+	outText += '<param name="allowScriptAccess" value="always" />' + newline;
+	outText += '<param name="movie" value="' + wimpyConfigs_c_Write.wimpySwf + '" />' + newline;
+	outText += '<param name="loop" value="false" />' + newline;
+	outText += '<param name="menu" value="false" />' + newline;
+	outText += '<param name="quality" value="high" />' + newline;
+	outText += '<param name="scale" value="noscale" />' + newline;
+	outText += '<param name="salign" value="lt" />' + newline;
+	outText += '<param name="bgcolor" value="' + wimpyConfigs_c_Write.bkgdColor + '" />' + newline;
+	outText += '<param name="flashvars" value="' + configs + '" />' + newline;
+	outText += useTpt_param;
+	outText += '<embed src="' + wimpyConfigs_c_Write.wimpySwf + '" flashvars="' + configs + '" loop="false" menu="false" quality="high" width="' + wimpyConfigs_c_Write.wimpyWidth + '" height="' + wimpyConfigs_c_Write.wimpyHeight + '" scale="noscale" salign="lt" name="' + wimpyRan + '" align="center" bgcolor="' + wimpyConfigs_c_Write.bkgdColor + '" allowScriptAccess="always" allowFullScreen="true"' + useTpt_embed + ' type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" />' + newline;
+	outText += '</object>';
+	outText += '</td>';
+	outText += '</tr>';
+	outText += '</table>' + newline;
+	return outText;
+}
+
+//////////////////////////////////////////////////
+//
+//                   JS
+//
+//////////////////////////////////////////////////
+
+function makeWimpyJS() {
+	var outText = "";
+	var ran = randomNumber(1, 10000);
+	var swfObjectName = "flashcontent" + ran;
+	outText += '<table width="100%" height="100%" border="0" cellpadding="0" cellspacing="0" bgcolor="' + wimpyConfigs_c_Write.bkgdColor + '">' + newline;
+	outText += '<tr>' + newline;
+	outText += '<td align="center" valign="middle">' + newline;
+	outText += '<div id="' + swfObjectName + '"><a href="http://www.adobe.com/products/flashplayer/">Flash Player upgrade required</a></div>' + newline;
+	outText += '<script language="javascript">' + newline;
+	outText += '// <![CDATA[' + newline;
+
+
+	var wcRan = 'wimpyConfigs' + ran;
+	outText += 'var ' + wcRan + ' = new Object();' + newline;
+	//outText += 'wimpyConfigs.wimpyReg="' + wimpyConfigs_c_Write.wimpyReg + '";' + newline;
+	outText += wcRan + '.wimpySwf="' + wimpyConfigs_c_Write.wimpySwf + '";' + newline;
+	outText += wcRan + '.wimpyApp="' + wimpyConfigs_c_Write.wimpyApp + '";' + newline;
+	outText += wcRan + '.wimpyWidth="' + wimpyConfigs_c_Write.wimpyWidth + '";' + newline;
+	outText += wcRan + '.wimpyHeight="' + wimpyConfigs_c_Write.wimpyHeight + '";' + newline;
+	for (prop in wimpyConfigs_c_Write) {
+		var val = wimpyConfigs_c_Write[prop];
+		if (prop != "wimpyWidth" && prop != "wimpyHeight" && prop != "wimpySwf" && prop != "wimpyApp" && prop != "wimpyJS" && prop != "playlist" && !isNull(val) && val != wimpyConfigs_c_Default[prop]) {
+			outText += wcRan + '.' + prop + '="' + val + '";' + newline;
+			if(prop == "plugPlaylist"){
+				outText += wcRan + '.plugEvery="' + wimpyConfigs_c_Write.plugEvery + '";' + newline;
+			}
+			if(prop == "onTrackCompleteURL"){
+				outText += wcRan + '.onTrackComplete="' + wimpyConfigs_c_Write.onTrackComplete + '";' + newline;
+			}
+		}
+	}
+	if(!isNull(wimpyConfigs_c_Write.playlist)){
+		outText += wcRan + '.playlist="' + preparePlaylist(wimpyConfigs_c_Write.playlist) +'";' + newline;
+	}
+	outText += 'makeWimpyPlayer('+ wcRan + ', "' + swfObjectName + '");' + newline;
+	outText += "// ]]>" + newline;
+	outText += '<\/script>' + newline;
+	outText += '</td>' + newline;
+	outText += '</tr>' + newline;
+	outText += '</table>' + newline;
+	return outText;
+}
+
+function preparePlaylist(theString){
+	if(theString.substr(0, 9) == "<playlist"){
+		return theString;
+	} else {
+		var AasString = theString.split('\r\n').join('__n__');
+		var asString = AasString.split('\n').join('__n__');
+		var BasString = asString.split('__n__');
+		var Alines = new Array();
+		for (var i in BasString) {
+			var theLine = stripWhiteSpace(BasString[i]);
+			if (!isNull(theLine)) {
+				Alines[Alines.length] = theLine;
+			}
+		}
+		return (Alines.join("|"));
+	}
+}
+
+
+//////////////////////////////////////////////////
+//
+//                Output
+//
+//////////////////////////////////////////////////
+
+
+
+// Snippet
+
+function outputSnippet() {
+	var outText = "";
+	outText += '<!-- THIS LINE GOES IN THE <HEAD> OF YOUR HTML PAGE -->' + newline;
+	outText += '<script language="javascript" src="' + wimpyConfigs_c_Write.wimpyJS + '"><\/script>' + newline + newline;
+	outText += '<!-- START WIMPY PLAYER CODE -->' + newline;
+	if (document.form1.no_js.checked == true) {
+		outText += makeWimpyHTML(wimpyConfigs_c_Write);
+	} else {
+		outText += makeWimpyJS(wimpyConfigs_c_Write);
+	}
+	outText += '<!-- END WIMPY PLAYER CODE -->' + newline;
+	document.form_snip.c.value = outText;
+}
+
+
+
+// Full Page
+
+function outputFullpage() {
+
+	var outText = "";
+	outText += '<html>' + newline;
+	outText += '<head>' + newline;
+	outText += '<title>' + wimpyConfigs_c_Write.wimpyHTMLpageTitle + '</title>' + newline;
+	outText += '<script language="javascript" src="' + wimpyConfigs_c_Write.wimpyJS + '"><\/script>' + newline;
+	outText += '</head>' + newline;
+	outText += '<body leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">' + newline;
+	outText += '<!-- START WIMPY PLAYER CODE -->' + newline;
+	if (document.form1.no_js.checked == true) {
+		outText += makeWimpyHTML(wimpyConfigs_c_Write);
+	} else {
+		outText += makeWimpyJS(wimpyConfigs_c_Write);
+	}
+	outText += '<!-- END WIMPY PLAYER CODE -->' + newline;
+	outText += '</body>' + newline;
+	outText += '</html>' + newline;
+	document.form_full.c.value = outText;
+}
+
+
+// Configs
+
+
+function outputConfigsXML() {
+	var outText = "";
+	outText += '<wimpyConfigs version="2.0">' + newline;
+	for (prop in wimpyConfigs_c_Write) {
+		var val = wimpyConfigs_c_Write[prop];
+		if(prop == "playlist"){
+			if(val != ""){
+				var pl = preparePlaylist(val);
+				outText += "<playlist>" + newline;
+				outText += pl
+				outText += "</playlist>" + newline;
+			}
+		} else if (prop != "wimpyJS" && prop != "wimpyInstall" ) {
+			outText += "<" + prop + ">" + val + "</" + prop + ">" + newline;
+		}
+	}
+	outText += '</wimpyConfigs>' + newline;
+	document.form_xml.c.value = outText;
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+/////                                         ////////////////////////////////////////////////////////
+/////              Open Close                 ////////////////////////////////////////////////////////
+/////                                         ////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+
+Adocs = new Array();
+Adocs[Adocs.length] = "menu_reg";
+Adocs[Adocs.length] = "menu_basic";
+Adocs[Adocs.length] = "menu_startup";
+Adocs[Adocs.length] = "menu_display";
+Adocs[Adocs.length] = "menu_advanced";
+
+function openClose(theID){
+	closeAllButMe(theID)
+	var x=document.getElementById(theID);
+	if(x.style.display == "block"){
+		x.style.display = "none";
+	}else{
+		x.style.display = "block";
+	}
+	javascript:scroll(0,0);
+}
+
+function closeAllButMe(me){
+	for(var i=0;i<Adocs.length;i++){
+		if(Adocs[i] != me){
+			var x=document.getElementById(Adocs[i]);
+			x.style.display = "none";
+		}
+	}
+}
+
+function closeAll(){
+	for(i=0;i<Adocs.length;i++){
+		var x=document.getElementById(Adocs[i]);
+		x.style.display = "none";
+	}
+}
+
+function openAll(){
+	for(i=0;i<Adocs.length;i++){
+		var x=document.getElementById(Adocs[i]);
+		x.style.display = "block";
+	}
+}
+
+
+function resizeApp() {
+	var offsetTop = 0;
+	var winSize = getWindowSize();
+	
+	var winHeight = winSize[1];
+	var x = document.getElementById("settings");
+	var settingsWidth = x.clientWidth 
+
+	for (var elem = x; elem;elem = elem.offsetParent) {
+		offsetTop += elem.offsetTop;
+	}
+	var height = winHeight - offsetTop;
+	if (height >= 0) {
+		x.style.height = height + "px";
+	}
+	
+	offsetTop = 0;
+	var c = document.getElementById("divCode");
+	var p = c.offsetParent;
+	yPos = winHeight - c.offsetHeight;
+	xPos = x.offsetWidth;
+	
+	if (yPos >= 0) {
+		c.style.left = xPos + "px";
+		c.style.top = yPos + "px";
+		c.style.width = (winSize[0] - settingsWidth - 20) + "px";
+	}
+}
+
+function getWindowSize() {
+	//alert(document.body.clientWidth);
+	var retval = Array();
+	if (self.innerWidth) {
+		  retval[0] = self.innerWidth;
+		  retval[1] = self.innerHeight;
+	}
+	else if (document.documentElement && document.documentElement.clientWidth) {
+		  retval[0] = document.documentElement.clientWidth;
+		  retval[1] = document.documentElement.clientHeight;
+	}
+	else if (document.body) {
+		  retval[0] = document.body.clientWidth;
+		  retval[1] = document.body.clientHeight;
+	}
+	return retval;
+}
+
+///////////////////////////////////////////////////
+///////////////////////////////////////////////////
+/////                                         /////
+/////                 Misc                    /////
+/////                                         /////
+///////////////////////////////////////////////////
+///////////////////////////////////////////////////
+
+function stripWhiteSpace(string_in) {
+	return string_in.split("\n").join("").split("\t").join("").split("%0A").join("").split("%09").join("");
+}
+
+function isNull(theValue) {
+	if (theValue == "" || theValue == undefined || theValue == "undefined" || theValue == null) {
+		return true;
+	} else {
+		return false;
+	}
+}
+
+function path_parts(thePath) {
+	var protocol = "";
+	if(thePath.substring(0,4) == "http"){
+		protocol = thePath.substring(0, thePath.indexOf("/")) + "//";
+		thePath = thePath.substring(thePath.indexOf("/") + 2, thePath.length);
+	}
+	if(thePath.lastIndexOf("/") == thePath.length-1){
+		thePath = thePath.substr(0, thePath.length-1);
+	}
+
+	var filepathA = thePath.split("/");
+	var filename = filepathA.pop();
+	var filepathB = filename.split(".");
+	var extension = "";
+	if (filepathB.length > 1) {
+		extension = filepathB.pop();
+	}
+	var basename = filepathB.join(".");
+	if(extension == ""){
+		filepathA.push(filename);
+	}
+	var mybasepath = filepathA.join("/");
+
+	if(mybasepath.length > 0){
+		mybasepath = mybasepath + "/";
+	}
+	//if(thePath == wimpyInstallURL){
+	//
+	//}
+	var Oret = new Object();
+	Oret.filename = filename;
+	Oret.extension = extension;
+	Oret.basename = basename;
+	Oret.basepath = protocol + mybasepath;
+	Oret.filepath = protocol + thePath;
+	return Oret;
+}
+
+function in_array(haystack, needle) {
+	for (var p in haystack) {
+		var item = haystack[p].toString().toLowerCase();
+		var val = needle.toString().toLowerCase();
+		if (item == val) {
+			return true;
+		}
+	}
+	return false;
+}
+
+///////////////////////////////////////////////////
+///////////////////////////////////////////////////
+/////                                         /////
+/////                 Debug                   /////
+/////                                         /////
+///////////////////////////////////////////////////
+///////////////////////////////////////////////////
+
+function displayObjectSingle(returnedObject){
+	var retText = "";
+	for(var prop in returnedObject){
+		retText += "<b>" + prop + '</b> : <font color="#CC0000">' + returnedObject[prop] + "</font><br>";
+	}
+	return (retText);
+
+}
+
+function displayObject(returnedObject){
+	var retText = "";
+	for(var prop in returnedObject){
+		var value = returnedObject[prop];
+		if(typeof(value) == "object"){
+			retText += displayObject(value);
+		} else {
+			retText += "<b>" + prop + '</b> : <font color="#CC0000">' + value + "</font><br>";
+		}
+	}
+	return (retText);
+
+}
+
+function writeit(text,id){
+	if (document.getElementById) {
+		var wimpyDoc = document.getElementById(id);
+		wimpyDoc.innerHTML = '';
+		wimpyDoc.innerHTML = text;
+	} else if (document.all) {
+		var wimpyDoc = document.all[id];
+		wimpyDoc.innerHTML = text;
+	} else if (document.layers) {
+		var wimpyDoc = document.layers[id];
+		text2 = '<P CLASS="testclass">' + text + '</P>';
+		wimpyDoc.document.open();
+		wimpyDoc.document.write(text2);
+		wimpyDoc.document.close();
+	}
+}
+
+function writeHTML(text,id){
+
+	if (document.getElementById) {
+		var wimpyDoc = document.getElementById(id);
+		wimpyDoc.innerHTML = '';
+		wimpyDoc.innerHTML = text;
+	} else if (document.all) {
+		var wimpyDoc = document.all[id];
+		wimpyDoc.innerHTML = text;
+	} else if (document.layers) {
+		var wimpyDoc = document.layers[id];
+		text2 = '<P CLASS="testclass">' + text + '</P>';
+		wimpyDoc.document.open();
+		wimpyDoc.document.write(text2);
+		wimpyDoc.document.close();
+	}
+
+}
+
+function writeitAppend(text,id){
+	if (document.getElementById) {
+		var wimpyDoc = document.getElementById(id);
+		wimpyDoc.innerHTML += "<br>" + text;
+	} else if (document.all) {
+		var wimpyDoc = document.all[id];
+		wimpyDoc.innerHTML += "<br>" + text;
+	} else if (document.layers) {
+		var wimpyDoc = document.layers[id];
+		text2 += "<br>" + text;
+		wimpyDoc.document.open();
+		wimpyDoc.document.write(text2);
+		wimpyDoc.document.close();
+	}
+}
+
+// ===================================================================
+// Color Picker derived from Matt Kruse's color picker:
+// http://www.mattkruse.com/
+// ===================================================================
+
+function ColorPicker_open(){
+	writeHTML(cp_contents, "divColorPicker");
+	var x = document.getElementById("divColorPicker");
+	x.style.visibility="visible";
+}
+
+function ColorPicker_close(){
+	writeHTML("", "divColorPicker");
+}
+
+function ColorPicker_pickColor(color){
+	ColorPicker_close();
+	if(color!=null){
+		document.form1.bkgdColor.value = color;
+	}
+}
+
+function ColorPicker_set(){
+	ColorPicker_highlightColor(document.form1.bkgdColor.value);
+}
+
+function ColorPicker_highlightColor(c){
+	var thedoc =(arguments.length>1)?arguments[1]:window.document;
+	var d = thedoc.getElementById("colorPickerSelectedColor");
+	d.style.backgroundColor = c;
+}
+
+var cp_contents = "";
+function makeColorPicker(){
+
+var colors = new Array("#FFFFFF","#FFFFFF","#F8F8F8","#F0F0F0","#E8E8E8","#E0E0E0","#D8D8D8","#D0D0D0","#C8C8C8","#C0C0C0","#B8B8B8","#B0B0B0","#A8A8A8","#A0A0A0","#989898","#909090","#888888","#808080","#787878","#707070","#686868","#606060","#585858","#505050","#484848","#404040","#383838","#303030","#282828","#202020","#000000","#000000","#F0DBDB","#F5D6D6","#FCCFCF","#FFCCCC","#E0B8B8","#EBADAD","#FA9E9E","#FF9999","#D19494","#E08585","#F76E6E","#FF6666","#C27070","#D65C5C","#F53D3D","#FF3333","#B24D4D","#CC3333","#F20D0D","#FF0000","#8F3D3D","#A32929","#C20A0A","#CC0000","#6B2E2E","#7A1F1F","#910808","#990000","#471F1F","#521414","#610505","#660000","#F0E6DB","#F5E6D6","#FCE6CF","#FFE6CC","#E0CCB8","#EBCCAD","#FACC9E","#FFCC99","#D1B294","#E0B285","#F7B26E","#FFB266","#C29970","#D6995C","#F5993D","#FF9933","#B2804D","#CC8033","#F2800D","#FF8000","#8F663D","#A36629","#C2660A","#CC6600","#6B4C2E","#7A4C1F","#914C08","#994C00","#47331F","#523314","#613305","#663300","#F0F0DB","#F5F5D6","#FCFCCF","#FFFFCC","#E0E0B8","#EBEBAD","#FAFA9E","#FFFF99","#D1D194","#E0E085","#F7F76E","#FFFF66","#C2C270","#D6D65C","#F5F53D","#FFFF33","#B2B24D","#CCCC33","#F2F20D","#FFFF00","#8F8F3D","#A3A329","#C2C20A","#CCCC00","#6B6B2E","#7A7A1F","#919108","#999900","#47471F","#525214","#616105","#666600","#E6F0DB","#E6F5D6","#E6FCCF","#E6FFCC","#CCE0B8","#CCEBAD","#CCFA9E","#CCFF99","#B2D194","#B3E085","#B3F76E","#B3FF66","#99C270","#99D65C","#99F53D","#99FF33","#80B24D","#80CC33","#80F20D","#80FF00","#668F3D","#66A329","#66C20A","#66CC00","#4D6B2E","#4D7A1F","#4D9108","#4D9900","#33471F","#335214","#336105","#336600","#DBF0DB","#D6F5D6","#CFFCCF","#CCFFCC","#B8E0B8","#ADEBAD","#9EFA9E","#99FF99","#94D194","#85E085","#6EF76E","#66FF66","#70C270","#5CD65C","#3DF53D","#33FF33","#4DB24D","#33CC33","#0DF20D","#00FF00","#3D8F3D","#29A329","#0AC20A","#00CC00","#2E6B2E","#1F7A1F","#089108","#009900","#1F471F","#145214","#056105","#006600","#DBF0E6","#D6F5E6","#CFFCE6","#CCFFE6","#B8E0CC","#ADEBCC","#9EFACC","#99FFCC","#94D1B2","#85E0B3","#6EF7B3","#66FFB3","#70C299","#5CD699","#3DF599","#33FF99","#4DB280","#33CC80","#0DF280","#00FF80","#3D8F66","#29A366","#0AC266","#00CC66","#2E6B4D","#1F7A4D","#08914D","#00994D","#1F4733","#145233","#056133","#006633","#DBF0F0","#D6F5F5","#CFFCFC","#CCFFFF","#B8E0E0","#ADEBEB","#9EFAFA","#99FFFF","#94D1D1","#85E0E0","#6EF7F7","#66FFFF","#70C2C2","#5CD6D6","#3DF5F5","#33FFFF","#4DB2B2","#33CCCC","#0DF2F2","#00FFFF","#3D8F8F","#29A3A3","#0AC2C2","#00CCCC","#2E6B6B","#1F7A7A","#089191","#009999","#1F4747","#145252","#056161","#006666","#DBE6F0","#D6E6F5","#CFE5FC","#CCE5FF","#B8CCE0","#ADCCEB","#9ECCFA","#99CCFF","#94B2D1","#85B2E0","#6EB2F7","#66B2FF","#7099C2","#5C99D6","#3D99F5","#3399FF","#4D7FB2","#337FCC","#0D7FF2","#007FFF","#3D668F","#2966A3","#0A66C2","#0066CC","#2E4C6B","#1F4C7A","#084C91","#004C99","#1F3347","#143352","#053361","#003366","#DBDBF0","#D6D6F5","#CFCFFC","#CCCCFF","#B8B8E0","#ADADEB","#9E9EFA","#9999FF","#9494D1","#8585E0","#6E6EF7","#6666FF","#7070C2","#5C5CD6","#3D3DF5","#3333FF","#4D4DB2","#3333CC","#0D0DF2","#0000FF","#3D3D8F","#2929A3","#0A0AC2","#0000CC","#2E2E6B","#1F1F7A","#080891","#000099","#1F1F47","#141452","#050561","#000066","#E6DBF0","#E6D6F5","#E5CFFC","#E5CCFF","#CCB8E0","#CCADEB","#CC9EFA","#CC99FF","#B294D1","#B285E0","#B26EF7","#B266FF","#9970C2","#995CD6","#993DF5","#9933FF","#7F4DB2","#7F33CC","#7F0DF2","#7F00FF","#663D8F","#6629A3","#660AC2","#6600CC","#4C2E6B","#4C1F7A","#4C0891","#4C0099","#331F47","#331452","#330561","#330066","#F0DBF0","#F5D6F5","#FCCFFC","#FFCCFF","#E0B8E0","#EBADEB","#FA9EFA","#FF99FF","#D194D1","#E085E0","#F76EF7","#FF66FF","#C270C2","#D65CD6","#F53DF5","#FF33FF");
+	var total = colors.length;
+	var width = 32;
+	cp_contents = "<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>";
+	var use_highlight =(document.getElementById || document.all)?true:false;
+	for(var i=0; i<total; i++){
+		if((i % width) == 0){
+			cp_contents += "<TR>";
+		}
+		if(use_highlight){
+			var mo = 'onMouseOver="ColorPicker_highlightColor(\''+colors[i]+'\')"';
+		} else {
+			mo = "";
+		}
+		var myColor = colors[i];
+		cp_contents += '<TD BGCOLOR="'+myColor+'"><FONT SIZE="-3"><A HREF="#" onClick="ColorPicker_pickColor(\''+myColor+'\');return false;" '+mo+' STYLE="text-decoration:none;">&nbsp;&nbsp;&nbsp;</A></FONT></TD>';
+		if( ((i+1)>=total) ||(((i+1) % width) == 0)){
+			cp_contents += "</TR>";
+		}
+	}
+	cp_contents += "</TABLE>";
+
+	/*
+	seeMe = '<textarea cols="41" rows="4" wrap="virtual">';
+	seeMe += cp_contents
+	seeMe += '</textarea>' + newline;
+	writeit (seeMe, "see")
+	*/
+
+}
+
+
+</script>
+<style type="text/css">
+<!--
+body {
+	font-family: Verdana, Arial, Geneva, SunSans-Regular;
+	font-size: 11px;
+	background-position: 0px 0px;
+	padding: 0px;
+	margin: 0px;
+
+}
+.tableCells {
+	margin: 0px;
+	padding-top: 4px;
+	padding-right: 2px;
+	padding-bottom: 10px;
+	padding-left: 2px;
+}
+
+a {  color: #003399; text-decoration: none}
+a:hover {  text-decoration: underline}
+.fineprint {
+	font-size: 9px;
+}
+li {
+	font-family: Verdana, Arial, Geneva, SunSans-Regular;
+	font-size: 11px;
+}
+ul {
+	font-family: Verdana, Arial, Geneva, SunSans-Regular;
+	font-size: 11px;
+}
+div {
+	font-family: Verdana, Arial, Geneva, SunSans-Regular;
+	font-size: 11px;
+}
+h1 {
+color:#666666;
+font-size:16px;
+}
+
+h2 {
+color:#000066;
+font-size:14px;
+}
+
+h3{
+color:#000066;
+font-size:12px;
+}
+
+h4{
+color:#000099;
+font-size:12px;
+}
+.subtitle {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	line-height: 12px;
+	font-weight: normal;
+
+}
+.searchTexarea1 {
+	height: 15px;
+	width: 125px;
+	vertical-align: middle;
+
+}
+.searchSubmit1 {
+	height: 18px;
+	width: 50px;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:10px;
+	color:#000000;
+	text-align: center;
+	vertical-align: middle;
+	margin: 0px;
+	padding: 0px;
+	background:#ECE9D8;
+}
+.codeExample {
+	background-color: #EFEFEF;
+	padding: 5px;
+	border: 1px solid #CCCCCC;
+	font-family: "Courier New", Courier, mono;
+	font-size: 12px;
+	color: #3300FF;
+	display: block;
+	width: 90%;
+	white-space: nowrap;
+}
+ul {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	margin-top: 0px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+	margin-left: 0px;
+	padding: 0px;
+}
+.tableMenuTitles {
+	background-color: #EBE9ED;
+}
+#settings {
+	width: 450px;
+	height: 20px;
+	overflow: auto;
+	overflow-x: hidden;
+	overflow-y: auto;
+
+}
+p {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+}
+td {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+}
+-->
+</style>
+</head>
+<body bgcolor="#F3F3F3" onResize="resizeApp()">
+<table width="100%" height="100%" border="0" cellpadding="0" cellspacing="0">
+  <tr>
+    <td width="10%" align="left" valign="middle"><font color="#666666" size="2"><strong>Wimpy Rave Customizer Tool </strong></font></td>
+    <td width="90%" align="left" valign="middle">&nbsp;&nbsp; <a href="javascript:collectSettings();"></a>&nbsp;&nbsp;<strong><a href="javascript:collectSettings();">Refresh Player / Code</a></strong></td>
+  </tr>
+  <tr>
+    <td align="left" valign="top"><div style="height: 582px; position: relative;" id="settings">
+        <form id="form1" name="form1" method="post" action="">
+          <!--
+		.
+		.
+	  REGISTRATION
+		.
+		.
+	  -->
+          <table width="100%" border="0" class="tableMenuTitles">
+            <tr>
+              <td onClick="openClose('menu_reg');return false;"><strong><a href="javascript:openClose('menu_reg');">&nbsp;+ Registration </a></td>
+              <td align="right" nowrap="nowrap"><font size="1"><a href="javascript:openAll();">[ open all]</a>&nbsp;&nbsp; <a href="javascript:closeAll();">[ close all ]</a> </font></td>
+            </tr>
+          </table>
+          <ul id="menu_reg" style="display:block;">
+            <table width="100%" border="0" cellpadding="0" cellspacing="0">
+              <tr bgcolor="#FFFFFF">
+                <td valign="top" class="tableCells">&nbsp;</td>
+                <td align="left" valign="top" class="tableCells"><p><a href="http://www.wimpyplayer.com/docs/rave/api/registration.html" target="helpWindow">Registration Code</a>: </p>
+                  <input name="wimpyReg" type="text" id="wimpyReg" value="" size="60" />
+                  <p>&nbsp;</p></td>
+              </tr>
+            </table>
+          </ul>
+          <!--
+		.
+		.
+	  MEDIA
+		.
+		.
+	  -->
+          <table width="100%" border="0" class="tableMenuTitles">
+            <tr>
+              <td onClick="openClose('menu_basic');return false;"><strong><a href="javascript:openClose('menu_basic');">&nbsp;+ Media </a></td>
+              <td align="right" nowrap="nowrap">&nbsp;</td>
+            </tr>
+          </table>
+          <ul id="menu_basic" style="display:block;">
+            <table width="100%" border="0" cellpadding="0" cellspacing="0">
+              <tr bgcolor="#FFFFFF">
+                <td valign="top" class="tableCells">&nbsp;</td>
+                <td align="left" valign="top" class="tableCells"><a href="http://www.wimpyplayer.com/docs/rave/api/playlist_select.html" target="helpWindow">Playlist</a>:
+                  <select name="playlistType" onChange="setPlaylistType()">
+                    <option value="auto" selected="selected">Automatic</option>
+                    <option value="xml">XML Playlist</option>
+                    <option value="rss">PodCast</option>
+                    <option value="m3u">M3U or PLS</option>
+                    <option value="txt">Simple Text</option>
+                    <option value="embed">Embedded</option>
+                  </select>
+                  &nbsp; <a href="javascript:collectSettings();">Refresh Player</a> <a href="javascript:collectSettings();"></a>
+                  <ul id="playlistType_wimpyApp" style="display:block;">
+                    <input name="wimpyApp" type="text" id="wimpyApp" value="__install__/rave.php" size="60" />
+                  </ul>
+                  <ul id="playlistType_playlist" style="display:block;">
+                    <textarea name="playlist" cols="41" rows="4" wrap="off" id="playlist">__install__/example1.flv</textarea>
+                  </ul></td>
+              </tr>
+            </table>
+          </ul>
+          <!--
+		.
+		.
+	  DISPLAY
+		.
+		.
+	  -->
+          <table width="100%" border="0" class="tableMenuTitles" onClick="openClose('menu_display');return false;">
+            <tr>
+              <td><strong><a href="javascript:openClose('menu_display');">&nbsp;+ Display</a></strong><a name="menu_display_goto" id="menu_display_goto"></a></td>
+            </tr>
+          </table>
+          <ul id="menu_display" style="display:block;">
+            <table width="100%" border="0" cellpadding="0" cellspacing="0" class="tableA">
+              <tr bgcolor="#FFFFFF" class="tableCells">
+                <td width="5%" valign="top" class="tableCells"><input name="use_wimpySkin" type="checkbox" id="use_wimpySkin" value="yes" onClick="checkButtonState('skin_use')"/>
+                </td>
+                <td colspan="2" align="left" valign="top" class="tableCells"><a href="http://www.wimpyplayer.com/docs/rave/api/wimpySkin.html" target="helpWindow">Use Skin</a>
+                  <div id="skinlist">&nbsp;</div>
+                  <input name="wimpySkin" type="text" id="wimpySkin" value="__install__/skin_microview.xml" size="60" /></td>
+              </tr>
+              <tr bgcolor="#F4F9FF" class="tableCells">
+                <td valign="top" class="tableCells">&nbsp;</td>
+                <td colspan="2" align="left" valign="top" class="tableCells"><a href="http://www.wimpyplayer.com/docs/rave/api/size.html" target="helpWindow">Size</a><br />
+                  <input name="set_size" type="radio" onClick="checkButtonState('skin_auto')" value="auto" />
+                  Auto detect (based on skin size) <br />
+                  <input name="set_size" type="radio" value="man" checked="checked" />
+                  Set size manually:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; width:
+                  <input name="wimpyWidth" type="text" id="wimpyWidth" value="250" size="4" />
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; height:
+                  <input name="wimpyHeight" type="text" id="wimpyHeight" value="290" size="4" /></td>
+              </tr>
+              <tr bgcolor="#FFFFFF">
+                <td height="5%" valign="top" class="tableCells">&nbsp;</td>
+                <td colspan="2" align="left" valign="top" nowrap="nowrap" class="tableCells"><table width="100%" border="0" cellpadding="0" cellspacing="0">
+                    <tr>
+                      <td colspan="2" align="left" valign="middle"><a href="http://www.wimpyplayer.com/docs/rave/api/bkgdColor.html" target="helpWindow">Background color:</a>
+                        <input name="bkgdColor" type="text" id="bkgdColor" value="#6A7A95" size="7" />
+                        <a href="#" onClick="ColorPicker_open();return false;" ></a> <a href="#" onClick="ColorPicker_set();return false;" >Set</a>&nbsp;&nbsp; &nbsp; &nbsp;<a href="#" onClick="ColorPicker_open();return false;" >Choose</a></td>
+                    </tr>
+                    <tr>
+                      <td width="3%" align="left" valign="middle"><strong>
+                        <input name="tptBkgd" type="checkbox" id="tptBkgd" value="yes" />
+                      </td>
+                      <td width="97%" align="left" valign="middle" nowrap="nowrap"><a href="http://www.wimpyplayer.com/docs/rave/api/tptBkgd.html" target="helpWindow">Transparent background</a></td>
+                    </tr>
+                  </table>
+                  <div id="divColorPicker">&nbsp;</div></td>
+              </tr>
+              <tr bgcolor="#F4F9FF">
+                <td height="5%" valign="top" class="tableCells">&nbsp;</td>
+                <td colspan="2" align="left" valign="top" nowrap="nowrap" class="tableCells"><p><a href="http://www.wimpyplayer.com/docs/rave/api/wimpyHTMLpageTitle.html" target="helpWindow">Page Title</a>:<br />
+                    <input name="wimpyHTMLpageTitle" type="text" id="wimpyHTMLpageTitle" value="Wimpy Player" size="60" />
+                  </p></td>
+              </tr>
+              <tr bgcolor="#FFFFFF">
+                <td height="3%" valign="middle" class="tableCells">&nbsp;</td>
+                <td width="26%" align="left" valign="middle" nowrap="nowrap" class="tableCells"><a href="http://www.wimpyplayer.com/docs/rave/api/setAspectRatio.html" target="helpWindow">Video Aspect Ratio</a>: </td>
+                <td width="69%" align="left" valign="middle" nowrap="nowrap" class="tableCells"><select name="setAspectRatio" id="setAspectRatio" onChange="changeSortField()">
+                    <option value="maintain" selected="selected">Maintain Dimensions</option>
+                    <option value="fit">Fit To Window</option>
+                  </select></td>
+              </tr>
+            </table>
+          </ul>
+          <!--
+		.
+		.
+	  START UP
+		.
+		.
+	  -->
+          <table width="100%" border="0" class="tableMenuTitles" onClick="openClose('menu_startup');return false;">
+            <tr>
+              <td><strong><a href="javascript:openClose('menu_startup');">&nbsp;+ Start Up</a></strong><a name="menu_startup_goto" id="menu_startup_goto"></a></td>
+            </tr>
+          </table>
+          <ul id="menu_startup" style="display:block;">
+            <table width="100%" border="0" cellpadding="0" cellspacing="0" class="tableA">
+              <tr bgcolor="#FFFFFF">
+                <td width="5%" height="5%" valign="middle" class="tableCells">&nbsp;</td>
+                <td width="95%" align="left" valign="middle" nowrap="nowrap" class="tableCells"><a href="http://www.wimpyplayer.com/docs/rave/api/theVolume.html" target="helpWindow">Start up volume</a>:
+                  <input name="theVolume" type="text" id="theVolume" value="100" size="3" maxlength="3" /></td>
+              </tr>
+              <tr bgcolor="#F4F9FF">
+                <td height="5%" valign="middle" class="tableCells">&nbsp;</td>
+                <td align="left" valign="middle" nowrap="nowrap" class="tableCells"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+                    <tr>
+                      <td width="21%" align="left" valign="middle" nowrap="nowrap"><p><a href="http://www.wimpyplayer.com/docs/rave/api/sortField.html" target="helpWindow">Sort Playlist By</a>:<br />
+                        </p></td>
+                      <td width="79%" align="left" valign="middle"><input name="sortField" type="text" id="sortField" value="title" size="10" />
+                        <select name="set_sortField" id="set_sortField" onChange="changeSortField()">
+                          <option value="title" selected="selected">title</option>
+                          <option value="seconds">time (seconds)</option>
+                          <option value="date">date</option>
+                          <option value="artist">artist</option>
+                          <option value="album">album</option>
+                          <option value="set field name here">other</option>
+                          <option value="none">Don't Sort</option>
+                        </select></td>
+                    </tr>
+                    <tr>
+                      <td align="left" valign="middle" nowrap="nowrap"><a href="http://www.wimpyplayer.com/docs/rave/api/sortField.html" target="helpWindow">Sort Order</a> </td>
+                      <td align="left" valign="middle"><select name="sortOrder" id="sortOrder" onChange="changeSortField()">
+                          <option value="asc" selected="selected">A-Z (ascending)</option>
+                          <option value="des">Z-A (descending)</option>
+                        </select></td>
+                    </tr>
+                  </table></td>
+              </tr>
+              <tr bgcolor="#FFFFFF">
+                <td height="5%" valign="middle" class="tableCells">&nbsp;</td>
+                <td align="left" valign="middle" nowrap="nowrap" class="tableCells"><a href="http://www.wimpyplayer.com/docs/rave/api/fsMode.html" target="helpWindow">Fullscreen Button Action</a>::
+                  <select name="fsMode" id="fsMode" onChange="changeSortField()">
+                    <option value="detach">Detach Player</option>
+                    <option value="fullscreen" selected="selected">Fullscreen</option>
+                  </select></td>
+              </tr>
+              <tr bgcolor="#F4F9FF">
+                <td height="5%" valign="middle" class="tableCells"><input name="loopTrack" type="checkbox" id="loopTrack" onClick="checkButtonState('loopTrack')" value="off" />
+                </td>
+                <td align="left" valign="middle" nowrap="nowrap" class="tableCells"><a href="http://www.wimpyplayer.com/docs/rave/api/loopTrack.html" target="helpWindow">Turn on &quot;Loop Track&quot; button</a></td>
+              </tr>
+              <tr bgcolor="#FFFFFF">
+                <td height="5%" valign="middle" class="tableCells"><input name="randomPlayback" type="checkbox" id="randomPlayback" onClick="checkButtonState('randomPlayback');" value="off" />
+                </td>
+                <td align="left" valign="middle" nowrap="nowrap" class="tableCells"><a href="http://www.wimpyplayer.com/docs/rave/api/randomPlayback.html" target="helpWindow">Turn on &quot;Random&quot; button</a></td>
+              </tr>
+              <tr bgcolor="#F4F9FF">
+                <td height="5%" valign="middle" class="tableCells"><input name="repeatPlaylist" type="checkbox" id="repeatPlaylist" value="off" />
+                </td>
+                <td align="left" valign="middle" nowrap="nowrap" class="tableCells"><a href="http://www.wimpyplayer.com/docs/rave/api/repeatPlaylist.html" target="helpWindow">Turn on &quot;Repeat Playlist&quot; button</a></td>
+              </tr>
+              <tr bgcolor="#FFFFFF">
+                <td height="5%" valign="middle" class="tableCells"><input name="randomOnLoad" type="checkbox" id="randomOnLoad" value="yes" />
+                </td>
+                <td align="left" valign="middle" nowrap="nowrap" class="tableCells"><a href="http://www.wimpyplayer.com/docs/rave/api/randomOnLoad.html" target="helpWindow">Select random track at startup</a></td>
+              </tr>
+              <tr bgcolor="#F4F9FF">
+                <td height="5%" valign="middle" class="tableCells"><font color="#CCCCCC"><strong>
+                  <input name="startPlayingOnload" type="checkbox" id="startPlayingOnload" value="yes" />
+                  </strong></font></td>
+                <td align="left" valign="middle" nowrap="nowrap" class="tableCells"><a href="http://www.wimpyplayer.com/docs/rave/api/startPlayingOnload.html" target="helpWindow">Start playing immediately</a></td>
+              </tr>
+              <tr bgcolor="#FFFFFF">
+                <td height="5%" valign="middle" class="tableCells"><input name="use_startOnTrack" type="checkbox" id="use_startOnTrack" value="yes" />
+                </td>
+                <td align="left" valign="middle" nowrap="nowrap" class="tableCells"><a href="http://www.wimpyplayer.com/docs/rave/api/startOnTrack.html" target="helpWindow">Play this track at startup</a>:
+                  <input name="startOnTrack" type="text" id="startOnTrack" value="4" size="4" maxlength="4" /></td>
+              </tr>
+              <!-- memory -->
+			  <tr bgcolor="#FFFFFF">
+                <td height="5%" valign="middle" class="tableCells"><input name="use_resume" type="checkbox" id="use_resume" value="yes" />                </td>
+                <td align="left" valign="middle" nowrap="nowrap" class="tableCells"><a href="http://www.wimpyplayer.com/docs/rave/api/resume.html" target="helpWindow">Enable Memory</a>:
+                <input name="resume" type="text" id="resume" value="4" size="4" maxlength="4" /></td>
+              </tr>
+			  
+              <tr bgcolor="#F4F9FF">
+                <td height="5%" valign="middle" class="tableCells"><input name="autoAdvance" type="checkbox" id="autoAdvance" value="yes" />
+                </td>
+                <td align="left" valign="middle" nowrap="nowrap" class="tableCells"><a href="http://www.wimpyplayer.com/docs/rave/api/autoAdvance.html" target="helpWindow">Automatically advance to next track</a></td>
+              </tr>
+              <tr bgcolor="#FFFFFF">
+                <td height="5%" valign="middle" class="tableCells"><input name="popUpHelp" type="checkbox" id="popUpHelp" value="yes" /></td>
+                <td align="left" valign="middle" nowrap="nowrap" class="tableCells"><a href="http://www.wimpyplayer.com/docs/rave/api/popUpHelp.html" target="helpWindow">Pop Up help enabled </a></td>
+              </tr>
+            </table>
+          </ul>
+          <!--
+		.
+		.
+	  ADVANCED
+		.
+		.
+	  -->
+          <table width="100%" border="0" onClick="openClose('menu_advanced');return false;" class="tableMenuTitles">
+            <tr>
+              <td><strong><a href="javascript:openClose('menu_advanced');">&nbsp;+ Advanced</a></strong><a name="menu_advanced_goto" id="menu_advanced_goto"></a></td>
+            </tr>
+          </table>
+          <ul id="menu_advanced" style="display:block;">
+            <table width="100%" border="0" cellpadding="0" cellspacing="0" class="tableA">
+              <tr bgcolor="#FFFFFF">
+                <td width="5%" height="5%" valign="middle" class="tableCells">&nbsp;</td>
+                <td width="35%" align="left" valign="middle" nowrap="nowrap" class="tableCells"><a href="http://www.wimpyplayer.com/docs/rave/api/infoDisplaySpeed.html" target="helpWindow">Info Scroller Speed</a>: </td>
+                <td width="60%" align="left" valign="middle" nowrap="nowrap" class="tableCells"><input name="infoDisplaySpeed" type="text" id="infoDisplaySpeed" value="3" size="3" /></td>
+              </tr>
+              <tr bgcolor="#F4F9FF">
+                <td height="5%" valign="middle" class="tableCells">&nbsp;</td>
+                <td align="left" valign="middle" nowrap="nowrap" class="tableCells"><a href="http://www.wimpyplayer.com/docs/rave/api/scrollFormat.html" target="helpWindow">Info Scroller Format</a>::</td>
+                <td align="left" valign="middle" nowrap="nowrap" class="tableCells"><input name="scrollFormat" type="text" id="scrollFormat" value="1 - 2" size="30" /></td>
+              </tr>
+              <tr bgcolor="#FFFFFF">
+                <td valign="middle" class="tableCells">&nbsp;</td>
+                <td align="left" valign="middle" class="tableCells"><a href="http://www.wimpyplayer.com/docs/rave/api/timeFormat.html" target="helpWindow">Time Display Format</a>: </td>
+                <td align="left" valign="middle" class="tableCells"><input name="timeFormat" type="text" id="timeFormat" value="1" size="30" /></td>
+              </tr>
+              <tr bgcolor="#F4F9FF">
+                <td height="5%" valign="middle" class="tableCells">&nbsp;</td>
+                <td align="left" valign="middle" nowrap="nowrap" class="tableCells"><a href="http://www.wimpyplayer.com/docs/rave/api/bufferSeconds.html" target="helpWindow">Buffer Seconds</a>: </td>
+                <td align="left" valign="middle" nowrap="nowrap" class="tableCells"><input name="bufferSeconds" type="text" id="bufferSeconds" value="10" size="3" /></td>
+              </tr>
+              <tr bgcolor="#FFFFFF">
+                <td height="3%" valign="middle" class="tableCells">&nbsp;</td>
+                <td align="left" valign="middle" nowrap="nowrap" class="tableCells"><a href="http://www.wimpyplayer.com/docs/rave/api/coverartBasename.html" target="helpWindow">Cover Art Base Name</a>: </td>
+                <td align="left" valign="middle" nowrap="nowrap" class="tableCells"><input name="coverartBasename" type="text" id="coverartBasename" value="coverart.jpg" size="30" /></td>
+              </tr>
+              <tr bgcolor="#F4F9FF">
+                <td valign="middle" class="tableCells">&nbsp;</td>
+                <td align="left" valign="middle" class="tableCells"><a href="http://www.wimpyplayer.com/docs/rave/api/debugMode.html" target="helpWindow">Debug Mode</a><br /></td>
+                <td align="left" valign="middle" class="tableCells"><select name="debugMode" id="debugMode" onChange="changeSortField()">
+                    <option value="no" selected="selected">Default</option>
+                    <option value="yes">Detailed Info</option>
+                    <option value="sup">Supress All Text</option>
+                  </select></td>
+              </tr>
+              <tr bgcolor="#FFFFFF">
+                <td height="5%" valign="middle" class="tableCells">&nbsp;</td>
+                <td align="left" valign="middle" nowrap="nowrap" class="tableCells"><a href="http://www.wimpyplayer.com/docs/rave/api/infoButtonAction.html" target="helpWindow">Info Button Action</a> <br />
+                  </p></td>
+                <td align="left" valign="middle" nowrap="nowrap" class="tableCells"><select name="infoButtonAction" id="infoButtonAction" onChange="changeSortField()">
+                    <option value="link">Link to Page</option>
+                    <option value="info">Show Info</option>
+                  </select></td>
+              </tr>
+              <tr bgcolor="#F4F9FF">
+                <td height="5%" valign="middle" class="tableCells">&nbsp;</td>
+                <td align="left" valign="middle" nowrap="nowrap" class="tableCells"><a href="http://www.wimpyplayer.com/docs/rave/api/clickWindowAction.html" target="helpWindow">Click Video Window Action</a><br /></td>
+                <td align="left" valign="middle" nowrap="nowrap" class="tableCells"><select name="clickWindowAction" id="clickWindowAction" onChange="changeSortField()">
+                    <option value="playPause" selected="selected">Play / Pause</option>
+                    <option value="playPauseNoIcon">Play / Pause (no icon)</option>
+                    <option value="controls">Show Controls</option>
+                    <option value="info">Show Info</option>
+                    <option value="link">Link to Page</option>
+                    <option value="nothing">Do Nothing</option>
+                  </select></td>
+              </tr>
+              <tr bgcolor="#FFFFFF">
+                <td height="5%" valign="middle" class="tableCells">&nbsp;</td>
+                <td align="left" valign="middle" nowrap="nowrap" class="tableCells"><a href="http://www.wimpyplayer.com/docs/rave/api/linkToWindow.html" target="helpWindow">External Link-to Window</a></td>
+                <td align="left" valign="middle" nowrap="nowrap" class="tableCells"><input name="linkToWindow" type="text" id="linkToWindow" value="_blank" size="30" /></td>
+              </tr>
+              <tr bgcolor="#F4F9FF">
+                <td height="5%" valign="top" class="tableCells"><input name="use_onTrackComplete" type="checkbox" id="use_onTrackComplete" value="yes" /></td>
+                <td colspan="2" align="left" valign="top" class="tableCells"><table width="100%" border="0" cellpadding="0" cellspacing="0" class="tableA">
+                    <tr>
+                      <td width="36%" align="left" valign="middle" nowrap="nowrap" class="tableCells"><a href="http://www.wimpyplayer.com/docs/rave/api/onTrackComplete.html" target="helpWindow">On Track Complete</a> </td>
+                      <td width="64%" align="left" valign="middle" nowrap="nowrap" class="tableCells"><select name="onTrackComplete" id="onTrackComplete" onChange="changeSortField()">
+                          <option value="gotoURL" selected="selected">Go to Page</option>
+                          <option value="loadClip">Load Movie</option>
+                        </select></td>
+                    </tr>
+                    <tr>
+                      <td colspan="2" align="left" valign="top" nowrap="nowrap" class="tableCells"><input name="onTrackCompleteURL" type="text" id="onTrackCompleteURL" value="__install__/file.html" size="60" />
+                      </td>
+                    </tr>
+                  </table></td>
+              </tr>
+              <tr bgcolor="#FFFFFF">
+                <td valign="top" class="tableCells"><input name="use_hide_folders" type="checkbox" id="use_hide_folders" value="yes" />
+                </td>
+                <td colspan="2" align="left" valign="top" class="tableCells"><a href="http://www.wimpyplayer.com/docs/rave/api/hide_folders.html" target="helpWindow">Hide Folders</a>: <br />
+                  <input name="hide_folders" type="text" id="hide_folders" value="skins, getid3, _notes, vti_bin" size="60" /></td>
+              </tr>
+              <tr bgcolor="#F4F9FF">
+                <td valign="top" class="tableCells"><input name="use_hide_files" type="checkbox" id="use_hide_files" value="yes" />
+                </td>
+                <td colspan="2" align="left" valign="top" class="tableCells"><a href="http://www.wimpyplayer.com/docs/rave/api/hide_files.html" target="helpWindow">Hide Files</a>: <br />
+                  <input name="hide_files" type="text" id="hide_files" value="rave.swf, wimpy.swf, wimpyAV.swf, raveConfigs.xml, wimpyConfigs.xml, wimpyAVconfigs.xml" size="60" /></td>
+              </tr>
+              <tr bgcolor="#FFFFFF">
+                <td valign="top" class="tableCells"><input name="use_plugPlaylist" type="checkbox" id="use_plugPlaylist" value="yes" />
+                </td>
+                <td colspan="2" align="left" valign="top" class="tableCells"><a href="http://www.wimpyplayer.com/docs/rave/api/plugPlaylist.html" target="helpWindow">Plug Playlist:</a><br />
+                  <input name="plugPlaylist" type="text" id="plugPlaylist" value="__install__/plug_playlist.xml" size="60" />
+                  <br />
+                  Plug Every:
+                  <input name="plugEvery" type="text" id="plugEvery" value="2" size="3" />
+                </td>
+              </tr>
+              <tr bgcolor="#F4F9FF">
+                <td height="5%" valign="top" class="tableCells"><input name="use_startupLogo" type="checkbox" id="use_startupLogo" value="yes" />
+                </td>
+                <td colspan="2" align="left" valign="top" nowrap="nowrap" class="tableCells"><a href="http://www.wimpyplayer.com/docs/rave/api/startupLogo.html" target="helpWindow">Startup Logo</a>: <br />
+                  <input name="startupLogo" type="text" id="startupLogo" value="__install__/logo.jpg" size="60" /></td>
+              </tr>
+              <tr bgcolor="#FFFFFF">
+                <td height="5%" valign="top" class="tableCells"><input name="use_defaultImage" type="checkbox" id="use_defaultImage" value="yes" />
+                </td>
+                <td colspan="2" align="left" valign="top" nowrap="nowrap" class="tableCells"><a href="http://www.wimpyplayer.com/docs/rave/api/defaultImage.html" target="helpWindow">Default Cover Art</a>:<br />
+                  <input name="defaultImage" type="text" id="defaultImage" value="__install__/graphic.jpg" size="60" /></td>
+              </tr>
+			  <tr bgcolor="#FFFFFF">
+                <td height="5%" valign="top" class="tableCells"><input name="use_videoOverlay" type="checkbox" id="use_videoOverlay" value="yes" />
+                </td>
+                <td colspan="2" align="left" valign="top" nowrap="nowrap" class="tableCells"><a href="http://www.wimpyplayer.com/docs/rave/api/videoOverlay.html" target="helpWindow">Video Overlay</a>:<br />
+                  <input name="videoOverlay" type="text" id="videoOverlay" value="__install__/graphic.png" size="60" /></td>
+              </tr>
+              <tr bgcolor="#F4F9FF">
+                <td valign="middle" class="tableCells"><input name="use_limitPlaytime" type="checkbox" id="use_limitPlaytime" value="yes" />
+                </td>
+                <td colspan="2" align="left" valign="middle" class="tableCells"><a href="http://www.wimpyplayer.com/docs/rave/api/limitPlaytime.html" target="helpWindow">Limit track playback time</a> to&nbsp;
+                  <input name="limitPlaytime" type="text" id="limitPlaytime" value="4" size="4" maxlength="4" />
+                  seconds </td>
+              </tr>
+              <tr bgcolor="#FFFFFF">
+                <td height="0%" valign="middle" class="tableCells"><input name="enableDownloads" type="checkbox" id="enableDownloads" value="yes" /></td>
+                <td colspan="2" align="left" valign="middle" nowrap="nowrap" class="tableCells"><a href="http://www.wimpyplayer.com/docs/rave/api/enableDownloads.html" target="helpWindow">Enable Downloads</a></td>
+              </tr>
+              <tr bgcolor="#F4F9FF">
+                <td valign="middle" class="tableCells"><input name="getMyid3info" type="checkbox" id="getMyid3info" value="yes" />
+                </td>
+                <td colspan="2" align="left" valign="middle" class="tableCells"><a href="http://www.wimpyplayer.com/docs/rave/api/getMyid3info.html" target="helpWindow">Extract embedded  ID3 info</a> </td>
+              </tr>
+              <tr bgcolor="#FFFFFF">
+                <td valign="middle" class="tableCells"><input name="findAllMedia" type="checkbox" id="findAllMedia" value="yes" />
+                </td>
+                <td colspan="2" align="left" valign="middle" class="tableCells"><a href="http://www.wimpyplayer.com/docs/rave/api/findAllMedia.html" target="helpWindow">Find All Media</a></td>
+              </tr>
+              <tr bgcolor="#F4F9FF">
+                <td valign="middle" class="tableCells"><input name="useSysCodePage" type="checkbox" id="useSysCodePage" value="yes" />
+                </td>
+                <td colspan="2" align="left" valign="middle" class="tableCells"><a href="http://www.wimpyplayer.com/docs/rave/api/useSysCodePage.html" target="helpWindow">Use Localized Characters</a> </td>
+              </tr>
+              <tr bgcolor="#FFFFFF">
+                <td valign="middle" class="tableCells"><input name="no_js" type="checkbox" id="no_js" value="no" />
+                </td>
+                <td colspan="2" align="left" valign="middle" class="tableCells"><a href="http://www.wimpyplayer.com/docs/rave/api/no_js.html" target="helpWindow">Do <b>NOT</b> use Javascript to render the player</a>.</td>
+              </tr>
+              <tr bgcolor="#F4F9FF">
+                <td valign="top" class="tableCells">&nbsp;</td>
+                <td colspan="2" align="left" valign="top" class="tableCells">Installation Folder<br />
+                  <input name="wimpyInstall" type="text" id="wimpyInstall" value="__install__" size="42" />
+                  &nbsp;<a href="#" onClick="changeInstallPath();return false;">apply</a> </td>
+              </tr>
+            </table>
+            <p>&nbsp;</p>
+          </ul>
+        </form>
+      </div></td>
+    <td width="90%" align="center" valign="middle" bgcolor="#000000" id="colorPickerSelectedColor"><!-- START WIMPY PLAYER CODE -->
+      <div id="flashcontent">&nbsp;</div>
+      <p>
+        <script language="JavaScript" type="text/javascript" >
+	//makeWimpyPlayer();
+            </script>
+        <!-- END WIMPY PLAYER CODE -->
+      </p>
+      <p>&nbsp;</p>
+      <p>&nbsp;</p>
+      <p>&nbsp;</p>
+      <p>&nbsp;</p>
+      <div id="divCode" style="width: 400px; height: 120px; position: absolute; left: 490px; top: 400px; background-color: #F3F3F3; border: 0px none #000000;" >
+        <table width="100%" border="0" class="tableMenuTitles">
+          <tr>
+            <td><div align="left"> <a href="javascript:collectSettings();"></a>&nbsp;&nbsp;<strong><a href="javascript:collectSettings();">Refresh Player / Code</a></strong></div></td>
+          </tr>
+        </table>
+        <table width="100%" border="0" align="center" cellpadding="3" cellspacing="0" class="tableA">
+          <tr>
+            <td align="center" valign="middle"><form action="http://www.wimpyplayer.com/customize/return.php" method="post" name="form_full" target="_blank" id="form_full">
+                <strong><a href="http://www.wimpyplayer.com/docs/rave/api/output_options.html" target="helpWindow">Full Page</a><br />
+                </strong>
+                <textarea name="c" cols="10" rows="2" wrap="off" id="c"></textarea>
+                <br />
+                <input name="kind" type="hidden" id="kind" value="html" />
+                <input name="save_full" type="submit" id="save_full" value="Save" />
+              </form></td>
+            <td align="center" valign="middle"><form action="http://www.wimpyplayer.com/customize/return.php" method="post" name="form_snip" target="_blank" id="form_snip">
+                <strong><a href="http://www.wimpyplayer.com/docs/rave/api/output_options.html" target="helpWindow">Snippet</a><br />
+                </strong>
+                <textarea name="c" cols="10" rows="2" wrap="off" id="c"></textarea>
+                <br />
+                <input name="kind" type="hidden" id="kind" value="html" />
+                <input name="save_snip" type="submit" id="save_snip" value="Save" />
+              </form></td>
+            <td align="center" valign="middle"><form action="http://www.wimpyplayer.com/customize/return.php" method="post" name="form_xml" target="_blank" id="form_xml">
+                <strong><a href="http://www.wimpyplayer.com/docs/rave/api/output_options.html" target="helpWindow">Config File</a> <br />
+                </strong>
+                <textarea name="c" cols="10" rows="2" wrap="off" id="c"></textarea>
+                <br />
+                <input name="kind" type="hidden" id="kind" value="xml" />
+                <input name="save_xml" type="submit" id="save_xml" value="Save" />
+              </form></td>
+          </tr>
+        </table>
+      </div></td>
+  </tr>
+</table>
+<div id="see"></div>
+<script language="JavaScript" type="text/javascript">
+//<![CDATA[
+closeAll();
+openClose('menu_display');
+init();
+//]]>
+</script>
+<script type="text/javascript">
+//<![CDATA[
+resizeApp();
+//]]>
+</script>
+</body>
+</html>

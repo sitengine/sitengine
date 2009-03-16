@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+
+<dictionary name="dictionary">
+    
+    <group name="LABELS">
+        <item name="entityTitle">Mitglieder</item>
+        <item name="actionsSectionIndex">Mitglieder anzeigen</item>
+        <item name="actionsSectionInsert">Mitglied hinzufügen</item>
+        <item name="listformTitle">Mitglieder</item>
+        <item name="listformColumnSortHref">Liste nach dieser Spalte sortieren</item>
+        <item name="listformBatchDeleteSubmit">Einträge löschen</item>
+        <item name="listformBatchUpdateSubmit">Liste aktualisieren</item>
+        <item name="listformFilterIsActive">Für die aktuelle Ansicht ist der Filter aktiviert</item>
+        <item name="listformNoRecords">Keine Mitglieder in dieser Gruppe</item>
+        <item name="listformNoMatchingRecords">Es entsprechen keine Mitglieder Ihren Filterkriterian</item>
+        <item name="listformConfirmDelete">Wollen Sie wirklich alle angewählten Mitglieder löschen?</item>
+        <item name="listformConfirmUpdate">Wollen Sie wirklich alle Mitglieder in dieser Liste aktualisieren?</item>
+        <item name="viewformInsertTitle">Neues Mitglied</item>
+        <item name="viewformUpdateTitle">Mitglied bearbeiten</item>
+        <item name="viewformInsertSubmit">Sichern</item>
+        <item name="viewformUpdateSubmit">Änderungen sichern</item>
+        <item name="viewformInputRequired">Mit rot markierte Felder müssen ausgefüllt werden</item>
+        <item name="filterSectionTitle">Filter</item>
+        <item name="filterSectionSubmit">Finde</item>
+        <item name="filterSectionReset">Zurückstellen</item>
+        <item name="settingsSectionTitle">Einstellungen</item>
+        <item name="settingsSectionSubmit">Speichern</item>
+        <item name="settingsSectionReset">Zurückstellen</item>
+        <item name="settingsSectionItemsPerPage">Einträge pro Seite</item>
+        <item name="pagerPage">Seite</item>
+        <item name="pagerPages">Seiten</item>
+        <item name="pagerOf">von</item>
+        <item name="pagerEntity">Einträgen</item>
+        <item name="pagerPreviousPage">Vorherige</item>
+        <item name="pagerNextPage">Nächste</item>
+    </group>
+    
+    <group name="BREADCRUMBS">
+        <item name="title">Permiso</item>
+        <item name="groupEntity">Groups</item>
+    </group>
+    
+    <group name="HELPS">
+        <item name="index"> </item>
+        <item name="update"> </item>
+        <item name="insert"> </item>
+    </group>
+
+    <group name="COLUMNS">
+        <item name="locked">Gesperrt</item>
+        <item name="enabled">Aktiviert</item>
+        <item name="lastLogin">Letzte Anmeldung</item>
+        <item name="name">Name</item>
+        <item name="nickname">Anzeigename</item>
+        <item name="firstname">Vorname</item>
+        <item name="lastname">Nachname</item>
+        <item name="userId">Benutzer</item>
+    </group>
+    
+    <group name="FIELDS">
+        <item name="userId">Benutzer</item>
+    </group>
+    
+    <group name="FIELDVALS">
+        <group name="enabled">
+            <item name="0">Nein</item>
+            <item name="1">Ja</item>
+        </group>
+        
+        <group name="locked">
+            <item name="0">Nein</item>
+            <item name="1">Ja</item>
+        </group>
+        
+        <group name="select">
+            <item name="noneSelected">Wählen</item>
+        </group>
+    </group>
+    
+    <group name="HINTS">
+        <item name="invalidRequest">Unzulässige Aktion</item>
+        <item name="accessDenied">Zugriff verweigert</item>
+        <item name="userIdRequired">Benutzer: Bitte eine Benutzer auswählen</item>
+        <item name="membershipExists">Dieser Benutzer ist bereits Mitglied in der gewählten Gruppe</item>
+    </group>
+
+</dictionary>
+

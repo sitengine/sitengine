@@ -1,0 +1,79 @@
+<playlist image="example1.jpg">
+	<item>
+		<filename>example1.flv</filename>
+		<artist>killeen%20and%20gieson</artist>
+		<title>alone</title>
+		<comments>http://www.gieson.com/Library/projects/wimpy.html</comments>
+		<image>example1.jpg</image>
+	</item>
+	<item>
+		<filename>example2.flv</filename>
+		<artist>Killeen%20and%20Gieson</artist>
+		<title>Hated</title>
+		<comments>http://www.plaino.com/</comments>
+		<image>example2.jpg</image>
+	</item>
+		<item>
+		<link> http://www.gieson.com/Library/projects/wimpyAV.html</link>
+		<description>An example FLV file. This video is an excerpt from "Rippen" a music video. To see the video in its entirety, visit gieson.com.</description>
+		<filekind>flv</filekind>
+		<seconds></seconds>
+		<date>2006-02-10 23:40:10</date>
+		<image>Example FLV.jpg</image>
+		<album>Example Media</album>
+		<artist>Mike Gieson</artist>
+		<title>Example FLV</title>
+		<filename>Example FLV.flv</filename>
+	</item>
+	<item>
+		<filekind>mp3</filekind>
+		<seconds></seconds>
+		<date>2004-08-18 05:16:38</date>
+		<image>Example MP3.jpg</image>
+		<description>An Example MP3 track. To here more of Brian and Mike's music go to gieson.com</description>
+		<album>Miserable Songs</album>
+		<artist>Brian Killeen and Mike Gieson</artist>
+		<title>Example MP3</title>
+		<filename>Example MP3.mp3</filename>
+		<link>http://www.gieson.com/Library/projects/wimpy.html</link>
+	</item>
+	<item>
+		<link>http://www.gieson.com/Library/projects/wimpyAV.html</link>
+		<filekind>swf</filekind>
+		<seconds></seconds>
+		<date>2004-06-01 05:32:28</date>
+		<image>Example SWF.jpg</image>
+		<description>An example SWF file. Rich Gieson Sr. explains how to watch a minor league baseball game. To see the video in its entirety, visit gieson.com.</description>
+		<album>Example Media</album>
+		<artist>Mike Gieson</artist>
+		<title>Example SWF</title>
+		<filename>Example SWF.swf</filename>
+	</item>
+		<item>
+		<filename>example1.flv</filename>
+		<artist>Bob</artist>
+		<title>Example 1 - FLV</title>
+		<description>Description for Example 1</description>
+		<seconds></seconds>
+		<image>example1.jpg</image>
+		<link>http://www.gieson.com</link>
+	</item>
+	<item>
+		<filename>example2.flv</filename>
+		<artist>Sally</artist>
+		<title>Example 2 - FLV</title>
+		<description>Description for Example 2</description>
+		<seconds></seconds>
+		<image>example2.jpg</image>
+		<link>http://www.plaino.com</link>
+	</item>
+	<item>
+		<filename>example3.flv</filename>
+		<artist>Bob</artist>
+		<title>Example 3 - FLV</title>
+		<description>Description for Example 3</description>
+		<seconds></seconds>
+		<image>example3.jpg</image>
+		<link>http://www.gieson.com</link>
+	</item>
+</playlist>

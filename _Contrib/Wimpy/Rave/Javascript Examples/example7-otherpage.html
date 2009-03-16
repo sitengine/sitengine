@@ -1,0 +1,93 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<title>Example 7 - Other Page</title>
+<script language='javascript' src='rave.js'></script>
+<link href="examples.css" rel="stylesheet" type="text/css" />
+<!-- These functions are used in the "Call multiple functions" example -->
+<script language="JavaScript" >
+
+function callMultipleFunctions(){
+	wimpy_popout_window.wimpy_clearPlaylist();
+	// addFilesC is built below.
+	wimpy_popout_window.wimpy_appendPlaylist(addFilesC, true);
+}
+
+var addFilesA = "";
+addFilesA += "<playlist>";
+addFilesA += "	<item>";
+addFilesA += "		<filename>example1.flv</filename>";
+addFilesA += "		<artist>killeen and gieson</artist>";
+addFilesA += "		<title>Example 1</title>";
+addFilesA += "		<comments>http://www.gieson.com/Library/projects/wimpy.html</comments>";
+addFilesA += "		<image>http://www.wimpyplayer.com/mp3s3/Killeen%20and%20Gieson%20-%20Alone.jpg</image>";
+addFilesA += "	</item>";
+addFilesA += "</playlist>";
+
+var addFilesB = "";
+addFilesB += "<playlist>";
+addFilesB += "	<item>";
+addFilesB += "		<filename>example2.flv</filename>";
+addFilesB += "		<artist>killeen and gieson</artist>";
+addFilesB += "		<title>Example 2</title>";
+addFilesB += "		<comments>http://www.gieson.com/Library/projects/wimpy.html</comments>";
+addFilesB += "		<image>http://www.wimpyplayer.com/mp3s3/Killeen%20and%20Gieson%20-%20Alone.jpg</image>";
+addFilesB += "	</item>";
+addFilesB += "</playlist>";
+
+var addFilesC = "";
+addFilesC += "<playlist>";
+addFilesC += "	<item>";
+addFilesC += "		<filename>example1.flv</filename>";
+addFilesC += "		<artist>killeen and gieson</artist>";
+addFilesC += "		<title>Example 1</title>";
+addFilesC += "		<comments>http://www.gieson.com/Library/projects/wimpy.html</comments>";
+addFilesC += "		<image>http://www.wimpyplayer.com/mp3s3/Killeen%20and%20Gieson%20-%20Alone.jpg</image>";
+addFilesC += "	</item>";
+addFilesC += "	<item>";
+addFilesC += "		<filename>example2.flv</filename>";
+addFilesC += "		<artist>Killeen and Gieson</artist>";
+addFilesC += "		<title>Example 2</title>";
+addFilesC += "		<comments>http://www.plaino.com/</comments>";
+addFilesC += "		<image>http://www.wimpyplayer.com/mp3s3/Killeen%20and%20Gieson%20-%20Hated.jpg</image>";
+addFilesC += "	</item>";
+addFilesC += "	<item>";
+addFilesC += "		<filename>example3.flv</filename>";
+addFilesC += "		<artist>Killeen and Gieson</artist>";
+addFilesC += "		<title>Example 3</title>";
+addFilesC += "		<comments>http://www.plaino.com/</comments>";
+addFilesC += "		<image>http://www.wimpyplayer.com/mp3s3/Killeen%20and%20Gieson%20-%20Hated.jpg</image>";
+addFilesC += "	</item>";
+addFilesC += "</playlist>";
+
+
+
+</script>
+</head>
+
+<body>
+<table width="100%" border="0" cellspacing="0" cellpadding="30">
+  <tr>
+    <td><h1>Other Page</h1>
+      <p>You should be able to control the player from this page as well. </p>
+      <p><a href="javascript:;" onClick="wimpy_popout_window.wimpy_clearPlaylist();">Clear Playlist </a><br />
+          <a href="javascript:;" onClick="wimpy_popout_window.wimpy_appendPlaylist(addFilesB, true)">Add One Track (and play immediately)</a><br />
+          <a href="javascript:;" onClick="wimpy_popout_window.wimpy_pause()">Pause </a><br />
+          <a href="javascript:;" onClick="wimpy_popout_window.wimpy_play()">Play </a><br />
+        <a href="javascript:;" onClick="wimpy_popout_window.wimpy_stop()">Stop </a></p>
+      <p>If you are unable to control the player using the links on this page, check the following:</p>
+      <p>- This feature is set up so that the popped up player &quot;polls&quot; the <b>browser window instance</b> that popped up the player every 1000 milliseconds (1 second). If you clicked a link on this page before 1 second elapsed,, chances are that the polling has not yet occured for THIS page. Wait at least one second and try again. You can change the polling frequency to a lower number by editing the line within <font color="#CC0000"><b>rave.js</b></font> that reads:</p>
+      <blockquote>
+        <p class="codeExample">setInterval( notifyOpener, 1000 ); <br>
+          <font color="#333333">... change &quot;1000&quot; to a lower number of milliseconds. We do not recommend going any lower than 500.</font> <br>
+          <font color="#333333">Example:</font><br>
+        setInterval( notifyOpener, 500 ); </p>
+      </blockquote>
+      <p>- You are not trying to control a player embedded in a page that you accessed directly. This feature (controlling the player from another page) only works when the <b>browser window instance</b> that contains the page that popped up the player has not changed. In other words, you did not do something like: Browser &gt; File &gt; New Window &gt; Then navigate to another page that contains Rave. This feature is set up for normal page navigation, where the intent is that the end user, while surfing your site, clicks a link on a page to open Rave as a pop up window, then continues to view the remainder of the page and decides to click another link on that same page, which leads them to another page on your site.</p>
+      <p>&nbsp;</p>
+      <p><a href="readme_rave_js_example7.html">Return to Example 7</a></p></td>
+  </tr>
+</table>
+<h1>&nbsp;</h1>
+</body>
+</html>

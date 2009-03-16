@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Sitengine_FormToMail_Default_IndexView</title>
+</head>
+
+<body>
+
+Sitengine_FormToMail_Default_IndexView<br /><br />
+
+<?require 'Sitengine/Env/_Templates/StatusSection.html';?>
+
+<form method="post" action="<?=$this->SECTIONS->FORM->submitUri;?>" enctype="multipart/form-data">
+<?=$this->SECTIONS->FORM->hiddens;?>
+
+<?
+	$field = 'firstname';
+	print $this->formText(
+		$field,
+		$this->SECTIONS->FORM->DATA->$field,
+		array('size' => 40)
+	);
+?>Firstname<br />
+
+<?
+	$field = 'lastname';
+	print $this->formText(
+		$field,
+		$this->SECTIONS->FORM->DATA->$field,
+		array('size' => 40)
+	);
+?>Lastname<br />
+
+<?
+	$field = 'email';
+	print $this->formText(
+		$field,
+		$this->SECTIONS->FORM->DATA->$field,
+		array('size' => 40)
+	);
+?>Mail<br />
+
+Message<br />
+<?
+	$field = 'message';
+	print $this->formTextarea(
+		$field,
+		$this->SECTIONS->FORM->DATA->$field,
+		array('size' => 40)
+	);
+?><br />
+
+<input type="submit" />
+</form>
+
+</body>
+</html>

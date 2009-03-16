@@ -1,0 +1,46 @@
+<html>
+<head>
+<title> New Document </title>
+<script language='javascript' src='readme.js'></script>
+<script language='javascript' src='rave.js'></script>
+<script language='javascript' src='rave_persist.js'></script>
+</head>
+
+<body>
+<h1>B</h1>
+
+<div id="trackSave">yo</div>
+
+<div id="flashcontent">You need to upgrade your Flash Player</div>
+
+
+<script language="JavaScript" >
+
+
+//writeit(myPlaylist,"trackSave");
+
+
+// Setting this to TRUE allows us to receive notifications from Wimpy:
+enableWimpyEvents = true;
+
+// Create a new object (can be any name) and add options to it:
+var myConfigs = new Object();
+
+if(myPlaylist == ""){
+	myConfigs.wimpyApp = "rave.php";
+} else {
+	myConfigs.playlist = myPlaylist;
+	myConfigs.startPlayingOnLoad = "no";
+}
+// Example of adding another option
+//myConfigs.startPlayingOnload = "yes";
+
+// create a player and include the config object as the argument:
+makeWimpyPlayer(myConfigs);
+
+
+</script>
+
+<a href="example8-A.html">Go to A</a>
+</body>
+</html>

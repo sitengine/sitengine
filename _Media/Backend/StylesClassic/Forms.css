@@ -1,0 +1,209 @@
+.viewform {
+    background-color: #fff;
+    margin-top: 0px;
+    border: dotted 1px #666;
+    padding: 0px 0px 0px 0px;
+}
+
+.viewformChildActions {
+    background-color: #fff;
+    margin: 5px 10px 0px 10px;
+    color: #666;
+    padding: 0px;
+    border: dotted 0px #666;
+}
+
+.viewformMain {
+    background-color: #eee;
+    border: dotted 1px #666;
+    margin: 5px 10px 0px 10px;
+    padding-top: 5px;
+}
+
+.viewformSectionTitle {
+    color: #999;
+    margin: 0px 0px 5px 210px;
+    font-size: medium;
+    font-weight: bold;
+    font-style: normal;
+}
+
+.viewformContainer {
+    margin: 0px;
+}
+
+.viewformLabelContainer {
+    clear: both;
+    float: left;
+    width: 200px;
+    text-align: right;
+    margin-right: 10px;
+}
+
+.viewformDefaultLabel {
+    color: #666;
+    font-weight: bold;
+}
+
+.viewformRequiredLabel {
+    color: #c00;
+    font-weight: bold;
+}
+
+.viewformErrorLabel {
+    color: #c00;
+    font-weight: bold;
+}
+
+.viewformLabelContainer div {
+    color: #666;
+    font-weight: normal;
+    font-size: x-small;
+}
+
+.viewformInputWithError {
+    color: #eee;
+    background-color: #f00;
+}
+
+.viewformLeftColumnTitle, .viewformRightColumnTitle {
+    color: #999;
+    font-size: medium;
+    font-weight: bold;
+    font-style: normal;
+}
+
+.viewformLeftColumnTitle {
+    clear: both;
+    float: left;
+    width: 200px;
+    text-align: right;
+    margin: 0pt 10pt 5pt 0pt;
+}
+
+.viewformRightColumnTitle {
+    margin: 0pt 0pt 5pt 0pt;
+}
+
+.viewformContentPlainLineTitle {
+	color: #999;
+    font-size: small;
+    font-weight: bold;
+    font-style: normal;
+}
+
+.viewformRequirements {
+    margin-left: 210px;
+    font-size: x-small;
+}
+
+
+
+
+
+.viewformMeta {
+    clear: both;
+    background-color: #eee;
+    margin: 5px 10px 0px 10px;
+    color: #666;
+    padding: 3px;
+    border: dotted 1px #666;
+}
+
+
+
+
+
+.viewformPermissions {
+    clear: both;
+    background-color: #eee;
+    margin: 5px 10px 0px 10px;
+    color: #666;
+    padding: 3px 3px 3px 0px;
+    border: dotted 1px #666;
+}
+
+.viewformPermissionLabel {
+    clear: both;
+    float: left;
+    width: 200px;
+    text-align: right;
+    padding-right: 10px;
+    color: #666;
+    font-weight: bold;
+}
+
+.viewformPermissionHint {
+    color: #666;
+    font-weight: normal;
+    font-size: x-small;
+}
+
+
+
+
+.viewformDate {
+    background-color: #eee;
+    border: dotted 1px #666;
+    padding: 3px;
+    margin: 5px 10px 0px 10px;
+}
+
+.viewformDateLabel {
+    color: #666;
+    font-weight: bold;
+    font-size: small;
+}
+
+
+
+
+.viewformSubmit {
+    background-color: #fff;
+    padding: 0px;
+    margin: 5px 0px 0px 0px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.fileProperties {
+    border: dotted 1px #666;
+    margin-bottom: 20px;
+    padding: 0px;
+}
+.filePropertiesLabel {
+    background-color: #fff;
+    color: #666;
+    border-bottom: dotted 1px #666;
+    text-align: left;
+}
+.filePropertiesValue {
+    background-color: #fff;
+    color: #666;
+    border-bottom: dotted 1px #666;
+    text-align: right;
+}
+
+.filePropertiesUpload {
+    background-color: #fff;
+    color: #eee;
+}
+
+.filePropertiesDelete {
+    background-color: #fff;
+    color: #c00;
+    text-align: right;
+}

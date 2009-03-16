@@ -1,0 +1,31 @@
+.titleOne {
+    color: #669;
+    font-size: x-large;
+    font-family: Helvetica, Arial;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.titleTwo {
+    color: #336;
+    font-size: 12pt;
+    font-family: Helvetica, Arial;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.titleThree {
+    color: #336;
+    font-size: 9pt;
+    font-family: Helvetica, Arial;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.textNormal {
+    color: #666;
+    font-size: small;
+    font-family: Helvetica, Arial;
+    font-weight: normal;
+    text-decoration: none;
+}

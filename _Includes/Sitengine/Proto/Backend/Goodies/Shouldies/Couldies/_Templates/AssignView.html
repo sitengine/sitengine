@@ -1,0 +1,242 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<!-- Document Created By Christian Hoegl - sitengine.org -->
+
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<meta http-equiv="Pragma" content="no-cache" />
+<meta name="robots" content="noindex, nofollow" />
+
+<title>Sitengine - <?=$this->html($this->DICTIONARY->LABELS->pageTitle);?></title>
+
+<link rel="stylesheet" type="text/css" href="<?=$this->_controller->getEnv()->getMediaRequestDir();?>/Backend/Styles/Global.css" />
+<link rel="stylesheet" type="text/css" href="<?=$this->_controller->getEnv()->getMediaRequestDir();?>/Backend/Styles/Lists.css" />
+<script language="JavaScript" type="text/JavaScript" src="<?=$this->_controller->getEnv()->getMediaRequestDir();?>/Global.js"></script>
+
+</head>
+<body>
+
+
+<div id="screen">
+<?require 'Sitengine/Env/_Templates/HeaderSection.html';?>
+<?require 'Sitengine/Env/_Templates/BreadcrumbsSection.html';?>
+<?require 'Sitengine/Env/_Templates/AbstractSection.html';?>
+<?require 'Sitengine/Env/_Templates/ActionsSection.html';?>
+<?require 'Sitengine/Env/_Templates/StatusSection.html';?>
+
+
+
+
+
+
+<div class="mainSectionLevel1">
+
+
+
+
+<div class="mainSectionHeader">
+<h2 class="mainSectionTitle"><?=$this->html($this->SECTIONS->FILELIST->title);?></h2>
+</div>
+
+
+
+
+<!--
+<div class="filter">
+<?if($this->SECTIONS->FILELIST->FILTER->isActive):?>
+    <div class="filterOn">
+<?else:?>
+    <div class="filterOff">
+<?endif;?>
+
+<form method="get" action="<?=$this->_controller->getEnv()->getUriSelfSubmit();?>" name="filterform" class="filterform">
+<?=$this->SECTIONS->FILELIST->FILTER->hiddens;?>
+<?foreach($this->SECTIONS->FILELIST->FILTER->ELEMENTS as $v):?><?=$v;?><?endforeach;?>
+
+<input type="button" value="<?=$this->html($this->DICTIONARY->INDEXVIEW->filterSectionSubmit);?>" onclick="document.filterform.submit();" />
+<input type="button" value="<?=$this->html($this->DICTIONARY->INDEXVIEW->filterSectionReset);?>" onclick="window.location = '<?=$this->SECTIONS->FILELIST->FILTER->uriReset;?>';" />
+
+</form>
+</div>
+</div>
+-->
+
+
+
+
+
+
+<?if(!sizeof($this->SECTIONS->FILELIST->DATA)):?>
+
+
+<div class="listformNoRecords">
+<span><?=$this->html($this->DICTIONARY->ASSIGNVIEW->noUploads);?></span>
+</div>
+
+
+<?else:?>
+
+
+
+
+
+
+<div class="listformAndControlsWrap">
+
+
+
+
+<table width="100%" class="listControlsTop">
+<tr><td valign="bottom"></td><td align="right" valign="bottom">
+
+<?$pagerAction = $this->_controller->getEnv()->getUriSelfSubmit();?>
+<?$pagerHiddens = $this->SECTIONS->FILELIST->PAGER->hiddens;?>
+<?$pagerCurrPageInput = $this->SECTIONS->FILELIST->PAGER->currPageInput;?>
+<?$pagerCurrPage = $this->SECTIONS->FILELIST->PAGER->currPage;?>
+<?$pagerNextPage = $this->SECTIONS->FILELIST->PAGER->nextPage;?>
+<?$pagerPrevPage = $this->SECTIONS->FILELIST->PAGER->prevPage;?>
+<?$pagerNumPages = $this->SECTIONS->FILELIST->PAGER->numPages;?>
+<?$pagerNumItems = $this->SECTIONS->FILELIST->PAGER->numItems;?>
+<?$pagerFirstItem = $this->SECTIONS->FILELIST->PAGER->firstItem;?>
+<?$pagerLastItem = $this->SECTIONS->FILELIST->PAGER->lastItem;?>
+<?$pagerUriPrevPage = $this->SECTIONS->FILELIST->PAGER->uriPrevPage;?>
+<?$pagerUriNextPage = $this->SECTIONS->FILELIST->PAGER->uriNextPage;?>
+<?$pagerPrevLabel = $this->DICTIONARY->PAGER->previousPage;?>
+<?$pagerNextLabel = $this->DICTIONARY->PAGER->nextPage;?>
+<?$pagerOfLabel = $this->DICTIONARY->PAGER->of;?>
+<?$pagerPageLabel = $this->DICTIONARY->PAGER->page;?>
+<?$pagerPagesLabel = $this->DICTIONARY->PAGER->pages;?>
+<?$pagerEntityLabel = $this->DICTIONARY->PAGER->entity;?>
+<?$pagerValClass = "pagerVal";?>
+<?$pagerTextClass = "pagerText";?>
+<?$pagerHrefPrevClass = "pagerHrefPrev";?>
+<?$pagerHrefNextClass = "pagerHrefNext";?>
+<?$pagerFormName = "pagerTop";?>
+<?$pagerFormClass = "pagerTop";?>
+
+<?require 'Sitengine/Env/_Templates/PagerSection.html';?>
+
+</td></tr></table>
+
+
+
+
+
+
+
+
+
+
+
+<form method="post" action="<?=$this->_controller->getEnv()->getUriSelfSubmit();?>" name="listform" class="listform">
+<?=$this->SECTIONS->FILELIST->hiddens;?>
+<table class="listformTable" cellpadding="0" cellspacing="0">
+
+
+<tr class="listformTitleRow">
+<th valign="top" class="listformCheckboxCell"><input type="checkbox" onclick="setCheckboxes(this.checked,document.listform,'SELECTROWITEM');" /></th>
+<th valign="top"><?=$this->html($this->DICTIONARY->ASSIGNVIEWCOLUMNS->name);?></th>
+<th valign="top"><?=$this->html($this->DICTIONARY->ASSIGNVIEWCOLUMNS->type);?></th>
+<th valign="top" class="listformNumberCell"><?=$this->html($this->DICTIONARY->ASSIGNVIEWCOLUMNS->size);?></th>
+<th valign="top" class="listformNumberCell"><?=$this->html($this->DICTIONARY->ASSIGNVIEWCOLUMNS->udate);?></th>
+
+</tr>
+
+
+
+
+<?foreach($this->SECTIONS->FILELIST->DATA as $row):?>
+<?$name = $this->html($row->name);?>
+<?$size = $this->html($row->size);?>
+
+<?$udate = $row->udate;?>
+<?$type = $row->type;?>
+<?$id = $row->id;?>
+<?$uriDownload = $row->uriDownload;?>
+<?$rowSelectCheckbox = $row->rowSelectCheckbox;?>
+<?$isMarked = $row->isMarked;?>
+
+
+
+<?if($isMarked):?>
+    <?$rowClass = "listformMarkedRow";?>
+<?else:?>
+    <?$rowClass = "listformDataRow";?>
+<?endif;?>
+
+<tr class="<?=$rowClass;?>">
+<td valign="top"><?=$rowSelectCheckbox;?></td>
+<td valign="top"><a href="<?=$uriDownload;?>"><?=$name;?></a></td>
+<td valign="top"><?=$type;?></td>
+<td valign="top" class="listformNumberCell"><?=$size;?></td>
+<td valign="top" class="listformNumberCell"><?=$udate;?></td>
+</tr>
+
+<?endforeach;?>
+
+
+
+
+<tr class="listformTitleRow">
+<th valign="top" class="listformCheckboxCell"><input type="checkbox" onclick="setCheckboxes(this.checked,document.listform,'SELECTROWITEM');" /></th>
+<th valign="top"><?=$this->html($this->DICTIONARY->ASSIGNVIEWCOLUMNS->name);?></th>
+<th valign="top"><?=$this->html($this->DICTIONARY->ASSIGNVIEWCOLUMNS->type);?></th>
+<th valign="top" class="listformNumberCell"><?=$this->html($this->DICTIONARY->ASSIGNVIEWCOLUMNS->size);?></th>
+<th valign="top" class="listformNumberCell"><?=$this->html($this->DICTIONARY->ASSIGNVIEWCOLUMNS->udate);?></th>
+</tr>
+
+</table>
+</form>
+
+
+
+
+
+
+
+
+
+
+
+<table width="100%" class="listControlsBottom"><tr><td valign="top">
+
+<input type="button" value="<?=$this->html($this->DICTIONARY->ASSIGNVIEW->batchAssignSubmit);?>" onclick="assignConfirmSubmit(document.listform, '<?=$this->SECTIONS->FILELIST->METHODS->doBatchAssign;?>', '<?=$this->SECTIONS->FILELIST->URIS->submitDoBatchAssign;?>', '<?=$this->DICTIONARY->ASSIGNVIEW->confirmAssign;?>');" />
+<input type="button" value="<?=$this->html($this->DICTIONARY->ASSIGNVIEW->batchUnlinkSubmit);?>" onclick="assignConfirmSubmit(document.listform, '<?=$this->SECTIONS->FILELIST->METHODS->doBatchUnlink;?>', '<?=$this->SECTIONS->FILELIST->URIS->submitDoBatchUnlink;?>', '<?=$this->DICTIONARY->ASSIGNVIEW->confirmUnlink;?>');" />
+
+</td><td valign="top" align="right">
+
+<?$pagerFormName = "pagerBottom";?>
+<?$pagerFormClass = "pagerBottom";?>
+<?require 'Sitengine/Env/_Templates/PagerSection.html';?>
+
+</td></tr></table>
+
+
+</div>
+
+
+
+
+
+
+
+
+<?endif;?>
+
+</div>
+
+
+
+
+
+
+
+
+
+<?require 'Sitengine/Env/_Templates/FooterSection.html';?>
+</div>
+</body>
+</html>
+
+<!-- Document Created By Christian Hoegl - sitengine.org -->

@@ -1,0 +1,40 @@
+<form method="get" action="<?=$pagerAction;?>" name="<?=$pagerFormName;?>" class="<?=$pagerFormClass;?>">
+	<?=$pagerHiddens;?>
+	
+	<?if($pagerCurrPage > 1):?>
+		<a href="<?=$pagerUriPrevPage;?>" class="<?=$pagerHrefPrevClass;?>"><?=$pagerPrevLabel;?></a>&nbsp;&nbsp;
+	<?endif;?>
+	
+	<span class="<?=$pagerValClass;?>"><?=$pagerFirstItem;?></span>
+	<span class="<?=$pagerTextClass;?>">&nbsp;-</span>
+	<span class="<?=$pagerValClass;?>">&nbsp;<?=$pagerLastItem;?></span>
+	<span class="<?=$pagerTextClass;?>">&nbsp;<?=$pagerOfLabel;?></span>
+	<span class="<?=$pagerValClass;?>">&nbsp;<?=$pagerNumItems;?></span>
+	<span class="<?=$pagerTextClass;?>">&nbsp;<?=$pagerEntityLabel;?></span>
+	
+	<?if($pagerNumPages == 1):?>
+		<?$singularPlural = $pagerPageLabel;?>
+	<?else:?>
+		<?$singularPlural = $pagerPagesLabel;?>
+	<?endif;?>
+	
+	<?if($pagerNumPages > 1):?>
+		<span class="<?=$pagerTextClass;?>">,</span>
+		<span class="<?=$pagerTextClass;?>">&nbsp;<?=$pagerPageLabel;?></span>
+		&nbsp;
+		<?=
+			$this->formText(
+				Sitengine_Env::PARAM_PAGE,
+				$pagerCurrPage,
+				array('size' => 3, 'class' => 'pagerInput')
+			);
+		?>
+		<span class="<?=$pagerTextClass;?>">&nbsp;<?=$pagerOfLabel;?></span>
+		<span class="<?=$pagerValClass;?>">&nbsp;<?=$pagerNumPages;?></span>
+		<span class="<?=$pagerTextClass;?>">&nbsp;<?=$singularPlural;?></span>
+	<?endif;?>
+	
+	<?if($pagerCurrPage < $pagerNumPages):?>
+		&nbsp;&nbsp;<a href="<?=$pagerUriNextPage;?>" class="<?=$pagerHrefNextClass;?>"><?=$pagerNextLabel;?></a>
+	<?endif;?>
+</form>

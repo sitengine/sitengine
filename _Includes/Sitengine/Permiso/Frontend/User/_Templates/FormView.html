@@ -1,0 +1,133 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<!-- Document Created By Christian Hoegl - sitengine.org -->
+
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<meta http-equiv="Pragma" content="no-cache" />
+<meta name="robots" content="noindex, nofollow" />
+
+<title>Account</title>
+</head>
+<body>
+
+
+<!--
+<a href="<?=$this->QUERIES->userNew;?>">Create New Account</a> | 
+<a href="<?=$this->QUERIES->user;?>">My Account</a>
+<?if($this->_controller->getPermiso()->getAuth()->hasIdentity()):?>
+	| <a href="<?=$this->QUERIES->userLogout;?>">Logout</a>
+<?endif;?>
+
+<hr />
+-->
+
+<?require 'Sitengine/Env/_Templates/StatusSection.html';?>
+
+
+
+<h2>My Account</h2>
+<form method="post" action="<?=$this->SECTIONS->ACCOUNTFORM->submitUri;?>" name="accountForm">
+<?=$this->SECTIONS->ACCOUNTFORM->hiddens;?>
+
+<?
+	$field = 'name';
+	print $this->formText(
+		$field,
+		$this->SECTIONS->ACCOUNTFORM->DATA->$field,
+		array('size' => 30)
+	)
+;?>&nbsp;E-Mail<br />
+
+<?
+	$field = 'nickname';
+	print $this->formText(
+		$field,
+		$this->SECTIONS->ACCOUNTFORM->DATA->$field,
+		array('size' => 30)
+	)
+;?>&nbsp;Display Name<br />
+
+<?
+	$field = 'firstname';
+	print $this->formText(
+		$field,
+		$this->SECTIONS->ACCOUNTFORM->DATA->$field,
+		array('size' => 30)
+	)
+;?>&nbsp;First Name<br />
+
+<?
+	$field = 'lastname';
+	print $this->formText(
+		$field,
+		$this->SECTIONS->ACCOUNTFORM->DATA->$field,
+		array('size' => 30)
+	)
+;?>&nbsp;Last Name<br />
+
+<?
+	$field = 'password';
+	print $this->formPassword(
+		$field,
+		$this->SECTIONS->ACCOUNTFORM->DATA->$field,
+		array('size' => 30)
+	)
+;?>&nbsp;Password<br />
+
+<?
+	$field = 'passwordConfirm';
+	print $this->formPassword(
+		$field,
+		$this->SECTIONS->ACCOUNTFORM->DATA->$field,
+		array('size' => 30)
+	)
+;?>&nbsp;Retype Password<br />
+
+<?
+	$field = 'country';
+	print $this->formSelect(
+		$field,
+		$this->SECTIONS->ACCOUNTFORM->DATA->$field,
+		array(),
+		$this->SECTIONS->ACCOUNTFORM->DATA->countryOptions->toArray()
+	);
+;?>&nbsp;Country<br />
+
+<?
+	$field = 'timezone';
+	print $this->formSelect(
+		$field,
+		$this->SECTIONS->ACCOUNTFORM->DATA->$field,
+		array(),
+		$this->_controller->getEnv()->getTimezones()
+	);
+;?>&nbsp;Timezone<br />
+
+<?
+	$field = 'newsletter';
+	print
+		($this->SECTIONS->ACCOUNTFORM->DATA->$field) ?
+		$this->formCheckbox($field, null, array('checked' => true)) :
+		$this->formCheckbox($field)
+	;
+?>&nbsp;Newsletter
+
+<br />
+
+<?
+	print $this->formSubmit(
+		'save',
+		'Save changes'
+	)
+;?>
+
+</form>
+
+
+
+</body>
+</html>
+
+<!-- Document Created By Christian Hoegl - sitengine.org -->

@@ -1,0 +1,108 @@
+<html>
+<head>
+<title>Example 3 - JavaScript Controls - Wimpy Rave Player (AJAX)</title>
+<link href="examples.css" rel="stylesheet" type="text/css">
+
+<script language='javascript' src='readme.js'></script>
+<script language='javascript' src='rave.js'></script>
+
+</head>
+
+<body>
+
+<table width="100%" border="0" cellspacing="0" cellpadding="20">
+  <tr align="center" valign="middle">
+    <td align="left" valign="top">
+
+
+
+
+
+<h1>Example 3 </h1>
+
+<!-- START WIMPY PLAYER CODE -->
+<div id="flashcontent">You need to upgrade your Flash Player</div>
+<script language="JavaScript" >
+	var myPlaylist = "";
+	myPlaylist += "<playlist>";
+	myPlaylist += "	<item>";
+	myPlaylist += "	<filename>example1.flv</filename>";
+	myPlaylist += "	<artist>Killeen and Gieson</artist>";
+	myPlaylist += "	<title>Example 1</title>";
+	myPlaylist += "	<comments>http://www.gieson.com/</comments>";
+	myPlaylist += "	<image>example1.jpg</image>";
+	myPlaylist += "	</item>";
+	myPlaylist += "	<item>";
+	myPlaylist += "	<filename>example2.flv</filename>";
+	myPlaylist += "	<artist>Killeen and Gieson</artist>";
+	myPlaylist += "	<title>Example 2</title>";
+	myPlaylist += "	<comments>http://www.wimpyplayer.com/</comments>";
+	myPlaylist += "	<image>example2.jpg</image>";
+	myPlaylist += "	</item>";
+	myPlaylist += "	<item>";
+	myPlaylist += "	<filename>example3.flv</filename>";
+	myPlaylist += "	<artist>Killeen and Gieson</artist>";
+	myPlaylist += "	<title>Example 3</title>";
+	myPlaylist += "	<comments>http://www.plaino.com/</comments>";
+	myPlaylist += "	<image>example3.jpg</image>";
+	myPlaylist += "	</item>";
+	myPlaylist += "</playlist>";
+
+	makeWimpyPlayer(myPlaylist);
+</script>
+<!-- END WIMPY PLAYER CODE -->
+
+
+
+
+<p>&nbsp;</p>
+<p>This example uses XML data to load multiple tracks into the player. The XML data is "built" using javascript. <br>
+  The benefit of using XML data is that you can include additional information for each track such as artist, title, graphic and a link. </p>
+<p>All data going into the player must be plain text. <font color="#CC0000"><strong>Do not</strong></font> put an XML object into the JavaScript function (e.g. XML-DOM) but rather use plain text &quot;in the shape of&quot; XML. Wimpy will parse the text into an XML object within Wimpy. Wimpy will not accept a &quot;true&quot; XML object.</p>
+<p> There are a few different XML playlist formats that Wimpy will accept: Wimpy XML playlists, RSS / Podcast playlists and XSPF playlists. The example below is a Wimpy XML playlists. </p>
+<p>&nbsp;</p>
+<p><strong>Example Code*</strong></p>
+<p class="codeExample"><font color="#666666">&lt;script language=&quot;JavaScript&quot; &gt;</font><br>
+  &nbsp;&nbsp;
+  var <font color="#009900">myPlaylist</font> = &quot;&quot;;<br>
+  &nbsp;&nbsp; myPlaylist += &quot;&lt;playlist&gt;&quot;;<br>
+  &nbsp;&nbsp; myPlaylist += &quot;		&nbsp; &lt;item&gt;&quot;;<br>
+  &nbsp;&nbsp; myPlaylist += &quot;			&nbsp;&nbsp;&nbsp; &lt;filename&gt;example1.flv&lt;/filename&gt;&quot;;<br>
+  &nbsp;&nbsp; myPlaylist += &quot;			&nbsp;&nbsp;&nbsp; &lt;artist&gt;Killeen and Gieson&lt;/artist&gt;&quot;;<br>
+  &nbsp;&nbsp; myPlaylist += &quot;						&nbsp;&nbsp;&nbsp; &lt;title&gt;Example 1&lt;/title&gt;&quot;;<br>
+  &nbsp;&nbsp; myPlaylist += &quot;						&nbsp;&nbsp;&nbsp; &lt;comments&gt;http://www.gieson.com/&lt;/comments&gt;&quot;;<br>
+  &nbsp;&nbsp; myPlaylist += &quot;						&nbsp;&nbsp;&nbsp; &lt;image&gt;example1.jpg&lt;/image&gt;&quot;;<br>
+  &nbsp;&nbsp; myPlaylist += &quot;					&nbsp;&nbsp;&lt;/item&gt;&quot;;<br>
+  &nbsp;&nbsp; myPlaylist += &quot;	&nbsp;	&lt;item&gt;&quot;;<br>
+  &nbsp;&nbsp; myPlaylist += &quot;						&nbsp;&nbsp;&nbsp; &lt;filename&gt;example2.flv&lt;/filename&gt;&quot;;<br>
+  &nbsp;&nbsp; myPlaylist += &quot;						&nbsp;&nbsp;&nbsp; &lt;artist&gt;Killeen and Gieson&lt;/artist&gt;&quot;;<br>
+  &nbsp;&nbsp; myPlaylist += &quot;						&nbsp;&nbsp;&nbsp; &lt;title&gt;Example 2&lt;/title&gt;&quot;;<br>
+  &nbsp;&nbsp; myPlaylist += &quot;						&nbsp;&nbsp;&nbsp; &lt;comments&gt;http://www.wimpyplayer.com/&lt;/comments&gt;&quot;;<br>
+  &nbsp;&nbsp; myPlaylist += &quot;						&nbsp;&nbsp;&nbsp; &lt;image&gt;example2.jpg&lt;/image&gt;&quot;;<br>
+  &nbsp;&nbsp; myPlaylist += &quot;					&nbsp; &lt;/item&gt;&quot;;<br>
+  &nbsp;&nbsp; myPlaylist += &quot;					&nbsp; &lt;item&gt;&quot;;<br>
+  &nbsp;&nbsp; myPlaylist += &quot;						&nbsp;&nbsp;&nbsp; &lt;filename&gt;example3.flv&lt;/filename&gt;&quot;;<br>
+  &nbsp;&nbsp; myPlaylist += &quot;						&nbsp;&nbsp;&nbsp; &lt;artist&gt;Killeen and Gieson&lt;/artist&gt;&quot;;<br>
+  &nbsp;&nbsp; myPlaylist += &quot;						&nbsp;&nbsp;&nbsp; &lt;title&gt;Example 3&lt;/title&gt;&quot;;<br>
+  &nbsp;&nbsp; myPlaylist += &quot;						&nbsp;&nbsp;&nbsp; &lt;comments&gt;http://www.plaino.com/&lt;/comments&gt;&quot;;<br>
+  &nbsp;&nbsp; myPlaylist += &quot;						&nbsp;&nbsp;&nbsp; &lt;image&gt;example3.jpg&lt;/image&gt;&quot;;<br>
+  &nbsp;&nbsp; myPlaylist += &quot;	&nbsp;&nbsp;&lt;/item&gt;&quot;;<br>
+  &nbsp;&nbsp; myPlaylist += &quot;&lt;/playlist&gt;&quot;;<br>
+  <br>
+  &nbsp;&nbsp; <font color="#FF0000">makeWimpyPlayer(</font><font color="#009900">myPlaylist</font><font color="#FF0000">);</font><br>
+  <font color="#666666">&lt;/script&gt;</font></p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p><font color="#666666"><a href="readme_rave_about.html#real">* Be sure to review &quot;Real World Usage&quot;</a></font></p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&copy;2007 <a href="http://www.wimpyplayer.com">Plaino</a></p>
+<p>&nbsp;</p>
+<p></p>
+</td>
+  </tr>
+</table>
+
+</body>
+</html>

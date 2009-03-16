@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE xliff PUBLIC "-//XLIFF//DTD XLIFF//EN"
+"http://www.oasis-open.org/committees/xliff/documents/xliff.dtd" >
+<xliff version="1.0" xml:lang="fr">
+	<file datatype="plaintext" original="index.php" source-language="fr">
+		<header></header>
+		<body>
+			<trans-unit id="001" resname="IDS_GREETINGS">
+				<source>source1</source>
+				<target>déstination1</target>
+			</trans-unit>
+			<trans-unit id="002" resname="IDS_MAILING LIST">
+				<source>source2</source>
+				<target>déstination2</target>
+			</trans-unit>
+			<trans-unit id="003" resname="IDS_SEE YOU">
+				<source>source3</source>
+				<target>déstination3</target>
+			</trans-unit>
+
+		</body>
+	</file>
+</xliff>

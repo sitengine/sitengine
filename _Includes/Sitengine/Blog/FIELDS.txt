@@ -1,0 +1,15 @@
+type*		titleLangX*		markupLangX*			teaserLangX*		url*	embedTag*
+-----------------------------------------------------------------------------------------
+video		name									caption						tag
+audio						description (html)
+link		title									description			url
+quote		source									quote
+gallery		title			description (html)		teaser
+photo						caption (html)								url
+text		title			body (html)				teaser
+
+
+
+
+
+(*) db-fields

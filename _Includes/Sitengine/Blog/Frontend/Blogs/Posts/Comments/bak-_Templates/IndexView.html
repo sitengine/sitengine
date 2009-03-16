@@ -1,0 +1,178 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<!-- Document Created By Christian Hoegl - sitengine.org -->
+
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<meta http-equiv="Pragma" content="no-cache" />
+<meta name="robots" content="noindex, nofollow" />
+
+<title>Sitengine - <?=$this->html($this->DICTIONARY->LABELS->pageTitle);?></title>
+
+<link rel="stylesheet" type="text/css" href="<?=$this->_controller->getEnv()->getMediaRequestDir();?>/Frontend/Styles/Global.css" />
+<link rel="stylesheet" type="text/css" href="<?=$this->_controller->getEnv()->getMediaRequestDir();?>/Frontend/Styles/Lists.css" />
+<script language="JavaScript" type="text/JavaScript" src="<?=$this->_controller->getEnv()->getMediaRequestDir();?>/Global.js"></script>
+
+</head>
+<body>
+
+
+
+<?require 'Sitengine/Env/_Templates/BreadcrumbsSection.html';?>
+<?require 'Sitengine/Env/_Templates/AbstractSection.html';?>
+<?require 'Sitengine/Env/_Templates/ActionsSection.html';?>
+<?require 'Sitengine/Env/_Templates/StatusSection.html';?>
+
+
+
+
+
+
+
+
+<form method="get" action="<?=$this->_controller->getEnv()->getUriSelfSubmit();?>" name="filterform" class="filterform">
+<?=$this->SECTIONS->COMMENTS->FILTER->hiddens;?>
+<?foreach($this->SECTIONS->COMMENTS->FILTER->ELEMENTS as $v):?><?=$v;?><?endforeach;?>
+
+<input type="button" value="<?=$this->html($this->DICTIONARY->LABELS->filterSectionSubmit);?>" onclick="document.filterform.submit();" />
+<input type="button" value="<?=$this->html($this->DICTIONARY->LABELS->filterSectionReset);?>" onclick="window.location = '<?=$this->SECTIONS->COMMENTS->FILTER->uriReset;?>';" />
+
+</form>
+
+
+
+<hr />
+
+
+
+<?if(!sizeof($this->SECTIONS->COMMENTS->DATA)):?>
+
+
+<a href="<?=$this->SECTIONS->ACTIONS->insert->uri;?>">Be the first to write a comment</a>
+
+
+<?else:?>
+
+
+
+
+
+Sort By:
+
+<a href="<?=$this->SECTIONS->COMMENTS->SORTING->QUERIES->comment;?>" comment="<?=$this->html($this->DICTIONARY->LABELS->listformColumnSortHref);?>"><?=$this->html($this->DICTIONARY->COLUMNS->comment);?></a>
+&nbsp;<img src="<?=$this->_controller->getEnv()->getMediaRequestDir();?>/Backend/Pics/Sort_<?=$this->SECTIONS->COMMENTS->SORTING->COLUMNS->comment;?>.gif" width="8" height="10" border="0" alt="" />
+
+<a href="<?=$this->SECTIONS->COMMENTS->SORTING->QUERIES->name;?>" name="<?=$this->html($this->DICTIONARY->LABELS->listformColumnSortHref);?>"><?=$this->html($this->DICTIONARY->COLUMNS->name);?></a>
+&nbsp;<img src="<?=$this->_controller->getEnv()->getMediaRequestDir();?>/Backend/Pics/Sort_<?=$this->SECTIONS->COMMENTS->SORTING->COLUMNS->name;?>.gif" width="8" height="10" border="0" alt="" />
+
+<a href="<?=$this->SECTIONS->COMMENTS->SORTING->QUERIES->firstname;?>" firstname="<?=$this->html($this->DICTIONARY->LABELS->listformColumnSortHref);?>"><?=$this->html($this->DICTIONARY->COLUMNS->firstname);?></a>
+&nbsp;<img src="<?=$this->_controller->getEnv()->getMediaRequestDir();?>/Backend/Pics/Sort_<?=$this->SECTIONS->COMMENTS->SORTING->COLUMNS->firstname;?>.gif" width="8" height="10" border="0" alt="" />
+
+<a href="<?=$this->SECTIONS->COMMENTS->SORTING->QUERIES->lastname;?>" lastname="<?=$this->html($this->DICTIONARY->LABELS->listformColumnSortHref);?>"><?=$this->html($this->DICTIONARY->COLUMNS->lastname);?></a>
+&nbsp;<img src="<?=$this->_controller->getEnv()->getMediaRequestDir();?>/Backend/Pics/Sort_<?=$this->SECTIONS->COMMENTS->SORTING->COLUMNS->lastname;?>.gif" width="8" height="10" border="0" alt="" />
+
+
+<a href="<?=$this->SECTIONS->COMMENTS->SORTING->QUERIES->cdate;?>"><?=$this->html($this->DICTIONARY->COLUMNS->cdate);?>&nbsp;<img src="<?=$this->_controller->getEnv()->getMediaRequestDir();?>/Backend/Pics/Sort_<?=$this->SECTIONS->COMMENTS->SORTING->COLUMNS->cdate;?>.gif" width="8" height="10" border="0" alt="" /></a>
+
+
+
+
+
+
+<?$pagerAction = $this->_controller->getEnv()->getUriSelfSubmit();?>
+<?$pagerHiddens = $this->SECTIONS->COMMENTS->PAGER->hiddens;?>
+<?$pagerCurrPageInput = $this->SECTIONS->COMMENTS->PAGER->currPageInput;?>
+<?$pagerCurrPage = $this->SECTIONS->COMMENTS->PAGER->currPage;?>
+<?$pagerNextPage = $this->SECTIONS->COMMENTS->PAGER->nextPage;?>
+<?$pagerPrevPage = $this->SECTIONS->COMMENTS->PAGER->prevPage;?>
+<?$pagerNumPages = $this->SECTIONS->COMMENTS->PAGER->numPages;?>
+<?$pagerNumItems = $this->SECTIONS->COMMENTS->PAGER->numItems;?>
+<?$pagerFirstItem = $this->SECTIONS->COMMENTS->PAGER->firstItem;?>
+<?$pagerLastItem = $this->SECTIONS->COMMENTS->PAGER->lastItem;?>
+<?$pagerUriPrevPage = $this->SECTIONS->COMMENTS->PAGER->uriPrevPage;?>
+<?$pagerUriNextPage = $this->SECTIONS->COMMENTS->PAGER->uriNextPage;?>
+<?$pagerPrevLabel = $this->DICTIONARY->LABELS->pagerPreviousPage;?>
+<?$pagerNextLabel = $this->DICTIONARY->LABELS->pagerNextPage;?>
+<?$pagerOfLabel = $this->DICTIONARY->LABELS->pagerOf;?>
+<?$pagerPageLabel = $this->DICTIONARY->LABELS->pagerPage;?>
+<?$pagerPagesLabel = $this->DICTIONARY->LABELS->pagerPages;?>
+<?$pagerEntityLabel = $this->DICTIONARY->LABELS->pagerEntity;?>
+<?$pagerValClass = "pagerVal";?>
+<?$pagerTextClass = "pagerText";?>
+<?$pagerHrefPrevClass = "pagerHrefPrev";?>
+<?$pagerHrefNextClass = "pagerHrefNext";?>
+<?$pagerFormName = "pagerTop";?>
+<?$pagerFormClass = "pagerTop";?>
+
+<?require 'Sitengine/Env/_Templates/PagerSection.html';?>
+
+
+
+
+
+
+<hr />
+
+
+
+
+<?foreach($this->SECTIONS->COMMENTS->DATA as $row):?>
+<?$cdate = $row->cdate;?>
+<?$comment = $this->html($this->truncate($row->comment));?>
+<?$name = $this->html($row->name);?>
+<?$firstname = $this->html($row->firstname);?>
+<?$lastname = $this->html($row->lastname);?>
+
+<?=$name;?> <?=$firstname;?> <?=$lastname;?> @ <?=$cdate;?>
+<h2><?=$comment;?></h2>
+
+<?endforeach;?>
+
+
+
+
+
+<?$pagerFormName = "pagerBottom";?>
+<?$pagerFormClass = "pagerBottom";?>
+<?require 'Sitengine/Env/_Templates/PagerSection.html';?>
+
+
+
+
+
+
+
+
+<form method="get" action="<?=$this->_controller->getEnv()->getUriSelfSubmit();?>" name="settingsForm" class="settingsForm">
+<?=$this->SECTIONS->COMMENTS->SETTINGS->hiddens;?>
+<?foreach($this->SECTIONS->COMMENTS->SETTINGS->ELEMENTS as $v):?><?=$v;?><?endforeach;?>
+
+<script type="text/javascript" language="Javascript">
+//<![CDATA[
+//<!--
+if(document.settingsForm.ipp) {
+	document.settingsForm.ipp.onchange = function() { document.settingsForm.submit(); }
+}
+if(document.settingsForm.t) {
+	document.settingsForm.t.onchange = function() { document.settingsForm.submit(); }
+}
+//-->
+//]]>
+</script>
+</form>
+
+
+<?endif;?>
+
+
+
+
+<hr />
+
+<?require 'Sitengine/Env/_Templates/FooterSection.html';?>
+</div>
+</body>
+</html>
+
+<!-- Document Created By Christian Hoegl - sitengine.org -->

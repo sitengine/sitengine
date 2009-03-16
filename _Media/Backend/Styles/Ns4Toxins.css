@@ -1,0 +1,34 @@
+/*
+ *
+ * From: http://www.alistapart.com/articles/sizematters
+ *
+ */
+ 
+body,
+body div,
+body p,
+body th, 
+body td,
+body li,
+body dd {
+    /* more specific to override imported rule */
+    font-size:    x-small;      
+    /* false value for WinIE4/5 */
+    voice-family: "\"}\"";   
+    /* trick WinIE4/5 into thinking rule is over */
+    voice-family: inherit;   
+    /* recover from trick */
+    font-size:    small
+    /* intended value for better browsers */
+}
+
+html>body,
+html>body div,
+html>body p, 
+html>body th,
+html>body td, 
+html>body li,
+html>body dd {
+    font-size:    small
+    /* be nice to Opera */
+}

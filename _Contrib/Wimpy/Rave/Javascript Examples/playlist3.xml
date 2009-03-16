@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<playlist>
+	<item>
+		<filename>example1.flv</filename>
+		<artist>killeen%20and%20gieson</artist>
+		<title>alone</title>
+		<comments>http://www.gieson.com/Library/projects/wimpy.html</comments>
+		<image>example1.jpg</image>
+	</item>
+	<item>
+		<filename>example2.flv</filename>
+		<artist>Killeen%20and%20Gieson</artist>
+		<title>Hated</title>
+		<comments>http://www.plaino.com/</comments>
+		<image>example2.jpg</image>
+	</item>
+</playlist>

@@ -1,0 +1,60 @@
+<html>
+<head>
+<title> Example 7 - Pop Up - Wimpy MP3 Player Javascript Kit</title>
+
+
+
+
+<!-- IMPORTANT NOTES: 
+
+1. The following line must be included anywhere 
+between the  <head> and </head> tag of you HTML page:
+
+2. You must edit the location of the "rave.js" file so that 
+it refers to the rave.js file on your server. 
+Example:
+src='http://www/yoursite.com/mp3s/rave.js'
+
+3. you must edit the URL to wimpy.swf in the rave.js file. 
+Open rave.js in a text editor and set the proper location 
+to wimpy.swf just like you did with rave.js so that the 
+URL refers to wimpy.swf on your server.
+
+-->
+<script language='javascript' src='rave.js'></script>
+
+
+
+
+
+</head>
+<body leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+
+
+
+
+<!-- START WIMPY PLAYER CODE -->
+<div id="trackInfo"></div>
+<div id="flashcontent">You need to upgrade your Flash Player</div>
+<script language="JavaScript" >
+
+var queryString = getQueryString();
+
+var myConfigs = new Object();
+myConfigs.startPlayingOnload = queryString['startPlayingOnload'];
+myConfigs.playlist = queryString['playlist'];
+myConfigs.wimpyWidth = queryString['w'];
+myConfigs.wimpyHeight = queryString['h'];
+
+makeWimpyPlayer(myConfigs, "flashcontent");
+
+notifyOpener();
+setInterval( notifyOpener, 8000 );
+
+</script>
+<!-- END WIMPY PLAYER CODE -->
+
+
+
+</body>
+</html>

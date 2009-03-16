@@ -1,0 +1,19 @@
+Source Redistribution and Publishing
+
+n99creations.com hereby grants permission to Mike Gieson, Plaino (info@wimpyplayer.com) the right to redistribute or republish the iTunes Coverflow Imitation (id=5) for public download.
+Conditions of the above agreement are as follows;
+The recipient stated above hereby agrees:
+- Credit will be given to n99creations.com and/or the source's propietary owner.
+- Source will not, in any case, be sold.
+- Credits will be stated in the source as follows:
+	/* ITUNES COVERFLOW IMITATION developed by NATHAN STOCKTON
+	   Original source is available at n99creations.com
+	   NATHAN STOCKTON is contactable via n99creations.com
+	   as user nathan99 					   */
+- Redistribution of the source is restricted to the domain : wimpyplayer.com*
+
+In no circumstances are the terms and conditions to be breached. If the terms and conditions are breached n99creations.com can, and will, persue further legal action and the agreement will be instantly forfeited.
+
+For further information contact n99creations at;
+www.n99creations.com/contact.php
+and thankyou for supporting n99creations.com!

@@ -1,0 +1,39 @@
+<?if(isset($this->SECTIONS->BREADCRUMBS->DATA) && sizeof($this->SECTIONS->BREADCRUMBS->DATA)):?>
+
+<div id="breadcrumbs">
+<?if($this->SECTIONS->BREADCRUMBS->title):?>
+    <span class="breadcrumbsTitle">&nbsp;<?=$this->html($this->SECTIONS->BREADCRUMBS->title);?></span>
+<?endif;?>
+
+
+<?$count = 0;?>
+<?foreach($this->SECTIONS->BREADCRUMBS->DATA as $entity):?>
+	<?$name = $this->html($entity->name);?>
+	<?$title = $this->html($this->truncate($entity->title,40));?>
+	<?$uriUpdate = $entity->uriUpdate;?>
+	<?$uriIndex = $entity->uriIndex;?>
+	
+	<?if(!$count && !$this->SECTIONS->BREADCRUMBS->title):?>
+		&nbsp;<a href="<?=$uriIndex;?>" class="breadcrumbsEntityName"><?=$name;?></a>
+	<?else:?>
+		<?if($uriIndex):?>
+			<span class="breadcrumbsSeparator">//</span>
+			<a href="<?=$uriIndex;?>" class="breadcrumbsEntityName"><?=$name;?></a>
+		<?endif;?>
+	<?endif;?>
+	
+	
+	<?if($uriUpdate):?>
+		<?if(!$title):?>
+			<?$title = $this->html($this->DICTIONARY->BREADCRUMBS->noTitle);?>
+		<?endif;?>
+		<?if($count):?>
+			<span class="breadcrumbsSeparator">//</span>
+		<?endif;?>
+		<a href="<?=$uriUpdate;?>" class="breadcrumbsEntityTitle"><?=$title;?></a>
+	<?endif;?>
+	<?$count++;?>
+<?endforeach;?>
+
+</div>
+<?endif;?>

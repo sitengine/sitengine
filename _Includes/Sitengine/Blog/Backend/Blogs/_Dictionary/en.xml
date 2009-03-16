@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+
+<dictionary name="dictionary">
+
+    <group name="LABELS">
+        <item name="pageTitle">Blog</item>
+        <item name="entityTitle">Blog</item>
+        <item name="actionsSectionIndex">Show all Blogs</item>
+        <item name="actionsSectionInsert">Create new Blog</item>
+        <item name="childActionsSectionPostsIndex">Show Posts</item>
+        <item name="childActionsSectionPostsInsert">Add Post</item>
+        <item name="listformTitle">Overview</item>
+        <item name="assignformTitle">Uploads</item>
+        <item name="listformPostsIndex">Show</item>
+        <item name="listformPostsInsert">New</item>
+        <item name="listformColumnSortHref">Click to sort the list by this column</item>
+        <item name="listformBatchDeleteSubmit">Delete selected</item>
+        <item name="listformBatchUpdateSubmit">Update list</item>
+        <item name="listformFilterIsActive">Filtering is active for the current view</item>
+        <item name="listformNoRecords">No Blogs in database</item>
+        <item name="listformNoMatchingRecords">No Blogs match your criteria</item>
+        <item name="listformConfirmDelete">Do you really want to delete the selected Blogs?</item>
+        <item name="listformConfirmUpdate">Do you really want to update all Blogs in the list?</item>
+        <item name="viewformInsertTitle">New Blog</item>
+        <item name="viewformUpdateTitle">Update Blog</item>
+        <item name="viewformPayloadNavTitleMain">Overview</item>
+        <item name="viewformContentSectionTitleDefault">Content</item>
+        <item name="viewformInsertSubmit">Save</item>
+        <item name="viewformUpdateSubmit">Save changes</item>
+        <item name="viewformInputRequired">Fields marked with red are required</item>
+        <item name="filterSectionTitle">Filter</item>
+        <item name="filterSectionSubmit">Find</item>
+        <item name="filterSectionReset">Reset</item>
+        <item name="settingsSectionTitle">Settings</item>
+        <item name="settingsSectionSubmit">Set</item>
+        <item name="settingsSectionReset">Reset</item>
+        <item name="settingsSectionItemsPerPage">Items per page</item>
+        <item name="pagerPage">Page</item>
+        <item name="pagerPages">Pages</item>
+        <item name="pagerOf">of</item>
+        <item name="pagerEntity">Records</item>
+        <item name="pagerPreviousPage">Previous</item>
+        <item name="pagerNextPage">Next</item>
+    </group>
+
+    <group name="HELPS">
+        <item name="_index"> </item>
+        <item name="_update"> </item>
+        <item name="_insert"> </item>
+    </group>
+    
+    <group name="COLUMNS">
+        <item name="title">Title</item>
+        <item name="slug">Slug</item>
+        <item name="type">Type</item>
+        <item name="locked">Locked</item>
+        <item name="publish">Publish</item>
+        <item name="cdate">Created</item>
+        <item name="sorting">Sorting</item>
+        <item name="displayThis">Homepage</item>
+        <item name="postAction">Posts</item>
+    </group>
+    
+    <group name="FIELDS">
+        <item name="type">Type</item>
+        <item name="locked">Locked</item>
+        <item name="publish">Publish</item>
+        <item name="title">Title</item>
+        <item name="slug">Slug</item>
+        <item name="markup">Text</item>
+        <item name="displayThis">Show on homepage</item>
+        <item name="transColor">Transparent Color</item>
+        <item name="transColorHint">RGB Value (For Gif's and Png's only)</item>
+        <item name="file1Original">File Upload</item>
+        <item name="file2Original">File Upload</item>
+        <item name="file1OriginalHint">Format gif, jpg, doc, xls oder pdf</item>
+        <item name="file2OriginalHint">Format gif, jpg, doc, xls oder pdf</item>
+        <item name="sorting">Sorting</item>
+        <item name="sortingHint">Smaller numbers appear at the end</item>
+    </group>
+
+    <group name="FIELDVALS">
+        <group name="gid">
+            <item name="noneSelected">Select group</item>
+        </group>
+        
+        <group name="displayThis">
+            <item name="0">No</item>
+            <item name="1">Yes</item>
+        </group>
+        
+        <group name="type">
+            <item name="noneSelected">Select Blog type</item>
+            <item name="collector">Collector</item>
+            <item name="fan">Fan</item>
+        </group>
+        
+        <group name="filterByType">
+            <item name="noneSelected">Filter by type</item>
+            <item name="collector">Collector</item>
+            <item name="fan">Fan</item>
+        </group>
+        
+        <group name="filterByUid">
+            <item name="noneSelected">Filter by owner</item>
+        </group>
+
+        <group name="filterByGid">
+            <item name="noneSelected">Filter by group</item>
+        </group>
+    </group>
+    
+    <group name="HINTS">
+        <item name="gidRequired">Please select a group</item>
+        <item name="titleRequired">Title: Input required</item>
+        <item name="slugRequired">Slug: Input required</item>
+        <item name="slugInvalid">Slugs may only contain numbers and letters</item>
+        <item name="slugExists">This slug is already in use</item>
+    </group>
+    
+</dictionary>

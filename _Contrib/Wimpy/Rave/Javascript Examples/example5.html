@@ -1,0 +1,126 @@
+<html>
+<head>
+<title>Example 5 - JavaScript Controls - Wimpy Rave Player (AJAX)</title>
+<link href="examples.css" rel="stylesheet" type="text/css">
+
+<script language='javascript' src='readme.js'></script>
+<script language='javascript' src='rave.js'></script>
+
+</head>
+
+<body>
+
+<table width="100%" border="0" cellspacing="0" cellpadding="20">
+  <tr align="center" valign="middle">
+    <td align="left" valign="top">
+
+
+
+
+
+<h1>Example 5 </h1>
+<p>This example shows how you can load items into Wimpy and control the player through standard HTML</p>
+<table width="500" border="0" cellspacing="10">
+  <tr>
+    <td align="left" valign="top">
+
+
+
+<!-- START WIMPY PLAYER CODE -->
+<div id="flashcontent">You need to upgrade your Flash Player</div>
+<script language="JavaScript" >
+makeWimpyPlayer();
+</script>
+<!-- END WIMPY PLAYER CODE -->
+
+
+
+    <p></p></td>
+    <td align="left" valign="top" nowrap>
+		<p>
+		<a href="javascript:;" onClick="wimpy_clearPlaylist();">Clear Playlist </a><br>
+		<a href="javascript:;" onClick="wimpy_appendPlaylist(addFilesA, false)">Add One Track </a><br>
+		<a href="javascript:;" onClick="wimpy_appendPlaylist(addFilesC, false)"> Add Multiple Tracks </a><br>
+		<a href="javascript:;" onClick="wimpy_clearPlaylist();">Clear Playlist </a><br>
+		<a href="javascript:;" onClick="wimpy_loadExternalPlaylist('playlist.xml')">Load and open external playlist </a><br>
+		<br>
+		<a href="javascript:;" onClick="wimpy_clearPlaylist();">Clear Playlist </a><br>
+		<a href="javascript:;" onClick="wimpy_appendPlaylist(addFilesB, true)">Add One Track (and play immediately)</a><br>
+		<a href="javascript:;" onClick="wimpy_pause()">Pause </a><br>
+		<a href="javascript:;" onClick="wimpy_play()">Play </a><br>
+		<a href="javascript:;" onClick="wimpy_stop()">Stop </a><br>
+		<br>
+		<a href="javascript:;" onClick="wimpy_clearPlaylist();">Clear Playlist </a><br>
+		<a href="javascript:;" onClick="wimpy_appendPlaylist(addFilesC, false)">Add Multiple Tracks </a><br>
+		<a href="javascript:;" onClick="wimpy_gotoTrack(2)"> Go to and play the second track in the playlist</a><br>
+		<a href="javascript:;" onClick="wimpy_next()"> Next </a><br>
+		<a href="javascript:;" onClick="wimpy_prev()"> Previous </a><br>
+		<a href="javascript:;" onClick="wimpy_loadExternalPlaylist('playlist1.xml')"></a><br>
+	    </p>
+	</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&copy;2007 <a href="http://www.wimpyplayer.com">Plaino</a></p>
+<p>&nbsp;</p>
+<p></p>
+<p>&nbsp;</p>
+
+
+<script>
+var addFilesA = "";
+addFilesA += "<playlist>";
+addFilesA += "	<item>";
+addFilesA += "		<filename>example1.flv</filename>";
+addFilesA += "		<artist>killeen and gieson</artist>";
+addFilesA += "		<title>Example 1</title>";
+addFilesA += "		<comments>http://www.gieson.com/Library/projects/wimpy.html</comments>";
+addFilesA += "		<image>http://www.wimpyplayer.com/mp3s3/Killeen%20and%20Gieson%20-%20Alone.jpg</image>";
+addFilesA += "	</item>";
+addFilesA += "</playlist>";
+
+var addFilesB = "";
+addFilesB += "<playlist>";
+addFilesB += "	<item>";
+addFilesB += "		<filename>example2.flv</filename>";
+addFilesB += "		<artist>killeen and gieson</artist>";
+addFilesB += "		<title>Example 2</title>";
+addFilesB += "		<comments>http://www.gieson.com/Library/projects/wimpy.html</comments>";
+addFilesB += "		<image>http://www.wimpyplayer.com/mp3s3/Killeen%20and%20Gieson%20-%20Alone.jpg</image>";
+addFilesB += "	</item>";
+addFilesB += "</playlist>";
+
+var addFilesC = "";
+addFilesC += "<playlist>";
+addFilesC += "	<item>";
+addFilesC += "		<filename>example1.flv</filename>";
+addFilesC += "		<artist>killeen and gieson</artist>";
+addFilesC += "		<title>Example 1</title>";
+addFilesC += "		<comments>http://www.gieson.com/Library/projects/wimpy.html</comments>";
+addFilesC += "		<image>http://www.wimpyplayer.com/mp3s3/Killeen%20and%20Gieson%20-%20Alone.jpg</image>";
+addFilesC += "	</item>";
+addFilesC += "	<item>";
+addFilesC += "		<filename>example2.flv</filename>";
+addFilesC += "		<artist>Killeen and Gieson</artist>";
+addFilesC += "		<title>Example 2</title>";
+addFilesC += "		<comments>http://www.plaino.com/</comments>";
+addFilesC += "		<image>http://www.wimpyplayer.com/mp3s3/Killeen%20and%20Gieson%20-%20Hated.jpg</image>";
+addFilesC += "	</item>";
+addFilesC += "	<item>";
+addFilesC += "		<filename>example3.flv</filename>";
+addFilesC += "		<artist>Killeen and Gieson</artist>";
+addFilesC += "		<title>Example 3</title>";
+addFilesC += "		<comments>http://www.plaino.com/</comments>";
+addFilesC += "		<image>http://www.wimpyplayer.com/mp3s3/Killeen%20and%20Gieson%20-%20Hated.jpg</image>";
+addFilesC += "	</item>";
+addFilesC += "</playlist>";
+</script>
+</td>
+  </tr>
+</table>
+
+</body>
+</html>

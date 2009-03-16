@@ -1,0 +1,3 @@
+Move all the files in this folder to your Rave Installation folder, then launch the example HTML files. 
+
+We highly recommend testing things out on a live server becuase sometimes things don't work so great when running on a local PC.

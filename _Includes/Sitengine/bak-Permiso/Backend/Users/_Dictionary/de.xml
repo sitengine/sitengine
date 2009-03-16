@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+
+<dictionary name="dictionary">
+    
+    <group name="LABELS">
+        <item name="entityTitle">Benutzer</item>
+        <item name="meEntityTitle">Mein Konto</item>
+        <item name="actionsSectionIndex">Alle Benutzer anzeigen</item>
+        <item name="actionsSectionInsert">Neuen Benutzer erstellen</item>
+        <item name="childActionsSectionMembershipsIndex">Mitgliedschaften anzeigen</item>
+        <item name="childActionsSectionMembershipsInsert">Mitgliedschaft hinzufügen</item>
+        <item name="listformTitle">Übersicht</item>
+        <item name="listformMembershipsIndex">Zeigen</item>
+        <item name="listformMembershipsInsert">Neu</item>
+        <item name="listformColumnSortHref">Liste nach dieser Spalte sortieren</item>
+        <item name="listformBatchDeleteSubmit">Einträge löschen</item>
+        <item name="listformBatchUpdateSubmit">Liste aktualisieren</item>
+        <item name="listformFilterIsActive">Für die aktuelle Ansicht ist der Filter aktiviert</item>
+        <item name="listformNoRecords">Keine Benutzer in der Datenbank</item>
+        <item name="listformNoMatchingRecords">Es entsprechen keine Benutzer Ihren Kriterien</item>
+        <item name="listformConfirmDelete">Wollen Sie wirklich alle angewählten Benutzer löschen?</item>
+        <item name="listformConfirmUpdate">Wollen Sie wirklich alle Benutzer in dieser Liste aktualisieren?</item>
+        <item name="viewformInsertTitle">Neuer Benutzer</item>
+        <item name="viewformUpdateTitle">Benutzer bearbeiten</item>
+        <item name="viewformInsertSubmit">Sichern</item>
+        <item name="viewformUpdateSubmit">Änderungen sichern</item>
+        <item name="viewformInputRequired">Mit rot markierte Felder müssen ausgefüllt werden</item>
+        <item name="filterSectionTitle">Filter</item>
+        <item name="filterSectionSubmit">Finde</item>
+        <item name="filterSectionReset">Zurückstellen</item>
+        <item name="settingsSectionTitle">Einstellungen</item>
+        <item name="settingsSectionSubmit">Speichern</item>
+        <item name="settingsSectionReset">Zurückstellen</item>
+        <item name="settingsSectionItemsPerPage">Einträge pro Seite</item>
+        <item name="pagerPage">Seite</item>
+        <item name="pagerPages">Seiten</item>
+        <item name="pagerOf">von</item>
+        <item name="pagerEntity">Einträgen</item>
+        <item name="pagerPreviousPage">Vorherige</item>
+        <item name="pagerNextPage">Nächste</item>
+    </group>
+    
+    <group name="HELPS">
+        <item name="index"> </item>
+        <item name="update"> </item>
+        <item name="insert"> </item>
+        <item name="me"> </item>
+    </group>
+
+    <group name="COLUMNS">
+        <item name="locked">Gesperrt</item>
+        <item name="enabled">Aktiviert</item>
+        <item name="lastLogin">Letzte Anmeldung</item>
+        <item name="name">Name</item>
+        <item name="nickname">Anzeigename</item>
+        <item name="firstname">Vorname</item>
+        <item name="lastname">Nachname</item>
+        <item name="language">Sprache</item>
+        <item name="membershipAction">Mitgliedschaften</item>
+        <item name="onlineNow">Jetzt online</item>
+    </group>
+    
+    <group name="FIELDS">
+        <item name="locked">Gesperrt</item>
+        <item name="enabled">Aktiviert</item>
+        <item name="language">Sprache</item>
+        <item name="timezone">Zeitzone</item>
+        <item name="password">Passwort</item>
+        <item name="name">E-Mail</item>
+        <item name="firstname">Vorname</item>
+        <item name="lastname">Nachname</item>
+        <item name="nickname">Anzeigename</item>
+        <item name="passwordConfirm">Passwort bestätigen</item>
+        <item name="email">Email</item>
+        <item name="description">Beschrieb</item>
+        <item name="notifyNewUser">User benachrichtigen</item>
+        <item name="notifyNewUserHint">Passwort wird automatisch erzeugt</item>
+    </group>
+    
+    <group name="FIELDVALS">
+        <item name="onlineNow">Online</item>
+        
+        <group name="enabled">
+            <item name="0">Nein</item>
+            <item name="1">Ja</item>
+        </group>
+        
+        <group name="locked">
+            <item name="0">Nein</item>
+            <item name="1">Ja</item>
+        </group>
+        
+        <group name="language">
+            <item name="noneSelected">Sprache wählen</item>
+        </group>
+        
+        <group name="timezone">
+            <item name="noneSelected">Wählen Sie Ihre Zeitzone</item>
+        </group>
+    </group>
+    
+    <group name="HINTS">
+        <item name="invalidRequest">Unzulässige Aktion</item>
+        <item name="accessDenied">Zugriff verweigert</item>
+        <item name="languageRequired">Sprache: Eingabe benötigt</item>
+        <item name="timezoneRequired">Zeitzone: Eingabe benötigt</item>
+        <item name="firstnameRequired">Vorname: Eingabe benötigt</item>
+        <item name="lastnameRequired">Nachname: Eingabe benötigt</item>
+        <item name="nameExists">Es existiert bereits ein Benutzer mit diesem Namen</item>
+        <item name="nameRequired">E-Mail: Eingabe benötigt</item>
+        <item name="nameValidEmailRequired">Benutzername: Gültige Emailadresse benötigt</item>
+        <item name="nameEmailAddressCharsOnly">Nur die Zeichen a-z, A-Z, 0-9 . - _ und @ sind erlaubt in Benutzernamen</item>
+        <item name="nicknameExists">Es existiert bereits ein Benutzer mit diesem Anzeigenamen</item>
+        <item name="nicknameRequired">Anzeigename: Eingabe benötigt</item>
+        <!--
+        <item name="nicknameWordCharsOnly">Nur die Zeichen a-z, A-Z und 0-9 sind erlaubt in Anzeigenamen</item>
+        -->
+        <item name="passwordRequired">Passwort: Eingabe benötigt</item>
+        <item name="passwordWordCharsOnly">Nur die Zeichen a-z, A-Z und 0-9 sind erlaubt in Passwörtern</item>
+        <item name="passwordsDontMatch">Die eingegebenen Passwörter stimmen nicht überein</item>
+    </group>
+    
+    <group name="WELCOMEMAIL">
+        <item name="subject">Welcome to %site%</item>
+        <item name="body">We have just created a new user account for you on %site%. Please use the following information to log into your account:
+        
+        User: %user%
+        Password: %password%
+        </item>
+    </group>
+
+</dictionary>
+

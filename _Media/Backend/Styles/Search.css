@@ -1,0 +1,77 @@
+
+.searchformSection {
+    background-color: #f00;
+}
+
+.searchform {
+    background-color: #fff;
+    margin-top: 0px;
+    border: dotted 1px #666;
+    padding: 5px;
+}
+
+
+
+
+.searchresultSection {
+    padding: 5px;
+    border-width: 0px 1px 0px 1px;
+    border-style: dotted;
+    border-color: #666;
+}
+
+.searchresultText {
+
+}
+
+.searchresultTitle {
+    color: #666;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.searchresultMeta {
+    font-size: x-small;
+}
+
+
+
+
+
+.noMatches {
+    margin: 0px 0px 20px 0px;
+    padding: 5px 0px 5px 5px;
+    border: dotted 1px #666;
+}
+
+.noMatches span {
+    font-size: medium;
+    font-weight: bold;
+    color: #c00;
+}
+
+
+
+
+
+.searchresultPagerTop {
+    background-color: #eee;
+    border: dotted 1px #666;
+    margin: 0px 0px 0px 0px;
+    padding: 5px;
+    font-size: x-small;
+}
+
+.searchresultPagerBottom {
+    background-color: #eee;
+    border: dotted 1px #666;
+    margin: 0px 0px 0px 0px;
+    padding: 5px;
+    font-size: x-small;
+}
+
+.searchresultPagerInput {
+    background-color: #fff;
+    color: #666;
+    font-size: xx-small;
+}

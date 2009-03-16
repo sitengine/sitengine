@@ -1,0 +1,152 @@
+<playlist image="http://mercury/wimpyAV/example1.jpg">
+	<item>
+		<filename>rtmp://mercury/wimpy/Track 04.mp3</filename>
+		<artist>RTMP - sonar MP3</artist>
+		<title>RTMP - sonar MP3</title>
+		<description>my description 6</description>
+		<seconds>275</seconds>
+		<image>http://mercury/wimpyAV/coverart/04.jpg</image>
+		<link>http://www.gieson.com</link>
+		<see>8</see>
+	</item>
+	<item>
+		<filename>rtmp://mercury/wimpy/test_63.flv</filename>
+		<artist>RTMP - test_63 FLV</artist>
+		<title>RTMP - test_63 FLV</title>
+		<description>my description 7</description>
+		<seconds>120</seconds>
+		<image>http://mercury/wimpyAV/coverart/05.jpg</image>
+		<link>http://www.gieson.com</link>
+		<see>7</see>
+	</item>
+	<item>
+		<filename>http://mercury/wimpyAV/example media/test_63.flv</filename>
+		<artist>b my artist 3</artist>
+		<title>02 test_63</title>
+		<description><p>Another mix of randomness and unsigned bands with a Plymouth bias.</p>
+<p>We have an exclusive play of <b>The Van Daniels</b> new EP which is not released until 16th Feb.</p>
+<p>We also play an old favourite <b>Ecco Jones</b>.</p>
+<p>Plus a roundup of some of the other bands we've played recently.</p>
+<p>&nbsp;</p></description>
+		<seconds></seconds>
+		<image>http://mercury/wimpyAV/coverart/01.jpg</image>
+		<link>http://www.gieson.com</link>
+		<downloadable>yes</downloadable>
+		<see>13</see>
+	</item>
+	<item>
+		<filename>http://mercury/wimpyAV/example media/mp3s/example.mp3</filename>
+		<artist>a MP3 track</artist>
+		<title>01 My MP3 file</title>
+		<description>my description 3</description>
+		<seconds></seconds>
+		<image>http://mercury/wimpyAV/coverart/01.jpg</image>
+		<link>http://www.gieson.com</link>
+		<downloadable>yes</downloadable>
+		<see>14</see>
+	</item>
+	<item>
+		<filename>http://mercury/wimpyAV/example media/Creation (swf).swf</filename>
+		<artist>God</artist>
+		<title>Creation</title>
+		<description>A cool animation</description>
+		<seconds></seconds>
+		<image>http://mercury/wimpyAV/coverart/02.jpg</image>
+		<link></link>
+		<see>12</see>
+	</item>
+	<item>
+		<filename>http://www.wimpyplayer.com/video/ART Commercial.flv</filename>
+		<artist>D my artist</artist>
+		<title>04 ART Commercial</title>
+		<description>my description</description>
+		<seconds></seconds>
+		<image></image>
+		<link>http://www.gieson.com</link>
+		<see>11</see>
+	</item>
+	<item>
+		<filename>http://mercury/wimpyAV/example media/test_150.flv</filename>
+		<artist>e my artist 2</artist>
+		<title>05 test_150</title>
+		<description>my description 2</description>
+		<seconds></seconds>
+		<image></image>
+		<link>http://www.gieson.com</link>
+		<see>10</see>
+	</item>
+	
+	<item>
+		<filename>http://mercury/wimpyAV/example media/A Rippen.swf</filename>
+		<artist>F my artist 5</artist>
+		<title>06 A Rippen.swf</title>
+		<description>my description 5</description>
+		<seconds></seconds>
+		<image>http://mercury/wimpyAV/coverart/03.jpg</image>
+		<link>http://www.gieson.com</link>
+		<see>9</see>
+	</item>
+	
+
+	<item>
+		<filekind>pls</filekind>
+		<filename>http://www.wazee.org/128.pls</filename>
+		<artist>Shoutcast 3</artist>
+		<title>Shoutcast 3</title>
+		<description>my description 8</description>
+		<seconds></seconds>
+		<image></image>
+		<link>http://www.gieson.com</link>
+		<see>6</see>
+	</item>
+	<item>
+		<filename>http://mercury/wimpyAV/example1.flv</filename>
+		<artist>J my artist 9</artist>
+		<title>10 my title 9</title>
+		<description>my description 9</description>
+		<seconds></seconds>
+		<image>http://mercury/wimpyAV/coverart/07.jpg</image>
+		<link>http://www.gieson.com</link>
+		<see>5</see>
+	</item>
+	<item>
+		<filename>http://mercury/wimpyAV/example1.flv</filename>
+		<artist>k my artist 10</artist>
+		<title>11 my title 10</title>
+		<description>my description 10</description>
+		<seconds></seconds>
+		<image>coverart.jpg</image>
+		<link>http://www.gieson.com</link>
+		<see>4</see>
+	</item>
+	<item>
+		<filename>http://mercury/wimpyAV/example1.flv</filename>
+		<artist>L my artist 11</artist>
+		<title>12 my title 11</title>
+		<description>my description 11</description>
+		<seconds></seconds>
+		<image>coverart.jpg</image>
+		<link>http://www.gieson.com</link>
+		<see>3</see>
+	</item>
+	<item>
+		<filename>http://mercury/wimpyAV/example1.flv</filename>
+		<artist>m my artist 12</artist>
+		<title>13 my title 12</title>
+		<description>my description 12</description>
+		<seconds></seconds>
+		<image>coverart.jpg</image>
+		<link>http://www.gieson.com</link>
+		<see>2</see>
+	</item>
+	<item>
+		<filename>http://mercury/wimpyAV/example1.flv</filename>
+		<artist>N my artist 13</artist>
+		<title>14 my title 13</title>
+		<description>my description 13</description>
+		<seconds></seconds>
+		<image>coverart.jpg</image>
+		<link>http://www.gieson.com</link>
+		<see>1</see>
+	</item>
+</playlist>

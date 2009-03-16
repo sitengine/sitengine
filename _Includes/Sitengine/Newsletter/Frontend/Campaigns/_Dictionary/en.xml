@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+
+<dictionary name="dictionary">
+	
+    <group name="LABELS">
+        <item name="pageTitle">Newsletter - Campaigns</item>
+    </group>
+    
+    <group name="INDEXVIEW">
+        <item name="filterIsActive">Filtering is active for the current view</item>
+        <item name="filterSectionSubmit">Find</item>
+        <item name="filterSectionReset">Reset</item>
+        <item name="noRecords">No Campaigns in database</item>
+        <item name="noMatchingRecords">No Campaigns match your criteria</item>
+        <item name="settingsSectionItemsPerPage">Items per page</item>
+    </group>
+    
+    
+    <group name="PAGER">
+        <item name="page">Page</item>
+        <item name="pages">Pages</item>
+        <item name="of">of</item>
+        <item name="entity">Campaigns</item>
+        <item name="previousPage">Previous</item>
+        <item name="nextPage">Next</item>
+    </group>
+    
+</dictionary>

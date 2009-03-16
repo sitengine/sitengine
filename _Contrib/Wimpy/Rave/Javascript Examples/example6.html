@@ -1,0 +1,153 @@
+<html>
+<head>
+<title>Example 6 - JavaScript Controls - Wimpy Rave Player (AJAX)</title>
+<link href="examples.css" rel="stylesheet" type="text/css">
+
+<script language='javascript' src='readme.js'></script>
+<script language='javascript' src='rave.js'></script>
+
+</head>
+
+<body>
+
+<table width="100%" border="0" cellspacing="0" cellpadding="20">
+  <tr align="center" valign="middle">
+    <td align="left" valign="top">
+
+
+
+
+<h1>Example 6</h1>
+<p>This example shows how you can interact with Wimpy. </p>
+<table width="671" border="0" cellspacing="10">
+	<tr>
+		<td width="325" align="left" valign="top">
+			<p>
+
+
+
+
+
+<!-- START WIMPY PLAYER CODE -->
+<div id="flashcontent">You need to upgrade your Flash Player</div>
+<p>
+  <script language="JavaScript" >
+
+// Setting this to TRUE allows us to receive notifications from Wimpy:
+enableWimpyEvents = true;
+
+// Create a new object (can be any name) and add options to it:
+var myConfigs = new Object();
+myConfigs.wimpyApp = "playlist.xml";
+// Example of adding another option
+//myConfigs.startPlayingOnload = "yes";
+
+// create a player and include the config object as the argument:
+makeWimpyPlayer(myConfigs);
+
+</script>
+  
+  
+  <!-- END WIMPY PLAYER CODE -->
+  
+  
+  
+  
+  
+  
+  
+  <!-- These functions are used in the "Call multiple functions" example -->
+  <script language="JavaScript" >
+
+function callMultipleFunctions(){
+	wimpy_clearPlaylist();
+	// addFilesC is built below.
+	wimpy_appendPlaylist(addFilesC, true);
+}
+
+var addFilesC = "";
+addFilesC += "<playlist>";
+addFilesC += "	<item>";
+addFilesC += "		<filename>example1.flv</filename>";
+addFilesC += "		<artist>killeen and gieson</artist>";
+addFilesC += "		<title>Example 1</title>";
+addFilesC += "		<comments>http://www.gieson.com/Library/projects/wimpy.html</comments>";
+addFilesC += "		<image>http://www.wimpyplayer.com/mp3s3/Killeen%20and%20Gieson%20-%20Alone.jpg</image>";
+addFilesC += "	</item>";
+addFilesC += "	<item>";
+addFilesC += "		<filename>example2.flv</filename>";
+addFilesC += "		<artist>Killeen and Gieson</artist>";
+addFilesC += "		<title>Example 2</title>";
+addFilesC += "		<comments>http://www.plaino.com/</comments>";
+addFilesC += "		<image>http://www.wimpyplayer.com/mp3s3/Killeen%20and%20Gieson%20-%20Hated.jpg</image>";
+addFilesC += "	</item>";
+addFilesC += "	<item>";
+addFilesC += "		<filename>example3.flv</filename>";
+addFilesC += "		<artist>Killeen and Gieson</artist>";
+addFilesC += "		<title>Example 3</title>";
+addFilesC += "		<comments>http://www.plaino.com/</comments>";
+addFilesC += "		<image>http://www.wimpyplayer.com/mp3s3/Killeen%20and%20Gieson%20-%20Hated.jpg</image>";
+addFilesC += "	</item>";
+addFilesC += "</playlist>";
+
+
+
+</script></p>
+<p><b>Returned Data  :</b></p>
+<div class="returnedDataBox" id="trackInfo"> Track Info will display here </div>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p></td>
+		<td width="312" align="left" valign="top" nowrap>
+		
+		<p><a href="javascript:;" onClick="displayInfo(wimpy_amReady_ask())">- a Ask if Wimpy is ready</a></p>
+		<p><a href="javascript:;" onClick="displayObject(wimpy_getTrackInfo())">- Get info on current track</a> <br />
+            <a href="javascript:;" onClick="displayObject(wimpy_getTrackInfo(2))"> - Get info on the second track in the playlist.</a> <br />
+            <a href="javascript:;" onClick="callMultipleFunctions()"> - Call multiple functions (Syncronous behaviour)</a> <br />
+            <a href="javascript:;" onClick="displayInfo(wimpy_amReady_ask())"></a> <br />
+            <a href="javascript:;" onClick="displayInfo(wimpy_getPlayheadSeconds())"> - Get playhead position in seconds</a> <br />
+            <a href="javascript:;" onClick="displayInfo(wimpy_getPlayheadPercent())"> - Get playhead position in percent complete</a> <br />
+            <a href="javascript:;" onClick="wimpy_setPlayheadSeconds(5)"> - <b>Set</b> playhead position to 5 seconds</a> <br />
+            <a href="javascript:;" onClick="wimpy_setPlayheadPercent(35)"> - <b>Set</b> playhead position to 35 percent complete</a> <br />
+            <a href="javascript:;" onClick="displayInfo(wimpy_getLoadPercent())"> - Get load percent</a> <br />
+            <a href="javascript:;" onClick="displayObject(wimpy_getLoadState())"> - Get load state</a> <br />
+            <a href="javascript:;" onClick="displayObject(wimpy_getPlayerState())"> - Get player state</a> <br />
+            <a href="javascript:;" onClick="displayInfo(wimpy_getTotalPlaylistItems())"> - Get total playlist items </a> <br />
+            <a href="javascript:;" onClick="displayPlaylistObject(wimpy_getPlaylist())"> - Get playlist</a> <br />
+		  - Set volume to <a href="javascript:;" onClick="wimpy_setVolume(40)">40 percent</a> : <a href="javascript:;" onClick="wimpy_setVolume(100)">100 percent</a> <br />
+		  - Turn Loop Track: <a href="javascript:;" onClick="wimpy_setLoopTrackState('on')"> &quot;on&quot; </a> : <a href="javascript:;" onClick="wimpy_setLoopTrackState('off')">&quot;off&quot;</a><br />
+		  - Turn Random Playback <a href="javascript:;" onClick="wimpy_setRandomState('on')">&quot;on&quot; </a> : <a href="javascript:;" onClick="wimpy_setRandomState('off')">&quot;off&quot; </a><br />
+		  - Turn Repeat Playlist: <a href="javascript:;" onClick="wimpy_setRepeatState('on')">&quot;on&quot; </a> : <a href="javascript:;" onClick="wimpy_setRepeatState('off')">&quot;off&quot; </a><br />
+		  - Turn Mute: <a href="javascript:;" onClick="wimpy_setMuteState('on')">&quot;on&quot; </a> : <a href="javascript:;" onClick="wimpy_setMuteState('off')">&quot;off&quot; </a><br />
+  <!-- NOTE: Notice that for wimpy_updateInfoDisplay this we are using 
+			single quotes around the function and double quotes within the arguments -->
+  <a href="javascript:;" onclick='wimpy_updateInfoDisplay(&quot;My New Artist&quot;, &quot;My New Title&quot;)'> - Update Artist and Title </a></p>
+		<p> <a href="javascript:;" onClick="wimpy_appendPlaylist(addFilesA, false)">Add One Track </a><br>
+            <a href="javascript:;" onClick="wimpy_appendPlaylist(addFilesC, false)"> Add Multiple Tracks </a><br>
+            <a href="javascript:;" onClick="wimpy_clearPlaylist();">Clear Playlist </a><br>
+            <a href="javascript:;" onClick="wimpy_loadExternalPlaylist('playlist1.xml')">Load and open external playlist </a><br>
+            <br>
+            <a href="javascript:;" onClick="wimpy_clearPlaylist();">Clear Playlist </a><br>
+            <a href="javascript:;" onClick="wimpy_appendPlaylist(addFilesB, true)">Add One Track (and play immediately)</a><br>
+            <a href="javascript:;" onClick="wimpy_pause()">Pause </a><br>
+            <a href="javascript:;" onClick="wimpy_play()">Play </a><br>
+            <a href="javascript:;" onClick="wimpy_stop()">Stop </a><br>
+            <br>
+            <a href="javascript:;" onClick="wimpy_clearPlaylist();">Clear Playlist </a><br>
+            <a href="javascript:;" onClick="wimpy_appendPlaylist(addFilesC, false)">Add Multiple Tracks </a><br>
+            <a href="javascript:;" onClick="wimpy_gotoTrack(2)"> Go to and play the second track in the playlist</a><br>
+            <a href="javascript:;" onClick="wimpy_next()"> Next </a><br>
+          <a href="javascript:;" onClick="wimpy_prev()"> Previous </a></p></td>
+	    </tr>
+</table>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&copy;2007 <a href="http://www.wimpyplayer.com">Plaino</a></p>
+<p>&nbsp;</p>
+<p></p>
+</td>
+  </tr>
+</table>
+
+</body>
+</html>

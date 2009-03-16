@@ -1,0 +1,150 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<!-- Document Created By Christian Hoegl - sitengine.org -->
+
+<html>
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<meta http-equiv="Pragma" content="no-cache" />
+		<meta name="robots" content="noindex, nofollow" />
+		
+		<title>Sitengine - <?=$this->html($this->DICTIONARY->LABELS->pageTitle);?></title>
+		
+		<link rel="stylesheet" type="text/css" href="<?=$this->_controller->getEnv()->getMediaRequestDir();?>/Backend/Styles/Global.css" />
+		<link rel="stylesheet" type="text/css" href="<?=$this->_controller->getEnv()->getMediaRequestDir();?>/Backend/Styles/Forms.css" />
+		<script language="JavaScript" type="text/JavaScript" src="<?=$this->_controller->getEnv()->getMediaRequestDir();?>/Global.js"></script>
+	</head>
+	
+	
+	<body>
+		<div id="screen">
+			<?require 'Sitengine/Env/_Templates/HeaderSection.html';?>
+			<?require 'Sitengine/Env/_Templates/BreadcrumbsSection.html';?>
+			<?require 'Sitengine/Env/_Templates/AbstractSection.html';?>
+			<?require 'Sitengine/Env/_Templates/ActionsSection.html';?>
+			<?require 'Sitengine/Env/_Templates/StatusSection.html';?>
+			
+			
+			<div class="main">
+				<div class="mainSectionLevel1">
+				
+				
+					<div class="mainSectionHeader">
+						<h2 class="mainSectionTitle">
+							<?if($this->SECTIONS->VIEWFORM->inputMode == Sitengine_Env::INPUTMODE_UPDATE):?>
+								<a href="<?=$this->SECTIONS->VIEWFORM->queryUpdate;?>">
+									<?=$this->html($this->SECTIONS->VIEWFORM->title);?>
+								</a>
+							<?else:?>
+								<?=$this->html($this->SECTIONS->VIEWFORM->title);?>
+							<?endif;?>
+						</h2>
+					</div>
+					
+					
+					
+					
+					
+					<form method="post" action="<?=$this->SECTIONS->VIEWFORM->submitUri;?>" enctype="multipart/form-data" name="viewform" class="viewform">
+						<?=$this->SECTIONS->VIEWFORM->hiddens;?>
+						
+						
+						<div class="viewformMain">
+							
+							<br />
+							
+							<?$field = 'groupId';?>
+							<div class="viewformContainer">
+								<div class="viewformLabelContainer">
+									<label for="<?=$field;?>" class="viewformRequiredLabel">
+										<?=$this->html($this->DICTIONARY->FORMVIEWFIELDS->$field);?>
+									</label>
+								</div>
+								<div class="viewformInputContainer">
+									<?=
+										$this->formSelect(
+											$field,
+											$this->SECTIONS->VIEWFORM->DATA->$field,
+											array(),
+											$this->SECTIONS->VIEWFORM->DATA->groupIdOptions->toArray()
+										);
+									?>
+								</div>
+							</div>
+							
+							<br />
+							
+						
+							<div class="viewformContainer">
+								<div class="viewformLabelContainer">
+									<label for="locked" class="viewformDefaultLabel">
+										<?=$this->html($this->DICTIONARY->FORMVIEWFIELDS->locked);?>
+									</label>
+								</div>
+								<div class="viewformInputContainer">
+									<?
+										print
+											($this->SECTIONS->VIEWFORM->DATA->locked) ?
+											$this->formCheckbox('locked', null, array('checked' => true)) :
+											$this->formCheckbox('locked')
+										;
+									?>
+								</div>
+							</div>
+							
+							<br />
+						
+						</div>
+							
+						
+						
+						
+						<?if($this->SECTIONS->VIEWFORM->inputMode == Sitengine_Env::INPUTMODE_UPDATE):?>
+						
+							<?
+								require_once 'Zend/Date.php';
+								$date = new Zend_Date($this->SECTIONS->VIEWFORM->DATA->cdate, 'yyyy-MM-dd HH:mm:ss');
+								$date->setTimezone($this->_controller->getPreferences()->getTimezone());
+								$cdate  = $date->get(Zend_Date::DATE_LONG, $this->_controller->getLocale());
+								$cdate .= ' '.$date->get(Zend_Date::TIME_LONG, $this->_controller->getLocale());
+								
+								$date = new Zend_Date($this->SECTIONS->VIEWFORM->DATA->mdate, 'yyyy-MM-dd HH:mm:ss');
+								$date->setTimezone($this->_controller->getPreferences()->getTimezone());
+								$mdate  = $date->get(Zend_Date::DATE_LONG, $this->_controller->getLocale());
+								$mdate .= ' '.$date->get(Zend_Date::TIME_LONG, $this->_controller->getLocale());
+							?>
+							
+							<div class="viewformDate">
+								<span class="viewformDateLabel"><?=$this->html($this->DICTIONARY->VIEWFORM->dateSectionCdate);?></span>
+								<span class="viewformDateValue"><?=$this->html($cdate);?></span>
+								&nbsp;&nbsp;
+								
+								<span class="viewformDateLabel"><?=$this->html($this->DICTIONARY->VIEWFORM->dateSectionMdate);?></span>
+								<span class="viewformDateValue"><?=$this->html($mdate);?></span>
+								&nbsp;&nbsp;
+							</div>
+						
+						<?endif;?>
+						
+						
+						
+						<div class="viewformSubmit">
+							<?if($this->SECTIONS->VIEWFORM->inputMode == Sitengine_Env::INPUTMODE_UPDATE):?>
+								<input type="submit" value="<?=$this->html($this->DICTIONARY->FORMVIEW->updateSubmit);?>" />
+							<?else:?>
+								<input type="submit" value="<?=$this->html($this->DICTIONARY->FORMVIEW->insertSubmit);?>" />
+							<?endif;?>
+						</div>
+					
+					
+					
+					</form>
+				</div>
+			</div>
+			
+			<?require 'Sitengine/Env/_Templates/FooterSection.html';?>
+		</div>
+	</body>
+</html>
+
+<!-- Document Created By Christian Hoegl - sitengine.org -->

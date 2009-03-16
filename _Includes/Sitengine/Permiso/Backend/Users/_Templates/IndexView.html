@@ -1,0 +1,452 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<!-- Document Created By Christian Hoegl - sitengine.org -->
+
+<html>
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<meta http-equiv="Pragma" content="no-cache" />
+		<meta name="robots" content="noindex, nofollow" />
+		
+		<title>Sitengine - <?=$this->html($this->DICTIONARY->LABELS->pageTitle);?></title>
+		
+		<link rel="stylesheet" type="text/css" href="<?=$this->_controller->getEnv()->getMediaRequestDir();?>/Backend/Styles/Global.css" />
+		<link rel="stylesheet" type="text/css" href="<?=$this->_controller->getEnv()->getMediaRequestDir();?>/Backend/Styles/Lists.css" />
+		<script language="JavaScript" type="text/JavaScript" src="<?=$this->_controller->getEnv()->getMediaRequestDir();?>/Global.js"></script>
+	</head>
+	
+	
+	<body>
+	
+	
+		<div id="screen">
+			<?require 'Sitengine/Env/_Templates/HeaderSection.html';?>
+			<?require 'Sitengine/Env/_Templates/BreadcrumbsSection.html';?>
+			<?require 'Sitengine/Env/_Templates/AbstractSection.html';?>
+			<?require 'Sitengine/Env/_Templates/ActionsSection.html';?>
+			<?require 'Sitengine/Env/_Templates/StatusSection.html';?>
+			
+			
+			
+			
+			
+			
+			<div class="mainSectionLevel1">
+				
+				
+				
+				
+				<div class="mainSectionHeader">
+					<h2 class="mainSectionTitle"><?=$this->html($this->SECTIONS->USERS->title);?></h2>
+				</div>
+				
+				
+				
+				
+				
+				
+				<div class="filter">
+					<?if($this->SECTIONS->USERS->FILTER->isActive):?>
+						<div class="filterOn">
+					<?else:?>
+						<div class="filterOff">
+					<?endif;?>
+					
+						<form method="get" action="<?=$this->_controller->getEnv()->getUriSelfSubmit();?>" name="filterform" class="filterform">
+							<?=$this->SECTIONS->USERS->FILTER->hiddens;?>
+							
+							<?
+								$name = Sitengine_Permiso_Backend_Users_Controller::PARAM_FILTER_BY_FIND;
+								print $this->formText(
+									$name,
+									$this->SECTIONS->USERS->FILTER->DATA->$name->value,
+									array('size' => 20)
+								);
+							?>
+							
+							<?
+								print $this->formButton(
+									'submit',
+									$this->DICTIONARY->INDEXVIEW->filterSectionSubmit,
+									array('onclick' => 'document.filterform.submit();')
+								);
+							?>
+							
+							<?
+								print $this->formButton(
+									'reset',
+									$this->DICTIONARY->INDEXVIEW->filterSectionReset,
+									array('onclick' => "window.location = '".$this->SECTIONS->USERS->FILTER->uriReset."';")
+								);
+							?>
+							
+						</form>
+					</div>
+				</div>
+				
+				
+				
+				
+				
+				
+				
+				<?if(!sizeof($this->SECTIONS->USERS->DATA)):?>
+				
+				
+					<div class="listformNoRecords">
+						<?if($this->SECTIONS->USERS->FILTER->isActive):?>
+							<span><?=$this->html($this->DICTIONARY->INDEXVIEW->noMatchingRecords);?></span><br />
+							<?=$this->html($this->DICTIONARY->INDEXVIEW->filterIsActive);?>
+						<?else:?>
+							<span><?=$this->html($this->DICTIONARY->INDEXVIEW->noRecords);?></span>
+						<?endif;?>
+					</div>
+				
+				
+				<?else:?>
+				
+				
+					<div class="listformAndControlsWrap">
+					
+					
+						<table width="100%" class="listControlsTop">
+							<tr>
+								<td valign="bottom"></td><td align="right" valign="bottom">
+									<?$pagerAction = $this->_controller->getEnv()->getUriSelfSubmit();?>
+									<?$pagerHiddens = $this->SECTIONS->USERS->PAGER->hiddens;?>
+									<?$pagerCurrPage = $this->SECTIONS->USERS->PAGER->currPage;?>
+									<?$pagerNextPage = $this->SECTIONS->USERS->PAGER->nextPage;?>
+									<?$pagerPrevPage = $this->SECTIONS->USERS->PAGER->prevPage;?>
+									<?$pagerNumPages = $this->SECTIONS->USERS->PAGER->numPages;?>
+									<?$pagerNumItems = $this->SECTIONS->USERS->PAGER->numItems;?>
+									<?$pagerFirstItem = $this->SECTIONS->USERS->PAGER->firstItem;?>
+									<?$pagerLastItem = $this->SECTIONS->USERS->PAGER->lastItem;?>
+									<?$pagerUriPrevPage = $this->SECTIONS->USERS->PAGER->uriPrevPage;?>
+									<?$pagerUriNextPage = $this->SECTIONS->USERS->PAGER->uriNextPage;?>
+									<?$pagerPrevLabel = $this->DICTIONARY->PAGER->previousPage;?>
+									<?$pagerNextLabel = $this->DICTIONARY->PAGER->nextPage;?>
+									<?$pagerOfLabel = $this->DICTIONARY->PAGER->of;?>
+									<?$pagerPageLabel = $this->DICTIONARY->PAGER->page;?>
+									<?$pagerPagesLabel = $this->DICTIONARY->PAGER->pages;?>
+									<?$pagerEntityLabel = $this->DICTIONARY->PAGER->entity;?>
+									<?$pagerValClass = "pagerVal";?>
+									<?$pagerTextClass = "pagerText";?>
+									<?$pagerHrefPrevClass = "pagerHrefPrev";?>
+									<?$pagerHrefNextClass = "pagerHrefNext";?>
+									<?$pagerFormName = "pagerTop";?>
+									<?$pagerFormClass = "pagerTop";?>
+									
+									<?require 'Sitengine/Env/_Templates/PagerSection.html';?>
+								</td>
+							</tr>
+						</table>
+						
+						
+						
+						
+						
+						
+						
+						
+						<form method="post" action="<?=$this->_controller->getEnv()->getUriSelfSubmit();?>" name="listform" class="listform">
+							<?=$this->SECTIONS->USERS->hiddens;?>
+							<table class="listformTable" cellpadding="0" cellspacing="0">
+							
+							
+								<tr class="listformTitleRow">
+									<th valign="top" class="listformCheckboxCell">
+										<input type="checkbox" onclick="setCheckboxes(this.checked,document.listform,'SELECTROWITEM');" />
+									</th>
+									
+									<th valign="top">
+										<a href="<?=$this->SECTIONS->USERS->SORTING->QUERIES->name;?>" title="<?=$this->html($this->DICTIONARY->LABELS->columnSortHref);?>">
+											<?=$this->html($this->DICTIONARY->INDEXVIEWCOLUMNS->name);?>
+										</a>
+										&nbsp;<img src="<?=$this->_controller->getEnv()->getMediaRequestDir();?>/Backend/Pics/Sort_<?=$this->SECTIONS->USERS->SORTING->COLUMNS->name;?>.gif" width="8" height="10" border="0" alt="" />
+									</th>
+									
+									<th valign="top">
+										<a href="<?=$this->SECTIONS->USERS->SORTING->QUERIES->nickname;?>" title="<?=$this->html($this->DICTIONARY->LABELS->columnSortHref);?>">
+											<?=$this->html($this->DICTIONARY->INDEXVIEWCOLUMNS->nickname);?>
+										</a>
+										&nbsp;<img src="<?=$this->_controller->getEnv()->getMediaRequestDir();?>/Backend/Pics/Sort_<?=$this->SECTIONS->USERS->SORTING->COLUMNS->nickname;?>.gif" width="8" height="10" border="0" alt="" />
+									</th>
+									
+									<th valign="top">
+										<a href="<?=$this->SECTIONS->USERS->SORTING->QUERIES->firstname;?>" title="<?=$this->html($this->DICTIONARY->LABELS->columnSortHref);?>">
+											<?=$this->html($this->DICTIONARY->INDEXVIEWCOLUMNS->firstname);?>
+										</a>
+										&nbsp;<img src="<?=$this->_controller->getEnv()->getMediaRequestDir();?>/Backend/Pics/Sort_<?=$this->SECTIONS->USERS->SORTING->COLUMNS->firstname;?>.gif" width="8" height="10" border="0" alt="" />
+									</th>
+									
+									<th valign="top">
+										<a href="<?=$this->SECTIONS->USERS->SORTING->QUERIES->lastname;?>" title="<?=$this->html($this->DICTIONARY->LABELS->columnSortHref);?>">
+											<?=$this->html($this->DICTIONARY->INDEXVIEWCOLUMNS->lastname);?>
+										</a>
+										&nbsp;<img src="<?=$this->_controller->getEnv()->getMediaRequestDir();?>/Backend/Pics/Sort_<?=$this->SECTIONS->USERS->SORTING->COLUMNS->lastname;?>.gif" width="8" height="10" border="0" alt="" />
+									</th>
+									
+									<th valign="top">
+										<a href="<?=$this->SECTIONS->USERS->SORTING->QUERIES->enabled;?>" title="<?=$this->html($this->DICTIONARY->LABELS->columnSortHref);?>">
+											<?=$this->html($this->DICTIONARY->INDEXVIEWCOLUMNS->enabled);?>
+										</a>
+										&nbsp;<img src="<?=$this->_controller->getEnv()->getMediaRequestDir();?>/Backend/Pics/Sort_<?=$this->SECTIONS->USERS->SORTING->COLUMNS->enabled;?>.gif" width="8" height="10" border="0" alt="" />
+									</th>
+									
+									<th valign="top">
+										<a href="<?=$this->SECTIONS->USERS->SORTING->QUERIES->locked;?>" title="<?=$this->html($this->DICTIONARY->LABELS->columnSortHref);?>">
+											<?=$this->html($this->DICTIONARY->INDEXVIEWCOLUMNS->locked);?>
+										</a>
+										&nbsp;<img src="<?=$this->_controller->getEnv()->getMediaRequestDir();?>/Backend/Pics/Sort_<?=$this->SECTIONS->USERS->SORTING->COLUMNS->locked;?>.gif" width="8" height="10" border="0" alt="" />
+									</th>
+									
+									<th valign="top">
+										<?=$this->html($this->DICTIONARY->INDEXVIEWCOLUMNS->membershipAction);?>
+									</th>
+									
+									<th valign="top" class="listformNumberCell" title="<?=$this->html($this->DICTIONARY->LABELS->columnSortHref);?>">
+										<img src="<?=$this->_controller->getEnv()->getMediaRequestDir();?>/Backend/Pics/Sort_<?=$this->SECTIONS->USERS->SORTING->COLUMNS->lastLogin;?>.gif" width="8" height="10" border="0" alt="" />&nbsp;
+										<a href="<?=$this->SECTIONS->USERS->SORTING->QUERIES->lastLogin;?>">
+											<?=$this->html($this->DICTIONARY->INDEXVIEWCOLUMNS->lastLogin);?>
+										</a>&nbsp;
+									</th>
+								</tr>
+								
+								
+								
+								
+								<?foreach($this->SECTIONS->USERS->DATA as $row):?>
+									
+									<?if($row->isMarked):?>
+										<?$rowClass = "listformMarkedRow";?>
+									<?else:?>
+										<?$rowClass = "listformDataRow";?>
+									<?endif;?>
+									
+									<tr class="<?=$rowClass;?>">
+										<td valign="top">
+											<?
+												if(sizeof($row->rowSelectCheckbox))
+												{
+													$name = $row->rowSelectCheckbox->name;
+													print
+														($row->rowSelectCheckbox->checked) ?
+														$this->formCheckbox($name, null, array('checked' => true)) :
+														$this->formCheckbox($name)
+													;
+												}
+											?>
+											&nbsp;
+										</td>
+										
+										<td valign="top">
+											<a href="<?=$row->uriUpdate;?>" class="listformDataTitle"><?=$this->html($row->name);?></a>
+										</td>
+										
+										<td valign="top"><?=$this->html($row->nickname);?></td>
+										<td valign="top"><?=$this->html($row->firstname);?></td>
+										<td valign="top"><?=$this->html($row->lastname);?></td>
+										
+										<td valign="top">
+											<?
+												$name = $row->enabledCheckbox->name;
+												print $row->enabledCheckbox->current;
+												print
+													($row->enabledCheckbox->checked) ?
+													$this->formCheckbox($name, null, array('checked' => true)) :
+													$this->formCheckbox($name)
+												;
+											?>
+										</td>
+										
+										<td valign="top">
+											<?
+												$name = $row->lockedCheckbox->name;
+												print $row->lockedCheckbox->current;
+												print
+													($row->lockedCheckbox->checked) ?
+													$this->formCheckbox($name, null, array('checked' => true)) :
+													$this->formCheckbox($name)
+												;
+											?>
+										</td>
+										
+										<td valign="top"><a href="<?=$row->uriMembershipIndex;?>" class="listformDataHighlight"><?=$row->membershipCount;?></a></td>
+										
+										<td valign="top" class="listformNumberCell">
+											<?
+												$lastLogin = '---';
+												require_once 'Zend/Date.php';
+												if(Zend_Date::isDate($row->lastLogin, 'yyyy-MM-dd HH:mm:ss'))
+												{
+													$date = new Zend_Date($row->lastLogin, 'yyyy-MM-dd HH:mm:ss');
+													$date->setTimezone($this->_controller->getPreferences()->getTimezone());
+													$lastLogin  = $date->get(Zend_Date::DATE_LONG, $this->_controller->getLocale());
+													$lastLogin .= ' '.$date->get(Zend_Date::TIME_LONG, $this->_controller->getLocale());
+												}
+												print $lastLogin;
+											?>
+										</td>
+									</tr>
+								
+								<?endforeach;?>
+								
+								
+								
+								
+								<tr class="listformTitleRow">
+									<th valign="top" class="listformCheckboxCell">
+										<input type="checkbox" onclick="setCheckboxes(this.checked,document.listform,'SELECTROWITEM');" />
+									</th>
+									
+									<th valign="top">
+										<a href="<?=$this->SECTIONS->USERS->SORTING->QUERIES->name;?>" title="<?=$this->html($this->DICTIONARY->LABELS->columnSortHref);?>">
+											<?=$this->html($this->DICTIONARY->INDEXVIEWCOLUMNS->name);?>
+										</a>
+										&nbsp;<img src="<?=$this->_controller->getEnv()->getMediaRequestDir();?>/Backend/Pics/Sort_<?=$this->SECTIONS->USERS->SORTING->COLUMNS->name;?>.gif" width="8" height="10" border="0" alt="" />
+									</th>
+									
+									<th valign="top">
+										<a href="<?=$this->SECTIONS->USERS->SORTING->QUERIES->nickname;?>" title="<?=$this->html($this->DICTIONARY->LABELS->columnSortHref);?>">
+											<?=$this->html($this->DICTIONARY->INDEXVIEWCOLUMNS->nickname);?>
+										</a>
+										&nbsp;<img src="<?=$this->_controller->getEnv()->getMediaRequestDir();?>/Backend/Pics/Sort_<?=$this->SECTIONS->USERS->SORTING->COLUMNS->nickname;?>.gif" width="8" height="10" border="0" alt="" />
+									</th>
+									
+									<th valign="top">
+										<a href="<?=$this->SECTIONS->USERS->SORTING->QUERIES->firstname;?>" title="<?=$this->html($this->DICTIONARY->LABELS->columnSortHref);?>">
+											<?=$this->html($this->DICTIONARY->INDEXVIEWCOLUMNS->firstname);?>
+										</a>
+										&nbsp;<img src="<?=$this->_controller->getEnv()->getMediaRequestDir();?>/Backend/Pics/Sort_<?=$this->SECTIONS->USERS->SORTING->COLUMNS->firstname;?>.gif" width="8" height="10" border="0" alt="" />
+									</th>
+									
+									<th valign="top">
+										<a href="<?=$this->SECTIONS->USERS->SORTING->QUERIES->lastname;?>" title="<?=$this->html($this->DICTIONARY->LABELS->columnSortHref);?>">
+											<?=$this->html($this->DICTIONARY->INDEXVIEWCOLUMNS->lastname);?>
+										</a>
+										&nbsp;<img src="<?=$this->_controller->getEnv()->getMediaRequestDir();?>/Backend/Pics/Sort_<?=$this->SECTIONS->USERS->SORTING->COLUMNS->lastname;?>.gif" width="8" height="10" border="0" alt="" />
+									</th>
+									
+									<th valign="top">
+										<a href="<?=$this->SECTIONS->USERS->SORTING->QUERIES->enabled;?>" title="<?=$this->html($this->DICTIONARY->LABELS->columnSortHref);?>">
+											<?=$this->html($this->DICTIONARY->INDEXVIEWCOLUMNS->enabled);?>
+										</a>
+										&nbsp;<img src="<?=$this->_controller->getEnv()->getMediaRequestDir();?>/Backend/Pics/Sort_<?=$this->SECTIONS->USERS->SORTING->COLUMNS->enabled;?>.gif" width="8" height="10" border="0" alt="" />
+									</th>
+									
+									<th valign="top">
+										<a href="<?=$this->SECTIONS->USERS->SORTING->QUERIES->locked;?>" title="<?=$this->html($this->DICTIONARY->LABELS->columnSortHref);?>">
+											<?=$this->html($this->DICTIONARY->INDEXVIEWCOLUMNS->locked);?>
+										</a>
+										&nbsp;<img src="<?=$this->_controller->getEnv()->getMediaRequestDir();?>/Backend/Pics/Sort_<?=$this->SECTIONS->USERS->SORTING->COLUMNS->locked;?>.gif" width="8" height="10" border="0" alt="" />
+									</th>
+									
+									<th valign="top">
+										<?=$this->html($this->DICTIONARY->INDEXVIEWCOLUMNS->membershipAction);?>
+									</th>
+									
+									<th valign="top" class="listformNumberCell" title="<?=$this->html($this->DICTIONARY->LABELS->columnSortHref);?>">
+										<img src="<?=$this->_controller->getEnv()->getMediaRequestDir();?>/Backend/Pics/Sort_<?=$this->SECTIONS->USERS->SORTING->COLUMNS->lastLogin;?>.gif" width="8" height="10" border="0" alt="" />&nbsp;
+										<a href="<?=$this->SECTIONS->USERS->SORTING->QUERIES->lastLogin;?>">
+											<?=$this->html($this->DICTIONARY->INDEXVIEWCOLUMNS->lastLogin);?>
+										</a>&nbsp;
+									</th>
+								</tr>
+							</table>
+						</form>
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						<table width="100%" class="listControlsBottom">
+							<tr>
+								<td valign="top">
+								
+									<?
+										$onclick  = "assignConfirmSubmit(";
+										$onclick .= "document.listform,";
+										$onclick .= "'".$this->SECTIONS->USERS->METHODS->doBatchUpdate."',";
+										$onclick .= "'".$this->SECTIONS->USERS->URIS->submitDoBatchUpdate."',";
+										$onclick .= "'".$this->DICTIONARY->INDEXVIEW->confirmUpdate."'";
+										$onclick .= ");";
+										
+										print $this->formButton(
+											'update',
+											$this->DICTIONARY->INDEXVIEW->batchUpdateSubmit,
+											array('onclick' => $onclick)
+										);
+									?>
+									
+									<?
+										$onclick  = "assignConfirmSubmit(";
+										$onclick .= "document.listform,";
+										$onclick .= "'".$this->SECTIONS->USERS->METHODS->doBatchDelete."',";
+										$onclick .= "'".$this->SECTIONS->USERS->URIS->submitDoBatchDelete."',";
+										$onclick .= "'".$this->DICTIONARY->INDEXVIEW->confirmDelete."'";
+										$onclick .= ");";
+										
+										print $this->formButton(
+											'delete',
+											$this->DICTIONARY->INDEXVIEW->batchDeleteSubmit,
+											array('onclick' => $onclick)
+										);
+									?>
+									
+								</td>
+								
+								<td valign="top" align="right">
+									<?$pagerFormName = "pagerBottom";?>
+									<?$pagerFormClass = "pagerBottom";?>
+									<?require 'Sitengine/Env/_Templates/PagerSection.html';?>
+								</td>
+							</tr>
+						</table>
+						
+						
+					</div>
+					
+					
+					
+					
+					<div class="settings">
+						<?if($this->SECTIONS->USERS->SETTINGS->isActive):?>
+							<div class="settingsOn">
+						<?else:?>
+							<div class="settingsOff">
+						<?endif;?>
+						
+							<form method="get" action="<?=$this->_controller->getEnv()->getUriSelfSubmit();?>" name="settingsForm" class="settingsForm">
+								<?=$this->SECTIONS->USERS->SETTINGS->hiddens;?>
+								
+								<?
+									$name = Sitengine_Env::PARAM_IPP;
+									print $this->formSelect(
+										$name,
+										$this->SECTIONS->USERS->SETTINGS->$name,
+										array('onchange' => 'document.settingsForm.submit();'),
+										$this->SECTIONS->USERS->SETTINGS->IPPS->toArray()
+									);
+								?>
+								
+							</form>
+						</div>
+					</div>
+						
+						
+				<?endif;?>
+			</div>
+			
+			
+			<?require 'Sitengine/Env/_Templates/FooterSection.html';?>
+		</div>
+	</body>
+</html>
+
+<!-- Document Created By Christian Hoegl - sitengine.org -->

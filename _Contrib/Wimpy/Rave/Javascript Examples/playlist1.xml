@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<playlist>
+	<item>
+		<filename>example1.flv</filename>
+		<artist>Bob</artist>
+		<title>Example 1 - FLV</title>
+		<description>Description for Example 1</description>
+		<seconds></seconds>
+		<image>example1.jpg</image>
+		<link>http://www.gieson.com</link>
+	</item>
+	<item>
+		<filename>example2.flv</filename>
+		<artist>Sally</artist>
+		<title>Example 2 - FLV</title>
+		<description>Description for Example 2</description>
+		<seconds></seconds>
+		<image>example2.jpg</image>
+		<link>http://www.plaino.com</link>
+	</item>
+	<item>
+		<filename>example3.flv</filename>
+		<artist>Bob</artist>
+		<title>Example 3 - FLV</title>
+		<description>Description for Example 3</description>
+		<seconds></seconds>
+		<image>example3.jpg</image>
+		<link>http://www.gieson.com</link>
+	</item>
+</playlist>

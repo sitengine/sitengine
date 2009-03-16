@@ -1,0 +1,35 @@
+<html>
+<head>
+<title>Wimpy Player</title>
+<script language="javascript" src="rave.js"></script>
+</head>
+<body leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+<!-- START WIMPY PLAYER CODE -->
+<table width="100%" height="100%" border="0" cellpadding="0" cellspacing="0" bgcolor="#000000">
+<tr>
+<td align="center" valign="middle">
+<div id="flashcontent"><a href="http://www.adobe.com/products/flashplayer/">Flash Player upgrade required</a></div>
+<script language="javascript">
+// <![CDATA[
+var wimpyConfigs = new Object();
+wimpyConfigs.wimpySwf=wimpySwfBasename;
+wimpyConfigs.wimpyApp=wimpyAppBasename;
+wimpyConfigs.startPlayingOnload="yes";
+wimpyConfigs.autoAdvance="no";
+wimpyConfigs.infoButtonAction="info";
+var queryString = getQueryString();
+if(queryString['t']){
+	wimpyConfigs.startOnTrack=queryString['t'];
+}
+if(queryString['f']){
+	wimpyConfigs.playlist=queryString['f'];
+}
+makeWimpyPlayer(wimpyConfigs);
+// ]]>
+</script>
+</td>
+</tr>
+</table>
+<!-- END WIMPY PLAYER CODE -->
+</body>
+</html>

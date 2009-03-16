@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<!-- Document Created By Christian Hoegl - sitengine.org -->
+
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<meta http-equiv="Pragma" content="no-cache" />
+<meta name="robots" content="noindex, nofollow" />
+
+<title>Sitengine - <?=$this->html($this->DICTIONARY->LABELS->pageTitle);?></title>
+
+<link rel="stylesheet" type="text/css" href="<?=$this->_controller->getEnv()->getMediaRequestDir();?>/Frontend/Styles/Global.css" />
+<link rel="stylesheet" type="text/css" href="<?=$this->_controller->getEnv()->getMediaRequestDir();?>/Frontend/Styles/Forms.css" />
+<script language="JavaScript" type="text/JavaScript" src="<?=$this->_controller->getEnv()->getMediaRequestDir();?>/Global.js"></script>
+
+</head>
+<body>
+
+
+
+<?require 'Sitengine/Env/_Templates/BreadcrumbsSection.html';?>
+<?require 'Sitengine/Env/_Templates/AbstractSection.html';?>
+<?require 'Sitengine/Env/_Templates/ActionsSection.html';?>
+<?require 'Sitengine/Env/_Templates/StatusSection.html';?>
+
+
+
+
+
+
+
+
+
+
+<form method="post" action="<?=$this->SECTIONS->VIEWFORM->submitUri;?>" enctype="multipart/form-data" name="viewform" class="viewform">
+<?=$this->SECTIONS->VIEWFORM->hiddens;?>
+
+
+<?=$this->html($this->DICTIONARY->FIELDS->comment);?><br />
+<?=$this->SECTIONS->VIEWFORM->ELEMENTS->comment;?><br />
+<input type="submit" value="<?=$this->html($this->DICTIONARY->LABELS->viewformInsertSubmit);?>" />
+</form>
+
+
+<hr />
+
+<?require 'Sitengine/Env/_Templates/FooterSection.html';?>
+</div>
+</body>
+</html>
+
+<!-- Document Created By Christian Hoegl - sitengine.org -->

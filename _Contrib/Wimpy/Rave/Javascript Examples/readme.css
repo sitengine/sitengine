@@ -1,0 +1,230 @@
+body {
+	font-family: Verdana, Arial, Geneva, SunSans-Regular;
+	font-size: 11px;
+	color: #000000;
+	padding: 0px;
+	margin: 0px;
+
+}
+.tableCells {
+	margin: 0px;
+	padding-top: 4px;
+	padding-right: 2px;
+	padding-bottom: 10px;
+	padding-left: 2px;
+}
+
+a {  color: #003399; text-decoration: none}
+a:hover {  text-decoration: underline}
+.fineprint {
+	font-size: 9px;
+}
+.formInsertCode {
+	height: 300px;
+	width: 520px;
+}
+.formInsertPHPhead {
+	height: 100px;
+	width: 520px;
+}
+li {
+	font-family: Verdana, Arial, Geneva, SunSans-Regular;
+	font-size: 11px;
+}
+ul {
+	font-family: Verdana, Arial, Geneva, SunSans-Regular;
+	font-size: 11px;
+}
+div {
+	font-family: Verdana, Arial, Geneva, SunSans-Regular;
+	font-size: 11px;
+}
+h1 {
+color:#666666;
+font-size:16px;
+}
+
+h2 {
+color:#000066;
+font-size:14px;
+}
+
+h3{
+color:#000066;
+font-size:12px;
+}
+
+h4{
+color:#000099;
+font-size:12px;
+}
+td {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	color: #333333;
+	clear: none;
+	float: none;
+
+}
+.splitTable {
+	border: thin solid #999999;
+}
+.subtitle {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	line-height: 12px;
+	font-weight: normal;
+
+}
+.searchTexarea1 {
+	height: 15px;
+	width: 125px;
+	vertical-align: middle;
+
+}
+.searchSubmit1 {
+	height: 18px;
+	width: 50px;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:10px;
+	color:#000000;
+	text-align: center;
+	vertical-align: middle;
+	margin: 0px;
+	padding: 0px;
+	background:#ECE9D8;
+}
+.tdAlt {
+	background-color: #F0F3F8;
+}
+span {
+	background-color: #EFEFEF;
+	padding: 5px;
+	border: 1px solid #CCCCCC;
+	font-family: "Courier New", Courier, mono;
+	font-size: 12px;
+	color: #3300FF;
+	display: block;
+	width: auto;
+	width: 90%;
+	white-space: nowrap;
+}
+.codeExample {
+	background-color: #EFEFEF;
+	padding: 5px;
+	border: 1px solid #CCCCCC;
+	font-family: "Courier New", Courier, mono;
+	font-size: 12px;
+	color: #3300FF;
+	display: block;
+	width: 90%;
+	white-space: nowrap;
+	overflow: auto;
+}
+.returnedDataBox {
+	background-color: #EFEFEF;
+	padding: 5px;
+	border: 1px solid #CCCCCC;
+	font-family: "Courier New", Courier, mono;
+	font-size: 12px;
+	color: #3300FF;
+	display: block;
+	width: 320px;
+	overflow: scroll;
+	height: 200
+}
+
+.sidebarL {
+	background-image: url(images/side-left.jpg);
+	background-repeat: repeat-y;
+	background-position: right;
+}
+.sidebarR {
+	background-image: url(images/side-right.jpg);
+	background-repeat: repeat-y;
+	background-position: left;
+}
+.navBar {
+	background-color: #57708E;
+}
+.containerTable {
+	border: 15px solid #CCCCCC;
+}
+.caption {
+	font-size: 9px;
+}
+.navbarTextON {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	color: #FFFFFF;
+}
+.sideContent {
+	border-top-width: 10px;
+	border-right-width: 10px;
+	border-bottom-width: 10px;
+	border-left-width: 10px;
+	border-top-style: solid;
+	border-right-style: none;
+	border-bottom-style: none;
+	border-left-style: solid;
+	border-top-color: #CCCCCC;
+	border-right-color: #CCCCCC;
+	border-bottom-color: #CCCCCC;
+	border-left-color: #CCCCCC;
+	padding: 10px;
+}
+ul {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	margin-top: 0px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+	margin-left: 0px;
+	padding: 0px;
+}
+.tableMenuTitles {
+	background-color: #EBE9ED;
+	background-image: url(customizer_assets/menu_bkgd.jpg);
+}
+#settings {
+	width: 450px;
+	height: 20px;
+
+	overflow: auto;
+	overflow-x: hidden;
+	overflow-y: auto;
+	
+}
+#div_scroll_startup {
+	width: 450px;
+	height: 300px;
+	overflow-x: hidden;
+	overflow-y: scroll;
+	overflow: -moz-scrollbars-vertical !important;
+}
+#div_scroll_advanced {
+	width: 450px;
+	height: 300px;
+	overflow-x: hidden;
+	overflow-y: scroll;
+	overflow: -moz-scrollbars-vertical !important;
+}
+#div_scroll_media {
+	width: 450px;
+	height: 300px;
+	overflow-x: hidden;
+	overflow-y: scroll;
+	overflow: -moz-scrollbars-vertical !important;
+}
+#div_scroll_display {
+	width: 450px;
+	height: 300px;
+	overflow-x: hidden;
+	overflow-y: scroll;
+	overflow: -moz-scrollbars-vertical !important;
+}
+
+.divScroll {
+	overflow: auto;
+	height: 400px;
+}

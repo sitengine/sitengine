@@ -1,0 +1,110 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<!-- Document Created By Christian Hoegl - sitengine.org -->
+
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<meta http-equiv="Pragma" content="no-cache" />
+<meta name="robots" content="noindex, nofollow" />
+
+<title>Sitengine - <?=$this->html($this->DICTIONARY->LABELS->pageTitle);?></title>
+
+<link rel="stylesheet" type="text/css" href="<?=$this->_controller->getEnv()->getMediaRequestDir();?>/Frontend/Styles/Global.css" />
+<link rel="stylesheet" type="text/css" href="<?=$this->_controller->getEnv()->getMediaRequestDir();?>/Frontend/Styles/Forms.css" />
+<script language="JavaScript" type="text/JavaScript" src="<?=$this->_controller->getEnv()->getMediaRequestDir();?>/Global.js"></script>
+
+</head>
+<body>
+
+
+<div id="screen">
+<?require 'Sitengine/Env/_Templates/HeaderSection.html';?>
+<?require 'Sitengine/Env/_Templates/BreadcrumbsSection.html';?>
+<?require 'Sitengine/Env/_Templates/AbstractSection.html';?>
+<?require 'Sitengine/Env/_Templates/ActionsSection.html';?>
+<?require 'Sitengine/Env/_Templates/StatusSection.html';?>
+
+
+
+
+
+
+<div class="mainSectionLevel1">
+
+
+
+
+<div class="mainSectionHeader">
+<h2 class="mainSectionTitle">
+<?if($this->SECTIONS->FILE->inputMode == Sitengine_Env::INPUTMODE_UPDATE):?>
+<a href="<?=$this->SECTIONS->FILE->queryUpdate;?>"><?=$this->html($this->SECTIONS->FILE->title);?></a>
+<?else:?>
+<?=$this->html($this->DICTIONARY->LABELS->viewformUploadTitle);?>
+<?endif;?>
+</h2>
+</div>
+
+
+
+
+
+<form method="post" action="<?=$this->SECTIONS->FILE->submitUri;?>" enctype="multipart/form-data" name="viewform" class="viewform">
+<?=$this->SECTIONS->FILE->hiddens;?>
+
+
+<?if($this->SECTIONS->FILE->inputMode == Sitengine_Env::INPUTMODE_UPDATE):?>
+	<div class="viewformChildActions">
+	
+	<?if(sizeof($this->SECTIONS->FILE->PAYLOADNAV) > 0):?>
+		<?$count = 0;?>
+		<?foreach($this->SECTIONS->FILE->PAYLOADNAV as $navItem):?>
+			<?if($count > 0):?> &#x2022; <?endif;?>
+			<a href="<?=$navItem->uri;?>"><?=$navItem->label;?></a>
+			<?$count++;?>
+		<?endforeach;?>
+	<?endif;?>
+	
+	</div>
+<?endif;?>
+
+
+
+
+
+
+
+
+<?=$this->SECTIONS->FILE->flex;?>
+
+
+
+</div>
+
+
+
+
+<div class="viewformSubmit"></div>
+
+
+
+
+
+</form>
+
+</div>
+
+
+
+
+
+
+
+
+
+<?require 'Sitengine/Env/_Templates/FooterSection.html';?>
+</div>
+</body>
+</html>
+
+<!-- Document Created By Christian Hoegl - sitengine.org -->

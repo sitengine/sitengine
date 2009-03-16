@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+
+<dictionary name="dictionary">
+    
+    <group name="LABELS">
+        <item name="entityTitle">Users</item>
+        <item name="meEntityTitle">My Account</item>
+        <item name="actionsSectionIndex">Show all users</item>
+        <item name="actionsSectionInsert">Create new user</item>
+        <item name="childActionsSectionMembershipsIndex">Show memberships</item>
+        <item name="childActionsSectionMembershipsInsert">Add membership</item>
+        <item name="listformTitle">Overview</item>
+        <item name="listformMembershipsIndex">Show</item>
+        <item name="listformMembershipsInsert">New</item>
+        <item name="listformColumnSortHref">Click to sort the list by this column</item>
+        <item name="listformBatchDeleteSubmit">Delete selected</item>
+        <item name="listformBatchUpdateSubmit">Update list</item>
+        <item name="listformFilterIsActive">Filtering is active for the current view</item>
+        <item name="listformNoRecords">No users in database</item>
+        <item name="listformNoMatchingRecords">No users match your criteria</item>
+        <item name="listformConfirmDelete">Do you really want to delete the selected users?</item>
+        <item name="listformConfirmUpdate">Do you really want to update all users in the list?</item>
+        <item name="viewformInsertTitle">New user</item>
+        <item name="viewformUpdateTitle">Update user</item>
+        <item name="viewformInsertSubmit">Save</item>
+        <item name="viewformUpdateSubmit">Save changes</item>
+        <item name="viewformInputRequired">Fields marked with red are required</item>
+        <item name="filterSectionTitle">Filter</item>
+        <item name="filterSectionSubmit">Find</item>
+        <item name="filterSectionReset">Reset</item>
+        <item name="settingsSectionTitle">Settings</item>
+        <item name="settingsSectionSubmit">Set</item>
+        <item name="settingsSectionReset">Reset</item>
+        <item name="settingsSectionItemsPerPage">Items per page</item>
+        <item name="pagerPage">Page</item>
+        <item name="pagerPages">Pages</item>
+        <item name="pagerOf">of</item>
+        <item name="pagerEntity">Records</item>
+        <item name="pagerPreviousPage">Previous</item>
+        <item name="pagerNextPage">Next</item>
+    </group>
+    
+    <group name="HELPS">
+        <item name="index"> </item>
+        <item name="update"> </item>
+        <item name="insert"> </item>
+        <item name="me"> </item>
+    </group>
+
+    <group name="COLUMNS">
+        <item name="locked">Locked</item>
+        <item name="enabled">Enabled</item>
+        <item name="lastLogin">Last Login</item>
+        <item name="name">Name</item>
+        <item name="nickname">Nickname</item>
+        <item name="firstname">Firstname</item>
+        <item name="lastname">Lastname</item>
+        <item name="language">Language</item>
+        <item name="membershipAction">Memberships</item>
+        <item name="onlineNow">Online now</item>
+    </group>
+    
+    <group name="FIELDS">
+        <item name="locked">Locked</item>
+        <item name="enabled">Enabled</item>
+        <item name="language">Language</item>
+        <item name="timezone">Timezone</item>
+        <item name="password">Password</item>
+        <item name="name">E-Mail</item>
+        <item name="firstname">Firstname</item>
+        <item name="lastname">Lastname</item>
+        <item name="nickname">Nickname</item>
+        <item name="passwordConfirm">Confirm password</item>
+        <item name="email">Email</item>
+        <item name="description">Description</item>
+        <item name="notifyNewUser">Notify user</item>
+        <item name="notifyNewUserHint">Password will be automatically generated</item>
+    </group>
+    
+    <group name="FIELDVALS">
+        <item name="onlineNow">Online</item>
+        
+        <group name="enabled">
+            <item name="0">No</item>
+            <item name="1">Yes</item>
+        </group>
+        
+        <group name="locked">
+            <item name="0">No</item>
+            <item name="1">Yes</item>
+        </group>
+        
+        <group name="language">
+            <item name="noneSelected">Select language</item>
+        </group>
+        
+        <group name="timezone">
+            <item name="noneSelected">Select your timezone</item>
+        </group>
+    </group>
+    
+    <group name="HINTS">
+        <item name="invalidRequest">Invalid request</item>
+        <item name="accessDenied">Access denied</item>
+        <item name="languageRequired">Language: input required</item>
+        <item name="timezoneRequired">Timezone: input required</item>
+        <item name="firstnameRequired">First Name: input required</item>
+        <item name="lastnameRequired">Last Name: input required</item>
+        <item name="nameExists">Username/E-Mail already taken</item>
+        <item name="nameRequired">E-Mail: input required</item>
+        <item name="nameValidEmailRequired">Username: Valid E-Mail address required</item>
+        <item name="nameEmailAddressCharsOnly">Only the characters a-z, A-Z, 0-9 . - _ and @ are allowed in names</item>
+        <item name="nicknameExists">Nickname already taken</item>
+        <item name="nicknameRequired">Nickname: input required</item>
+        <!--
+        <item name="nicknameWordCharsOnly">Only the characters a-z, A-Z and 0-9 are allowed in nicknames</item>
+        -->
+        <item name="passwordRequired">Password: input required</item>
+        <item name="passwordWordCharsOnly">Only the characters a-z, A-Z and 0-9 are allowed in passwords</item>
+        <item name="passwordsDontMatch">Passwords don&apos;t match</item>
+    </group>
+    
+    <group name="WELCOMEMAIL">
+        <item name="subject">Welcome to %site%</item>
+        <item name="body">We have just created a new user account for you on %site%. Please use the following information to log into your account:
+        
+        User: %user%
+        Password: %password%
+        </item>
+    </group>
+    
+</dictionary>
+

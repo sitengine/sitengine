@@ -1,0 +1,354 @@
+.filter {
+    text-align: right;
+    padding: 0px;
+    border-color: #666;
+    border-style: dotted;
+    border-width: 1px 1px 0px 1px;
+    margin: 0px;
+}
+
+
+.filterOn {
+    background-color: #cf0;
+    padding: 3px;
+}
+
+.filterOn h3 {
+    color: #666;
+    display: inline;
+    font-weight: bold;
+}
+
+.filterOn a {
+    color: #666;
+}
+
+
+.filterOff {
+    background-color: #fff;
+    padding: 3px;
+}
+
+.filterOff h3 {
+    color: #666;
+    display: inline;
+    font-weight: bold;
+}
+
+.filterOff a {
+    color: #666;
+}
+
+
+
+
+
+
+.search {
+    text-align: left;
+    padding: 0px;
+    border-color: #666;
+    border-style: dotted;
+    border-width: 1px 1px 0px 1px;
+    margin: 0px;
+}
+
+
+.searchOn {
+    background-color: #cf0;
+    padding: 3px;
+}
+
+.searchOn h3 {
+    color: #666;
+    display: inline;
+    font-weight: bold;
+}
+
+.searchOn a {
+    color: #666;
+}
+
+
+.searchOff {
+    background-color: #fff;
+    padding: 3px;
+}
+
+.searchOff h3 {
+    color: #666;
+    display: inline;
+    font-weight: bold;
+}
+
+.searchOff a {
+    color: #666;
+}
+
+
+
+
+
+
+
+
+
+
+.settings {
+    text-align: right;
+    padding: 0px;
+    border-color: #666;
+    border-style: dotted;
+    border-width: 0px 1px 1px 1px;
+    margin: 0px;
+}
+
+
+.settingsOn {
+    background-color: #cf0;
+    padding: 3px;
+}
+
+.settingsOn h3 {
+    color: #666;
+    display: inline;
+    font-weight: bold;
+}
+
+.settingsOn a {
+    color: #666;
+}
+
+
+.settingsOff {
+    background-color: #fff;
+    padding: 3px;
+}
+
+.settingsOff h3 {
+    color: #666;
+    display: inline;
+    font-weight: bold;
+}
+
+.settingsOff a {
+    color: #666;
+}
+
+
+
+
+
+
+
+
+.listformNoRecords {
+    margin: 0px 0px 20px 0px;
+    padding: 5px 0px 5px 5px;
+    border: dotted 1px #666;
+}
+
+.listformNoRecords span {
+    font-size: medium;
+    font-weight: bold;
+    color: #c00;
+}
+
+
+
+
+
+
+
+
+
+
+.listformAndControlsWrap {
+    border: dotted 1px #666;
+    margin: 0px 0px 0px 0px;
+}
+
+.listform {
+    margin: 0px;
+}
+
+
+.listformNavigation {
+    background-color: #fff;
+    margin: 0px 0px 5px 0px;
+    color: #666;
+    padding: 0px;
+    border: dotted 0px #666;
+}
+
+
+.listformTable {
+    width: 98%;
+    background-color: #fff;
+    border-collapse: collapse;
+    border: dotted 1px #666;
+    margin: 0px 10px 0px 10px;
+}
+
+.listformTable th {
+    padding: 1px;
+    font-size: small;
+    font-weight: bold;
+    text-align: left;
+}
+
+.listformTable td {
+    padding: 1px;
+    font-weight: normal;
+}
+
+.listformTitleRow {
+    background-color: #eee;
+    color: #666;
+    border-width: 0px 0px 1px 0px;
+    border-style: dotted;
+    border-color: #666;
+    font-weight: bold;
+    text-align: left;
+}
+
+.listformTitleRow a {
+    color: #666;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.listformDataRow {
+    border-bottom-style: dotted;
+    border-bottom-width: 1px;
+    border-bottom-color: #666;
+    background-color: #fff;
+}
+.listformMarkedRow {
+    border-bottom-style: dotted;
+    border-bottom-width: 1px;
+    border-bottom-color: #666;
+    background-color: #eee;
+}
+.listformSummaryRow {
+    border-bottom-style: dotted;
+    border-bottom-width: 1px;
+    border-bottom-color: #666;
+    background-color: #cf0;
+}
+
+.listformDataTitle {
+    font-size: small;
+    font-weight: bold;
+}
+.listformDataHighlight {
+    color: #fff;
+    padding: 0pt 2pt 0pt 2pt;
+    background-color: #666;
+    font-size: small;
+    font-weight: bold;
+}
+.listformDataHighlight:visited {
+	color: #fff;
+}
+.listformDataErrorHighlight {
+    color: #fff;
+    padding: 0pt 2pt 0pt 2pt;
+    background-color: #f00;
+    font-size: small;
+    font-weight: bold;
+}
+/*
+.listformDataTitle a {
+    font-size: small;
+    font-weight: bold;
+}
+*/
+.listformDataTitleError {
+    font-size: small;
+    font-weight: bold;
+    font-style: italic;
+}
+/*
+.listformDataTitleError a {
+    font-size: small;
+    font-weight: bold;
+    font-style: italic;
+}
+*/
+.listformDataTitle:hover, .listformDataTitleError:hover {
+    color: #f00;
+}
+
+.listformDataHref {
+    background-color: #eee;
+    font-size: small;
+}
+
+.listformChildNav {
+    background-color: #eee;
+    font-size: x-small;
+}
+
+th.listformNumberCell, td.listformNumberCell {
+    text-align: right;
+}
+
+
+
+
+/*
+.summaryTable {
+    width: 98%;
+    border-collapse: collapse;
+    border-style: dotted;
+    border-width: 1px 1px 1px 1px;
+    border-color: #666;
+    margin: 10px 10px 10px 10px;
+    color: #eee;
+    background-color: #999;
+    font-size: x-large;
+}
+
+.summaryTable h3 {
+    color: #eee;
+    padding: 3pt;
+    display: inline;
+    font-size: x-large;
+}
+
+.summaryTable span {
+    color: #cf0;
+    padding: 3pt;
+    display: inline;
+    font-size: x-large;
+}
+*/
+
+
+
+
+
+.listControlsTop {
+    background-color: #fff;
+    margin: 0px 0px 5px 0px;
+}
+
+.listControlsTop td {
+    font-size: x-small;
+}
+
+.listControlsBottom {
+    background-color: #fff;
+    margin: 5px 0px 0px 0px;
+}
+
+.listControlsBottom td {
+    font-size: x-small;
+}
+
+.pagerInput {
+    background-color: #eee;
+    color: #666;
+    font-size: xx-small;
+}

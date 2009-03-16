@@ -1,0 +1,39 @@
+<?if($this->_controller->getStatus()->getCode() && $this->_controller->getStatus()->isError()):?>
+	<div id="errorStatus">
+		<h2>
+			<?if($this->_controller->getStatus()->getMessage()):?>
+				<?=$this->html($this->_controller->getStatus()->getMessage());?>
+			<?else:?>
+				An Error has occured. Please check back later
+			<?endif;?>
+		</h2>
+		<?if(sizeof($this->_controller->getStatus()->getHints())):?>
+			<ul>
+				<?foreach($this->_controller->getStatus()->getHints() as $hint):?>
+					<?foreach($hint['messages'] as $message):?>
+						<li><?=$this->html($message);?></li>
+					<?endforeach;?>
+				<?endforeach;?>
+			</ul>
+		<?endif;?>
+	</div>
+<?elseif($this->_controller->getStatus()->getCode()):?>
+	<div id="successStatus">
+		<h2>
+			<?if($this->_controller->getStatus()->getMessage()):?>
+				<?=$this->html($this->_controller->getStatus()->getMessage());?>
+			<?else:?>
+				An Error has occured. Please check back later
+			<?endif;?>
+		</h2>
+		<?if(sizeof($this->_controller->getStatus()->getHints())):?>
+			<ul>
+				<?foreach($this->_controller->getStatus()->getHints() as $hint):?>
+					<?foreach($hint['messages'] as $message):?>
+						<li><?=$this->html($message);?></li>
+					<?endforeach;?>
+				<?endforeach;?>
+			</ul>
+		<?endif;?>
+	</div>
+<?endif;?>

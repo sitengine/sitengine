@@ -1,0 +1,210 @@
+#blog {
+	background:#000;
+	color: #fff;
+	font-size: small;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: normal;
+    text-align:left;
+}
+
+#blog a {
+	color:#f00;
+    text-decoration: none;
+}
+
+#blog p {
+	margin:0;
+}
+
+
+
+
+
+
+
+
+/* GENERAL BLOG STUFF */
+.blogDate {
+	font-size:x-small;
+	color:#999;
+}
+
+.blogAuthor {
+	font-size:x-small;
+	color:#fff;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/* BLOGS POSTS STUFF */
+.blogBlogsPostsTitle {
+	color: #eee;
+	margin:.2em 0 0 0;
+	font-size:3em;
+	font-weight:bold;
+}
+
+.blogBlogsPostsHasNone {
+
+}
+
+.blogBlogsPostsFilter {
+	text-align:right;
+	padding:1em;
+}
+
+.blogBlogsPostsPagerTop {
+	text-align:right;
+	padding:1em;
+}
+
+.blogBlogsPostsPagerBottom {
+	text-align:right;
+	padding:1em;
+}
+
+.blogBlogsPostsViewHref {
+	font-size:small;
+	color:#f00;
+	padding:.3em;
+}
+
+.blogBlogsPostsItem {
+	margin: 0 0 1em 0;
+}
+
+.blogBlogsPostsMeta {
+	padding:.1em;
+	margin-bottom:.2em;
+}
+
+.blogBlogsPostsAddComment {
+	padding:.2em;
+	margin-right:.3;
+	font-size:x-small;
+}
+
+.blogBlogsPostsAddComment a {
+    color: #f00;
+}
+
+.blogBlogsPostsTeaser {
+	margin:.2em;
+}
+
+.blogBlogsPostsQuoteSource {
+	color:#eee;
+	font-style:italic;
+}
+
+.blogBlogsPostsAudioPlayer {
+	text-align:left;
+	padding:.5em;
+	margin:0px;
+}
+
+.blogBlogsPostsGalleryPhotoCount {
+	color:#999;
+	font-size:x-small;
+	font-style:italic;
+}
+
+
+
+
+
+
+
+
+/* BLOGS POST STUFF */
+.blogBlogsPostTitle {
+	color: #fff;
+	margin:.2em 0 0 0;
+	font-size:3em;
+	font-weight:bold;
+}
+
+.blogBlogsPostText {
+	margin:.2em;
+}
+
+.blogBlogsPostText a {
+	color:#f00;
+}
+
+.blogBlogsPostQuoteSource {
+	color:#eee;
+	font-style:italic;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/* BLOGS POSTS FILES STUFF */
+.blogBlogsPostsFilesTitle {
+	color: #f00;
+	margin:.2em 0 0 0;
+	font-size:3em;
+	font-weight:bold;
+}
+
+.blogBlogsPostsFilesSlideControls a {
+	color:#f00;
+}
+
+
+
+
+
+
+
+
+
+
+
+/* BLOGS POSTS COMMENTS STUFF */
+.blogBlogsPostsCommentsHrefInsert {
+	color:#f00;
+}
+
+.blogBlogsPostsCommentsItem {
+	font-size: 1em;
+	margin-bottom: .5em;
+}
+
+
+
+
+
+
+
+
+
+
+
+/* BLOGS POSTS COMMENT STUFF */
+.blogBlogsPostsCommentMainTitle {
+	color:#fff;
+	margin: 0;
+}
+
+.blogBlogsPostsCommentReturnHref {
+	color:#f00;
+}

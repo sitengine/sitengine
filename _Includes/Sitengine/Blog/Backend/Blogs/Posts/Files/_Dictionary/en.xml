@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+
+<dictionary name="dictionary">
+
+    <group name="LABELS">
+        <item name="pageTitle">Blog - Files</item>
+        <item name="entityTitle">Blog - Files</item>
+        <item name="actionsSectionFileIndex">Show Files</item>
+        <item name="actionsSectionFileInsert">Add File to this Post</item>
+        <item name="actionsSectionPhotoIndex">Show Photos</item>
+        <item name="actionsSectionPhotoInsert">Add Photo to this Post</item>
+        <item name="actionsSectionUpload">Batch Upload</item>
+        <item name="actionsSectionAssign">Show Uploads</item>
+        <item name="listformBatchAssignSubmit">Assign Configured Uploads</item>
+        <item name="listformBatchUnlinkSubmit">Delete Selected Uploads</item>
+        <item name="listformPhotoTitle">Photos</item>
+        <item name="listformFileTitle">Files</item>
+        <item name="assignformTitle">Uploads</item>
+        <item name="viewformInsertPhotoTitle">New Photo</item>
+        <item name="viewformInsertFileTitle">New File</item>
+        <item name="viewformUpdateTitle">Update File</item>
+        <item name="viewformUploadTitle">Batch Upload</item>
+        <item name="viewformPayloadNavTitleMain">Overview</item>
+        <item name="viewformContentSectionTitleDefault">Content</item>
+        <item name="viewformInsertSubmit">Save</item>
+        <item name="viewformUpdateSubmit">Save changes</item>
+        <item name="viewformInputRequired">Fields marked with red are required</item>
+        <item name="listformColumnSortHref">Click to sort the list by this column</item>
+        <item name="listformBatchDeleteSubmit">Delete selected</item>
+        <item name="listformBatchUpdateSubmit">Update list</item>
+        <item name="listformFilterIsActive">Filtering is active for the current view</item>
+        <item name="listformNoRecords">No Files in database</item>
+        <item name="listformNoUploads">No Uploads available</item>
+        <item name="listformNoMatchingRecords">No Files match your criteria</item>
+        <item name="listformConfirmDelete">Do you really want to delete the selected Files?</item>
+        <item name="listformConfirmUpdate">Do you really want to update all Files in the list?</item>
+        <item name="listformConfirmAssign">Do you really want to assign all configured Uploads in the list?</item>
+        <item name="listformConfirmUnlink">Do you really want to delete all selected Uploads in the list?</item>
+        <item name="filterSectionTitle">Filter</item>
+        <item name="filterSectionSubmit">Find</item>
+        <item name="filterSectionReset">Reset</item>
+        <item name="settingsSectionTitle">Settings</item>
+        <item name="settingsSectionSubmit">Set</item>
+        <item name="settingsSectionReset">Reset</item>
+        <item name="settingsSectionItemsPerPage">Items per page</item>
+        <item name="pagerPage">Page</item>
+        <item name="pagerPages">Pages</item>
+        <item name="pagerOf">of</item>
+        <item name="pagerEntity">Records</item>
+        <item name="pagerPreviousPage">Previous</item>
+        <item name="pagerNextPage">Next</item>
+    </group>
+    
+    <group name="BREADCRUMBS">
+    	<!--
+        <item name="title">Blog</item>
+        -->
+        <item name="blogEntity">Blog</item>
+        <item name="postEntity">Posts</item>
+        <item name="galleryFileEntity">Photos</item>
+        <item name="otherFileEntity">Files</item>
+    </group>
+
+    <group name="HELPS">
+        <item name="_index"> </item>
+        <item name="_update"> </item>
+        <item name="_insert"> </item>
+        <item name="_upload"> </item>
+        <item name="_assign"> </item>
+    </group>
+
+    <group name="COLUMNS">
+        <item name="title">Title</item>
+        <item name="type">Type</item>
+        <item name="locked">Locked</item>
+        <item name="publish">Publish</item>
+        <item name="cdate">Created</item>
+        <item name="sorting">Sorting</item>
+        <item name="displayThis">Homepage</item>
+        <item name="fileCount">Images</item>
+    </group>
+    
+    <group name="FIELDS">
+        <item name="uri">Copy/Paste URI</item>
+        <item name="publish">Publish</item>
+        <item name="title">Name</item>
+        <item name="titleHint">Not displayed publicly</item>
+        <item name="markup">Caption</item>
+        <item name="file1OriginalFile">File Upload</item>
+        <item name="file1OriginalFileHint">Format gif, jpg, doc, xls oder pdf</item>
+        
+        <item name="file1OriginalPhoto">Photo Upload</item>
+        <item name="file1OriginalPhotoHint">gif, jpg, png</item>
+        
+        <item name="sorting">Sorting</item>
+        <item name="sortingHint">Smaller numbers appear first</item>
+    </group>
+
+    <group name="FIELDVALS">
+        <group name="gid">
+            <item name="noneSelected">Select group</item>
+        </group>
+        
+        <group name="displayThis">
+            <item name="0">No</item>
+            <item name="1">Yes</item>
+        </group>
+        
+        <group name="type">
+            <item name="noneSelected">Select File type</item>
+            <item name="collector">Collector</item>
+            <item name="fan">Fan</item>
+        </group>
+        
+        <group name="filterByType">
+            <item name="noneSelected">Filter by type</item>
+            <item name="collector">Collector</item>
+            <item name="fan">Fan</item>
+        </group>
+        
+        <group name="filterByUid">
+            <item name="noneSelected">Filter by owner</item>
+        </group>
+
+        <group name="filterByGid">
+            <item name="noneSelected">Filter by group</item>
+        </group>
+    </group>
+    
+    <group name="HINTS">
+        <item name="gidRequired">Please select a group</item>
+        <item name="titleRequired">Title: Input required</item>
+        <item name="file1OriginalRequired">Image 1 is required</item>
+        <item name="file1OriginalFiletype">Image 1: Wrong format</item>
+        <item name="file1OriginalFilesize">Image 1: Filesize exceeded</item>
+    </group>
+    
+</dictionary>
+

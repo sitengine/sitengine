@@ -1,0 +1,58 @@
+<html>
+<head>
+<title>Example 2 - JavaScript Controls - Wimpy Rave Player (AJAX)</title>
+<link href="examples.css" rel="stylesheet" type="text/css">
+
+<script language='javascript' src='readme.js'></script>
+<script language='javascript' src='rave.js'></script>
+
+</head>
+
+<body>
+
+<table width="100%" border="0" cellspacing="0" cellpadding="20">
+  <tr align="center" valign="middle">
+    <td align="left" valign="top">
+
+
+
+
+
+<h1>Example 2</h1>
+
+
+<!-- START WIMPY PLAYER CODE -->
+<div id="flashcontent">You need to upgrade your Flash Player</div>
+<script language="JavaScript" >
+makeWimpyPlayer("example1.flv|playlist.xml|example2.flv");
+</script>
+<!-- END WIMPY PLAYER CODE -->
+
+
+
+
+<p>&nbsp;</p>
+<p>This example loads <strong>two</strong> tracks into the player at startup. Each file reference is seperated by a "pipe" ( | ) character.</p>
+<p>You will notice that we've loaded an XML playlist at the same time that we loaded the video files. external playlists are loaded into Wimpy the same way that media files are loaded in. </p>
+<p>You will also notice that the order of the items do not display within Wimpy in the order that they appear within the JavaScript funtion becuase, by default, items are sorted alphabetically. You can set the sort order when using the <a href="http://www.wimpyplayer.com/customize/">Customizer Tool</a>. </p>
+<p>&nbsp;</p>
+<p><b>Example Code </b>*</p>
+<p class="codeExample"><font color="#666666">&lt;script language=&quot;JavaScript&quot; &gt;</font><br>
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  makeWimpyPlayer(<font color="#FF0000"><strong><font color="#009900">&quot;</font></strong><font color="#009900">example1.flv</font><strong>|</strong><font color="#FF0000"><font color="#FF0000"><font color="#FF0000"><font color="#FF0000"><font color="#009900">playlist.xml</font></font></font></font></font><font color="#009900"><strong><font color="#FF0000">|</font></strong></font><font color="#FF0000"><font color="#009900">example2.flv</font></font><font color="#009900">&quot;</font></font>);<br>
+  <font color="#666666">&lt;/script&gt;</font></p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p><font color="#666666"><a href="readme_rave_about.html#real">* Be sure to review &quot;Real World Usage&quot;</a></font></p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&copy;2007 <a href="http://www.wimpyplayer.com">Plaino</a></p>
+<p>&nbsp;</p>
+<p></p>
+</td>
+  </tr>
+</table>
+
+</body>
+</html>

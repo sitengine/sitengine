@@ -1,0 +1,59 @@
+<html>
+<head>
+<title>Example 4 - JavaScript Controls - Wimpy Rave Player (AJAX)</title>
+<link href="examples.css" rel="stylesheet" type="text/css">
+
+<script language='javascript' src='readme.js'></script>
+<script language='javascript' src='rave.js'></script>
+
+</head>
+
+<body>
+
+<table width="100%" border="0" cellspacing="0" cellpadding="20">
+  <tr align="center" valign="middle">
+    <td align="left" valign="top">
+
+
+
+
+<h1>Example 4 </h1>
+
+
+<!-- START WIMPY PLAYER CODE -->
+<div id="flashcontent">You need to upgrade your Flash Player</div>
+<script language="JavaScript" >
+wimpyApp = "playlist1.xml";
+makeWimpyPlayer();
+</script>
+<!-- END WIMPY PLAYER CODE -->
+
+
+
+<p>&nbsp;</p>
+<p>This example loads and opens an external playlist at startup.</p>
+<p>As you can see, we've simply over-written the &quot;wimpyApp&quot; variable that was previously defined within rave.js. Since rave.js is loaded in the &lt;head&gt; of this HTML page all the variables are already established and we can change thier value as needed in the &lt;body&gt; portion of this page just before the player gets rendered.</p>
+<blockquote>
+  <p>NOTE: One might think to use the <strong>wimpy_loadExternalPlaylist</strong> or <strong>wimpy_appendPlaylist</strong> functions immediately after <font color="#0000FF"><strong>makeWimpyPlayer</strong></font>. Attempting to call these functions will not work because it takes a couple seconds for wimpy to initialize. It is best to use these functions as &quot;user input&quot; functions, where a user has to click on something in order for it to ocur. </p>
+  <p>The only other alternative would be to use the <strong>wimpy_amReady_ask</strong> function to check to see if Wimpy is ready to accept function calls. Once wimpy_amReady_ask returns &quot;true&quot; you can use any given function to communicate with Wimpy. </p>
+</blockquote>
+<p><strong>Example Code*</strong></p>
+<p class="codeExample"><font color="#666666">&lt;script language=&quot;JavaScript&quot; &gt;</font><br>
+  &nbsp;&nbsp; <font color="#FF0000">wimpyApp</font> = <font color="#009900">&quot;playlist1.xml&quot;</font>;<br>
+&nbsp;&nbsp;
+  makeWimpyPlayer();<br>
+<font color="#666666">&lt;/script&gt; </font></p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p><font color="#666666"><a href="readme_rave_about.html#real">* Be sure to review &quot;Real World Usage&quot;</a></font></p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&copy;2007 <a href="http://www.wimpyplayer.com">Plaino</a></p>
+<p>&nbsp;</p>
+<p></p>
+</td>
+  </tr>
+</table>
+
+</body>
+</html>

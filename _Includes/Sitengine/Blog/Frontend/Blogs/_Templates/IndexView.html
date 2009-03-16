@@ -1,0 +1,193 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<!-- Document Created By Christian Hoegl - sitengine.org -->
+
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<meta http-equiv="Pragma" content="no-cache" />
+<meta name="robots" content="noindex, nofollow" />
+
+<title>Sitengine - <?=$this->html($this->DICTIONARY->LABELS->pageTitle);?></title>
+
+<link rel="stylesheet" type="text/css" href="<?=$this->_controller->getEnv()->getMediaRequestDir();?>/Frontend/Styles/Global.css" />
+<link rel="stylesheet" type="text/css" href="<?=$this->_controller->getEnv()->getMediaRequestDir();?>/Frontend/Styles/Lists.css" />
+<script language="JavaScript" type="text/JavaScript" src="<?=$this->_controller->getEnv()->getMediaRequestDir();?>/Global.js"></script>
+
+</head>
+<body>
+
+
+
+
+<?require 'Sitengine/Env/_Templates/BreadcrumbsSection.html';?>
+<?require 'Sitengine/Env/_Templates/AbstractSection.html';?>
+<?require 'Sitengine/Env/_Templates/StatusSection.html';?>
+
+
+
+
+
+
+
+
+
+
+
+<form method="get" action="<?=$this->_controller->getEnv()->getUriSelfSubmit();?>" name="filterform" class="filterform">
+<?=$this->SECTIONS->BLOGS->FILTER->hiddens;?>
+<?foreach($this->SECTIONS->BLOGS->FILTER->ELEMENTS as $v):?><?=$v;?><?endforeach;?>
+
+<input type="button" value="<?=$this->html($this->DICTIONARY->LABELS->filterSectionSubmit);?>" onclick="document.filterform.submit();" />
+<input type="button" value="<?=$this->html($this->DICTIONARY->LABELS->filterSectionReset);?>" onclick="window.location = '<?=$this->SECTIONS->BLOGS->FILTER->uriReset;?>';" />
+
+</form>
+
+
+
+
+
+<hr />
+
+
+
+<?if(!sizeof($this->SECTIONS->BLOGS->DATA)):?>
+
+
+<div class="listformNoRecords">
+<?if($this->SECTIONS->BLOGS->FILTER->isActive):?>
+    <span><?=$this->html($this->DICTIONARY->LABELS->listformNoMatchingRecords);?></span><br />
+    <?=$this->html($this->DICTIONARY->LABELS->listformFilterIsActive);?>
+<?else:?>
+    <span><?=$this->html($this->DICTIONARY->LABELS->listformNoRecords);?></span>
+<?endif;?>
+</div>
+
+
+<?else:?>
+
+
+
+
+
+
+
+
+Sort By: <a href="<?=$this->SECTIONS->BLOGS->SORTING->QUERIES->title;?>" title="<?=$this->html($this->DICTIONARY->LABELS->listformColumnSortHref);?>"><?=$this->html($this->DICTIONARY->COLUMNS->title);?></a>
+&nbsp;<img src="<?=$this->_controller->getEnv()->getMediaRequestDir();?>/Backend/Pics/Sort_<?=$this->SECTIONS->BLOGS->SORTING->COLUMNS->title;?>.gif" width="8" height="10" border="0" alt="" />
+
+<a href="<?=$this->SECTIONS->BLOGS->SORTING->QUERIES->cdate;?>"><?=$this->html($this->DICTIONARY->COLUMNS->cdate);?></a><img src="<?=$this->_controller->getEnv()->getMediaRequestDir();?>/Backend/Pics/Sort_<?=$this->SECTIONS->BLOGS->SORTING->COLUMNS->cdate;?>.gif" width="8" height="10" border="0" alt="" />
+
+
+
+
+
+
+
+
+
+<?$pagerAction = $this->_controller->getEnv()->getUriSelfSubmit();?>
+<?$pagerHiddens = $this->SECTIONS->BLOGS->PAGER->hiddens;?>
+<?$pagerCurrPageInput = $this->SECTIONS->BLOGS->PAGER->currPageInput;?>
+<?$pagerCurrPage = $this->SECTIONS->BLOGS->PAGER->currPage;?>
+<?$pagerNextPage = $this->SECTIONS->BLOGS->PAGER->nextPage;?>
+<?$pagerPrevPage = $this->SECTIONS->BLOGS->PAGER->prevPage;?>
+<?$pagerNumPages = $this->SECTIONS->BLOGS->PAGER->numPages;?>
+<?$pagerNumItems = $this->SECTIONS->BLOGS->PAGER->numItems;?>
+<?$pagerFirstItem = $this->SECTIONS->BLOGS->PAGER->firstItem;?>
+<?$pagerLastItem = $this->SECTIONS->BLOGS->PAGER->lastItem;?>
+<?$pagerUriPrevPage = $this->SECTIONS->BLOGS->PAGER->uriPrevPage;?>
+<?$pagerUriNextPage = $this->SECTIONS->BLOGS->PAGER->uriNextPage;?>
+<?$pagerPrevLabel = $this->DICTIONARY->LABELS->pagerPreviousPage;?>
+<?$pagerNextLabel = $this->DICTIONARY->LABELS->pagerNextPage;?>
+<?$pagerOfLabel = $this->DICTIONARY->LABELS->pagerOf;?>
+<?$pagerPageLabel = $this->DICTIONARY->LABELS->pagerPage;?>
+<?$pagerPagesLabel = $this->DICTIONARY->LABELS->pagerPages;?>
+<?$pagerEntityLabel = $this->DICTIONARY->LABELS->pagerEntity;?>
+<?$pagerValClass = "pagerVal";?>
+<?$pagerTextClass = "pagerText";?>
+<?$pagerHrefPrevClass = "pagerHrefPrev";?>
+<?$pagerHrefNextClass = "pagerHrefNext";?>
+<?$pagerFormName = "pagerTop";?>
+<?$pagerFormClass = "pagerTop";?>
+
+<?require 'Sitengine/Env/_Templates/PagerSection.html';?>
+
+
+
+
+
+<hr />
+
+
+
+
+
+<?foreach($this->SECTIONS->BLOGS->DATA as $row):?>
+<?$cdate = $this->html($row->cdate);?>
+<?$title = $this->html($row->title);?>
+<?$slug = $this->html($row->slug);?>
+<?$postCount = $this->html($row->postCount);?>
+
+<?$uriPostIndex = $row->uriPostIndex;?>
+
+<h2><a href="<?=$uriPostIndex;?>" class="listformDataTitle"><?=$title;?></a> (<?=$postCount;?>)</h2>
+
+<?endforeach;?>
+
+
+
+
+
+
+
+
+<hr />
+
+
+
+<?$pagerFormName = "pagerBottom";?>
+<?$pagerFormClass = "pagerBottom";?>
+<?require 'Sitengine/Env/_Templates/PagerSection.html';?>
+
+
+
+
+
+
+
+
+<form method="get" action="<?=$this->_controller->getEnv()->getUriSelfSubmit();?>" name="settingsForm" class="settingsForm">
+<?=$this->SECTIONS->BLOGS->SETTINGS->hiddens;?>
+<?foreach($this->SECTIONS->BLOGS->SETTINGS->ELEMENTS as $v):?><?=$v;?><?endforeach;?>
+
+<script type="text/javascript" language="Javascript">
+//<![CDATA[
+//<!--
+if(document.settingsForm.ipp) {
+	document.settingsForm.ipp.onchange = function() { document.settingsForm.submit(); }
+}
+if(document.settingsForm.t) {
+	document.settingsForm.t.onchange = function() { document.settingsForm.submit(); }
+}
+//-->
+//]]>
+</script>
+
+</form>
+
+
+
+<?endif;?>
+
+
+
+
+
+<hr />
+
+<?require 'Sitengine/Env/_Templates/FooterSection.html';?>
+</body>
+</html>
+
+<!-- Document Created By Christian Hoegl - sitengine.org -->

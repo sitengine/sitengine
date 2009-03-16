@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+
+<dictionary name="dictionary">
+	
+    <group name="LABELS">
+        <item name="pageTitle">Permiso - Users</item>
+        <item name="entityTitle">Permiso - Users</item>
+        <item name="actionsSectionIndex">Show all Users</item>
+        <item name="actionsSectionInsert">Create new User</item>
+        <item name="columnSortHref">Click to sort the list by this column</item>
+    </group>
+    
+    
+    <group name="HELPS">
+        <item name="_index"> </item>
+        <item name="_update"> </item>
+        <item name="_insert"> </item>
+    </group>
+    
+    
+    <group name="INDEXVIEW">
+        <item name="title">Overview</item>
+        <item name="membershipsIndex">Show</item>
+        <item name="batchDeleteSubmit">Delete selected</item>
+        <item name="batchUpdateSubmit">Update list</item>
+        <item name="filterIsActive">Filtering is active for the current view</item>
+        <item name="noRecords">No Users in database</item>
+        <item name="noMatchingRecords">No Users match your criteria</item>
+        <item name="confirmDelete">Do you really want to delete the selected Users?</item>
+        <item name="confirmUpdate">Do you really want to update all Users in the list?</item>
+        <item name="filterSectionTitle">Filter</item>
+        <item name="filterSectionSubmit">Find</item>
+        <item name="filterSectionReset">Reset</item>
+        <item name="settingsSectionTitle">Settings</item>
+        <item name="settingsSectionSubmit">Set</item>
+        <item name="settingsSectionReset">Reset</item>
+        <item name="settingsSectionItemsPerPage">Items per page</item>
+    </group>
+    
+    
+    <group name="INDEXVIEWCOLUMNS">
+        <item name="name">E-Mail</item>
+        <item name="nickname">Nickname</item>
+        <item name="firstname">First Name</item>
+        <item name="lastname">Last Name</item>
+        <item name="enabled">Enabled</item>
+        <item name="locked">Locked</item>
+        <item name="lastLogin">Last Login</item>
+        <item name="membershipAction">Memberships</item>
+    </group>
+    
+    
+    <group name="FORMVIEW">
+        <item name="childActionsSectionMembershipsIndex">Memberships</item>
+        <item name="insertTitle">New User</item>
+        <item name="updateTitle">Update User</item>
+        <item name="insertSubmit">Save</item>
+        <item name="updateSubmit">Save changes</item>
+        <item name="dateSectionLastLogin">LastLogin</item>
+    </group>
+    
+    
+    <group name="FORMVIEWFIELDS">
+        <item name="name">E-Mail</item>
+        <item name="nickname">Nickname</item>
+        <item name="firstname">First Name</item>
+        <item name="lastname">Last Name</item>
+        <item name="password">Password</item>
+        <item name="passwordConfirm">Confirm Password</item>
+        <item name="description">Description</item>
+        <item name="country">Country</item>
+        <item name="timezone">Timezone</item>
+        <item name="newsletter">Newsletter</item>
+        <item name="language">Language</item>
+        <item name="enabled">Enabled</item>
+        <item name="locked">Locked</item>
+        <item name="avatarOriginal">Avatar</item>
+        <item name="avatarOriginalHint">Format gif or jpg</item>
+        <item name="notifyNewUser">Notify New User</item>
+    </group>
+    
+    
+    <group name="FIELDVALS">
+        <group name="country">
+            <item name="noneSelected">Select country</item>
+        </group>
+    </group>
+    
+    
+    <group name="PAGER">
+        <item name="page">Page</item>
+        <item name="pages">Pages</item>
+        <item name="of">of</item>
+        <item name="entity">Users</item>
+        <item name="previousPage">Previous</item>
+        <item name="nextPage">Next</item>
+    </group>
+    
+    <!--
+    <group name="HINTS">
+        <item name="invalidRequest">Invalid request</item>
+        <item name="timezoneRequired">Timezone: input required</item>
+        <item name="firstnameRequired">First Name: input required</item>
+        <item name="lastnameRequired">Last Name: input required</item>
+        <item name="nameExists">Username/E-Mail already taken</item>
+        <item name="nameRequired">E-Mail: input required</item>
+        <item name="nameValidEmailRequired">Valid E-Mail address required</item>
+        <item name="nicknameExists">Nickname already taken</item>
+        <item name="nicknameRequired">Nickname: input required</item>
+        <item name="passwordRequired">Password: input required</item>
+        <item name="passwordsDontMatch">Passwords don&apos;t match</item>
+        <item name="passwordTooShort">Password is too short</item>
+        <item name="countryRequired">Country is required</item>
+        <item name="avatarOriginalFiletype">Avatar: Wrong format</item>
+        <item name="avatarOriginalFilesize">Avatar: Filesize exceeded</item>
+    </group>
+    -->
+    
+    <group name="NOTIFYNEWUSERMAIL">
+        <item name="subject">Welcome to %site%</item>
+        <item name="body">We have just created a new user account for you on %site%. Please use the following information to log into your account:
+        
+        User: %user%
+        Password: %password%
+        </item>
+    </group>
+    
+</dictionary>

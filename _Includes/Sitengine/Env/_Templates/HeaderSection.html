@@ -1,0 +1,61 @@
+<?
+$url = $this->_controller->getEnv()->getHeaderBrandUrl();
+$href = '';
+$hrefend = '';
+
+if($url !== null && !preg_match('/^http/i', $url)) { $url = 'http://'.$url; }
+if($url !== null) { $href = "<a href=\"$url\">"; $hrefend = '</a>'; }
+?>
+
+<div id="headerBrandBg">
+<div id="headerBrand"><?=$href;?><?=$this->html($this->_controller->getEnv()->getHeaderBrand());?><?=$hrefend;?></div>
+</div>
+
+<table id="header"><tr><td valign="bottom">
+
+<?if(isset($this->SECTIONS->GLOBALNAV->menu)):?>
+
+<form name="globalNavForm" action="/">
+<?=$this->SECTIONS->GLOBALNAV->menu;?>
+</form>
+
+<?endif;?>
+
+
+</td><td valign="bottom" align="right">
+
+
+
+
+<div id="sysinfo">
+
+<?=$this->html($this->DICTIONARY->LABELS->currentUser);?>: 
+<?if(isset($this->QUERIES->myAccount)):?><a href="<?=$this->QUERIES->myAccount;?>"><?endif;?>
+<?=$this->_controller->getPermiso()->getAuth()->getIdentity();?>
+<?if(isset($this->QUERIES->myAccount)):?></a><?endif;?>
+ // 
+ <!--
+<?if($this->ORGANIZATION->name):?>
+<?=$this->html($this->DICTIONARY->LABELS->currentOrganization);?>: <?=$this->ORGANIZATION->name;?> // 
+<?endif;?>
+-->
+
+<?
+	$lastLogin = '';
+	if($this->_controller->getPermiso()->getAuth()->getLastLogin())
+	{
+		require_once 'Zend/Date.php';
+		$date = new Zend_Date($this->_controller->getPermiso()->getAuth()->getLastLogin(), 'yyyy-MM-dd HH:mm:ss');
+		$date->setTimezone($this->_controller->getPreferences()->getTimezone());
+		$lastLogin  = $date->get(Zend_Date::DATE_LONG, $this->_controller->getLocale());
+		$lastLogin .= ' '.$date->get(Zend_Date::TIME_LONG, $this->_controller->getLocale());
+	}
+?>
+
+<?=$this->html($this->DICTIONARY->LABELS->lastLogin);?>: <?=$lastLogin;?> 
+//
+<a href="<?=$this->QUERIES->signOut;?>"><?=$this->html($this->DICTIONARY->LABELS->signOut);?></a>
+</div>
+
+
+</td></tr></table>

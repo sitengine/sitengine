@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+
+<dictionary name="dictionary">
+	
+	<group name="STATUS">
+        <item name="errorInsert">You could not be subscribed to our Newsletter</item>
+        <item name="okInsert">You have successfully subscribed to our Newsletter</item>
+    </group>
+    
+    <group name="LABELS">
+        <item name="pageTitle"> </item>
+    </group>
+    
+</dictionary>

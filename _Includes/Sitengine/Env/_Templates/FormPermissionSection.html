@@ -1,0 +1,114 @@
+<div class="viewformPermissions">
+
+	<div class="viewformSectionTitle"><?=$this->html($this->permissionSectionTitle);?></div>
+	
+	<table border="0" cellpadding="0" cellspacing="0">
+	
+		<tr>
+			<td valign="top" class="viewformPermissionLabel"><?=$this->html($this->permissionSectionUid);?></td>
+			<td valign="top">
+				<?=
+					$this->formSelect(
+						'uid',
+						$this->uid,
+						array(),
+						$this->uidOptions
+					);
+				?>
+				&nbsp;&nbsp;
+			</td>
+		</tr>
+		
+		
+		
+		<tr>
+			<td valign="top" class="viewformPermissionLabel"><?=$this->html($this->permissionSectionGid);?></td>
+			
+			<td valign="top">
+				<?=
+					$this->formSelect(
+						'gid',
+						$this->gid,
+						array(),
+						$this->gidOptions
+					);
+				?>
+				&nbsp;&nbsp;
+			</td>
+			
+			<td valign="top">
+				<?
+					print
+						($this->rag) ?
+						$this->formCheckbox('rag', null, array('checked' => true)) :
+						$this->formCheckbox('rag')
+					;
+				?>
+				<span class="viewformPermissionHint"><?=$this->permissionSectionRead;?>&nbsp;</span>
+			</td>
+		
+			<td valign="top">
+				<?
+					print
+						($this->uag) ?
+						$this->formCheckbox('uag', null, array('checked' => true)) :
+						$this->formCheckbox('uag')
+					;
+				?>
+				<span class="viewformPermissionHint"><?=$this->permissionSectionUpdate;?>&nbsp;</span>
+			</td>
+			
+			<td valign="top">
+				<?
+					print
+						($this->dag) ?
+						$this->formCheckbox('dag', null, array('checked' => true)) :
+						$this->formCheckbox('dag')
+					;
+				?>
+				<span class="viewformPermissionHint"><?=$this->permissionSectionDelete;?>&nbsp;</span>
+			</td>
+		</tr>
+		
+		
+		
+		<tr>
+			<td valign="top" class="viewformPermissionLabel"><?=$this->permissionSectionWorld;?></td>
+			<td valign="top">&nbsp;</td>
+			
+			<td valign="top">
+				<?
+					print
+						($this->raw) ?
+						$this->formCheckbox('raw', null, array('checked' => true)) :
+						$this->formCheckbox('raw')
+					;
+				?>
+				<span class="viewformPermissionHint"><?=$this->permissionSectionRead;?>&nbsp;</span>
+			</td>
+			
+			<td valign="top">
+				<?
+					print
+						($this->uaw) ?
+						$this->formCheckbox('uaw', null, array('checked' => true)) :
+						$this->formCheckbox('uaw')
+					;
+				?>
+				<span class="viewformPermissionHint"><?=$this->permissionSectionUpdate;?>&nbsp;</span>
+			</td>
+			
+			<td valign="top">
+				<?
+					print
+						($this->daw) ?
+						$this->formCheckbox('daw', null, array('checked' => true)) :
+						$this->formCheckbox('daw')
+					;
+				?>
+				<span class="viewformPermissionHint"><?=$this->permissionSectionDelete;?>&nbsp;</span>
+			</td>
+		</tr>
+	
+	</table>
+</div>

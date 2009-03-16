@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+
+<dictionary name="dictionary">
+    
+    <group name="LABELS">
+        <item name="entityTitle">Memberships</item>
+        <item name="listformTitle">Memberships</item>
+        <item name="listformColumnSortHref">Click to sort the list by this column</item>
+        <item name="listformBatchDeleteSubmit">Delete selected</item>
+        <item name="listformBatchUpdateSubmit">Update list</item>
+        <item name="listformFilterIsActive">Filtering is active for the current view</item>
+        <item name="listformNoRecords">This user has no memberships</item>
+        <item name="listformNoMatchingRecords">No memberships match your criteria</item>
+        <item name="listformConfirmDelete">Do you really want to delete the selected memberships?</item>
+        <item name="listformConfirmUpdate">Do you really want to update all memberships in the list?</item>
+        <item name="viewformInsertTitle">New membership</item>
+        <item name="viewformUpdateTitle">Update membership</item>
+        <item name="viewformInsertSubmit">Save</item>
+        <item name="viewformUpdateSubmit">Save changes</item>
+        <item name="viewformInputRequired">Fields marked with red are required</item>
+        <item name="actionsSectionIndex">Show memberships</item>
+        <item name="actionsSectionInsert">Add membership for this user</item>
+        <item name="filterSectionTitle">Filter</item>
+        <item name="filterSectionSubmit">Find</item>
+        <item name="filterSectionReset">Reset</item>
+        <item name="settingsSectionTitle">Settings</item>
+        <item name="settingsSectionSubmit">Set</item>
+        <item name="settingsSectionReset">Reset</item>
+        <item name="settingsSectionItemsPerPage">Items per page</item>
+        <item name="pagerPage">Page</item>
+        <item name="pagerPages">Pages</item>
+        <item name="pagerOf">of</item>
+        <item name="pagerEntity">Records</item>
+        <item name="pagerPreviousPage">Previous</item>
+        <item name="pagerNextPage">Next</item>
+    </group>
+    
+    <group name="BREADCRUMBS">
+        <item name="title">Permiso</item>
+        <item name="userEntity">Users</item>
+    </group>
+    
+    <group name="HELPS">
+        <item name="index"> </item>
+        <item name="update"> </item>
+        <item name="insert"> </item>
+    </group>
+    
+    <group name="COLUMNS">
+        <item name="locked">Locked</item>
+        <item name="enabled">Enabled</item>
+        <item name="cdate">Created</item>
+        <item name="name">Name</item>
+    </group>
+    
+    <group name="FIELDS">
+        <item name="groupId">Group</item>
+    </group>
+    
+    <group name="FIELDVALS">
+        <group name="enabled">
+            <item name="0">No</item>
+            <item name="1">Yes</item>
+        </group>
+        
+        <group name="locked">
+            <item name="0">No</item>
+            <item name="1">Yes</item>
+        </group>
+        
+        <group name="select">
+            <item name="noneSelected">Select</item>
+        </group>
+    </group>
+    
+    <group name="HINTS">
+        <item name="invalidRequest">Invalid request</item>
+        <item name="accessDenied">Access denied</item>
+        <item name="groupIdRequired">Group: Please select a group</item>
+        <item name="membershipExists">This user is already member in the selected group</item>
+    </group>
+    
+</dictionary>
+

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+
+<dictionary name="dictionary">
+	
+	<item name="statusSendOk">Mitteilung abgeschickt</item>
+	<item name="statusSendError">Mitteilung konnte nicht abgeschickt werden</item>
+	<item name="hintFirstnameRequired">Bitte eingeben: Vorname</item>
+	<item name="hintLastnameRequired">Bitte eingeben: Nachname</item>
+	<item name="hintEmailRequired">Bitte geben Sie eine gültige Emailadresse an</item>
+	
+	<item name="groupOne">Eins</item>
+	<item name="groupTwo">Zwei</item>
+	<item name="groupThree">Drei</item>
+    
+</dictionary>

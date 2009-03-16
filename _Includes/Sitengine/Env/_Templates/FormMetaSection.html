@@ -1,0 +1,27 @@
+<?if(
+    $this->SECTIONS->VIEWFORM->ELEMENTS->enabled ||
+    $this->SECTIONS->VIEWFORM->ELEMENTS->locked
+):?>
+
+<div class="viewformMeta">
+
+<div class="viewformSectionTitle"><?=$this->html($this->DICTIONARY->VIEWFORM->metaSectionTitle);?></div>
+
+<?if($this->SECTIONS->VIEWFORM->ELEMENTS->enabled):?>
+<div class="viewformContainer">
+<div class="viewformLabelContainer"><label for="enabled" class="viewformDefaultLabel"><?=$this->html($this->DICTIONARY->VIEWFORM->metaSectionEnabledField);?></label></div>
+<div class="viewformInputContainer"><?=$this->SECTIONS->VIEWFORM->ELEMENTS->enabled;?></div>
+</div>
+<?endif;?>
+
+
+<?if($this->SECTIONS->VIEWFORM->ELEMENTS->locked):?>
+<div class="viewformContainer">
+<div class="viewformLabelContainer"><label for="locked" class="viewformDefaultLabel"><?=$this->html($this->DICTIONARY->VIEWFORM->metaSectionLockedField);?></label></div>
+<div class="viewformInputContainer"><?=$this->SECTIONS->VIEWFORM->ELEMENTS->locked;?></div>
+</div>
+<?endif;?>
+
+
+</div>
+<?endif;?>

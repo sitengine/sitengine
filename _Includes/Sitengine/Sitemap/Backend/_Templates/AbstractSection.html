@@ -1,0 +1,26 @@
+<div id="abstract">
+<h1>
+
+<?if($this->SECTIONS->ABSTRACT->type == Sitengine_Sitemap::ITEMTYPE_FILE):?>
+<img src="<?=$this->_controller->getEnv()->getMediaRequestDir();?>/Sitemap/Pics/File.gif" width="19" height="19" border="0" alt="File" />&nbsp;
+
+<?elseif($this->SECTIONS->ABSTRACT->type == Sitengine_Sitemap::ITEMTYPE_PAGE):?>
+<img src="<?=$this->_controller->getEnv()->getMediaRequestDir();?>/Sitemap/Pics/Page.gif" width="19" height="19" border="0" alt="Page" />&nbsp;
+
+<?elseif($this->SECTIONS->ABSTRACT->type == Sitengine_Sitemap::ITEMTYPE_MASK):?>
+<img src="<?=$this->_controller->getEnv()->getMediaRequestDir();?>/Sitemap/Pics/Mask.gif" width="19" height="19" border="0" alt="Mask" />&nbsp;
+
+<?elseif($this->SECTIONS->ABSTRACT->type == Sitengine_Sitemap::ITEMTYPE_LAYER):?>
+<img src="<?=$this->_controller->getEnv()->getMediaRequestDir();?>/Sitemap/Pics/Layer.gif" width="19" height="19" border="0" alt="Layer" />&nbsp;
+
+<?elseif($this->SECTIONS->ABSTRACT->type == Sitengine_Sitemap::ITEMTYPE_SNIPPET):?>
+<img src="<?=$this->_controller->getEnv()->getMediaRequestDir();?>/Sitemap/Pics/Snippet.gif" width="19" height="19" border="0" alt="Snippet" />&nbsp;
+<?endif;?>
+
+<?if($this->SECTIONS->ABSTRACT->uri):?><a href="<?=$this->SECTIONS->ABSTRACT->uri;?>"><?endif;?>
+<?=$this->html($this->truncate($this->SECTIONS->ABSTRACT->title, 80));?>
+<?if($this->SECTIONS->ABSTRACT->uri):?></a><?endif;?></h1>
+<?if($this->SECTIONS->ABSTRACT->help):?>
+<p><?=$this->html($this->SECTIONS->ABSTRACT->help);?></p>
+<?endif;?>
+</div>

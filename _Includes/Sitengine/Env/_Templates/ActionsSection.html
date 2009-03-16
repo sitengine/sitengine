@@ -1,0 +1,11 @@
+<div class="actions">
+	<?$count = 0;?>
+	<?if(isset($this->SECTIONS->ACTIONS)):?>
+		<?foreach($this->SECTIONS->ACTIONS as $navItem):?>
+			<?if($count > 0):?> &#x2022; <?endif;?>
+			<a href="<?=$navItem->uri;?>"><?=$navItem->label;?></a>
+			<?if($navItem->postfix):?><?=$navItem->postfix;?><?endif;?>
+			<?$count = $count+1;?>
+		<?endforeach;?>
+	<?endif;?>
+</div>

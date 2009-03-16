@@ -1,0 +1,116 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<!-- Document Created By Christian Hoegl - sitengine.org -->
+
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<meta http-equiv="Pragma" content="no-cache" />
+<meta name="robots" content="noindex, nofollow" />
+
+<title>Sitengine - <?=$this->html($this->DICTIONARY->LABELS->pageTitle);?></title>
+
+<link rel="stylesheet" type="text/css" href="<?=$this->_controller->getEnv()->getMediaRequestDir();?>/Frontend/Styles/Global.css" />
+<link rel="stylesheet" type="text/css" href="<?=$this->_controller->getEnv()->getMediaRequestDir();?>/Frontend/Styles/Lists.css" />
+<script language="JavaScript" type="text/JavaScript" src="<?=$this->_controller->getEnv()->getMediaRequestDir();?>/Global.js"></script>
+
+</head>
+<body>
+
+
+
+
+<?=$this->SECTIONS->SNIPPETS->top;?>
+
+
+
+<form method="get" action="<?=$this->_controller->getEnv()->getUriSelfSubmit();?>" name="filterform" class="filterform">
+<?=$this->SECTIONS->CAMPAIGNS->FILTER->hiddens;?>
+<?foreach($this->SECTIONS->CAMPAIGNS->FILTER->ELEMENTS as $v):?><?=$v;?><?endforeach;?>
+
+<input type="button" value="<?=$this->html($this->DICTIONARY->INDEXVIEW->filterSectionSubmit);?>" onclick="document.filterform.submit();" />
+<input type="button" value="<?=$this->html($this->DICTIONARY->INDEXVIEW->filterSectionReset);?>" onclick="window.location = '<?=$this->SECTIONS->CAMPAIGNS->FILTER->uriReset;?>';" />
+
+</form>
+
+
+
+
+
+
+
+
+<?if(!sizeof($this->SECTIONS->CAMPAIGNS->DATA)):?>
+
+<?if($this->SECTIONS->CAMPAIGNS->FILTER->isActive):?>
+    <span><?=$this->html($this->DICTIONARY->INDEXVIEW->noMatchingRecords);?></span><br />
+    <?=$this->html($this->DICTIONARY->INDEXVIEW->filterIsActive);?>
+<?else:?>
+    <span><?=$this->html($this->DICTIONARY->INDEXVIEW->noRecords);?></span>
+<?endif;?>
+
+<?else:?>
+
+
+
+
+
+
+
+
+
+<?$pagerAction = $this->_controller->getEnv()->getUriSelfSubmit();?>
+<?$pagerHiddens = $this->SECTIONS->CAMPAIGNS->PAGER->hiddens;?>
+<?$pagerCurrPageInput = $this->SECTIONS->CAMPAIGNS->PAGER->currPageInput;?>
+<?$pagerCurrPage = $this->SECTIONS->CAMPAIGNS->PAGER->currPage;?>
+<?$pagerNextPage = $this->SECTIONS->CAMPAIGNS->PAGER->nextPage;?>
+<?$pagerPrevPage = $this->SECTIONS->CAMPAIGNS->PAGER->prevPage;?>
+<?$pagerNumPages = $this->SECTIONS->CAMPAIGNS->PAGER->numPages;?>
+<?$pagerNumItems = $this->SECTIONS->CAMPAIGNS->PAGER->numItems;?>
+<?$pagerFirstItem = $this->SECTIONS->CAMPAIGNS->PAGER->firstItem;?>
+<?$pagerLastItem = $this->SECTIONS->CAMPAIGNS->PAGER->lastItem;?>
+<?$pagerUriPrevPage = $this->SECTIONS->CAMPAIGNS->PAGER->uriPrevPage;?>
+<?$pagerUriNextPage = $this->SECTIONS->CAMPAIGNS->PAGER->uriNextPage;?>
+<?$pagerPrevLabel = $this->DICTIONARY->PAGER->previousPage;?>
+<?$pagerNextLabel = $this->DICTIONARY->PAGER->nextPage;?>
+<?$pagerOfLabel = $this->DICTIONARY->PAGER->of;?>
+<?$pagerPageLabel = $this->DICTIONARY->PAGER->page;?>
+<?$pagerPagesLabel = $this->DICTIONARY->PAGER->pages;?>
+<?$pagerEntityLabel = $this->DICTIONARY->PAGER->entity;?>
+<?$pagerValClass = "pagerVal";?>
+<?$pagerTextClass = "pagerText";?>
+<?$pagerHrefPrevClass = "pagerHrefPrev";?>
+<?$pagerHrefNextClass = "pagerHrefNext";?>
+<?$pagerFormName = "pagerTop";?>
+<?$pagerFormClass = "pagerTop";?>
+
+<?require 'Sitengine/Env/_Templates/PagerSection.html';?>
+
+
+
+
+
+
+
+
+<ul>
+<?foreach($this->SECTIONS->CAMPAIGNS->DATA as $row):?>
+<?$cdate = $this->html($row->cdate);?>
+<?$title = $this->html($row->title);?>
+
+<?$uriUpdate = $row->uriUpdate;?>
+<a href="<?=$uriUpdate;?>" class="listformDataTitle"><?=$title;?></a><br />
+
+<?endforeach;?>
+</ul>
+
+<?endif;?>
+
+
+<?=$this->SECTIONS->SNIPPETS->bottom;?>
+
+
+</body>
+</html>
+
+<!-- Document Created By Christian Hoegl - sitengine.org -->

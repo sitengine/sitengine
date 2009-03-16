@@ -1,0 +1,85 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<!-- Document Created By Christian Hoegl - sitengine.org -->
+
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<meta http-equiv="Pragma" content="no-cache" />
+<meta name="robots" content="noindex, nofollow" />
+
+<title>Sitengine - <?=$this->html($this->DICTIONARY->FORMTEXTVIEW->pageTitle);?></title>
+
+<link rel="stylesheet" type="text/css" href="<?=$this->_controller->getEnv()->getMediaRequestDir();?>/Frontend/Styles/Global.css" />
+<link rel="stylesheet" type="text/css" href="<?=$this->_controller->getEnv()->getMediaRequestDir();?>/Frontend/Styles/Forms.css" />
+<script language="JavaScript" type="text/JavaScript" src="<?=$this->_controller->getEnv()->getMediaRequestDir();?>/Global.js"></script>
+
+</head>
+<body>
+
+
+
+<?require 'Sitengine/Env/_Templates/BreadcrumbsSection.html';?>
+<?require 'Sitengine/Env/_Templates/AbstractSection.html';?>
+<?require 'Sitengine/Env/_Templates/StatusSection.html';?>
+
+<?
+	$mp3 = preg_replace('/&amp;/', '&', $this->SECTIONS->POST->file1OriginalUri);
+	$escapedProjectDir = preg_replace('/\//', '\/', $this->_controller->getEnv()->getMyProjectDir());
+	$escapedProjectDir = preg_replace('/\./', '\.', $escapedProjectDir);
+	$xsendPath  = $this->_controller->getEnv()->getMyProjectRequestDir();
+	$xsendPath .= '/'.preg_replace('/'.$escapedProjectDir.'\//', '', $this->SECTIONS->POST->file1OriginalPath);
+?>
+	
+<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,47,0" width="30" height="30" id="wimpy_button_45225" name="wimpy_button_45225" >
+<param name="movie" value="<?=$this->_controller->getEnv()->getContribRequestDir();?>/Wimpy/Button/wimpy_button.swf?theFile=<?=$xsendPath;?>" />
+<param name="quality" value="high" />
+<param name="bgcolor" value="#ffffff" />
+<embed src="<?=$this->_controller->getEnv()->getContribRequestDir();?>/Wimpy/Button/wimpy_button.swf?theFile=<?=$xsendPath;?>" width="30" height="30" quality="high" bgcolor="#ffffff" pluginspage="http://www.macromedia.com/go/getflashplayer" type="application/x-shockwave-flash"  name="wimpy_button_45225" /></object><br />
+<?=$this->SECTIONS->POST->markup;?>
+
+
+<?foreach($this->SECTIONS->POST as $field => $val):?>
+	<?=$field;?> = <?=$val;?><br />
+<?endforeach;?>
+
+
+
+
+<hr />
+
+<h2>Comments</h2>
+
+<?if(!sizeof($this->SECTIONS->COMMENTS)):?>
+
+
+<a href="<?=$this->SECTIONS->COMMENTACTIONS->commentInsert->uri;?>">Be the first to write a comment</a>
+
+
+<?else:?>
+
+<a href="<?=$this->SECTIONS->COMMENTACTIONS->commentInsert->uri;?>">Post a comment</a><br />
+
+<?foreach($this->SECTIONS->COMMENTS as $row):?>
+<?$id = $this->html($row->id);?>
+<?$cdate = $row->cdate;?>
+<?$comment = $this->html($this->truncate($row->comment));?>
+<?$name = $this->html($row->name);?>
+<?$firstname = $this->html($row->firstname);?>
+<?$lastname = $this->html($row->lastname);?>
+
+<?=$firstname;?> <?=$lastname;?> @ <?=$cdate;?>
+<h3><?=$comment;?></h3>
+
+<?endforeach;?>
+<?endif;?>
+
+
+
+<hr />
+
+<?require 'Sitengine/Env/_Templates/FooterSection.html';?>
+</body>
+</html>
+
+<!-- Document Created By Christian Hoegl - sitengine.org -->
