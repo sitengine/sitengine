@@ -51,7 +51,7 @@ abstract class Sitengine_Proto_Backend_Goodies_Controller extends Sitengine_Cont
     protected $_locale = null;
     protected $_permiso = null;
     protected $_namespace = null;
-    protected $_dictionary = null;
+    protected $_translate = null;
     protected $_entity = null;
     protected $_markedRows = array();
     protected $_templateIndexView = null;
@@ -67,7 +67,7 @@ abstract class Sitengine_Proto_Backend_Goodies_Controller extends Sitengine_Cont
     public function getLocale() { return $this->_locale; }
     public function getPermiso() { return $this->_permiso; }
     public function getNamespace() { return $this->_namespace; }
-    public function getDictionary() { return $this->_dictionary; }
+    public function getTranslate() { return $this->_translate; }
     public function getEntity() { return $this->_entity; }
     public function getMarkedRows() { return $this->_markedRows; }
     
@@ -145,7 +145,7 @@ abstract class Sitengine_Proto_Backend_Goodies_Controller extends Sitengine_Cont
 			$this->_preferences = Sitengine_Env_Preferences::getInstance();
 			$this->_locale = $this->getEnv()->getLocaleInstance();
 			$this->_permiso = $this->getFrontController()->getPermisoPackage()->start($this->getDatabase());
-        	$this->_dictionary = $this->_getDictionaryInstance();
+        	$this->_translate = $this->_getTranslateInstance();
         	$this->_entity = $this->_getEntityModelInstance();
 			require_once 'Zend/Session/Namespace.php';
     		$this->_namespace = new Zend_Session_Namespace(get_class($this));
@@ -219,22 +219,23 @@ abstract class Sitengine_Proto_Backend_Goodies_Controller extends Sitengine_Cont
     
     
     
-    protected function _getDictionaryInstance()
+    protected function _getTranslateInstance()
     {
-    	require_once 'Sitengine/Dictionary.php';
-        $dictionary = new Sitengine_Dictionary($this->getEnv()->getDebugControl());
-        
-        # english
-        $dictionary->addFiles(
-            Sitengine_Env::LANGUAGE_EN,
-            array(
-				$this->getEnv()->getIncludesDir().'/Sitengine/Env/_Dictionary/global.xml',
-				$this->getEnv()->getIncludesDir().'/Sitengine/Env/_Dictionary/en.xml',
-				$this->getEnv()->getIncludesDir().'/Sitengine/Proto/Backend/Goodies/_Dictionary/en.xml',
-				$this->getEnv()->getIncludesDir().'/Sitengine/Proto/Backend/_Dictionary/en.xml'
-			)
-        );
-        return $dictionary;
+    	require_once 'Sitengine/Translate.php';
+		$translate = new Sitengine_Translate(
+			Sitengine_Translate::AN_XML,
+			$this->getEnv()->getIncludesDir().'/Sitengine/Env/_Dictionary/global.xml',
+			Sitengine_Env::LANGUAGE_EN
+		);
+		
+		$en = array(
+			$this->getEnv()->getIncludesDir().'/Sitengine/Env/_Dictionary/en.xml',
+			$this->getEnv()->getIncludesDir().'/Sitengine/Proto/Backend/Goodies/_Dictionary/en.xml',
+			$this->getEnv()->getIncludesDir().'/Sitengine/Proto/Backend/_Dictionary/en.xml'
+		);
+		
+		$translate->addMergeTranslation($en, Sitengine_Env::LANGUAGE_EN);
+		return $translate;
     }
     
     
@@ -288,8 +289,17 @@ abstract class Sitengine_Proto_Backend_Goodies_Controller extends Sitengine_Cont
 					Sitengine_Debug::action($this->getPreferences()->getDebugMode());
 				}
 				
-				$this->getLocale()->setLocale($this->getPreferences()->getLanguage());
-				$this->getDictionary()->readFiles($this->getPreferences()->getLanguage());
+				$this->getLocale()->setLocale(Sitengine_Env::LANGUAGE_EN);
+				
+				if($this->getTranslate()->isAvailable($this->getPreferences()->getLanguage()))
+				{
+					$this->getLocale()->setLocale($this->getPreferences()->getLanguage());
+					$this->getTranslate()->setLocale($this->getPreferences()->getLanguage());
+				}
+				
+				require_once 'Zend/Registry.php';
+				Zend_Registry::set('Zend_Translate', $this->getTranslate()->getAdapter());
+				
 				$this->getStatus()->restore();
 			}
 		}
@@ -471,7 +481,7 @@ abstract class Sitengine_Proto_Backend_Goodies_Controller extends Sitengine_Cont
             {
                 $this->getStatus()->set(
                 	Sitengine_Env::STATUS_ERRORUPDATE,
-                	$this->getDictionary()->getFromStatus(Sitengine_Env::STATUS_ERRORUPDATE),
+                	$this->getTranslate()->translate(Sitengine_Env::STATUS_ERRORUPDATE),
                 	true
                 );
                 return $this->_goToAction(self::ACTION_UPDATE);
@@ -480,7 +490,7 @@ abstract class Sitengine_Proto_Backend_Goodies_Controller extends Sitengine_Cont
                 $this->getEntity()->refresh($data);
                 $this->getStatus()->set(
                 	Sitengine_Env::STATUS_OKUPDATE,
-                	$this->getDictionary()->getFromStatus(Sitengine_Env::STATUS_OKUPDATE),
+                	$this->getTranslate()->translate(Sitengine_Env::STATUS_OKUPDATE),
                 	false
                 );
             }
@@ -529,7 +539,7 @@ abstract class Sitengine_Proto_Backend_Goodies_Controller extends Sitengine_Cont
             {
                 $this->getStatus()->set(
                 	Sitengine_Env::STATUS_ERRORINSERT,
-                	$this->getDictionary()->getFromStatus(Sitengine_Env::STATUS_ERRORINSERT),
+                	$this->getTranslate()->translate(Sitengine_Env::STATUS_ERRORINSERT),
                 	true
                 );
                 return $this->_goToAction(self::ACTION_INSERT);
@@ -537,7 +547,7 @@ abstract class Sitengine_Proto_Backend_Goodies_Controller extends Sitengine_Cont
             
 			$this->getStatus()->set(
 				Sitengine_Env::STATUS_OKINSERT,
-				$this->getDictionary()->getFromStatus(Sitengine_Env::STATUS_OKINSERT),
+				$this->getTranslate()->translate(Sitengine_Env::STATUS_OKINSERT),
 				false
 			);
 			
@@ -568,7 +578,7 @@ abstract class Sitengine_Proto_Backend_Goodies_Controller extends Sitengine_Cont
             $this->_start();
             
             if(!$this->getPermiso()->getAcl()->privateAccessGranted($this->getFrontController()->getProtoPackage()->getAuthorizedGroups())) {
-                print $this->getDictionary()->getFromStatus(Sitengine_Env::STATUS_UNAUTHORIZED);
+                print $this->getTranslate()->translate(Sitengine_Env::STATUS_UNAUTHORIZED);
 				exit;
             }
             
@@ -624,7 +634,7 @@ abstract class Sitengine_Proto_Backend_Goodies_Controller extends Sitengine_Cont
                 {
                 	$this->getStatus()->set(
                 		Sitengine_Env::STATUS_ERRORBATCHTRASH,
-                		$this->getDictionary()->getFromStatus(Sitengine_Env::STATUS_ERRORBATCHTRASH),
+                		$this->getTranslate()->translate(Sitengine_Env::STATUS_ERRORBATCHTRASH),
                 		true
                 	);
                 	return $this->_goToAction(self::ACTION_INDEX);
@@ -633,7 +643,7 @@ abstract class Sitengine_Proto_Backend_Goodies_Controller extends Sitengine_Cont
                 {
                 	$this->getStatus()->set(
                 		Sitengine_Env::STATUS_OKBATCHTRASH,
-                		$this->getDictionary()->getFromStatus(Sitengine_Env::STATUS_OKBATCHTRASH),
+                		$this->getTranslate()->translate(Sitengine_Env::STATUS_OKBATCHTRASH),
                 		false
                 	);
                 }
@@ -702,7 +712,7 @@ abstract class Sitengine_Proto_Backend_Goodies_Controller extends Sitengine_Cont
                 {
                 	$this->getStatus()->set(
                 		Sitengine_Env::STATUS_ERRORBATCHUPDATE,
-                		$this->getDictionary()->getFromStatus(Sitengine_Env::STATUS_ERRORBATCHUPDATE),
+                		$this->getTranslate()->translate(Sitengine_Env::STATUS_ERRORBATCHUPDATE),
                 		true
                 	);
                 	return $this->_goToAction(self::ACTION_INDEX);
@@ -711,7 +721,7 @@ abstract class Sitengine_Proto_Backend_Goodies_Controller extends Sitengine_Cont
                 {
                 	$this->getStatus()->set(
                 		Sitengine_Env::STATUS_OKBATCHUPDATE,
-                		$this->getDictionary()->getFromStatus(Sitengine_Env::STATUS_OKBATCHUPDATE),
+                		$this->getTranslate()->translate(Sitengine_Env::STATUS_OKBATCHUPDATE),
                 		false
                 	);
                 }
@@ -795,7 +805,7 @@ abstract class Sitengine_Proto_Backend_Goodies_Controller extends Sitengine_Cont
                 if($updated < sizeof($rows)) {
                     $this->getStatus()->set(
                     	Sitengine_Env::STATUS_ERRORBATCHASSIGN,
-                    	$this->getDictionary()->getFromStatus(Sitengine_Env::STATUS_ERRORBATCHASSIGN),
+                    	$this->getTranslate()->translate(Sitengine_Env::STATUS_ERRORBATCHASSIGN),
                     	true
                     );
                     return $this->_goToAction(self::ACTION_ASSIGN);
@@ -803,7 +813,7 @@ abstract class Sitengine_Proto_Backend_Goodies_Controller extends Sitengine_Cont
                 else if(sizeof($rows) > 0) {
                     $this->getStatus()->set(
                     	Sitengine_Env::STATUS_OKBATCHASSIGN,
-                    	$this->getDictionary()->getFromStatus(Sitengine_Env::STATUS_OKBATCHASSIGN),
+                    	$this->getTranslate()->translate(Sitengine_Env::STATUS_OKBATCHASSIGN),
                     	false
                     );
                 }
@@ -852,7 +862,7 @@ abstract class Sitengine_Proto_Backend_Goodies_Controller extends Sitengine_Cont
                 if($deleted < sizeof($rows)) {
                     $this->getStatus()->set(
                     	Sitengine_Env::STATUS_ERRORBATCHUNLINK,
-                    	$this->getDictionary()->getFromStatus(Sitengine_Env::STATUS_ERRORBATCHUNLINK),
+                    	$this->getTranslate()->translate(Sitengine_Env::STATUS_ERRORBATCHUNLINK),
                     	true
                     );
                     return $this->_goToAction(self::ACTION_ASSIGN);
@@ -860,7 +870,7 @@ abstract class Sitengine_Proto_Backend_Goodies_Controller extends Sitengine_Cont
                 else if(sizeof($rows) > 0) {
                     $this->getStatus()->set(
                     	Sitengine_Env::STATUS_OKBATCHUNLINK,
-                    	$this->getDictionary()->getFromStatus(Sitengine_Env::STATUS_OKBATCHUNLINK),
+                    	$this->getTranslate()->translate(Sitengine_Env::STATUS_OKBATCHUNLINK),
                     	false
                     );
                 }

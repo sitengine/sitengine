@@ -90,7 +90,7 @@ abstract class Sitengine_Newsletter_Backend_Campaigns_FormView extends Sitengine
 			#'ORGANIZATION' => $this->_controller->getPermiso()->getOrganization()->getData(),
 			#'USER' => $this->_controller->getPermiso()->getAuth()->getData(),
 			#'Auth' => $this->_controller->getPermiso()->getAuth(),
-			'DICTIONARY' => $this->_controller->getDictionary()->getData()
+			#'DICTIONARY' => $this->_controller->getTranslate()->translateGroup('data')
 		);
     }
     
@@ -179,14 +179,14 @@ abstract class Sitengine_Newsletter_Backend_Campaigns_FormView extends Sitengine
                 $uri = $this->_controller->getRequest()->getBasePath().'/'.$route->assemble($args, true);
                 $childActions['attachmentsIndex'] = array(
                     'uri' => $uri,
-                    'label' => $this->_controller->getDictionary()->getFromFormView('childActionsSectionAttachmentsIndex'),
+                    'label' => $this->_controller->getTranslate()->translate('formViewChildActionsSectionAttachmentsIndex'),
                     'postfix' => ' ('.$this->_controller->getViewHelper()->countAttachments($stored['id']).')'
                 );
                 
                 $uri = $this->_controller->getViewHelper()->getFrontendCampaignViewUrl($this->_controller->getEntity()->getRow());
                 $childActions['frontendCampaignView'] = array(
                     'uri' => $uri,
-                    'label' => $this->_controller->getDictionary()->getFromFormView('childActionsFrontendCampaignViewUrl')
+                    'label' => $this->_controller->getTranslate()->translate('formViewChildActionsFrontendCampaignViewUrl')
                 );
                 
                 
@@ -232,7 +232,7 @@ abstract class Sitengine_Newsletter_Backend_Campaigns_FormView extends Sitengine
                 $route = $this->_controller->getFrontController()->getRouter()->getRoute(Sitengine_Newsletter_Backend_Front::ROUTE_CAMPAIGNS_NEW);
                 $submitUri = $this->_controller->getRequest()->getBasePath().'/'.$route->assemble($args, true);
                 
-                $title = $this->_controller->getDictionary()->getFromFormView('insertTitle');
+                $title = $this->_controller->getTranslate()->translate('formViewInsertTitle');
                 $jsUrlsUri = '';
             }
             #Sitengine_Debug::print_r($data);
@@ -244,25 +244,25 @@ abstract class Sitengine_Newsletter_Backend_Campaigns_FormView extends Sitengine
             ########################################################################
 			$n = 'title';
 			$e = new Sitengine_Form_Element($n, $data[$n]);
-			$e->setClass('viewformInput');
-			$e->setId('viewform'.$n);
+			$e->setClass('viewFormInput');
+			$e->setId('viewForm'.$n);
 			$elements[$n] = $e->getText(40);
 			
 			$n = 'publish';
 			$e = new Sitengine_Form_Element($n, '1');
-			$e->setClass('viewformCheckbox');
-			$e->setId('viewform'.$n);
+			$e->setClass('viewFormCheckbox');
+			$e->setId('viewForm'.$n);
 			$elements[$n] = $e->getCheckbox($data[$n]);
 			
 			$n = 'type';
 			$e = new Sitengine_Form_Element($n, $data[$n]);
-			$e->setClass('viewformSelect');
-			$e->setId('viewform'.$n);
-			$elements[$n] = $e->getSelect($this->_controller->getDictionary()->getFromFieldvals($n));
+			$e->setClass('viewFormSelect');
+			$e->setId('viewForm'.$n);
+			$elements[$n] = $e->getSelect($this->_controller->getTranslate()->translateGroup('fieldValsType'));
 			
 			$n = 'body';
 			$e = new Sitengine_Form_Element($n, $data[$n]);
-			$e->setClass('viewformTextarea');
+			$e->setClass('viewFormTextarea');
 			$e->setId('editor1');
 			$elements[$n] = $e->getTextarea(40, 10);
             

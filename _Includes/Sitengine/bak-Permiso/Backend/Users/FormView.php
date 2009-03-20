@@ -91,7 +91,7 @@ abstract class Sitengine_Permiso_Backend_Users_FormView extends Sitengine_View {
 				#'ORGANIZATION' => $this->_controller->getPermiso()->getOrganization()->getData(),
 				#'USER' => $this->_controller->getPermiso()->getAuth()->getData(),
 				#'Auth' => $this->_controller->getPermiso()->getAuth(),
-				'DICTIONARY' => $this->_controller->getDictionary()->getData()
+				#'DICTIONARY' => $this->_controller->getTranslate()->translateGroup('data')
 			);
        	}
         catch (Exception $exception) {
@@ -208,7 +208,7 @@ abstract class Sitengine_Permiso_Backend_Users_FormView extends Sitengine_View {
 					$uri = $this->_controller->getRequest()->getBasePath().'/'.$route->assemble($args, true);
 					$childActions['membershipList'] = array(
 							'uri' => $uri,
-							'label' => $this->_controller->getDictionary()->getFromLabels('childActionsSectionMembershipsIndex'),
+							'label' => $this->_controller->getTranslate()->translate('labelsChildActionsSectionMembershipsIndex'),
 							'postfix' => ' ('.$this->_controller->getViewHelper()->countMemberships($stored['id']).')'
 						);
 					
@@ -221,7 +221,7 @@ abstract class Sitengine_Permiso_Backend_Users_FormView extends Sitengine_View {
 					$uri = $this->_controller->getRequest()->getBasePath().'/'.$route->assemble($args, true);
 					$childActions['membershipInsert'] = array(
 						'uri' => $uri,
-						'label' => $this->_controller->getDictionary()->getFromLabels('childActionsSectionMembershipsInsert')
+						'label' => $this->_controller->getTranslate()->translate('labelsChildActionsSectionMembershipsInsert')
 					);
                 }
                 $this->setSection('CHILDACTIONS', $childActions);
@@ -283,7 +283,7 @@ abstract class Sitengine_Permiso_Backend_Users_FormView extends Sitengine_View {
                 $route = $this->_controller->getFrontController()->getRouter()->getRoute(Sitengine_Permiso_Backend_Front::ROUTE_USERS);
                 $submitUri = $this->_controller->getRequest()->getBasePath().'/'.$route->assemble($args, true);
                 
-                $title = $this->_controller->getDictionary()->getFromLabels('viewformInsertTitle');
+                $title = $this->_controller->getTranslate()->translate('labelsViewformInsertTitle');
             }
             #Sitengine_Debug::print_r($data);
             
@@ -300,27 +300,27 @@ abstract class Sitengine_Permiso_Backend_Users_FormView extends Sitengine_View {
 				) {
 					$n = 'enabled';
 					$e = new Sitengine_Form_Element($n, '1');
-					$e->setClass('viewformCheckbox');
-					$e->setId('viewform'.$n);
+					$e->setClass('viewFormCheckbox');
+					$e->setId('viewForm'.$n);
 					$elements[$n] = $e->getCheckbox($data[$n]);
 					
 					$n = 'locked';
 					$e = new Sitengine_Form_Element($n, '1');
-					$e->setClass('viewformCheckbox');
-					$e->setId('viewform'.$n);
+					$e->setClass('viewFormCheckbox');
+					$e->setId('viewForm'.$n);
 					$elements[$n] = $e->getCheckbox($data[$n]);
 					
 					$n = 'notifyNewUser';
 					$e = new Sitengine_Form_Element($n, '1');
-					$e->setClass('viewformCheckbox');
-					$e->setId('viewform'.$n);
+					$e->setClass('viewFormCheckbox');
+					$e->setId('viewForm'.$n);
 					$elements[$n] = $e->getCheckbox($data[$n]);
 				}
 				
 				$n = 'name';
 				$e = new Sitengine_Form_Element($n, $data[$n]);
-				$e->setClass('viewformInput');
-				$e->setId('viewform'.$n);
+				$e->setClass('viewFormInput');
+				$e->setId('viewForm'.$n);
 				# make name field readonly for system users or if account is locked
 				if(
 					$id==Sitengine_Permiso::UID_ROOT ||
@@ -341,66 +341,65 @@ abstract class Sitengine_Permiso_Backend_Users_FormView extends Sitengine_View {
 				) {
 					# users can choose language from available languages of organization
 					$n = 'language';
-					$nlanguages = $this->_controller->getDictionary()->getLanguages();
+					$nlanguages = $this->_controller->getTranslate()->translateGroup('languages');
 					foreach($this->_availableLanguages as $symbol) {
 						if(array_key_exists($symbol, $nlanguages)) {
 							$languages[$symbol] = $nlanguages[$symbol];
 						}
 					}
-					$languages = array_merge($this->_controller->getDictionary()->getFromFieldvals($n), $languages);
+					$languages = array_merge($this->_controller->getTranslate()->translateGroup('fieldValsLanguage'), $languages);
 					$e = new Sitengine_Form_Element($n, $data[$n]);
-					$e->setClass('viewformSelect');
-					$e->setId('viewform'.$n);
+					$e->setClass('viewFormSelect');
+					$e->setId('viewForm'.$n);
 					$elements[$n] = $e->getSelect($languages);
 					
 					$n = 'timezone';
-					#$timezones = array_merge($this->_controller->getDictionary()->getFromFieldvals($n), $this->_controller->getDictionary()->getTimezones());
 					$e = new Sitengine_Form_Element($n, $data[$n]);
-					$e->setClass('viewformSelect');
-					$e->setId('viewform'.$n);
+					$e->setClass('viewFormSelect');
+					$e->setId('viewForm'.$n);
 					$elements[$n] = $e->getSelect($this->_controller->getEnv()->getTimezones());
 				
 					$n = 'password';
 					$e = new Sitengine_Form_Element($n, $this->_controller->getRequest()->getPost('password'));
-					$e->setClass('viewformInput');
-					$e->setId('viewform'.$n);
+					$e->setClass('viewFormInput');
+					$e->setId('viewForm'.$n);
 					$elements[$n] = $e->getText(20, 'password');
 					
 					$n = 'passwordConfirm';
 					$e = new Sitengine_Form_Element($n, $this->_controller->getRequest()->getPost('passwordConfirm'));
-					$e->setClass('viewformInput');
-					$e->setId('viewform'.$n);
+					$e->setClass('viewFormInput');
+					$e->setId('viewForm'.$n);
 					$elements[$n] = $e->getText(20, 'password');
 					
 					$n = 'nickname';
 					$e = new Sitengine_Form_Element($n, $data[$n]);
-					$e->setClass('viewformInput');
-					$e->setId('viewform'.$n);
+					$e->setClass('viewFormInput');
+					$e->setId('viewForm'.$n);
 					$elements[$n] = $e->getText(20);
 					
 					$n = 'firstname';
 					$e = new Sitengine_Form_Element($n, $data[$n]);
-					$e->setClass('viewformInput');
-					$e->setId('viewform'.$n);
+					$e->setClass('viewFormInput');
+					$e->setId('viewForm'.$n);
 					$elements[$n] = $e->getText(40);
 					
 					$n = 'lastname';
 					$e = new Sitengine_Form_Element($n, $data[$n]);
-					$e->setClass('viewformInput');
-					$e->setId('viewform'.$n);
+					$e->setClass('viewFormInput');
+					$e->setId('viewForm'.$n);
 					$elements[$n] = $e->getText(40);
 					
 					$n = 'email';
 					$e = new Sitengine_Form_Element($n, $data[$n]);
-					$e->setClass('viewformInput');
-					$e->setId('viewform'.$n);
+					$e->setClass('viewFormInput');
+					$e->setId('viewForm'.$n);
 					$elements[$n] = $e->getText(40);
 				}
 				
 				$n = 'description';
 				$e = new Sitengine_Form_Element($n, $data[$n]);
-				$e->setClass('viewformTextarea');
-				$e->setId('viewform'.$n);
+				$e->setClass('viewFormTextarea');
+				$e->setId('viewForm'.$n);
 				$elements[$n] = $e->getTextarea(40, 10);
             }
             

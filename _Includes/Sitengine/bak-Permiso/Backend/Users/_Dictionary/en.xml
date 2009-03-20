@@ -1,133 +1,93 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
-
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <dictionary name="dictionary">
-    
-    <group name="LABELS">
-        <item name="entityTitle">Users</item>
-        <item name="meEntityTitle">My Account</item>
-        <item name="actionsSectionIndex">Show all users</item>
-        <item name="actionsSectionInsert">Create new user</item>
-        <item name="childActionsSectionMembershipsIndex">Show memberships</item>
-        <item name="childActionsSectionMembershipsInsert">Add membership</item>
-        <item name="listformTitle">Overview</item>
-        <item name="listformMembershipsIndex">Show</item>
-        <item name="listformMembershipsInsert">New</item>
-        <item name="listformColumnSortHref">Click to sort the list by this column</item>
-        <item name="listformBatchDeleteSubmit">Delete selected</item>
-        <item name="listformBatchUpdateSubmit">Update list</item>
-        <item name="listformFilterIsActive">Filtering is active for the current view</item>
-        <item name="listformNoRecords">No users in database</item>
-        <item name="listformNoMatchingRecords">No users match your criteria</item>
-        <item name="listformConfirmDelete">Do you really want to delete the selected users?</item>
-        <item name="listformConfirmUpdate">Do you really want to update all users in the list?</item>
-        <item name="viewformInsertTitle">New user</item>
-        <item name="viewformUpdateTitle">Update user</item>
-        <item name="viewformInsertSubmit">Save</item>
-        <item name="viewformUpdateSubmit">Save changes</item>
-        <item name="viewformInputRequired">Fields marked with red are required</item>
-        <item name="filterSectionTitle">Filter</item>
-        <item name="filterSectionSubmit">Find</item>
-        <item name="filterSectionReset">Reset</item>
-        <item name="settingsSectionTitle">Settings</item>
-        <item name="settingsSectionSubmit">Set</item>
-        <item name="settingsSectionReset">Reset</item>
-        <item name="settingsSectionItemsPerPage">Items per page</item>
-        <item name="pagerPage">Page</item>
-        <item name="pagerPages">Pages</item>
-        <item name="pagerOf">of</item>
-        <item name="pagerEntity">Records</item>
-        <item name="pagerPreviousPage">Previous</item>
-        <item name="pagerNextPage">Next</item>
-    </group>
-    
-    <group name="HELPS">
-        <item name="index"> </item>
-        <item name="update"> </item>
-        <item name="insert"> </item>
-        <item name="me"> </item>
-    </group>
-
-    <group name="COLUMNS">
-        <item name="locked">Locked</item>
-        <item name="enabled">Enabled</item>
-        <item name="lastLogin">Last Login</item>
-        <item name="name">Name</item>
-        <item name="nickname">Nickname</item>
-        <item name="firstname">Firstname</item>
-        <item name="lastname">Lastname</item>
-        <item name="language">Language</item>
-        <item name="membershipAction">Memberships</item>
-        <item name="onlineNow">Online now</item>
-    </group>
-    
-    <group name="FIELDS">
-        <item name="locked">Locked</item>
-        <item name="enabled">Enabled</item>
-        <item name="language">Language</item>
-        <item name="timezone">Timezone</item>
-        <item name="password">Password</item>
-        <item name="name">E-Mail</item>
-        <item name="firstname">Firstname</item>
-        <item name="lastname">Lastname</item>
-        <item name="nickname">Nickname</item>
-        <item name="passwordConfirm">Confirm password</item>
-        <item name="email">Email</item>
-        <item name="description">Description</item>
-        <item name="notifyNewUser">Notify user</item>
-        <item name="notifyNewUserHint">Password will be automatically generated</item>
-    </group>
-    
-    <group name="FIELDVALS">
-        <item name="onlineNow">Online</item>
-        
-        <group name="enabled">
-            <item name="0">No</item>
-            <item name="1">Yes</item>
-        </group>
-        
-        <group name="locked">
-            <item name="0">No</item>
-            <item name="1">Yes</item>
-        </group>
-        
-        <group name="language">
-            <item name="noneSelected">Select language</item>
-        </group>
-        
-        <group name="timezone">
-            <item name="noneSelected">Select your timezone</item>
-        </group>
-    </group>
-    
-    <group name="HINTS">
-        <item name="invalidRequest">Invalid request</item>
-        <item name="accessDenied">Access denied</item>
-        <item name="languageRequired">Language: input required</item>
-        <item name="timezoneRequired">Timezone: input required</item>
-        <item name="firstnameRequired">First Name: input required</item>
-        <item name="lastnameRequired">Last Name: input required</item>
-        <item name="nameExists">Username/E-Mail already taken</item>
-        <item name="nameRequired">E-Mail: input required</item>
-        <item name="nameValidEmailRequired">Username: Valid E-Mail address required</item>
-        <item name="nameEmailAddressCharsOnly">Only the characters a-z, A-Z, 0-9 . - _ and @ are allowed in names</item>
-        <item name="nicknameExists">Nickname already taken</item>
-        <item name="nicknameRequired">Nickname: input required</item>
-        <!--
-        <item name="nicknameWordCharsOnly">Only the characters a-z, A-Z and 0-9 are allowed in nicknames</item>
-        -->
-        <item name="passwordRequired">Password: input required</item>
-        <item name="passwordWordCharsOnly">Only the characters a-z, A-Z and 0-9 are allowed in passwords</item>
-        <item name="passwordsDontMatch">Passwords don&apos;t match</item>
-    </group>
-    
-    <group name="WELCOMEMAIL">
-        <item name="subject">Welcome to %site%</item>
-        <item name="body">We have just created a new user account for you on %site%. Please use the following information to log into your account:
+	<item name="labelsEntityTitle">Users</item>
+	<item name="labelsMeEntityTitle">My Account</item>
+	<item name="labelsActionsSectionIndex">Show all users</item>
+	<item name="labelsActionsSectionInsert">Create new user</item>
+	<item name="labelsChildActionsSectionMembershipsIndex">Show memberships</item>
+	<item name="labelsChildActionsSectionMembershipsInsert">Add membership</item>
+	<item name="labelsListformTitle">Overview</item>
+	<item name="labelsListformMembershipsIndex">Show</item>
+	<item name="labelsListformMembershipsInsert">New</item>
+	<item name="labelsListformColumnSortHref">Click to sort the list by this column</item>
+	<item name="labelsListformBatchDeleteSubmit">Delete selected</item>
+	<item name="labelsListformBatchUpdateSubmit">Update list</item>
+	<item name="labelsListformFilterIsActive">Filtering is active for the current view</item>
+	<item name="labelsListformNoRecords">No users in database</item>
+	<item name="labelsListformNoMatchingRecords">No users match your criteria</item>
+	<item name="labelsListformConfirmDelete">Do you really want to delete the selected users?</item>
+	<item name="labelsListformConfirmUpdate">Do you really want to update all users in the list?</item>
+	<item name="labelsViewformInsertTitle">New user</item>
+	<item name="labelsViewformUpdateTitle">Update user</item>
+	<item name="labelsViewformInsertSubmit">Save</item>
+	<item name="labelsViewformUpdateSubmit">Save changes</item>
+	<item name="labelsViewformInputRequired">Fields marked with red are required</item>
+	<item name="labelsFilterSectionTitle">Filter</item>
+	<item name="labelsFilterSectionSubmit">Find</item>
+	<item name="labelsFilterSectionReset">Reset</item>
+	<item name="labelsSettingsSectionTitle">Settings</item>
+	<item name="labelsSettingsSectionSubmit">Set</item>
+	<item name="labelsSettingsSectionReset">Reset</item>
+	<item name="labelsSettingsSectionItemsPerPage">Items per page</item>
+	<item name="labelsPagerPage">Page</item>
+	<item name="labelsPagerPages">Pages</item>
+	<item name="labelsPagerOf">of</item>
+	<item name="labelsPagerEntity">Records</item>
+	<item name="labelsPagerPreviousPage">Previous</item>
+	<item name="labelsPagerNextPage">Next</item>
+	<item name="helpsIndex"/>
+	<item name="helpsUpdate"/>
+	<item name="helpsInsert"/>
+	<item name="helpsMe"/>
+	<item name="columnsLocked">Locked</item>
+	<item name="columnsEnabled">Enabled</item>
+	<item name="columnsLastLogin">Last Login</item>
+	<item name="columnsName">Name</item>
+	<item name="columnsNickname">Nickname</item>
+	<item name="columnsFirstname">Firstname</item>
+	<item name="columnsLastname">Lastname</item>
+	<item name="columnsLanguage">Language</item>
+	<item name="columnsMembershipAction">Memberships</item>
+	<item name="columnsOnlineNow">Online now</item>
+	<item name="fieldsLocked">Locked</item>
+	<item name="fieldsEnabled">Enabled</item>
+	<item name="fieldsLanguage">Language</item>
+	<item name="fieldsTimezone">Timezone</item>
+	<item name="fieldsPassword">Password</item>
+	<item name="fieldsName">E-Mail</item>
+	<item name="fieldsFirstname">Firstname</item>
+	<item name="fieldsLastname">Lastname</item>
+	<item name="fieldsNickname">Nickname</item>
+	<item name="fieldsPasswordConfirm">Confirm password</item>
+	<item name="fieldsEmail">Email</item>
+	<item name="fieldsDescription">Description</item>
+	<item name="fieldsNotifyNewUser">Notify user</item>
+	<item name="fieldsNotifyNewUserHint">Password will be automatically generated</item>
+	<item name="fieldValsOnlineNow">Online</item>
+	<!-- array --><item name="fieldValsEnabled0">No</item>
+	<!-- array --><item name="fieldValsEnabled1">Yes</item>
+	<!-- array --><item name="fieldValsLocked0">No</item>
+	<!-- array --><item name="fieldValsLocked1">Yes</item>
+	<!-- array --><item name="fieldValsLanguageNoneSelected">Select language</item>
+	<!-- array --><item name="fieldValsTimezoneNoneSelected">Select your timezone</item>
+	<item name="hintsInvalidRequest">Invalid request</item>
+	<item name="hintsAccessDenied">Access denied</item>
+	<item name="hintsLanguageRequired">Language: input required</item>
+	<item name="hintsTimezoneRequired">Timezone: input required</item>
+	<item name="hintsFirstnameRequired">First Name: input required</item>
+	<item name="hintsLastnameRequired">Last Name: input required</item>
+	<item name="hintsNameExists">Username/E-Mail already taken</item>
+	<item name="hintsNameRequired">E-Mail: input required</item>
+	<item name="hintsNameValidEmailRequired">Username: Valid E-Mail address required</item>
+	<item name="hintsNameEmailAddressCharsOnly">Only the characters a-z, A-Z, 0-9 . - _ and @ are allowed in names</item>
+	<item name="hintsNicknameExists">Nickname already taken</item>
+	<item name="hintsNicknameRequired">Nickname: input required</item>
+	<item name="hintsPasswordRequired">Password: input required</item>
+	<item name="hintsPasswordWordCharsOnly">Only the characters a-z, A-Z and 0-9 are allowed in passwords</item>
+	<item name="hintsPasswordsDontMatch">Passwords don't match</item>
+	<item name="welcomemailSubject">Welcome to %site%</item>
+	<item name="welcomemailBody">We have just created a new user account for you on %site%. Please use the following information to log into your account:
         
         User: %user%
-        Password: %password%
-        </item>
-    </group>
-    
+        Password: %password%</item>
 </dictionary>
-

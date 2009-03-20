@@ -1,11 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
-
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <dictionary name="dictionary">
-    
-    <group name="LABELS">
-        <item name="backendHome">Home</item>
-        <item name="blogFrontendBlogs">Blog</item>
-    </group>
-
+	<item name="labelsBackendHome">Home</item>
+	<item name="labelsBlogFrontendBlogs">Blog</item>
 </dictionary>
-

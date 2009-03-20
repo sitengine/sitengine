@@ -84,7 +84,7 @@ abstract class Sitengine_Newsletter_Frontend_Subscriptions_UnsubscribeView exten
 				#'ORGANIZATION' => $this->_controller->getPermiso()->getOrganization()->getData(),
 				#'USER' => $this->_controller->getPermiso()->getAuth()->getData(),
 				#'Auth' => $this->_controller->getPermiso()->getAuth(),
-				'DICTIONARY' => $this->_controller->getDictionary()->getData()
+				#'DICTIONARY' => $this->_controller->getTranslate()->translateGroup('data')
 			);
 		}
         catch (Exception $exception) {

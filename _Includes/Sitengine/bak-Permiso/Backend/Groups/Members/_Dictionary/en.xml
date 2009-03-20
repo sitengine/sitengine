@@ -1,88 +1,56 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
-
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <dictionary name="dictionary">
-    
-    <group name="LABELS">
-        <item name="entityTitle">Members</item>
-        <item name="actionsSectionIndex">Show members</item>
-        <item name="actionsSectionInsert">Add member to this group</item>
-        <item name="listformTitle">Members</item>
-        <item name="listformColumnSortHref">Click to sort the list by this column</item>
-        <item name="listformBatchDeleteSubmit">Delete selected</item>
-        <item name="listformBatchUpdateSubmit">Update list</item>
-        <item name="listformFilterIsActive">Filtering is active for the current view</item>
-        <item name="listformNoRecords">No members in this group</item>
-        <item name="listformNoMatchingRecords">No members match your criteria</item>
-        <item name="listformConfirmDelete">Do you really want to delete the selected members?</item>
-        <item name="listformConfirmUpdate">Do you really want to update all members in the list?</item>
-        <item name="viewformInsertTitle">New member</item>
-        <item name="viewformUpdateTitle">Update member</item>
-        <item name="viewformInsertSubmit">Save</item>
-        <item name="viewformUpdateSubmit">Save changes</item>
-        <item name="viewformInputRequired">Fields marked with red are required</item>
-        <item name="filterSectionTitle">Filter</item>
-        <item name="filterSectionSubmit">Find</item>
-        <item name="filterSectionReset">Reset</item>
-        <item name="settingsSectionTitle">Settings</item>
-        <item name="settingsSectionSubmit">Set</item>
-        <item name="settingsSectionReset">Reset</item>
-        <item name="settingsSectionItemsPerPage">Items per page</item>
-        <item name="pagerPage">Page</item>
-        <item name="pagerPages">Pages</item>
-        <item name="pagerOf">of</item>
-        <item name="pagerEntity">Records</item>
-        <item name="pagerPreviousPage">Previous</item>
-        <item name="pagerNextPage">Next</item>
-    </group>
-    
-    <group name="BREADCRUMBS">
-        <item name="title">Permiso</item>
-        <item name="groupEntity">Groups</item>
-    </group>
-    
-    <group name="HELPS">
-        <item name="index"> </item>
-        <item name="update"> </item>
-        <item name="insert"> </item>
-    </group>
-
-    <group name="COLUMNS">
-        <item name="locked">Locked</item>
-        <item name="enabled">Enabled</item>
-        <item name="lastLogin">Last Login</item>
-        <item name="name">Name</item>
-        <item name="nickname">Nickname</item>
-        <item name="firstname">Firstname</item>
-        <item name="lastname">Lastname</item>
-        <item name="userId">User</item>
-    </group>
-    
-    <group name="FIELDS">
-        <item name="userId">User</item>
-    </group>
-    
-    <group name="FIELDVALS">
-        <group name="enabled">
-            <item name="0">No</item>
-            <item name="1">Yes</item>
-        </group>
-        
-        <group name="locked">
-            <item name="0">No</item>
-            <item name="1">Yes</item>
-        </group>
-        
-        <group name="select">
-            <item name="noneSelected">Select</item>
-        </group>
-    </group>
-    
-    <group name="HINTS">
-        <item name="invalidRequest">Invalid request</item>
-        <item name="accessDenied">Access denied</item>
-        <item name="userIdRequired">User: Please select a user to be added to this group</item>
-        <item name="membershipExists">This user is already member in the selected group</item>
-    </group>
-    
+	<item name="labelsEntityTitle">Members</item>
+	<item name="labelsActionsSectionIndex">Show members</item>
+	<item name="labelsActionsSectionInsert">Add member to this group</item>
+	<item name="labelsListformTitle">Members</item>
+	<item name="labelsListformColumnSortHref">Click to sort the list by this column</item>
+	<item name="labelsListformBatchDeleteSubmit">Delete selected</item>
+	<item name="labelsListformBatchUpdateSubmit">Update list</item>
+	<item name="labelsListformFilterIsActive">Filtering is active for the current view</item>
+	<item name="labelsListformNoRecords">No members in this group</item>
+	<item name="labelsListformNoMatchingRecords">No members match your criteria</item>
+	<item name="labelsListformConfirmDelete">Do you really want to delete the selected members?</item>
+	<item name="labelsListformConfirmUpdate">Do you really want to update all members in the list?</item>
+	<item name="labelsViewformInsertTitle">New member</item>
+	<item name="labelsViewformUpdateTitle">Update member</item>
+	<item name="labelsViewformInsertSubmit">Save</item>
+	<item name="labelsViewformUpdateSubmit">Save changes</item>
+	<item name="labelsViewformInputRequired">Fields marked with red are required</item>
+	<item name="labelsFilterSectionTitle">Filter</item>
+	<item name="labelsFilterSectionSubmit">Find</item>
+	<item name="labelsFilterSectionReset">Reset</item>
+	<item name="labelsSettingsSectionTitle">Settings</item>
+	<item name="labelsSettingsSectionSubmit">Set</item>
+	<item name="labelsSettingsSectionReset">Reset</item>
+	<item name="labelsSettingsSectionItemsPerPage">Items per page</item>
+	<item name="labelsPagerPage">Page</item>
+	<item name="labelsPagerPages">Pages</item>
+	<item name="labelsPagerOf">of</item>
+	<item name="labelsPagerEntity">Records</item>
+	<item name="labelsPagerPreviousPage">Previous</item>
+	<item name="labelsPagerNextPage">Next</item>
+	<item name="breadcrumbsTitle">Permiso</item>
+	<item name="breadcrumbsGroupEntity">Groups</item>
+	<item name="helpsIndex"/>
+	<item name="helpsUpdate"/>
+	<item name="helpsInsert"/>
+	<item name="columnsLocked">Locked</item>
+	<item name="columnsEnabled">Enabled</item>
+	<item name="columnsLastLogin">Last Login</item>
+	<item name="columnsName">Name</item>
+	<item name="columnsNickname">Nickname</item>
+	<item name="columnsFirstname">Firstname</item>
+	<item name="columnsLastname">Lastname</item>
+	<item name="columnsUserId">User</item>
+	<item name="fieldsUserId">User</item>
+	<!-- array --><item name="fieldValsEnabled0">No</item>
+	<!-- array --><item name="fieldValsEnabled1">Yes</item>
+	<!-- array --><item name="fieldValsLocked0">No</item>
+	<!-- array --><item name="fieldValsLocked1">Yes</item>
+	<!-- array --><item name="fieldValsSelectNoneSelected">Select</item>
+	<item name="hintsInvalidRequest">Invalid request</item>
+	<item name="hintsAccessDenied">Access denied</item>
+	<item name="hintsUserIdRequired">User: Please select a user to be added to this group</item>
+	<item name="hintsMembershipExists">This user is already member in the selected group</item>
 </dictionary>
-

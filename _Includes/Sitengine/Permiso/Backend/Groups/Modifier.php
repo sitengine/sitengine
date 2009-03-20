@@ -69,7 +69,7 @@ abstract class Sitengine_Permiso_Backend_Groups_Modifier
             {
             	$error = $this->_controller->getFrontController()->getPermisoPackage()->getGroupsTable()->getError();
             	if($error === null) { return null; }
-            	$message = $this->_controller->getDictionary()->getFromHints($error);
+            	$message = $this->_controller->getTranslate()->translate('hints'.ucfirst($error));
     			$this->_controller->getStatus()->addHint('record', $message);
     			return null;
             }
@@ -94,13 +94,13 @@ abstract class Sitengine_Permiso_Backend_Groups_Modifier
             $data = array();
             
             if(!$this->_ok2modify($id)) {
-                $message = $this->_controller->getDictionary()->getFromHints(Sitengine_Env::HINT_INVALID_ACTION);
+                $message = $this->_controller->getTranslate()->translate(Sitengine_Env::HINT_INVALID_ACTION);
                 $this->_controller->getStatus()->addHint('modifier', $message);
                 return null;
             }
             
             if($this->_controller->getRequest()->getPost('mdate') != $stored['mdate']) {
-                $message = $this->_controller->getDictionary()->getFromHints(Sitengine_Env::HINT_DATA_EXPIRED);
+                $message = $this->_controller->getTranslate()->translate(Sitengine_Env::HINT_DATA_EXPIRED);
                 $this->_controller->getStatus()->addHint('modifier', $message);
                 return null;
             }
@@ -125,7 +125,7 @@ abstract class Sitengine_Permiso_Backend_Groups_Modifier
             {
             	$error = $this->_controller->getFrontController()->getPermisoPackage()->getGroupsTable()->getError();
             	if($error === null) { return null; }
-            	$message = $this->_controller->getDictionary()->getFromHints($error);
+            	$message = $this->_controller->getTranslate()->translate('hints'.ucfirst($error));
     			$this->_controller->getStatus()->addHint('record', $message);
     			return null;
             }
@@ -160,12 +160,12 @@ abstract class Sitengine_Permiso_Backend_Groups_Modifier
 		$val = $this->_controller->getRequest()->getPost($name);
 		# name can't be empty
 		if(Sitengine_Validator::nada($val)) {
-			$message = $this->_controller->getDictionary()->getFromHints('nameRequired');
+			$message = $this->_controller->getTranslate()->translate('hintsNameRequired');
 			$this->_controller->getStatus()->addHint($name, $message);
 		}
 		# names must be made up of a-zA-Z0-9
 		else if(!Sitengine_Validator::word($val)) {
-			$message = $this->_controller->getDictionary()->getFromHints('nameInvalid');
+			$message = $this->_controller->getTranslate()->translate('hintsNameInvalid');
 			$this->_controller->getStatus()->addHint($name, $message);
 		}
         return (!$this->_controller->getStatus()->hasHints());

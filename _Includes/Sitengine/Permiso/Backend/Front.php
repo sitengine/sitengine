@@ -201,7 +201,7 @@ abstract class Sitengine_Permiso_Backend_Front extends Sitengine_Controller_Fron
     
     
     public function getGlobalNavSection(
-        Sitengine_Dictionary $dictionary,
+        Sitengine_Translate $translate,
         array $queries,
         $current,
         $selectorPrefix=''
@@ -211,16 +211,16 @@ abstract class Sitengine_Permiso_Backend_Front extends Sitengine_Controller_Fron
         $items = array();
         
         $location = 'backendHome';
-        $items[$queries[$location]] = '> '.$dictionary->getFromLabels($location);
+        $items[$queries[$location]] = '> '.$translate->translate('labels'.ucfirst($location));
         
         $items['separator10'] = '----------------';
         
         $location = 'permisoBackendUsers';
-        $items[$queries[$location]] = '> '.$dictionary->getFromLabels($location);
+        $items[$queries[$location]] = '> '.$translate->translate('labels'.ucfirst($location));
         $selected = ($current=='permisoBackendUsers') ? $queries[$location] : $selected;
         
         $location = 'permisoBackendGroups';
-        $items[$queries[$location]] = '> '.$dictionary->getFromLabels($location);
+        $items[$queries[$location]] = '> '.$translate->translate('labels'.ucfirst($location));
         $selected = ($current=='permisoBackendGroups') ? $queries[$location] : $selected;
         
         $n = 'globalNav';

@@ -1,84 +1,45 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
-
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <dictionary name="dictionary">
-	
-    <group name="LABELS">
-        <item name="pageTitle">Permiso - Memberships</item>
-        <item name="entityTitle">Permiso - Memberships</item>
-        <item name="actionsSectionIndex">Show all Memberships</item>
-        <item name="actionsSectionInsert">Add Membership</item>
-        <item name="columnSortHref">Click to sort the list by this column</item>
-    </group>
-    
-    
-    <group name="HELPS">
-        <item name="_index"> </item>
-        <item name="_update"> </item>
-        <item name="_insert"> </item>
-    </group>
-    
-    
-    <group name="INDEXVIEW">
-        <item name="title">Overview</item>
-        <item name="batchDeleteSubmit">Delete selected</item>
-        <item name="batchUpdateSubmit">Update list</item>
-        <item name="filterIsActive">Filtering is active for the current view</item>
-        <item name="noRecords">No Memberships in database</item>
-        <item name="noMatchingRecords">No Memberships match your criteria</item>
-        <item name="confirmDelete">Do you really want to delete the selected Memberships?</item>
-        <item name="confirmUpdate">Do you really want to update all Memberships in the list?</item>
-        <item name="filterSectionTitle">Filter</item>
-        <item name="filterSectionSubmit">Find</item>
-        <item name="filterSectionReset">Reset</item>
-        <item name="settingsSectionTitle">Settings</item>
-        <item name="settingsSectionSubmit">Set</item>
-        <item name="settingsSectionReset">Reset</item>
-        <item name="settingsSectionItemsPerPage">Items per page</item>
-    </group>
-    
-    
-    <group name="INDEXVIEWCOLUMNS">
-        <item name="name">Group</item>
-        <item name="locked">Locked</item>
-    </group>
-    
-    
-    <group name="FORMVIEW">
-        <item name="insertTitle">New Membership</item>
-        <item name="updateTitle">Update Membership</item>
-        <item name="insertSubmit">Save</item>
-        <item name="updateSubmit">Save changes</item>
-    </group>
-    
-    
-    <group name="FORMVIEWFIELDS">
-        <item name="groupId">Group</item>
-        <item name="locked">Locked</item>
-    </group>
-    
-    
-    <group name="FIELDVALS">
-        <group name="groupId">
-            <item name="noneSelected">Select group</item>
-        </group>
-    </group>
-    
-    
-    <group name="PAGER">
-        <item name="page">Page</item>
-        <item name="pages">Pages</item>
-        <item name="of">of</item>
-        <item name="entity">Records</item>
-        <item name="previousPage">Previous</item>
-        <item name="nextPage">Next</item>
-    </group>
-    
-    
-    <group name="HINTS">
-        <item name="invalidRequest">Invalid request</item>
-        <item name="accessDenied">Access denied</item>
-        <item name="groupIdRequired">Please select a group</item>
-        <item name="membershipExists">This user is already member in the selected group</item>
-    </group>
-    
+	<item name="labelsPageTitle">Permiso - Memberships</item>
+	<item name="labelsEntityTitle">Permiso - Memberships</item>
+	<item name="labelsActionsSectionIndex">Show all Memberships</item>
+	<item name="labelsActionsSectionInsert">Add Membership</item>
+	<item name="labelsColumnSortHref">Click to sort the list by this column</item>
+	<item name="helps_index"/>
+	<item name="helps_update"/>
+	<item name="helps_insert"/>
+	<item name="indexViewTitle">Overview</item>
+	<item name="indexViewBatchDeleteSubmit">Delete selected</item>
+	<item name="indexViewBatchUpdateSubmit">Update list</item>
+	<item name="indexViewFilterIsActive">Filtering is active for the current view</item>
+	<item name="indexViewNoRecords">No Memberships in database</item>
+	<item name="indexViewNoMatchingRecords">No Memberships match your criteria</item>
+	<item name="indexViewConfirmDelete">Do you really want to delete the selected Memberships?</item>
+	<item name="indexViewConfirmUpdate">Do you really want to update all Memberships in the list?</item>
+	<item name="indexViewFilterSectionTitle">Filter</item>
+	<item name="indexViewFilterSectionSubmit">Find</item>
+	<item name="indexViewFilterSectionReset">Reset</item>
+	<item name="indexViewSettingsSectionTitle">Settings</item>
+	<item name="indexViewSettingsSectionSubmit">Set</item>
+	<item name="indexViewSettingsSectionReset">Reset</item>
+	<item name="indexViewSettingsSectionItemsPerPage">Items per page</item>
+	<item name="indexViewColumnsName">Group</item>
+	<item name="indexViewColumnsLocked">Locked</item>
+	<item name="formViewInsertTitle">New Membership</item>
+	<item name="formViewUpdateTitle">Update Membership</item>
+	<item name="formViewInsertSubmit">Save</item>
+	<item name="formViewUpdateSubmit">Save changes</item>
+	<item name="formViewFieldsGroupId">Group</item>
+	<item name="formViewFieldsLocked">Locked</item>
+	<!-- array --><item name="fieldValsGroupIdNoneSelected">Select group</item>
+	<item name="pagerPage">Page</item>
+	<item name="pagerPages">Pages</item>
+	<item name="pagerOf">of</item>
+	<item name="pagerEntity">Records</item>
+	<item name="pagerPreviousPage">Previous</item>
+	<item name="pagerNextPage">Next</item>
+	<item name="hintsInvalidRequest">Invalid request</item>
+	<item name="hintsAccessDenied">Access denied</item>
+	<item name="hintsGroupIdRequired">Please select a group</item>
+	<item name="hintsMembershipExists">This user is already member in the selected group</item>
 </dictionary>

@@ -87,7 +87,7 @@ abstract class Sitengine_Newsletter_Backend_Campaigns_Attachments_FormView exten
 			#'ORGANIZATION' => $this->_controller->getPermiso()->getOrganization()->getData(),
 			#'USER' => $this->_controller->getPermiso()->getAuth()->getData(),
 			#'Auth' => $this->_controller->getPermiso()->getAuth(),
-			'DICTIONARY' => $this->_controller->getDictionary()->getData()
+			#'DICTIONARY' => $this->_controller->getTranslate()->translateGroup('data')
 		);
     }
     
@@ -208,7 +208,7 @@ abstract class Sitengine_Newsletter_Backend_Campaigns_Attachments_FormView exten
                 $route = $this->_controller->getFrontController()->getRouter()->getRoute(Sitengine_Newsletter_Backend_Front::ROUTE_CAMPAIGNS_ATTACHMENTS_NEW);
                 $submitUri = $this->_controller->getRequest()->getBasePath().'/'.$route->assemble($args, true);
                 
-                $title = $this->_controller->getDictionary()->getFromFormView('insertTitle');
+                $title = $this->_controller->getTranslate()->translate('formViewInsertTitle');
             }
             #Sitengine_Debug::print_r($data);
             
@@ -219,14 +219,14 @@ abstract class Sitengine_Newsletter_Backend_Campaigns_Attachments_FormView exten
             
 			$n = 'title';
 			$e = new Sitengine_Form_Element($n, $data[$n]);
-			$e->setClass('viewformInput');
-			$e->setId('viewform'.$n);
+			$e->setClass('viewFormInput');
+			$e->setId('viewForm'.$n);
 			$elements[$n] = $e->getText(40);
 			
 			$n = 'file1Original';
 			$e = new Sitengine_Form_Element($n);
-			$e->setClass('viewformFile');
-			$e->setId('viewform'.$n);
+			$e->setClass('viewFormFile');
+			$e->setId('viewForm'.$n);
 			$elements[$n] = $e->getFile(40);
 			
 			

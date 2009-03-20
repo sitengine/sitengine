@@ -75,7 +75,7 @@ abstract class Sitengine_Permiso_Backend_Users_Memberships_ViewHelper extends Si
 				'GLOBALNAV',
 				$this->_controller->getFrontController()->getGlobalNavSection(
 					$this->_controller->getPermiso(),
-					$this->_controller->getDictionary(),
+					$this->_controller->getTranslate(),
 					$this->_queries,
 					'permisoBackendUsers'
 				)
@@ -98,13 +98,13 @@ abstract class Sitengine_Permiso_Backend_Users_Memberships_ViewHelper extends Si
 			
 			require_once 'Sitengine/Env/Preferences/Sections.php';
 			
-			if(sizeof($this->_controller->getDictionary()->getAvailableLanguages()) > 1) {
+			if(sizeof($this->_controller->getTranslate()->getAvailableLanguages()) > 1) {
 				$this->setSection(
 					'LANGUAGE',
 					Sitengine_Env_Preferences_Sections::getLanguageForm(
 						$this->_controller->getPreferences()->getLanguage(),
-						$this->_controller->getDictionary()->getAvailableLanguages(),
-						$this->_controller->getDictionary()->getLocLangs(),
+						$this->_controller->getTranslate()->getAvailableLanguages(),
+						$this->_controller->getTranslate()->translateGroup('loclangs'),
 						'language'
 					)
 				);
@@ -124,7 +124,7 @@ abstract class Sitengine_Permiso_Backend_Users_Memberships_ViewHelper extends Si
 			$this->setSection(
 				'BREADCRUMBS',
 				array(
-					#'title' => $this->_controller->getDictionary()->getFromBreadcrumbs('title'),
+					#'title' => $this->_controller->getTranslate()->translate('breadcrumbsTitle'),
 					'DATA' => $breadcrumbs
 				)
 			);
@@ -134,7 +134,7 @@ abstract class Sitengine_Permiso_Backend_Users_Memberships_ViewHelper extends Si
 				array(
 					'title' => $breadcrumbs[0]['title'],
 					'uri' => $breadcrumbs[0]['uriUpdate'],
-					'help' => $this->_controller->getDictionary()->getFromHelps($this->_controller->getRequest()->getActionName())
+					'help' => ''
 				)
 			);
 			
@@ -159,11 +159,11 @@ abstract class Sitengine_Permiso_Backend_Users_Memberships_ViewHelper extends Si
 				array(
 					array(
 						'uri' => $uriIndex,
-						'label' => $this->_controller->getDictionary()->getFromLabels('actionsSectionIndex')
+						'label' => $this->_controller->getTranslate()->translate('labelsActionsSectionIndex')
 					),
 					array(
 						'uri' => $uriInsert,
-						'label' => $this->_controller->getDictionary()->getFromLabels('actionsSectionInsert')
+						'label' => $this->_controller->getTranslate()->translate('labelsActionsSectionInsert')
 					)
 				)
 			);
@@ -259,7 +259,7 @@ abstract class Sitengine_Permiso_Backend_Users_Memberships_ViewHelper extends Si
         if($firstname || $lastname) { $title .= ')'; }
         
         $level = array(
-            'name' => $this->_controller->getDictionary()->getFromBreadcrumbs('userEntity'),
+            'name' => $this->_controller->getTranslate()->translate('breadcrumbsUserEntity'),
             'title' => $title,
             'uriUpdate' => $uriUpdate,
             'uriIndex' => $uriIndex

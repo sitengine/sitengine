@@ -8,7 +8,7 @@
 <meta http-equiv="Pragma" content="no-cache" />
 <meta name="robots" content="noindex, nofollow" />
 
-<title>Sitengine - <?=$this->html($this->DICTIONARY->LABELS->pageTitle);?></title>
+<title>Sitengine - <?=$this->html($this->translate('labelsPageTitle'));?></title>
 
 <link rel="stylesheet" type="text/css" href="<?=$this->_controller->getEnv()->getMediaRequestDir();?>/Frontend/Styles/Global.css" />
 <link rel="stylesheet" type="text/css" href="<?=$this->_controller->getEnv()->getMediaRequestDir();?>/Frontend/Styles/Lists.css" />
@@ -37,8 +37,8 @@
 <?=$this->SECTIONS->POSTS->FILTER->hiddens;?>
 <?foreach($this->SECTIONS->POSTS->FILTER->ELEMENTS as $v):?><?=$v;?><?endforeach;?>
 
-<input type="button" value="<?=$this->html($this->DICTIONARY->LABELS->filterSectionSubmit);?>" onclick="document.filterform.submit();" />
-<input type="button" value="<?=$this->html($this->DICTIONARY->LABELS->filterSectionReset);?>" onclick="window.location = '<?=$this->SECTIONS->POSTS->FILTER->uriReset;?>';" />
+<input type="button" value="<?=$this->html($this->translate('labelsFilterSectionSubmit'));?>" onclick="document.filterform.submit();" />
+<input type="button" value="<?=$this->html($this->translate('labelsFilterSectionReset'));?>" onclick="window.location = '<?=$this->SECTIONS->POSTS->FILTER->uriReset;?>';" />
 
 </form>
 
@@ -55,10 +55,10 @@
 
 <div class="listformNoRecords">
 <?if($this->SECTIONS->POSTS->FILTER->isActive):?>
-    <span><?=$this->html($this->DICTIONARY->LABELS->listformNoMatchingRecords);?></span><br />
-    <?=$this->html($this->DICTIONARY->LABELS->listformFilterIsActive);?>
+    <span><?=$this->html($this->translate('labelsListformNoMatchingRecords'));?></span><br />
+    <?=$this->html($this->translate('labelsListformFilterIsActive'));?>
 <?else:?>
-    <span><?=$this->html($this->DICTIONARY->LABELS->listformNoRecords);?></span>
+    <span><?=$this->html($this->translate('labelsListformNoRecords'));?></span>
 <?endif;?>
 </div>
 
@@ -71,16 +71,16 @@
 
 Sort By:
 
-<a href="<?=$this->SECTIONS->POSTS->SORTING->QUERIES->title;?>"><?=$this->html($this->DICTIONARY->COLUMNS->title);?></a>
+<a href="<?=$this->SECTIONS->POSTS->SORTING->QUERIES->title;?>"><?=$this->html($this->translate('columnsTitle'));?></a>
 &nbsp;<img src="<?=$this->_controller->getEnv()->getMediaRequestDir();?>/Backend/Pics/Sort_<?=$this->SECTIONS->POSTS->SORTING->COLUMNS->title;?>.gif" width="8" height="10" border="0" alt="" />
 
-<a href="<?=$this->SECTIONS->POSTS->SORTING->QUERIES->type;?>"><?=$this->html($this->DICTIONARY->COLUMNS->type);?></a>
+<a href="<?=$this->SECTIONS->POSTS->SORTING->QUERIES->type;?>"><?=$this->html($this->translate('columnsType'));?></a>
 &nbsp;<img src="<?=$this->_controller->getEnv()->getMediaRequestDir();?>/Backend/Pics/Sort_<?=$this->SECTIONS->POSTS->SORTING->COLUMNS->type;?>.gif" width="8" height="10" border="0" alt="" />
 
-<a href="<?=$this->SECTIONS->POSTS->SORTING->QUERIES->publish;?>"><?=$this->html($this->DICTIONARY->COLUMNS->publish);?></a>
+<a href="<?=$this->SECTIONS->POSTS->SORTING->QUERIES->publish;?>"><?=$this->html($this->translate('columnsPublish'));?></a>
 &nbsp;<img src="<?=$this->_controller->getEnv()->getMediaRequestDir();?>/Backend/Pics/Sort_<?=$this->SECTIONS->POSTS->SORTING->COLUMNS->publish;?>.gif" width="8" height="10" border="0" alt="" />
 
-<a href="<?=$this->SECTIONS->POSTS->SORTING->QUERIES->cdate;?>"><?=$this->html($this->DICTIONARY->COLUMNS->cdate);?></a><img src="<?=$this->_controller->getEnv()->getMediaRequestDir();?>/Backend/Pics/Sort_<?=$this->SECTIONS->POSTS->SORTING->COLUMNS->cdate;?>.gif" width="8" height="10" border="0" alt="" /></a>
+<a href="<?=$this->SECTIONS->POSTS->SORTING->QUERIES->cdate;?>"><?=$this->html($this->translate('columnsCdate'));?></a><img src="<?=$this->_controller->getEnv()->getMediaRequestDir();?>/Backend/Pics/Sort_<?=$this->SECTIONS->POSTS->SORTING->COLUMNS->cdate;?>.gif" width="8" height="10" border="0" alt="" /></a>
 
 
 
@@ -99,12 +99,12 @@ Sort By:
 <?$pagerLastItem = $this->SECTIONS->POSTS->PAGER->lastItem;?>
 <?$pagerUriPrevPage = $this->SECTIONS->POSTS->PAGER->uriPrevPage;?>
 <?$pagerUriNextPage = $this->SECTIONS->POSTS->PAGER->uriNextPage;?>
-<?$pagerPrevLabel = $this->DICTIONARY->LABELS->pagerPreviousPage;?>
-<?$pagerNextLabel = $this->DICTIONARY->LABELS->pagerNextPage;?>
-<?$pagerOfLabel = $this->DICTIONARY->LABELS->pagerOf;?>
-<?$pagerPageLabel = $this->DICTIONARY->LABELS->pagerPage;?>
-<?$pagerPagesLabel = $this->DICTIONARY->LABELS->pagerPages;?>
-<?$pagerEntityLabel = $this->DICTIONARY->LABELS->pagerEntity;?>
+<?$pagerPrevLabel = $this->translate('labelsPagerPreviousPage');?>
+<?$pagerNextLabel = $this->translate('labelsPagerNextPage');?>
+<?$pagerOfLabel = $this->translate('labelsPagerOf');?>
+<?$pagerPageLabel = $this->translate('labelsPagerPage');?>
+<?$pagerPagesLabel = $this->translate('labelsPagerPages');?>
+<?$pagerEntityLabel = $this->translate('labelsPagerEntity');?>
 <?$pagerValClass = "pagerVal";?>
 <?$pagerTextClass = "pagerText";?>
 <?$pagerHrefPrevClass = "pagerHrefPrev";?>
@@ -192,16 +192,16 @@ Sort By:
 
 <!--
 <?if($type == Sitengine_Blog_Posts_Table::TYPE_GALLERY):?>
-<a href="<?=$uriFileIndex;?>" class="listformDataHref"><?=$this->html($this->DICTIONARY->LABELS->listformGalleryFilesIndex);?></a> (<?=$fileCount;?>)
+<a href="<?=$uriFileIndex;?>" class="listformDataHref"><?=$this->html($this->translate('labelsListformGalleryFilesIndex'));?></a> (<?=$fileCount;?>)
 <?elseif($type == Sitengine_Blog_Posts_Table::TYPE_TEXT):?>
-<a href="<?=$uriFileIndex;?>" class="listformDataHref"><?=$this->html($this->DICTIONARY->LABELS->listformTextpostFilesIndex);?></a> (<?=$fileCount;?>)
+<a href="<?=$uriFileIndex;?>" class="listformDataHref"><?=$this->html($this->translate('labelsListformTextpostFilesIndex'));?></a> (<?=$fileCount;?>)
 <?else:?>
-<?=$this->html($this->DICTIONARY->LABELS->listformFilesIndex);?>
+<?=$this->html($this->translate('labelsListformFilesIndex'));?>
 <?endif;?>
 -->
 
-<a href="<?=$uriCommentInsert;?>" class="listformDataHref"><?=$this->html($this->DICTIONARY->LABELS->listformCommentsInsert);?></a> - 
-<a href="<?=$uriCommentIndex;?>" class="listformDataHref"><?=$this->html($this->DICTIONARY->LABELS->listformCommentsIndex);?></a> (<?=$commentCount;?>)
+<a href="<?=$uriCommentInsert;?>" class="listformDataHref"><?=$this->html($this->translate('labelsListformCommentsInsert'));?></a> - 
+<a href="<?=$uriCommentIndex;?>" class="listformDataHref"><?=$this->html($this->translate('labelsListformCommentsIndex'));?></a> (<?=$commentCount;?>)
 <?=$cdate;?><br />
 <hr />
 <?endforeach;?>

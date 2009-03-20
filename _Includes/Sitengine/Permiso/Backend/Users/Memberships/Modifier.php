@@ -85,7 +85,7 @@ abstract class Sitengine_Permiso_Backend_Users_Memberships_Modifier
             {
             	$error = $this->_controller->getFrontController()->getPermisoPackage()->getMembershipsTable()->getError();
             	if($error === null) { return null; }
-            	$message = $this->_controller->getDictionary()->getFromHints($error);
+            	$message = $this->_controller->getTranslate()->translate('hints'.ucfirst($error));
     			$this->_controller->getStatus()->addHint('record', $message);
     			return null;
             }
@@ -110,13 +110,13 @@ abstract class Sitengine_Permiso_Backend_Users_Memberships_Modifier
             $data = array();
             
             if(!$this->_ok2modify($id)) {
-                $message = $this->_controller->getDictionary()->getFromHints(Sitengine_Env::HINT_INVALID_ACTION);
+                $message = $this->_controller->getTranslate()->translate(Sitengine_Env::HINT_INVALID_ACTION);
                 $this->_controller->getStatus()->addHint('modifier', $message);
                 return null;
             }
             
             if($this->_controller->getRequest()->getPost('mdate') != $stored['mdate']) {
-                $message = $this->_controller->getDictionary()->getFromHints(Sitengine_Env::HINT_DATA_EXPIRED);
+                $message = $this->_controller->getTranslate()->translate(Sitengine_Env::HINT_DATA_EXPIRED);
                 $this->_controller->getStatus()->addHint('modifier', $message);
                 return null;
             }
@@ -142,7 +142,7 @@ abstract class Sitengine_Permiso_Backend_Users_Memberships_Modifier
             {
             	$error = $this->_controller->getFrontController()->getPermisoPackage()->getMembershipsTable()->getError();
             	if($error === null) { return null; }
-            	$message = $this->_controller->getDictionary()->getFromHints($error);
+            	$message = $this->_controller->getTranslate()->translate('hints'.ucfirst($error));
     			$this->_controller->getStatus()->addHint('record', $message);
     			return null;
             }
@@ -167,7 +167,7 @@ abstract class Sitengine_Permiso_Backend_Users_Memberships_Modifier
 		$userId = $this->_controller->getEntity()->getAncestorId();
 		
 		if(Sitengine_Validator::nada($groupId, Sitengine_Permiso_Backend_Users_Memberships_Controller::VALUE_NONESELECTED)) {
-			$message = $this->_controller->getDictionary()->getFromHints('groupIdRequired');
+			$message = $this->_controller->getTranslate()->translate('hintsGroupIdRequired');
 			$this->_controller->getStatus()->addHint($name, $message);
 		}
 		
@@ -176,7 +176,7 @@ abstract class Sitengine_Permiso_Backend_Users_Memberships_Modifier
 			$userId == Sitengine_Permiso::UID_LOSTFOUND
 		) {
 			# users guest and lostfound can't be made a member of any group
-			$message = $this->_controller->getDictionary()->getFromHints(Sitengine_Env::HINT_INVALID_ACTION);
+			$message = $this->_controller->getTranslate()->translate(Sitengine_Env::HINT_INVALID_ACTION);
 			$this->_controller->getStatus()->addHint('modifier', $message);
 			return false;
 		}
@@ -186,14 +186,14 @@ abstract class Sitengine_Permiso_Backend_Users_Memberships_Modifier
 			!$this->_controller->getPermiso()->getDirectory()->userIsMember($this->_controller->getPermiso()->getAuth()->getId(), Sitengine_Permiso::GID_ADMINISTRATORS)
 		) {
 			# only administrators can add users to the administrators group
-			$message = $this->_controller->getDictionary()->getFromHints(Sitengine_Env::HINT_INVALID_ACTION);
+			$message = $this->_controller->getTranslate()->translate(Sitengine_Env::HINT_INVALID_ACTION);
 			$this->_controller->getStatus()->addHint('modifier', $message);
 			return false;
 		}
 		
 		if($groupId == Sitengine_Permiso::GID_LOSTFOUND) {
 			# no users can be added to the lostfound group
-			$message = $this->_controller->getDictionary()->getFromHints(Sitengine_Env::HINT_INVALID_ACTION);
+			$message = $this->_controller->getTranslate()->translate(Sitengine_Env::HINT_INVALID_ACTION);
 			$this->_controller->getStatus()->addHint('modifier', $message);
 			return false;
 		}

@@ -1,102 +1,60 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
-
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <dictionary name="dictionary">
-	
-    <group name="LABELS">
-        <item name="pageTitle">Newsletter - Campaigns</item>
-        <item name="entityTitle">Newsletter - Campaigns</item>
-        <item name="actionsSectionIndex">Show all Campaigns</item>
-        <item name="actionsSectionInsert">Create new Campaign</item>
-        <item name="columnSortHref">Click to sort the list by this column</item>
-    </group>
-    
-    
-    <group name="HELPS">
-        <item name="_index"> </item>
-        <item name="_update"> </item>
-        <item name="_insert"> </item>
-    </group>
-    
-    
-    <group name="INDEXVIEW">
-        <item name="title">Overview</item>
-        <item name="attachmentsIndex">Show</item>
-        <item name="batchDeleteSubmit">Delete selected</item>
-        <item name="batchUpdateSubmit">Update list</item>
-        <item name="filterIsActive">Filtering is active for the current view</item>
-        <item name="noRecords">No Campaigns in database</item>
-        <item name="noMatchingRecords">No Campaigns match your criteria</item>
-        <item name="confirmDelete">Do you really want to delete the selected Campaigns?</item>
-        <item name="confirmUpdate">Do you really want to update all Campaigns in the list?</item>
-        <item name="filterSectionTitle">Filter</item>
-        <item name="filterSectionSubmit">Find</item>
-        <item name="filterSectionReset">Reset</item>
-        <item name="settingsSectionTitle">Settings</item>
-        <item name="settingsSectionSubmit">Set</item>
-        <item name="settingsSectionReset">Reset</item>
-        <item name="settingsSectionItemsPerPage">Items per page</item>
-    </group>
-    
-    
-    <group name="INDEXVIEWCOLUMNS">
-        <item name="title">Title</item>
-        <item name="type">Type</item>
-        <item name="publish">Publish</item>
-        <item name="cdate">Created</item>
-        <item name="attachmentAction">Attachments</item>
-        <item name="frontendCampaignViewUrl">View Campaign</item>
-    </group>
-    
-    
-    <group name="FORMVIEW">
-        <item name="childActionsSectionAttachmentsIndex">Attachments</item>
-        <item name="childActionsFrontendCampaignViewUrl">Show</item>
-        <item name="insertTitle">New Campaign</item>
-        <item name="updateTitle">Update Campaign</item>
-        <item name="payloadNavTitleMain">Overview</item>
-        <item name="contentSectionTitleDefault">Content</item>
-        <item name="insertSubmit">Save</item>
-        <item name="updateSubmit">Save changes</item>
-        <item name="inputRequired">Fields marked with red are required</item>
-    </group>
-    
-    
-    <group name="FORMVIEWFIELDS">
-        <item name="type">Type</item>
-        <item name="publish">Publish</item>
-        <item name="title">Title</item>
-        <item name="body">Body</item>
-    </group>
-    
-    
-    <group name="PAGER">
-        <item name="page">Page</item>
-        <item name="pages">Pages</item>
-        <item name="of">of</item>
-        <item name="entity">Records</item>
-        <item name="previousPage">Previous</item>
-        <item name="nextPage">Next</item>
-    </group>
-	
-	
-    <group name="FIELDVALS">
-        <group name="type">
-            <item name="noneSelected">Select Campaign type</item>
-            <item name="collector">Collector</item>
-            <item name="fan">Fan</item>
-        </group>
-        
-        <group name="filterByType">
-            <item name="noneSelected">Filter by type</item>
-            <item name="collector">Collector</item>
-            <item name="fan">Fan</item>
-        </group>
-    </group>
-    
-    
-    <group name="HINTS">
-        <item name="titleRequired">Title: Input required</item>
-        <item name="typeRequired">Type: Input required</item>
-    </group>
-    
+	<item name="labelsPageTitle">Newsletter - Campaigns</item>
+	<item name="labelsEntityTitle">Newsletter - Campaigns</item>
+	<item name="labelsActionsSectionIndex">Show all Campaigns</item>
+	<item name="labelsActionsSectionInsert">Create new Campaign</item>
+	<item name="labelsColumnSortHref">Click to sort the list by this column</item>
+	<item name="helps_index"/>
+	<item name="helps_update"/>
+	<item name="helps_insert"/>
+	<item name="indexViewTitle">Overview</item>
+	<item name="indexViewAttachmentsIndex">Show</item>
+	<item name="indexViewBatchDeleteSubmit">Delete selected</item>
+	<item name="indexViewBatchUpdateSubmit">Update list</item>
+	<item name="indexViewFilterIsActive">Filtering is active for the current view</item>
+	<item name="indexViewNoRecords">No Campaigns in database</item>
+	<item name="indexViewNoMatchingRecords">No Campaigns match your criteria</item>
+	<item name="indexViewConfirmDelete">Do you really want to delete the selected Campaigns?</item>
+	<item name="indexViewConfirmUpdate">Do you really want to update all Campaigns in the list?</item>
+	<item name="indexViewFilterSectionTitle">Filter</item>
+	<item name="indexViewFilterSectionSubmit">Find</item>
+	<item name="indexViewFilterSectionReset">Reset</item>
+	<item name="indexViewSettingsSectionTitle">Settings</item>
+	<item name="indexViewSettingsSectionSubmit">Set</item>
+	<item name="indexViewSettingsSectionReset">Reset</item>
+	<item name="indexViewSettingsSectionItemsPerPage">Items per page</item>
+	<item name="indexViewColumnsTitle">Title</item>
+	<item name="indexViewColumnsType">Type</item>
+	<item name="indexViewColumnsPublish">Publish</item>
+	<item name="indexViewColumnsCdate">Created</item>
+	<item name="indexViewColumnsAttachmentAction">Attachments</item>
+	<item name="indexViewColumnsFrontendCampaignViewUrl">View Campaign</item>
+	<item name="formViewChildActionsSectionAttachmentsIndex">Attachments</item>
+	<item name="formViewChildActionsFrontendCampaignViewUrl">Show</item>
+	<item name="formViewInsertTitle">New Campaign</item>
+	<item name="formViewUpdateTitle">Update Campaign</item>
+	<item name="formViewPayloadNavTitleMain">Overview</item>
+	<item name="formViewContentSectionTitleDefault">Content</item>
+	<item name="formViewInsertSubmit">Save</item>
+	<item name="formViewUpdateSubmit">Save changes</item>
+	<item name="formViewInputRequired">Fields marked with red are required</item>
+	<item name="formViewFieldsType">Type</item>
+	<item name="formViewFieldsPublish">Publish</item>
+	<item name="formViewFieldsTitle">Title</item>
+	<item name="formViewFieldsBody">Body</item>
+	<item name="pagerPage">Page</item>
+	<item name="pagerPages">Pages</item>
+	<item name="pagerOf">of</item>
+	<item name="pagerEntity">Records</item>
+	<item name="pagerPreviousPage">Previous</item>
+	<item name="pagerNextPage">Next</item>
+	<!-- array --><item name="fieldValsTypeNoneSelected">Select Campaign type</item>
+	<!-- array --><item name="fieldValsTypeCollector">Collector</item>
+	<!-- array --><item name="fieldValsTypeFan">Fan</item>
+	<!-- array --><item name="fieldValsFilterByTypeNoneSelected">Filter by type</item>
+	<!-- array --><item name="fieldValsFilterByTypeCollector">Collector</item>
+	<!-- array --><item name="fieldValsFilterByTypeFan">Fan</item>
+	<item name="hintsTitleRequired">Title: Input required</item>
+	<item name="hintsTypeRequired">Type: Input required</item>
 </dictionary>

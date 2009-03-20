@@ -33,7 +33,7 @@ abstract class Sitengine_Error_Controller extends Sitengine_Controller_Action
     protected $_env = null;
     protected $_status = null;
     protected $_locale = null;
-    protected $_dictionary = null;
+    protected $_translate = null;
     protected $_defaultLanguage = 'en';
     protected $_templateIndexView = null;
     
@@ -41,7 +41,7 @@ abstract class Sitengine_Error_Controller extends Sitengine_Controller_Action
     public function getEnv() { return $this->_env; }
     public function getStatus() { return $this->_status; }
     public function getLocale() { return $this->_locale; }
-    public function getDictionary() { return $this->_dictionary; }
+    public function getTranslate() { return $this->_translate; }
     
     
     # objects that are not initialized on controller init
@@ -73,7 +73,7 @@ abstract class Sitengine_Error_Controller extends Sitengine_Controller_Action
         	require_once 'Sitengine/Status.php';
 			$this->_status = Sitengine_Status::getInstance();
 			$this->_locale = $this->getEnv()->getLocaleInstance();
-        	$this->_dictionary = $this->_getDictionaryInstance();
+        	$this->_translate = $this->_getTranslateInstance();
         	$this->_templateIndexView = $this->getEnv()->getIncludesDir().'/Sitengine/Error/_Templates/IndexView.html';
         }
         catch (Exception $exception) {
@@ -120,29 +120,29 @@ abstract class Sitengine_Error_Controller extends Sitengine_Controller_Action
     }
     
     
-    protected function _getDictionaryInstance()
+    protected function _getTranslateInstance()
     {
-    	require_once 'Sitengine/Dictionary.php';
-        $dictionary = new Sitengine_Dictionary($this->getEnv()->getDebugControl());
-        
-        # english
-        $dictionary->addFiles(
-            Sitengine_Env::LANGUAGE_EN,
-            array(
-				$this->getEnv()->getIncludesDir().'/Sitengine/Env/_Dictionary/en.xml',
-				$this->getEnv()->getIncludesDir().'/Sitengine/Error/_Dictionary/en.xml'
-			)
-        );
-        
-        # deutsch
-        $dictionary->addFiles(
-            Sitengine_Env::LANGUAGE_DE,
-            array(
-				$this->getEnv()->getIncludesDir().'/Sitengine/Env/_Dictionary/de.xml',
-				$this->getEnv()->getIncludesDir().'/Sitengine/Error/_Dictionary/de.xml'
-			)
-        );
-        return $dictionary;
+    	require_once 'Sitengine/Translate.php';
+		$translate = new Sitengine_Translate(
+			Sitengine_Translate::AN_XML,
+			$this->getEnv()->getIncludesDir().'/Sitengine/Env/_Dictionary/global.xml',
+			Sitengine_Env::LANGUAGE_EN
+		);
+		
+		$en = array(
+			$this->getEnv()->getIncludesDir().'/Sitengine/Env/_Dictionary/en.xml',
+			$this->getEnv()->getIncludesDir().'/Sitengine/Error/_Dictionary/en.xml'
+		);
+		
+		$de = array(
+			$this->getEnv()->getIncludesDir().'/Sitengine/Env/_Dictionary/global.xml',
+			$this->getEnv()->getIncludesDir().'/Sitengine/Env/_Dictionary/de.xml',
+			$this->getEnv()->getIncludesDir().'/Sitengine/Error/_Dictionary/de.xml'
+		);
+		
+		$translate->addMergeTranslation($en, Sitengine_Env::LANGUAGE_EN);
+		$translate->addMergeTranslation($de, Sitengine_Env::LANGUAGE_DE);
+		return $translate;
     }
     
     
@@ -152,9 +152,17 @@ abstract class Sitengine_Error_Controller extends Sitengine_Controller_Action
 			if(!$this->_started)
 			{
 				$this->_started = true;
-				$language = $this->getRequest()->getParam(Sitengine_Env::PARAM_LANGUAGE);
-				$this->getLocale()->setLocale($language);
-				$this->getDictionary()->readFiles($language, $this->_defaultLanguage);
+				
+				$this->getLocale()->setLocale(Sitengine_Env::LANGUAGE_EN);
+				
+				if($this->getTranslate()->isAvailable($this->getPreferences()->getLanguage()))
+				{
+					$this->getLocale()->setLocale($this->getPreferences()->getLanguage());
+					$this->getTranslate()->setLocale($this->getPreferences()->getLanguage());
+				}
+				
+				require_once 'Zend/Registry.php';
+				Zend_Registry::set('Zend_Translate', $this->getTranslate()->getAdapter());
 			}
 		}
         catch (Exception $exception) {
@@ -197,7 +205,7 @@ abstract class Sitengine_Error_Controller extends Sitengine_Controller_Action
     		$this->_start();
     		$this->getStatus()->set(
 				Sitengine_Env::STATUS_BADREQUEST,
-				$this->getDictionary()->getFromStatus(Sitengine_Env::STATUS_BADREQUEST),
+				$this->getTranslate()->translate(Sitengine_Env::STATUS_BADREQUEST),
 				true
 			);
 			$view = $this->_getIndexViewInstance();
@@ -223,7 +231,7 @@ abstract class Sitengine_Error_Controller extends Sitengine_Controller_Action
     		$this->_start();
     		$this->getStatus()->set(
 				Sitengine_Env::STATUS_ERROR,
-				$this->getDictionary()->getFromStatus(Sitengine_Env::STATUS_ERROR),
+				$this->getTranslate()->translate(Sitengine_Env::STATUS_ERROR),
 				true
 			);
 			$view = $this->_getIndexViewInstance();
@@ -249,7 +257,7 @@ abstract class Sitengine_Error_Controller extends Sitengine_Controller_Action
     		$this->_start();
     		$this->getStatus()->set(
 				Sitengine_Env::STATUS_NOTFOUND,
-				$this->getDictionary()->getFromStatus(Sitengine_Env::STATUS_NOTFOUND),
+				$this->getTranslate()->translate(Sitengine_Env::STATUS_NOTFOUND),
 				true
 			);
 			$view = $this->_getIndexViewInstance();
@@ -276,7 +284,7 @@ abstract class Sitengine_Error_Controller extends Sitengine_Controller_Action
     		$this->_start();
     		$this->getStatus()->set(
 				Sitengine_Env::STATUS_UNAUTHORIZED,
-				$this->getDictionary()->getFromStatus(Sitengine_Env::STATUS_UNAUTHORIZED),
+				$this->getTranslate()->translate(Sitengine_Env::STATUS_UNAUTHORIZED),
 				true
 			);
 			$view = $this->_getIndexViewInstance();
@@ -302,7 +310,7 @@ abstract class Sitengine_Error_Controller extends Sitengine_Controller_Action
     		$this->_start();
     		$this->getStatus()->set(
 				Sitengine_Env::STATUS_NOT_SUPPORTED,
-				$this->getDictionary()->getFromStatus(Sitengine_Env::STATUS_NOT_SUPPORTED),
+				$this->getTranslate()->translate(Sitengine_Env::STATUS_NOT_SUPPORTED),
 				true
 			);
 			$view = $this->_getIndexViewInstance();

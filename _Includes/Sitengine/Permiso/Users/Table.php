@@ -96,7 +96,7 @@ class Sitengine_Permiso_Users_Table extends Sitengine_Db_TableWithFiles
     public function checkUserModifyData(
     	Sitengine_Status $status,
     	Sitengine_Controller_Request_Http $request,
-    	Sitengine_Dictionary $dictionary
+    	Sitengine_Translate $translate
     )
     {
     	require_once 'Sitengine/Validator.php';
@@ -104,39 +104,39 @@ class Sitengine_Permiso_Users_Table extends Sitengine_Db_TableWithFiles
 		$name = 'name';
 		$val = $request->getPost($name);
 		if(Sitengine_Validator::nada($val)) {
-			$message = $dictionary->getFromHints('nameRequired');
+			$message = $translate->translate('hintsNameRequired');
 			$status->addHint($name, $message);
 		}
 		else if(!Sitengine_Validator::emailAddress($val)) {
-			$message = $dictionary->getFromHints('nameValidEmailRequired');
+			$message = $translate->translate('hintsNameValidEmailRequired');
 			$status->addHint($name, $message);
 		}
 		
 		$name = 'nickname';
 		$val = $request->getPost($name);
 		if(Sitengine_Validator::nada($val)) {
-			$message = $dictionary->getFromHints('nicknameRequired');
+			$message = $translate->translate('hintsNicknameRequired');
 			$status->addHint($name, $message);
 		}
 		
 		$name = 'firstname';
 		$val = $request->getPost($name);
 		if(Sitengine_Validator::nada($val)) {
-			$message = $dictionary->getFromHints('firstnameRequired');
+			$message = $translate->translate('hintsFirstnameRequired');
 			$status->addHint($name, $message);
 		}
 		
 		$name = 'lastname';
 		$val = $request->getPost($name);
 		if(Sitengine_Validator::nada($val)) {
-			$message = $dictionary->getFromHints('lastnameRequired');
+			$message = $translate->translate('hintsLastnameRequired');
 			$status->addHint($name, $message);
 		}
 		
 		$name = 'password';
 		$val = $request->getPost($name);
 		if($val != $request->getPost('passwordConfirm')) {
-			$message = $dictionary->getFromHints('passwordsDontMatch');
+			$message = $translate->translate('hintsPasswordsDontMatch');
 			$status->addHint($name, $message);
 		}
 		
@@ -148,7 +148,7 @@ class Sitengine_Permiso_Users_Table extends Sitengine_Db_TableWithFiles
 			);
 			
 			$validator->setMessage(
-				$dictionary->getFromHints('passwordTooShort'),
+				$translate->translate('hintsPasswordTooShort'),
 				Zend_Validate_StringLength::TOO_SHORT)
 			;
 			
@@ -161,13 +161,13 @@ class Sitengine_Permiso_Users_Table extends Sitengine_Db_TableWithFiles
 		
 		$name = 'country';
 		if(Sitengine_Validator::nada($request->getPost($name), 'noneSelected')) {
-			$message = $dictionary->getFromHints('countryRequired');
+			$message = $translate->translate('hintsCountryRequired');
 			$status->addHint($name, $message);
 		}
 		
 		$name = 'timezone';
 		if(Sitengine_Validator::nada($request->getPost($name), 'noneSelected')) {
-			$message = $dictionary->getFromHints('timezoneRequired');
+			$message = $translate->translate('hintsTimezoneRequired');
 			#$status->addHint($name, $message);
 		}
 	
@@ -182,12 +182,12 @@ class Sitengine_Permiso_Users_Table extends Sitengine_Db_TableWithFiles
 			
 			if(!preg_match('/(gif|jpg|jpeg)/i', $upload->getMime()))
 			{
-				$messages[] = $dictionary->getFromHints('avatarOriginalFiletype');
+				$messages[] = $translate->translate('hintsAvatarOriginalFiletype');
 			}
 			
 			if($upload->getSize() > 1024 * 1024)
 			{
-				$messages[] = $dictionary->getFromHints('avatarOriginalFilesize');
+				$messages[] = $translate->translate('hintsAvatarOriginalFilesize');
 			}
 			
 			if(sizeof($messages))

@@ -89,7 +89,7 @@ abstract class Sitengine_Permiso_Backend_Groups_FormView extends Sitengine_View 
 				#'ORGANIZATION' => $this->_controller->getPermiso()->getOrganization()->getData(),
 				#'USER' => $this->_controller->getPermiso()->getAuth()->getData(),
 				#'Auth' => $this->_controller->getPermiso()->getAuth(),
-				'DICTIONARY' => $this->_controller->getDictionary()->getData()
+				#'DICTIONARY' => $this->_controller->getTranslate()->translateGroup('data')
 			);
        	}
         catch (Exception $exception) {
@@ -193,7 +193,7 @@ abstract class Sitengine_Permiso_Backend_Groups_FormView extends Sitengine_View 
                 $uri = $this->_controller->getRequest()->getBasePath().'/'.$route->assemble($args, true);
                 $childActions['memberList'] = array(
                     'uri' => $uri,
-                    'label' => $this->_controller->getDictionary()->getFromLabels('childActionsSectionMembersIndex'),
+                    'label' => $this->_controller->getTranslate()->translate('labelsChildActionsSectionMembersIndex'),
                     'postfix' => ' ('.$this->_controller->getViewHelper()->countMembers($stored['id']).')'
                 );
                     
@@ -207,7 +207,7 @@ abstract class Sitengine_Permiso_Backend_Groups_FormView extends Sitengine_View 
                 $uri = $this->_controller->getRequest()->getBasePath().'/'.$route->assemble($args, true);
                 $childActions['memberInsert'] = array(
                     'uri' => $uri,
-                    'label' => $this->_controller->getDictionary()->getFromLabels('childActionsSectionMembersInsert')
+                    'label' => $this->_controller->getTranslate()->translate('labelsChildActionsSectionMembersInsert')
                 );
                 
                 $this->setSection('CHILDACTIONS', $childActions);
@@ -258,7 +258,7 @@ abstract class Sitengine_Permiso_Backend_Groups_FormView extends Sitengine_View 
                 $route = $this->_controller->getFrontController()->getRouter()->getRoute(Sitengine_Permiso_Backend_Front::ROUTE_GROUPS);
                 $submitUri = $this->_controller->getRequest()->getBasePath().'/'.$route->assemble($args, true);
                 
-                $title = $this->_controller->getDictionary()->getFromLabels('viewformInsertTitle');
+                $title = $this->_controller->getTranslate()->translate('labelsViewformInsertTitle');
             }
             #Sitengine_Debug::print_r($data);
             
@@ -274,22 +274,22 @@ abstract class Sitengine_Permiso_Backend_Groups_FormView extends Sitengine_View 
 				) {
 					$n = 'enabled';
 					$e = new Sitengine_Form_Element($n, '1');
-					$e->setClass('viewformCheckbox');
-					$e->setId('viewform'.$n);
+					$e->setClass('viewFormCheckbox');
+					$e->setId('viewForm'.$n);
 					$elements[$n] = $e->getCheckbox($data[$n]);
 					
 					$n = 'locked';
 					$e = new Sitengine_Form_Element($n, '1');
-					$e->setClass('viewformCheckbox');
-					$e->setId('viewform'.$n);
+					$e->setClass('viewFormCheckbox');
+					$e->setId('viewForm'.$n);
 					$elements[$n] = $e->getCheckbox($data[$n]);
 				}
 				
 				
 				$n = 'name';
 				$e = new Sitengine_Form_Element($n, $data[$n]);
-				$e->setClass('viewformInput');
-				$e->setId('viewform'.$n);
+				$e->setClass('viewFormInput');
+				$e->setId('viewForm'.$n);
 				if(
 					$id==Sitengine_Permiso::GID_ADMINISTRATORS ||
 					$locked=='1'
@@ -301,8 +301,8 @@ abstract class Sitengine_Permiso_Backend_Groups_FormView extends Sitengine_View 
 				
 				$n = 'description';
 				$e = new Sitengine_Form_Element($n, $data[$n]);
-				$e->setClass('viewformTextarea');
-				$e->setId('viewform'.$n);
+				$e->setClass('viewFormTextarea');
+				$e->setId('viewForm'.$n);
 				$elements[$n] = $e->getTextarea(40, 10);
             }
             

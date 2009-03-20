@@ -83,7 +83,7 @@ abstract class Sitengine_Proto_Backend_Goodies_AssignView extends Sitengine_View
 			#'ORGANIZATION' => $this->_controller->getPermiso()->getOrganization()->getData(),
 			#'USER' => $this->_controller->getPermiso()->getAuth()->getData(),
 			#'Auth' => $this->_controller->getPermiso()->getAuth(),
-			'DICTIONARY' => $this->_controller->getDictionary()->getData()
+			#'DICTIONARY' => $this->_controller->getTranslate()->translateGroup('data')
 		);
     }
     
@@ -141,7 +141,7 @@ abstract class Sitengine_Proto_Backend_Goodies_AssignView extends Sitengine_View
 						$v = (sizeof($markedRows) && isset($markedRows[$id])) ? $this->_controller->getRequest()->getPost($p) : Sitengine_Proto_Backend_Goodies_Controller::VALUE_NONESELECTED;
 						$e = new Sitengine_Form_Element($p, $v);
 						$e->setClass('listformSelect');
-						$type  = $e->getSelect($this->_controller->getDictionary()->getFromFieldvals($n));
+						$type  = $e->getSelect($this->_controller->getTranslate()->translateGroup('fieldValsType'));
 						$type .= Sitengine_Form_Element::getHidden($h, Sitengine_Proto_Backend_Goodies_Controller::VALUE_NONESELECTED);
 						
 						$args = array(
@@ -225,7 +225,7 @@ abstract class Sitengine_Proto_Backend_Goodies_AssignView extends Sitengine_View
             
             return array(
                 'hiddens' => implode('', $hiddens),
-                'title' => $this->_controller->getDictionary()->getFromAssignView('assignFormTitle'),
+                'title' => $this->_controller->getTranslate()->translate('assignViewAssignFormTitle'),
                 'URIS' => $uris,
                 'METHODS' => $methods,
                 'DATA' => $list,

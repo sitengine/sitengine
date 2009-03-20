@@ -86,7 +86,7 @@ abstract class Sitengine_Sitemap_Backend_SearchView extends Sitengine_View {
 				#'ORGANIZATION' => $this->_controller->getPermiso()->getOrganization()->getData(),
 				#'USER' => $this->_controller->getPermiso()->getAuth()->getData(),
 				#'Auth' => $this->_controller->getPermiso()->getAuth(),
-				'DICTIONARY' => $this->_controller->getDictionary()->getData()
+				#'DICTIONARY' => $this->_controller->getTranslate()->translateGroup('data')
 			);
 		}
         catch (Exception $exception) {
@@ -129,7 +129,7 @@ abstract class Sitengine_Sitemap_Backend_SearchView extends Sitengine_View {
             # set html input element
             $languages = array();
             foreach($this->_controller->getTranslations()->get() as $symbol) {
-            	$languages[$symbol] = $this->_controller->getDictionary()->getFromLanguages($symbol);
+            	$languages[$symbol] = $this->_controller->getTranslate()->translate('languages'.ucfirst($symbol));
             }
             $e = new Sitengine_Form_Element(Sitengine_Env::PARAM_TRANSLATION, $this->_controller->getTranslations()->getSymbol());
             $e->setId('settings'.Sitengine_Env::PARAM_TRANSLATION);
@@ -144,7 +144,7 @@ abstract class Sitengine_Sitemap_Backend_SearchView extends Sitengine_View {
         	$valueIpp = ($valueIpp <= 100 && $valueIpp >= 1) ? $valueIpp : $defaultIpp;
             # set html input element
             $ippValues = array(
-                '' => $this->_controller->getDictionary()->getFromLabels('settingsSectionItemsPerPage'),
+                '' => $this->_controller->getTranslate()->translate('labelsSettingsSectionItemsPerPage'),
                 5 => 5,
                 10 => 10,
                 20 => 20,
@@ -181,7 +181,7 @@ abstract class Sitengine_Sitemap_Backend_SearchView extends Sitengine_View {
             $e = new Sitengine_Form_Element(Sitengine_Sitemap_Backend_Controller::PARAM_SEARCH_BY_TYPE, $filter->getVal(Sitengine_Sitemap_Backend_Controller::PARAM_SEARCH_BY_TYPE));
             $e->setId('filter'.Sitengine_Sitemap_Backend_Controller::PARAM_SEARCH_BY_TYPE);
             $e->setClass('filterSelect');
-            $filter->setElement(Sitengine_Sitemap_Backend_Controller::PARAM_SEARCH_BY_TYPE, $e->getSelect($this->_controller->getDictionary()->getFromFieldvals(Sitengine_Sitemap_Backend_Controller::PARAM_SEARCH_BY_TYPE)));
+            $filter->setElement(Sitengine_Sitemap_Backend_Controller::PARAM_SEARCH_BY_TYPE, $e->getSelect($this->_controller->getTranslate()->translateGroup('fieldValsSearchByType')));
             
             $e = new Sitengine_Form_Element(Sitengine_Sitemap_Backend_Controller::PARAM_SEARCH_BY_FIND, $filter->getVal(Sitengine_Sitemap_Backend_Controller::PARAM_SEARCH_BY_FIND));
             $e->setId('filter'.Sitengine_Sitemap_Backend_Controller::PARAM_SEARCH_BY_FIND);
@@ -399,7 +399,7 @@ abstract class Sitengine_Sitemap_Backend_SearchView extends Sitengine_View {
             #### COLLECT ALL DATA
             ########################################################################
             return array(
-                'title' => $this->_controller->getDictionary()->getFromLabels('searchFormTitle'),
+                'title' => $this->_controller->getTranslate()->translate('labelsSearchFormTitle'),
                 'FILTER' => $filterData,
                 'SETTINGS' => $settingsData,
                 'SORTING' => $sortingData,

@@ -84,7 +84,7 @@ abstract class Sitengine_Newsletter_Backend_Campaigns_IndexView extends Sitengin
 			#'ORGANIZATION' => $this->_controller->getPermiso()->getOrganization()->getData(),
 			#'USER' => $this->_controller->getPermiso()->getAuth()->getData(),
 			#'Auth' => $this->_controller->getPermiso()->getAuth(),
-			'DICTIONARY' => $this->_controller->getDictionary()->getData()
+			#'DICTIONARY' => $this->_controller->getTranslate()->translateGroup('data')
 		);
     }
     
@@ -137,7 +137,7 @@ abstract class Sitengine_Newsletter_Backend_Campaigns_IndexView extends Sitengin
         	$valueIpp = ($valueIpp <= 100 && $valueIpp >= 1) ? $valueIpp : $defaultIpp;
             # set html input element
             $ippValues = array(
-                '' => $this->_controller->getDictionary()->getFromIndexView('settingsSectionItemsPerPage'),
+                '' => $this->_controller->getTranslate()->translate('indexViewSettingsSectionItemsPerPage'),
                 5 => 5,
                 10 => 10,
                 20 => 20,
@@ -174,7 +174,7 @@ abstract class Sitengine_Newsletter_Backend_Campaigns_IndexView extends Sitengin
             $e = new Sitengine_Form_Element(Sitengine_Newsletter_Backend_Campaigns_Controller::PARAM_FILTER_BY_TYPE, $filter->getVal(Sitengine_Newsletter_Backend_Campaigns_Controller::PARAM_FILTER_BY_TYPE));
             $e->setId('filter'.Sitengine_Newsletter_Backend_Campaigns_Controller::PARAM_FILTER_BY_TYPE);
             $e->setClass('filterSelect');
-            $filter->setElement(Sitengine_Newsletter_Backend_Campaigns_Controller::PARAM_FILTER_BY_TYPE, $e->getSelect($this->_controller->getDictionary()->getFromFieldvals(Sitengine_Newsletter_Backend_Campaigns_Controller::PARAM_FILTER_BY_TYPE)));
+            $filter->setElement(Sitengine_Newsletter_Backend_Campaigns_Controller::PARAM_FILTER_BY_TYPE, $e->getSelect($this->_controller->getTranslate()->translateGroup('fieldValsFilterByType')));
             */
             $e = new Sitengine_Form_Element(Sitengine_Newsletter_Backend_Campaigns_Controller::PARAM_FILTER_BY_FIND, $filter->getVal(Sitengine_Newsletter_Backend_Campaigns_Controller::PARAM_FILTER_BY_FIND));
             $e->setId('filter'.Sitengine_Newsletter_Backend_Campaigns_Controller::PARAM_FILTER_BY_FIND);
@@ -448,7 +448,7 @@ abstract class Sitengine_Newsletter_Backend_Campaigns_IndexView extends Sitengin
             
             return array(
                 'hiddens' => implode('', $hiddens),
-                'title' => $this->_controller->getDictionary()->getFromIndexView('title'),
+                'title' => $this->_controller->getTranslate()->translate('indexViewTitle'),
                 'URIS' => $uris,
                 'METHODS' => $methods,
                 'FILTER' => $filterData,

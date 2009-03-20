@@ -8,7 +8,7 @@
 <meta http-equiv="Pragma" content="no-cache" />
 <meta name="robots" content="noindex, nofollow" />
 
-<title>Sitengine - <?=$this->html($this->DICTIONARY->LABELS->pageTitle);?></title>
+<title>Sitengine - <?=$this->html($this->translate('labelsPageTitle'));?></title>
 
 <link rel="stylesheet" type="text/css" href="<?=$this->_controller->getEnv()->getMediaRequestDir();?>/Frontend/Styles/Global.css" />
 <link rel="stylesheet" type="text/css" href="<?=$this->_controller->getEnv()->getMediaRequestDir();?>/Frontend/Styles/Lists.css" />
@@ -28,8 +28,8 @@
 <?=$this->SECTIONS->CAMPAIGNS->FILTER->hiddens;?>
 <?foreach($this->SECTIONS->CAMPAIGNS->FILTER->ELEMENTS as $v):?><?=$v;?><?endforeach;?>
 
-<input type="button" value="<?=$this->html($this->DICTIONARY->INDEXVIEW->filterSectionSubmit);?>" onclick="document.filterform.submit();" />
-<input type="button" value="<?=$this->html($this->DICTIONARY->INDEXVIEW->filterSectionReset);?>" onclick="window.location = '<?=$this->SECTIONS->CAMPAIGNS->FILTER->uriReset;?>';" />
+<input type="button" value="<?=$this->html($this->translate('indexViewFilterSectionSubmit'));?>" onclick="document.filterform.submit();" />
+<input type="button" value="<?=$this->html($this->translate('indexViewFilterSectionReset'));?>" onclick="window.location = '<?=$this->SECTIONS->CAMPAIGNS->FILTER->uriReset;?>';" />
 
 </form>
 
@@ -43,10 +43,10 @@
 <?if(!sizeof($this->SECTIONS->CAMPAIGNS->DATA)):?>
 
 <?if($this->SECTIONS->CAMPAIGNS->FILTER->isActive):?>
-    <span><?=$this->html($this->DICTIONARY->INDEXVIEW->noMatchingRecords);?></span><br />
-    <?=$this->html($this->DICTIONARY->INDEXVIEW->filterIsActive);?>
+    <span><?=$this->html($this->translate('indexViewNoMatchingRecords'));?></span><br />
+    <?=$this->html($this->translate('indexViewFilterIsActive'));?>
 <?else:?>
-    <span><?=$this->html($this->DICTIONARY->INDEXVIEW->noRecords);?></span>
+    <span><?=$this->html($this->translate('indexViewNoRecords'));?></span>
 <?endif;?>
 
 <?else:?>
@@ -71,12 +71,12 @@
 <?$pagerLastItem = $this->SECTIONS->CAMPAIGNS->PAGER->lastItem;?>
 <?$pagerUriPrevPage = $this->SECTIONS->CAMPAIGNS->PAGER->uriPrevPage;?>
 <?$pagerUriNextPage = $this->SECTIONS->CAMPAIGNS->PAGER->uriNextPage;?>
-<?$pagerPrevLabel = $this->DICTIONARY->PAGER->previousPage;?>
-<?$pagerNextLabel = $this->DICTIONARY->PAGER->nextPage;?>
-<?$pagerOfLabel = $this->DICTIONARY->PAGER->of;?>
-<?$pagerPageLabel = $this->DICTIONARY->PAGER->page;?>
-<?$pagerPagesLabel = $this->DICTIONARY->PAGER->pages;?>
-<?$pagerEntityLabel = $this->DICTIONARY->PAGER->entity;?>
+<?$pagerPrevLabel = $this->translate('pagerPreviousPage');?>
+<?$pagerNextLabel = $this->translate('pagerNextPage');?>
+<?$pagerOfLabel = $this->translate('pagerOf');?>
+<?$pagerPageLabel = $this->translate('pagerPage');?>
+<?$pagerPagesLabel = $this->translate('pagerPages');?>
+<?$pagerEntityLabel = $this->translate('pagerEntity');?>
 <?$pagerValClass = "pagerVal";?>
 <?$pagerTextClass = "pagerText";?>
 <?$pagerHrefPrevClass = "pagerHrefPrev";?>

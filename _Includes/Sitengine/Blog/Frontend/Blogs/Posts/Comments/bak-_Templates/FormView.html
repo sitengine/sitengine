@@ -8,7 +8,7 @@
 <meta http-equiv="Pragma" content="no-cache" />
 <meta name="robots" content="noindex, nofollow" />
 
-<title>Sitengine - <?=$this->html($this->DICTIONARY->LABELS->pageTitle);?></title>
+<title>Sitengine - <?=$this->html($this->translate('labelsPageTitle'));?></title>
 
 <link rel="stylesheet" type="text/css" href="<?=$this->_controller->getEnv()->getMediaRequestDir();?>/Frontend/Styles/Global.css" />
 <link rel="stylesheet" type="text/css" href="<?=$this->_controller->getEnv()->getMediaRequestDir();?>/Frontend/Styles/Forms.css" />
@@ -33,13 +33,13 @@
 
 
 
-<form method="post" action="<?=$this->SECTIONS->VIEWFORM->submitUri;?>" enctype="multipart/form-data" name="viewform" class="viewform">
+<form method="post" action="<?=$this->SECTIONS->VIEWFORM->submitUri;?>" enctype="multipart/form-data" name="viewForm" class="viewForm">
 <?=$this->SECTIONS->VIEWFORM->hiddens;?>
 
 
-<?=$this->html($this->DICTIONARY->FIELDS->comment);?><br />
+<?=$this->html($this->translate('fieldsComment'));?><br />
 <?=$this->SECTIONS->VIEWFORM->ELEMENTS->comment;?><br />
-<input type="submit" value="<?=$this->html($this->DICTIONARY->LABELS->viewformInsertSubmit);?>" />
+<input type="submit" value="<?=$this->html($this->translate('labelsViewformInsertSubmit'));?>" />
 </form>
 
 

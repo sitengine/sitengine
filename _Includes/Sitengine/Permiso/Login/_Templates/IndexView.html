@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta http-equiv="Pragma" content="no-cache" />
 <meta name="robots" content="noindex, nofollow" />
-<title><?=$this->html($this->DICTIONARY->LABELS->pageTitle);?></title>
+<title><?=$this->html($this->translate('labelsPageTitle'));?></title>
 
 <?if(isset($this->STYLESHEETS->default)):?>
 <link rel="stylesheet" type="text/css" href="<?=$this->STYLESHEETS->default;?>" />
@@ -33,8 +33,8 @@
 <form method="post" action="<?=$this->SECTIONS->LOGIN->handler;?>" name="login" id="login">
 <?=$this->SECTIONS->LOGIN->hiddens;?>
 
-<h1><?=$this->html($this->DICTIONARY->LABELS->pageTitle);?></h1>
-<p><?=$this->html($this->DICTIONARY->LABELS->info);?><br /><br />
+<h1><?=$this->html($this->translate('labelsPageTitle'));?></h1>
+<p><?=$this->html($this->translate('labelsInfo'));?><br /><br />
 
 
 <label>
@@ -45,7 +45,7 @@
 			array('size' => 20)
 		);
 	?>
-	&nbsp;<?=$this->html($this->DICTIONARY->LABELS->loginuField);?>
+	&nbsp;<?=$this->html($this->translate('labelsLoginuField'));?>
 </label>
 
 <br />
@@ -58,7 +58,7 @@
 			array('size' => 20)
 		);
 	?>
-	&nbsp;<?=$this->html($this->DICTIONARY->LABELS->loginpField);?>
+	&nbsp;<?=$this->html($this->translate('labelsLoginpField'));?>
 </label>
 
 <br /><br />
@@ -70,7 +70,7 @@
 	<?=
 		$this->formSubmit(
 			'login',
-			$this->DICTIONARY->LABELS->submit
+			$this->translate('labelsSubmit')
 		);
 	?>
 </div>

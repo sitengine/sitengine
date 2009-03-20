@@ -200,7 +200,7 @@ abstract class Sitengine_Sitemap_Backend_Modifier
             {
             	$error = $this->_controller->getRecord()->getError();
             	if($error === null) { return null; }
-            	$message = $this->_controller->getDictionary()->getFromHints($error);
+            	$message = $this->_controller->getTranslate()->translate('hints'.ucfirst($error));
     			$this->_controller->getStatus()->addHint('record', $message);
     			return null;
             }
@@ -224,12 +224,12 @@ abstract class Sitengine_Sitemap_Backend_Modifier
             $data = array();
             
             if(!$this->_controller->getPermiso()->getDac()->updateAccessGranted($stored)) {
-                $message = $this->_controller->getDictionary()->getFromHints(Sitengine_Env::HINT_INVALID_ACTION);
+                $message = $this->_controller->getTranslate()->translate(Sitengine_Env::HINT_INVALID_ACTION);
                 $this->_controller->getStatus()->addHint('modifier', $message);
                 return null;
             }
             if($this->_controller->getRequest()->getPost('mdate') != $stored['mdate']) {
-                $message = $this->_controller->getDictionary()->getFromHints(Sitengine_Env::HINT_DATA_EXPIRED);
+                $message = $this->_controller->getTranslate()->translate(Sitengine_Env::HINT_DATA_EXPIRED);
                 $this->_controller->getStatus()->addHint('modifier', $message);
                 return null;
             }
@@ -240,7 +240,7 @@ abstract class Sitengine_Sitemap_Backend_Modifier
 				$val = $this->_controller->getRequest()->getPost($name);
 				if($id && $val!=$stored[$name] && 
 				$stored[Sitengine_Permiso::FIELD_UID] != $this->_controller->getPermiso()->getAuth()->getId() && !$this->_controller->getPermiso()->getDirectory()->userIsMember($this->_controller->getPermiso()->getAuth()->getId(), Sitengine_Permiso::GID_ADMINISTRATORS)) {
-					$message = $this->_controller->getDictionary()->getFromHints(Sitengine_Env::HINT_INVALID_ACTION);
+					$message = $this->_controller->getTranslate()->translate(Sitengine_Env::HINT_INVALID_ACTION);
 					$this->_controller->getStatus()->addHint('modifier', $message);
 					return null;
 				}
@@ -304,7 +304,7 @@ abstract class Sitengine_Sitemap_Backend_Modifier
             {
             	$error = $this->_controller->getRecord()->getError();
             	if($error === null) { return null; }
-            	$message = $this->_controller->getDictionary()->getFromHints($error);
+            	$message = $this->_controller->getTranslate()->translate('hints'.ucfirst($error));
     			$this->_controller->getStatus()->addHint('record', $message);
     			return null;
             }
@@ -355,7 +355,7 @@ abstract class Sitengine_Sitemap_Backend_Modifier
     {
     	$name = 'gid';
 		if($this->_controller->getRequest()->getPost($name)==Sitengine_Sitemap_Backend_Controller::VALUE_NONESELECTED) {
-			$message = $this->_controller->getDictionary()->getFromHints($name.'Required');
+			$message = $this->_controller->getTranslate()->translate('hints'.ucfirst($name).'Required');
 			$this->_controller->getStatus()->addHint($name, $message);
 		}
     }
@@ -366,11 +366,11 @@ abstract class Sitengine_Sitemap_Backend_Modifier
     	$name = 'keyword';
 		$val = $this->_controller->getRequest()->getPost($name);
 		if(Sitengine_Validator::nada($val)) {
-			$message = $this->_controller->getDictionary()->getFromHints($name.'Required');
+			$message = $this->_controller->getTranslate()->translate('hints'.ucfirst($name).'Required');
 			$this->_controller->getStatus()->addHint($name, $message);
 		}
 		else if(!Sitengine_Validator::word($val)) {
-			$message = $this->_controller->getDictionary()->getFromHints($name.'Invalid');
+			$message = $this->_controller->getTranslate()->translate('hints'.ucfirst($name).'Invalid');
 			$this->_controller->getStatus()->addHint($name, $message);
 		}
     }
@@ -382,7 +382,7 @@ abstract class Sitengine_Sitemap_Backend_Modifier
 		$upload = new Sitengine_Upload($name);
 		
 		if($required && !$upload->isFile()) {
-			$message = $this->_controller->getDictionary()->getFromHints($name.'Required');
+			$message = $this->_controller->getTranslate()->translate('hints'.ucfirst($name).'Required');
 			$this->_controller->getStatus()->addHint($name, $message);
 			return null;
 		}
@@ -390,16 +390,16 @@ abstract class Sitengine_Sitemap_Backend_Modifier
 			$n = 'transColor';
 			$v = $this->_controller->getRequest()->getPost($n);
 			if($v && !Sitengine_Validator::rgbColor($v)) {
-				$message = $this->_controller->getDictionary()->getFromHints($n.'Invalid');
+				$message = $this->_controller->getTranslate()->translate('hints'.ucfirst($n).'Invalid');
 				$this->_controller->getStatus()->addHint($n, $message);
 			}
 			#print $upload->getMime();
 			if(!preg_match($this->_allowedTypes, $upload->getMime())) {
-				$message = $this->_controller->getDictionary()->getFromHints($name.'Filetype');
+				$message = $this->_controller->getTranslate()->translate('hints'.ucfirst($name).'Filetype');
 				$this->_controller->getStatus()->addHint($name, $message);
 			}
 			if($upload->getSize() > $this->_maxSize) {
-				$message = $this->_controller->getDictionary()->getFromHints($name.'Filesize');
+				$message = $this->_controller->getTranslate()->translate('hints'.ucfirst($name).'Filesize');
 				$this->_controller->getStatus()->addHint($name, $message);
 			}
 		}

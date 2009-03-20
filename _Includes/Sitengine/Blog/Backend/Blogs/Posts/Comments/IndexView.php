@@ -85,7 +85,7 @@ abstract class Sitengine_Blog_Backend_Blogs_Posts_Comments_IndexView extends Sit
 				#'ORGANIZATION' => $this->_controller->getPermiso()->getOrganization()->getData(),
 				#'USER' => $this->_controller->getPermiso()->getAuth()->getData(),
 				#'Auth' => $this->_controller->getPermiso()->getAuth(),
-				'DICTIONARY' => $this->_controller->getDictionary()->getData()
+				#'DICTIONARY' => $this->_controller->getTranslate()->translateGroup('data')
 			);
 		}
         catch (Exception $exception) {
@@ -142,7 +142,7 @@ abstract class Sitengine_Blog_Backend_Blogs_Posts_Comments_IndexView extends Sit
         	$valueIpp = ($valueIpp <= 100 && $valueIpp >= 1) ? $valueIpp : $defaultIpp;
             # set html input element
             $ippValues = array(
-                '' => $this->_controller->getDictionary()->getFromLabels('settingsSectionItemsPerPage'),
+                '' => $this->_controller->getTranslate()->translate('labelsSettingsSectionItemsPerPage'),
                 5 => 5,
                 10 => 10,
                 20 => 20,
@@ -460,7 +460,7 @@ abstract class Sitengine_Blog_Backend_Blogs_Posts_Comments_IndexView extends Sit
             
             return array(
                 'hiddens' => implode('', $hiddens),
-                'title' => $this->_controller->getDictionary()->getFromLabels('listformTitle'),
+                'title' => $this->_controller->getTranslate()->translate('labelsListformTitle'),
                 'URIS' => $uris,
                 'METHODS' => $methods,
                 'FILTER' => $filterData,

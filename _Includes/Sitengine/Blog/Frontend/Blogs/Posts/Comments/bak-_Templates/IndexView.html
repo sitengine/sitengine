@@ -8,7 +8,7 @@
 <meta http-equiv="Pragma" content="no-cache" />
 <meta name="robots" content="noindex, nofollow" />
 
-<title>Sitengine - <?=$this->html($this->DICTIONARY->LABELS->pageTitle);?></title>
+<title>Sitengine - <?=$this->html($this->translate('labelsPageTitle'));?></title>
 
 <link rel="stylesheet" type="text/css" href="<?=$this->_controller->getEnv()->getMediaRequestDir();?>/Frontend/Styles/Global.css" />
 <link rel="stylesheet" type="text/css" href="<?=$this->_controller->getEnv()->getMediaRequestDir();?>/Frontend/Styles/Lists.css" />
@@ -35,8 +35,8 @@
 <?=$this->SECTIONS->COMMENTS->FILTER->hiddens;?>
 <?foreach($this->SECTIONS->COMMENTS->FILTER->ELEMENTS as $v):?><?=$v;?><?endforeach;?>
 
-<input type="button" value="<?=$this->html($this->DICTIONARY->LABELS->filterSectionSubmit);?>" onclick="document.filterform.submit();" />
-<input type="button" value="<?=$this->html($this->DICTIONARY->LABELS->filterSectionReset);?>" onclick="window.location = '<?=$this->SECTIONS->COMMENTS->FILTER->uriReset;?>';" />
+<input type="button" value="<?=$this->html($this->translate('labelsFilterSectionSubmit'));?>" onclick="document.filterform.submit();" />
+<input type="button" value="<?=$this->html($this->translate('labelsFilterSectionReset'));?>" onclick="window.location = '<?=$this->SECTIONS->COMMENTS->FILTER->uriReset;?>';" />
 
 </form>
 
@@ -60,20 +60,20 @@
 
 Sort By:
 
-<a href="<?=$this->SECTIONS->COMMENTS->SORTING->QUERIES->comment;?>" comment="<?=$this->html($this->DICTIONARY->LABELS->listformColumnSortHref);?>"><?=$this->html($this->DICTIONARY->COLUMNS->comment);?></a>
+<a href="<?=$this->SECTIONS->COMMENTS->SORTING->QUERIES->comment;?>" comment="<?=$this->html($this->translate('labelsListformColumnSortHref'));?>"><?=$this->html($this->translate('columnsComment'));?></a>
 &nbsp;<img src="<?=$this->_controller->getEnv()->getMediaRequestDir();?>/Backend/Pics/Sort_<?=$this->SECTIONS->COMMENTS->SORTING->COLUMNS->comment;?>.gif" width="8" height="10" border="0" alt="" />
 
-<a href="<?=$this->SECTIONS->COMMENTS->SORTING->QUERIES->name;?>" name="<?=$this->html($this->DICTIONARY->LABELS->listformColumnSortHref);?>"><?=$this->html($this->DICTIONARY->COLUMNS->name);?></a>
+<a href="<?=$this->SECTIONS->COMMENTS->SORTING->QUERIES->name;?>" name="<?=$this->html($this->translate('labelsListformColumnSortHref'));?>"><?=$this->html($this->translate('columnsName'));?></a>
 &nbsp;<img src="<?=$this->_controller->getEnv()->getMediaRequestDir();?>/Backend/Pics/Sort_<?=$this->SECTIONS->COMMENTS->SORTING->COLUMNS->name;?>.gif" width="8" height="10" border="0" alt="" />
 
-<a href="<?=$this->SECTIONS->COMMENTS->SORTING->QUERIES->firstname;?>" firstname="<?=$this->html($this->DICTIONARY->LABELS->listformColumnSortHref);?>"><?=$this->html($this->DICTIONARY->COLUMNS->firstname);?></a>
+<a href="<?=$this->SECTIONS->COMMENTS->SORTING->QUERIES->firstname;?>" firstname="<?=$this->html($this->translate('labelsListformColumnSortHref'));?>"><?=$this->html($this->translate('columnsFirstname'));?></a>
 &nbsp;<img src="<?=$this->_controller->getEnv()->getMediaRequestDir();?>/Backend/Pics/Sort_<?=$this->SECTIONS->COMMENTS->SORTING->COLUMNS->firstname;?>.gif" width="8" height="10" border="0" alt="" />
 
-<a href="<?=$this->SECTIONS->COMMENTS->SORTING->QUERIES->lastname;?>" lastname="<?=$this->html($this->DICTIONARY->LABELS->listformColumnSortHref);?>"><?=$this->html($this->DICTIONARY->COLUMNS->lastname);?></a>
+<a href="<?=$this->SECTIONS->COMMENTS->SORTING->QUERIES->lastname;?>" lastname="<?=$this->html($this->translate('labelsListformColumnSortHref'));?>"><?=$this->html($this->translate('columnsLastname'));?></a>
 &nbsp;<img src="<?=$this->_controller->getEnv()->getMediaRequestDir();?>/Backend/Pics/Sort_<?=$this->SECTIONS->COMMENTS->SORTING->COLUMNS->lastname;?>.gif" width="8" height="10" border="0" alt="" />
 
 
-<a href="<?=$this->SECTIONS->COMMENTS->SORTING->QUERIES->cdate;?>"><?=$this->html($this->DICTIONARY->COLUMNS->cdate);?>&nbsp;<img src="<?=$this->_controller->getEnv()->getMediaRequestDir();?>/Backend/Pics/Sort_<?=$this->SECTIONS->COMMENTS->SORTING->COLUMNS->cdate;?>.gif" width="8" height="10" border="0" alt="" /></a>
+<a href="<?=$this->SECTIONS->COMMENTS->SORTING->QUERIES->cdate;?>"><?=$this->html($this->translate('columnsCdate'));?>&nbsp;<img src="<?=$this->_controller->getEnv()->getMediaRequestDir();?>/Backend/Pics/Sort_<?=$this->SECTIONS->COMMENTS->SORTING->COLUMNS->cdate;?>.gif" width="8" height="10" border="0" alt="" /></a>
 
 
 
@@ -92,12 +92,12 @@ Sort By:
 <?$pagerLastItem = $this->SECTIONS->COMMENTS->PAGER->lastItem;?>
 <?$pagerUriPrevPage = $this->SECTIONS->COMMENTS->PAGER->uriPrevPage;?>
 <?$pagerUriNextPage = $this->SECTIONS->COMMENTS->PAGER->uriNextPage;?>
-<?$pagerPrevLabel = $this->DICTIONARY->LABELS->pagerPreviousPage;?>
-<?$pagerNextLabel = $this->DICTIONARY->LABELS->pagerNextPage;?>
-<?$pagerOfLabel = $this->DICTIONARY->LABELS->pagerOf;?>
-<?$pagerPageLabel = $this->DICTIONARY->LABELS->pagerPage;?>
-<?$pagerPagesLabel = $this->DICTIONARY->LABELS->pagerPages;?>
-<?$pagerEntityLabel = $this->DICTIONARY->LABELS->pagerEntity;?>
+<?$pagerPrevLabel = $this->translate('labelsPagerPreviousPage');?>
+<?$pagerNextLabel = $this->translate('labelsPagerNextPage');?>
+<?$pagerOfLabel = $this->translate('labelsPagerOf');?>
+<?$pagerPageLabel = $this->translate('labelsPagerPage');?>
+<?$pagerPagesLabel = $this->translate('labelsPagerPages');?>
+<?$pagerEntityLabel = $this->translate('labelsPagerEntity');?>
 <?$pagerValClass = "pagerVal";?>
 <?$pagerTextClass = "pagerText";?>
 <?$pagerHrefPrevClass = "pagerHrefPrev";?>

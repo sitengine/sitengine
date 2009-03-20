@@ -76,7 +76,7 @@ abstract class Sitengine_Permiso_Backend_Groups_FormView extends Sitengine_View
 			'QUERIES' => $this->_queries,
 			'SECTIONS' => $this->_sections,
 			'SETTINGS' => $this->_settings,
-			'DICTIONARY' => $this->_controller->getDictionary()->getData()
+			#'DICTIONARY' => $this->_controller->getTranslate()->translateGroup('data')
 		);
     }
     
@@ -143,7 +143,7 @@ abstract class Sitengine_Permiso_Backend_Groups_FormView extends Sitengine_View
                 $uri = $this->_controller->getRequest()->getBasePath().'/'.$route->assemble($args, true);
                 $childActions['membersIndex'] = array(
                     'uri' => $uri,
-                    'label' => $this->_controller->getDictionary()->getFromFormView('childActionsSectionMembersIndex'),
+                    'label' => $this->_controller->getTranslate()->translate('formViewChildActionsSectionMembersIndex'),
                     'postfix' => ' ('.$this->_controller->getViewHelper()->countMembers($stored['id']).')'
                 );
                 
@@ -182,7 +182,7 @@ abstract class Sitengine_Permiso_Backend_Groups_FormView extends Sitengine_View
                 $route = $this->_controller->getFrontController()->getRouter()->getRoute(Sitengine_Permiso_Backend_Front::ROUTE_GROUPS_NEW);
                 $submitUri = $this->_controller->getRequest()->getBasePath().'/'.$route->assemble($args, true);
                 
-                $title = $this->_controller->getDictionary()->getFromFormView('insertTitle');
+                $title = $this->_controller->getTranslate()->translate('formViewInsertTitle');
             }
             #Sitengine_Debug::print_r($data);
 			

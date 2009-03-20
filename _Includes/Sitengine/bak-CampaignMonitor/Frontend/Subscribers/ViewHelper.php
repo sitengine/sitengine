@@ -81,13 +81,13 @@ abstract class Sitengine_CampaignMonitor_Frontend_Subscribers_ViewHelper extends
 			
 			require_once 'Sitengine/Env/Preferences/Sections.php';
 			
-			if(sizeof($this->_controller->getDictionary()->getAvailableLanguages()) > 1) {
+			if(sizeof($this->_controller->getTranslate()->getAvailableLanguages()) > 1) {
 				$this->setSection(
 					'LANGUAGE',
 					Sitengine_Env_Preferences_Sections::getLanguageForm(
 						$this->_controller->getPreferences()->getLanguage(),
-						$this->_controller->getDictionary()->getAvailableLanguages(),
-						$this->_controller->getDictionary()->getLocLangs()
+						$this->_controller->getTranslate()->getAvailableLanguages(),
+						$this->_controller->getTranslate()->translateGroup('loclangs')
 					)
 				);
 			}

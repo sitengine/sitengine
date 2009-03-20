@@ -43,7 +43,7 @@ abstract class Sitengine_Permiso_Backend_Users_Memberships_Controller extends Si
     protected $_locale = null;
     protected $_permiso = null;
     protected $_namespace = null;
-    protected $_dictionary = null;
+    protected $_translate = null;
     protected $_entity = null;
     protected $_markedRows = array();
     protected $_templateIndexView = null;
@@ -58,7 +58,7 @@ abstract class Sitengine_Permiso_Backend_Users_Memberships_Controller extends Si
     public function getLocale() { return $this->_locale; }
     public function getPermiso() { return $this->_permiso; }
     public function getNamespace() { return $this->_namespace; }
-    public function getDictionary() { return $this->_dictionary; }
+    public function getTranslate() { return $this->_translate; }
     public function getEntity() { return $this->_entity; }
     public function getMarkedRows() { return $this->_markedRows; }
     
@@ -114,7 +114,7 @@ abstract class Sitengine_Permiso_Backend_Users_Memberships_Controller extends Si
 			$this->_preferences = Sitengine_Env_Preferences::getInstance();
 			$this->_locale = $this->getEnv()->getLocaleInstance();
 			$this->_permiso = $this->getFrontController()->getPermisoPackage()->start($this->getDatabase());
-        	$this->_dictionary = $this->_getDictionaryInstance();
+        	$this->_translate = $this->_getTranslateInstance();
         	$this->_entity = $this->_getEntityModelInstance();
 			require_once 'Zend/Session/Namespace.php';
     		$this->_namespace = new Zend_Session_Namespace(get_class($this));
@@ -183,22 +183,23 @@ abstract class Sitengine_Permiso_Backend_Users_Memberships_Controller extends Si
 	
 	
 	
-    protected function _getDictionaryInstance()
+    protected function _getTranslateInstance()
     {
-        require_once 'Sitengine/Dictionary.php';
-        $dictionary = new Sitengine_Dictionary($this->getEnv()->getDebugControl());
-        
-        # english
-        $dictionary->addFiles(
-            Sitengine_Env::LANGUAGE_EN,
-            array(
-				$this->getEnv()->getIncludesDir().'/Sitengine/Env/_Dictionary/global.xml',
-				$this->getEnv()->getIncludesDir().'/Sitengine/Env/_Dictionary/en.xml',
-				$this->getEnv()->getIncludesDir().'/Sitengine/Permiso/Backend/Users/Memberships/_Dictionary/en.xml',
-				$this->getEnv()->getIncludesDir().'/Sitengine/Permiso/Backend/_Dictionary/en.xml'
-			)
-        );
-        return $dictionary;
+    	require_once 'Sitengine/Translate.php';
+		$translate = new Sitengine_Translate(
+			Sitengine_Translate::AN_XML,
+			$this->getEnv()->getIncludesDir().'/Sitengine/Env/_Dictionary/global.xml',
+			Sitengine_Env::LANGUAGE_EN
+		);
+		
+		$en = array(
+			$this->getEnv()->getIncludesDir().'/Sitengine/Env/_Dictionary/en.xml',
+			$this->getEnv()->getIncludesDir().'/Sitengine/Permiso/Backend/Users/Memberships/_Dictionary/en.xml',
+			$this->getEnv()->getIncludesDir().'/Sitengine/Permiso/Backend/_Dictionary/en.xml'
+		);
+		
+		$translate->addMergeTranslation($en, Sitengine_Env::LANGUAGE_EN);
+		return $translate;
     }
     
     
@@ -251,8 +252,17 @@ abstract class Sitengine_Permiso_Backend_Users_Memberships_Controller extends Si
 					Sitengine_Debug::action($this->getPreferences()->getDebugMode());
 				}
 				
-				$this->getLocale()->setLocale($this->getPreferences()->getLanguage());
-				$this->getDictionary()->readFiles($this->getPreferences()->getLanguage());
+				$this->getLocale()->setLocale(Sitengine_Env::LANGUAGE_EN);
+				
+				if($this->getTranslate()->isAvailable($this->getPreferences()->getLanguage()))
+				{
+					$this->getLocale()->setLocale($this->getPreferences()->getLanguage());
+					$this->getTranslate()->setLocale($this->getPreferences()->getLanguage());
+				}
+				
+				require_once 'Zend/Registry.php';
+				Zend_Registry::set('Zend_Translate', $this->getTranslate()->getAdapter());
+				
 				$this->getStatus()->restore();
 			}
 		}
@@ -429,7 +439,7 @@ abstract class Sitengine_Permiso_Backend_Users_Memberships_Controller extends Si
             {
                 $this->getStatus()->set(
                 	Sitengine_Env::STATUS_ERRORUPDATE,
-                	$this->getDictionary()->getFromStatus(Sitengine_Env::STATUS_ERRORUPDATE),
+                	$this->getTranslate()->translate(Sitengine_Env::STATUS_ERRORUPDATE),
                 	true
                 );
                 return $this->_goToAction(self::ACTION_UPDATE);
@@ -438,7 +448,7 @@ abstract class Sitengine_Permiso_Backend_Users_Memberships_Controller extends Si
                 $this->getEntity()->refresh($data);
                 $this->getStatus()->set(
                 	Sitengine_Env::STATUS_OKUPDATE,
-                	$this->getDictionary()->getFromStatus(Sitengine_Env::STATUS_OKUPDATE),
+                	$this->getTranslate()->translate(Sitengine_Env::STATUS_OKUPDATE),
                 	false
                 );
             }
@@ -502,7 +512,7 @@ abstract class Sitengine_Permiso_Backend_Users_Memberships_Controller extends Si
             if(is_null($data)) {
                 $this->getStatus()->set(
                 	Sitengine_Env::STATUS_ERRORINSERT,
-                	$this->getDictionary()->getFromStatus(Sitengine_Env::STATUS_ERRORINSERT),
+                	$this->getTranslate()->translate(Sitengine_Env::STATUS_ERRORINSERT),
                 	true
                 );
                 return $this->_goToAction(self::ACTION_INSERT);
@@ -510,7 +520,7 @@ abstract class Sitengine_Permiso_Backend_Users_Memberships_Controller extends Si
             else {
                 $this->getStatus()->set(
                 	Sitengine_Env::STATUS_OKINSERT,
-                	$this->getDictionary()->getFromStatus(Sitengine_Env::STATUS_OKINSERT),
+                	$this->getTranslate()->translate(Sitengine_Env::STATUS_OKINSERT),
                 	false
                 );
                 $this->getStatus()->save();
@@ -579,7 +589,7 @@ abstract class Sitengine_Permiso_Backend_Users_Memberships_Controller extends Si
                 if($deleted < sizeof($rows)) {
                     $this->getStatus()->set(
                     	Sitengine_Env::STATUS_ERRORBATCHTRASH,
-                    	$this->getDictionary()->getFromStatus(Sitengine_Env::STATUS_ERRORBATCHTRASH),
+                    	$this->getTranslate()->translate(Sitengine_Env::STATUS_ERRORBATCHTRASH),
                     	true
                     );
                     return $this->_goToAction(self::ACTION_INDEX);
@@ -587,7 +597,7 @@ abstract class Sitengine_Permiso_Backend_Users_Memberships_Controller extends Si
                 else if(sizeof($rows) > 0) {
                     $this->getStatus()->set(
                     	Sitengine_Env::STATUS_OKBATCHTRASH,
-                    	$this->getDictionary()->getFromStatus(Sitengine_Env::STATUS_OKBATCHTRASH),
+                    	$this->getTranslate()->translate(Sitengine_Env::STATUS_OKBATCHTRASH),
                     	false
                     );
                 }
@@ -663,7 +673,7 @@ abstract class Sitengine_Permiso_Backend_Users_Memberships_Controller extends Si
                 if($updated < sizeof($rows)) {
                     $this->getStatus()->set(
                     	Sitengine_Env::STATUS_ERRORBATCHUPDATE,
-                    	$this->getDictionary()->getFromStatus(Sitengine_Env::STATUS_ERRORBATCHUPDATE),
+                    	$this->getTranslate()->translate(Sitengine_Env::STATUS_ERRORBATCHUPDATE),
                     	true
                     );
                     return $this->_goToAction(self::ACTION_INDEX);
@@ -671,7 +681,7 @@ abstract class Sitengine_Permiso_Backend_Users_Memberships_Controller extends Si
                 else if(sizeof($rows) > 0) {
                     $this->getStatus()->set(
                     	Sitengine_Env::STATUS_OKBATCHUPDATE,
-                    	$this->getDictionary()->getFromStatus(Sitengine_Env::STATUS_OKBATCHUPDATE),
+                    	$this->getTranslate()->translate(Sitengine_Env::STATUS_OKBATCHUPDATE),
                     	false
                     );
                 }

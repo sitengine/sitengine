@@ -87,7 +87,7 @@ abstract class Sitengine_Blog_Backend_Blogs_Posts_FormTextView extends Sitengine
 				#'ORGANIZATION' => $this->_controller->getPermiso()->getOrganization()->getData(),
 				#'USER' => $this->_controller->getPermiso()->getAuth()->getData(),
 				#'Auth' => $this->_controller->getPermiso()->getAuth(),
-				'DICTIONARY' => $this->_controller->getDictionary()->getData()
+				#'DICTIONARY' => $this->_controller->getTranslate()->translateGroup('data')
 			);
        	}
         catch (Exception $exception) {
@@ -203,7 +203,7 @@ abstract class Sitengine_Blog_Backend_Blogs_Posts_FormTextView extends Sitengine
 				$uri = $this->_controller->getRequest()->getBasePath().'/'.$route->assemble($args, true);
 				$childActions['fileList'] = array(
 					'uri' => $uri,
-					'label' => $this->_controller->getDictionary()->getFromFormTextView('childActionsSectionFilesIndex'),
+					'label' => $this->_controller->getTranslate()->translate('formtextviewChildActionsSectionFilesIndex'),
 					'postfix' => ' ('.$this->_controller->getViewHelper()->countFiles($stored['id']).')'
 				);
 				
@@ -215,7 +215,7 @@ abstract class Sitengine_Blog_Backend_Blogs_Posts_FormTextView extends Sitengine
 				$uri = $this->_controller->getRequest()->getBasePath().'/'.$route->assemble($args, true);
 				$childActions['fileInsert'] = array(
 					'uri' => $uri,
-					'label' => $this->_controller->getDictionary()->getFromFormTextView('childActionsSectionFilesInsert')
+					'label' => $this->_controller->getTranslate()->translate('formtextviewChildActionsSectionFilesInsert')
 				);
                 
                 
@@ -237,7 +237,7 @@ abstract class Sitengine_Blog_Backend_Blogs_Posts_FormTextView extends Sitengine
                 
                 $title = $stored['titleLang'.$translations->getIndex()];
                 $title = ($title!='') ? $title : $stored['titleLang0'];
-                $title = $this->_controller->getDictionary()->getFromFormTextView('updateTitle').' ('.$title.')';
+                $title = $this->_controller->getTranslate()->translate('formtextviewUpdateTitle').' ('.$title.')';
             }
             else
             {
@@ -270,7 +270,7 @@ abstract class Sitengine_Blog_Backend_Blogs_Posts_FormTextView extends Sitengine
                 $route = $this->_controller->getFrontController()->getRouter()->getRoute(Sitengine_Blog_Backend_Front::ROUTE_BLOGS_POSTS_NEW);
                 $submitUri = $this->_controller->getRequest()->getBasePath().'/'.$route->assemble($args, true);
                 
-                $title = $this->_controller->getDictionary()->getFromFormTextView('insertTitle');
+                $title = $this->_controller->getTranslate()->translate('formtextviewInsertTitle');
             }
             #Sitengine_Debug::print_r($data);
             
@@ -291,53 +291,53 @@ abstract class Sitengine_Blog_Backend_Blogs_Posts_FormTextView extends Sitengine
 				{
 					$n = Sitengine_Permiso::FIELD_UID;
 					$e = new Sitengine_Form_Element($n, $data[$n]);
-					$e->setClass('viewformSelect');
-					$e->setId('viewform'.$n);
+					$e->setClass('viewFormSelect');
+					$e->setId('viewForm'.$n);
 					$users = $this->_controller->getPermiso()->getDirectory()->getAllUsers();
 					$elements[$n] = $e->getSelect($users);
 					
 					$n = Sitengine_Permiso::FIELD_GID;
 					$e = new Sitengine_Form_Element($n, $data[$n]);
-					$e->setClass('viewformSelect');
-					$e->setId('viewform'.$n);
+					$e->setClass('viewFormSelect');
+					$e->setId('viewForm'.$n);
 					$groups = $this->_controller->getPermiso()->getDirectory()->getAllGroups();
-					$groups = array_merge($this->_controller->getDictionary()->getFromFieldvals(Sitengine_Permiso::FIELD_GID), $groups);
+					$groups = array_merge($this->_controller->getTranslate()->translateGroup('fieldValsGid'), $groups);
 					$elements[$n] = $e->getSelect($groups);
 					
 					$n = Sitengine_Permiso::FIELD_RAG;
 					$e = new Sitengine_Form_Element($n, '1');
-					$e->setClass('viewformCheckbox');
-					$e->setId('viewform'.$n);
+					$e->setClass('viewFormCheckbox');
+					$e->setId('viewForm'.$n);
 					$elements[$n] = $e->getCheckbox($data[$n]);
 					
 					$n = Sitengine_Permiso::FIELD_RAW;
 					$e = new Sitengine_Form_Element($n, '1');
-					$e->setClass('viewformCheckbox');
-					$e->setId('viewform'.$n);
+					$e->setClass('viewFormCheckbox');
+					$e->setId('viewForm'.$n);
 					$elements[$n] = $e->getCheckbox($data[$n]);
 					
 					$n = Sitengine_Permiso::FIELD_UAG;
 					$e = new Sitengine_Form_Element($n, '1');
-					$e->setClass('viewformCheckbox');
-					$e->setId('viewform'.$n);
+					$e->setClass('viewFormCheckbox');
+					$e->setId('viewForm'.$n);
 					$elements[$n] = $e->getCheckbox($data[$n]);
 					
 					$n = Sitengine_Permiso::FIELD_UAW;
 					$e = new Sitengine_Form_Element($n, '1');
-					$e->setClass('viewformCheckbox');
-					$e->setId('viewform'.$n);
+					$e->setClass('viewFormCheckbox');
+					$e->setId('viewForm'.$n);
 					$elements[$n] = $e->getCheckbox($data[$n]);
 					
 					$n = Sitengine_Permiso::FIELD_DAG;
 					$e = new Sitengine_Form_Element($n, '1');
-					$e->setClass('viewformCheckbox');
-					$e->setId('viewform'.$n);
+					$e->setClass('viewFormCheckbox');
+					$e->setId('viewForm'.$n);
 					$elements[$n] = $e->getCheckbox($data[$n]);
 					
 					$n = Sitengine_Permiso::FIELD_DAW;
 					$e = new Sitengine_Form_Element($n, '1');
-					$e->setClass('viewformCheckbox');
-					$e->setId('viewform'.$n);
+					$e->setClass('viewFormCheckbox');
+					$e->setId('viewForm'.$n);
 					$elements[$n] = $e->getCheckbox($data[$n]);
 				}
 				*/
@@ -345,8 +345,8 @@ abstract class Sitengine_Blog_Backend_Blogs_Posts_FormTextView extends Sitengine
 				/*
 				$n = 'titleLang'.$translations->getDefaultIndex();
 				$e = new Sitengine_Form_Element($n, $data[$n]);
-				$e->setClass('viewformInput');
-				$e->setId('viewform'.$n);
+				$e->setClass('viewFormInput');
+				$e->setId('viewForm'.$n);
 				$elements['title'] = $e->getText(40);
 				
 				$n = 'markupLang'.$translations->getDefaultIndex();
@@ -354,33 +354,33 @@ abstract class Sitengine_Blog_Backend_Blogs_Posts_FormTextView extends Sitengine
 				*/
 				$n = 'publish';
 				$e = new Sitengine_Form_Element($n, '1');
-				$e->setClass('viewformCheckbox');
-				$e->setId('viewform'.$n);
+				$e->setClass('viewFormCheckbox');
+				$e->setId('viewForm'.$n);
 				$elements[$n] = $e->getCheckbox($data[$n]);
 				/*
 				$n = 'file1Original';
 				$e = new Sitengine_Form_Element($n);
-				$e->setClass('viewformFile');
-				$e->setId('viewform'.$n);
+				$e->setClass('viewFormFile');
+				$e->setId('viewForm'.$n);
 				$elements[$n] = $e->getFile(40);
 				
 				$n = 'file1OriginalDelete';
 				$e = new Sitengine_Form_Element($n, '1');
-				$e->setClass('viewformCheckbox');
-				$e->setId('viewform'.$n);
+				$e->setClass('viewFormCheckbox');
+				$e->setId('viewForm'.$n);
 				$elements[$n] = $e->getCheckbox($data[$n]);
 				*/
             }
 			$n = 'titleLang'.$payloads->getTranslationIndex();
 			$e = new Sitengine_Form_Element($n, $data[$n]);
-			$e->setClass('viewformInput');
-			$e->setId('viewform'.$n);
+			$e->setClass('viewFormInput');
+			$e->setId('viewForm'.$n);
 			$elements['title'] = $e->getText(40);
 			
 			$n = 'teaserLang'.$payloads->getTranslationIndex();
 			$e = new Sitengine_Form_Element($n, $data[$n]);
-			$e->setClass('viewformTextarea');
-			$e->setId('viewform'.$n);
+			$e->setClass('viewFormTextarea');
+			$e->setId('viewForm'.$n);
 			$elements['teaser'] = $e->getTextarea(60, 5);
 			
 			#$n = 'markupLang'.$payloads->getTranslationIndex();
@@ -388,7 +388,7 @@ abstract class Sitengine_Blog_Backend_Blogs_Posts_FormTextView extends Sitengine
 			
 			$n = 'markupLang'.$payloads->getTranslationIndex();
 			$e = new Sitengine_Form_Element($n, $data[$n]);
-			$e->setClass('viewformTextarea');
+			$e->setClass('viewFormTextarea');
 			$e->setId('markupTextarea');
 			$elements['markup'] = $e->getTextarea(40, 10);
 			
@@ -396,13 +396,13 @@ abstract class Sitengine_Blog_Backend_Blogs_Posts_FormTextView extends Sitengine
             ########################################################################
             #### CONTENT PAYLOAD SECTION TITLE
             ########################################################################
-            $contentSectionTitle = $this->_controller->getDictionary()->getFromFormTextView('contentSectionTitleDefault');
+            $contentSectionTitle = $this->_controller->getTranslate()->translate('formtextviewContentSectionTitleDefault');
             
             if(sizeof($translations->get()) > 1)
             {
             	if(!$payloads->isMain()) { $symbol = $payloads->getTranslationSymbol(); }
             	else { $symbol = $translations->getDefaultSymbol(); }
-            	$contentSectionTitle .= ' ('.$this->_controller->getDictionary()->getFromLanguages($symbol).')';
+            	$contentSectionTitle .= ' ('.$this->_controller->getTranslate()->translate('languages'.ucfirst($symbol)).')';
             }
             
             
@@ -428,7 +428,7 @@ abstract class Sitengine_Blog_Backend_Blogs_Posts_FormTextView extends Sitengine
 				
 				$payloadNav[$payloads->getMainName()] = array(
 					'uri' => $uri,
-					'label' => $this->_controller->getDictionary()->getFromFormAudioView('payloadNavTitleMain')
+					'label' => $this->_controller->getTranslate()->translate('formaudioviewPayloadNavTitleMain')
 				);
 				
 				$count = 0;
@@ -452,9 +452,9 @@ abstract class Sitengine_Blog_Backend_Blogs_Posts_FormTextView extends Sitengine
 						$uri .= Sitengine_Controller_Request_Http::makeNameValueQuery($query);
 						
 						if(sizeof($translations->get()) > 1) {
-							$label = $this->_controller->getDictionary()->getFromLanguages($symbol);
+							$label = $this->_controller->getTranslate()->translate('languages'.ucfirst($symbol));
 						}else {
-							$label = $this->_controller->getDictionary()->getFromFormAudioView('contentSectionTitleDefault');
+							$label = $this->_controller->getTranslate()->translate('formaudioviewContentSectionTitleDefault');
 						}
 						
 						$payloadNav[$currentPayload] = array(

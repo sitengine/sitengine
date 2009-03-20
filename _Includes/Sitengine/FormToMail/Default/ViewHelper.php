@@ -80,18 +80,17 @@ abstract class Sitengine_FormToMail_Default_ViewHelper extends Sitengine_View
 			}
 			
 			require_once 'Sitengine/Env/Preferences/Sections.php';
-			/*
 			if(sizeof($this->_controller->getTranslate()->getAvailableLanguages()) > 1) {
 				$this->setSection(
 					'LANGUAGE',
 					Sitengine_Env_Preferences_Sections::getLanguageForm(
 						$this->_controller->getPreferences()->getLanguage(),
 						$this->_controller->getTranslate()->getAvailableLanguages(),
-						$this->_controller->getTranslate()->getLocLangs()
+						$this->_controller->getTranslate()->translateGroup('loclangs')
 					)
 				);
 			}
-			*/
+			
 			$this->setSection(
 				'TIMEZONE',
 				Sitengine_Env_Preferences_Sections::getTimezoneForm(

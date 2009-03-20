@@ -1,82 +1,49 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
-
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <dictionary name="dictionary">
-	
-    <group name="LABELS">
-        <item name="pageTitle">Permiso - Groups</item>
-        <item name="entityTitle">Permiso - Groups</item>
-        <item name="actionsSectionIndex">Show all Groups</item>
-        <item name="actionsSectionInsert">Create new Group</item>
-        <item name="columnSortHref">Click to sort the list by this column</item>
-    </group>
-    
-    
-    <group name="HELPS">
-        <item name="_index"> </item>
-        <item name="_update"> </item>
-        <item name="_insert"> </item>
-    </group>
-    
-    
-    <group name="INDEXVIEW">
-        <item name="title">Overview</item>
-        <item name="membersIndex">Show</item>
-        <item name="batchDeleteSubmit">Delete selected</item>
-        <item name="batchUpdateSubmit">Update list</item>
-        <item name="filterIsActive">Filtering is active for the current view</item>
-        <item name="noRecords">No Groups in database</item>
-        <item name="noMatchingRecords">No Groups match your criteria</item>
-        <item name="confirmDelete">Do you really want to delete the selected Groups?</item>
-        <item name="confirmUpdate">Do you really want to update all Groups in the list?</item>
-        <item name="filterSectionTitle">Filter</item>
-        <item name="filterSectionSubmit">Find</item>
-        <item name="filterSectionReset">Reset</item>
-        <item name="settingsSectionTitle">Settings</item>
-        <item name="settingsSectionSubmit">Set</item>
-        <item name="settingsSectionReset">Reset</item>
-        <item name="settingsSectionItemsPerPage">Items per page</item>
-    </group>
-    
-    
-    <group name="INDEXVIEWCOLUMNS">
-        <item name="name">Name</item>
-        <item name="locked">Locked</item>
-        <item name="enabled">Enabled</item>
-        <item name="memberAction">Members</item>
-    </group>
-    
-    
-    <group name="FORMVIEW">
-        <item name="childActionsSectionMembersIndex">Members</item>
-        <item name="insertTitle">New Group</item>
-        <item name="updateTitle">Update Group</item>
-        <item name="insertSubmit">Save</item>
-        <item name="updateSubmit">Save changes</item>
-    </group>
-    
-    
-    <group name="FORMVIEWFIELDS">
-        <item name="name">Name</item>
-        <item name="locked">Locked</item>
-        <item name="enabled">Enabled</item>
-    </group>
-    
-    
-    <group name="PAGER">
-        <item name="page">Page</item>
-        <item name="pages">Pages</item>
-        <item name="of">of</item>
-        <item name="entity">Records</item>
-        <item name="previousPage">Previous</item>
-        <item name="nextPage">Next</item>
-    </group>
-    
-    
-    <group name="HINTS">
-        <item name="invalidRequest">Invalid request</item>
-        <item name="nameExists">There is already a group with the same name</item>
-        <item name="nameRequired">Name: Input required</item>
-        <item name="nameInvalid">Only the characters a-z, A-Z and 0-9 are allowed in names</item>
-    </group>
-    
+	<item name="labelsPageTitle">Permiso - Groups</item>
+	<item name="labelsEntityTitle">Permiso - Groups</item>
+	<item name="labelsActionsSectionIndex">Show all Groups</item>
+	<item name="labelsActionsSectionInsert">Create new Group</item>
+	<item name="labelsColumnSortHref">Click to sort the list by this column</item>
+	<item name="helps_index"/>
+	<item name="helps_update"/>
+	<item name="helps_insert"/>
+	<item name="indexViewTitle">Overview</item>
+	<item name="indexViewMembersIndex">Show</item>
+	<item name="indexViewBatchDeleteSubmit">Delete selected</item>
+	<item name="indexViewBatchUpdateSubmit">Update list</item>
+	<item name="indexViewFilterIsActive">Filtering is active for the current view</item>
+	<item name="indexViewNoRecords">No Groups in database</item>
+	<item name="indexViewNoMatchingRecords">No Groups match your criteria</item>
+	<item name="indexViewConfirmDelete">Do you really want to delete the selected Groups?</item>
+	<item name="indexViewConfirmUpdate">Do you really want to update all Groups in the list?</item>
+	<item name="indexViewFilterSectionTitle">Filter</item>
+	<item name="indexViewFilterSectionSubmit">Find</item>
+	<item name="indexViewFilterSectionReset">Reset</item>
+	<item name="indexViewSettingsSectionTitle">Settings</item>
+	<item name="indexViewSettingsSectionSubmit">Set</item>
+	<item name="indexViewSettingsSectionReset">Reset</item>
+	<item name="indexViewSettingsSectionItemsPerPage">Items per page</item>
+	<item name="indexViewColumnsName">Name</item>
+	<item name="indexViewColumnsLocked">Locked</item>
+	<item name="indexViewColumnsEnabled">Enabled</item>
+	<item name="indexViewColumnsMemberAction">Members</item>
+	<item name="formViewChildActionsSectionMembersIndex">Members</item>
+	<item name="formViewInsertTitle">New Group</item>
+	<item name="formViewUpdateTitle">Update Group</item>
+	<item name="formViewInsertSubmit">Save</item>
+	<item name="formViewUpdateSubmit">Save changes</item>
+	<item name="formViewFieldsName">Name</item>
+	<item name="formViewFieldsLocked">Locked</item>
+	<item name="formViewFieldsEnabled">Enabled</item>
+	<item name="pagerPage">Page</item>
+	<item name="pagerPages">Pages</item>
+	<item name="pagerOf">of</item>
+	<item name="pagerEntity">Records</item>
+	<item name="pagerPreviousPage">Previous</item>
+	<item name="pagerNextPage">Next</item>
+	<item name="hintsInvalidRequest">Invalid request</item>
+	<item name="hintsNameExists">There is already a group with the same name</item>
+	<item name="hintsNameRequired">Name: Input required</item>
+	<item name="hintsNameInvalid">Only the characters a-z, A-Z and 0-9 are allowed in names</item>
 </dictionary>

@@ -1,12 +1,6 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
-
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <dictionary name="dictionary">
-    
-    <group name="LABELS">
-        <item name="backendHome">Home</item>
-        <item name="permisoBackendUsers">Benutzer</item>
-        <item name="permisoBackendGroups">Gruppen</item>
-    </group>
-
+	<item name="labelsBackendHome">Home</item>
+	<item name="labelsPermisoBackendUsers">Benutzer</item>
+	<item name="labelsPermisoBackendGroups">Gruppen</item>
 </dictionary>
-

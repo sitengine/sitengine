@@ -104,7 +104,7 @@ abstract class Sitengine_Blog_Backend_Blogs_Posts_Comments_Modifier
             {
             	$error = $this->_controller->getFrontController()->getBlogPackage()->getCommentsTable()->getError();
             	if($error === null) { return null; }
-            	$message = $this->_controller->getDictionary()->getFromHints($error);
+            	$message = $this->_controller->getTranslate()->translate('hints'.ucfirst($error));
     			$this->_controller->getStatus()->addHint('record', $message);
     			return null;
             }
@@ -129,12 +129,12 @@ abstract class Sitengine_Blog_Backend_Blogs_Posts_Comments_Modifier
             $data = array();
             
             if(!$this->_controller->getPermiso()->getDac()->updateAccessGranted($stored)) {
-                $message = $this->_controller->getDictionary()->getFromHints(Sitengine_Env::HINT_INVALID_ACTION);
+                $message = $this->_controller->getTranslate()->translate(Sitengine_Env::HINT_INVALID_ACTION);
                 $this->_controller->getStatus()->addHint('modifier', $message);
                 return null;
             }
             if($this->_controller->getRequest()->getPost('mdate') != $stored['mdate']) {
-                $message = $this->_controller->getDictionary()->getFromHints(Sitengine_Env::HINT_DATA_EXPIRED);
+                $message = $this->_controller->getTranslate()->translate(Sitengine_Env::HINT_DATA_EXPIRED);
                 $this->_controller->getStatus()->addHint('modifier', $message);
                 return null;
             }
@@ -180,7 +180,7 @@ abstract class Sitengine_Blog_Backend_Blogs_Posts_Comments_Modifier
             {
             	$error = $this->_controller->getFrontController()->getBlogPackage()->getCommentsTable()->getError();
             	if($error === null) { return null; }
-            	$message = $this->_controller->getDictionary()->getFromHints($error);
+            	$message = $this->_controller->getTranslate()->translate('hints'.ucfirst($error));
     			$this->_controller->getStatus()->addHint('record', $message);
     			return null;
             }
@@ -199,13 +199,13 @@ abstract class Sitengine_Blog_Backend_Blogs_Posts_Comments_Modifier
     {
 		$name = 'gid';
 		if($this->_controller->getRequest()->getPost($name)==Sitengine_Blog_Backend_Blogs_Posts_Comments_Controller::VALUE_NONESELECTED) {
-			$message = $this->_controller->getDictionary()->getFromHints('gidRequired');
+			$message = $this->_controller->getTranslate()->translate('hintsGidRequired');
 			$this->_controller->getStatus()->addHint($name, $message);
 		}
 		
 		$name = 'comment';
 		if(Sitengine_Validator::nada($this->_controller->getRequest()->getPost($name), Sitengine_Blog_Backend_Blogs_Posts_Comments_Controller::VALUE_NONESELECTED)) {
-			$message = $this->_controller->getDictionary()->getFromHints('commentRequired');
+			$message = $this->_controller->getTranslate()->translate('hintsCommentRequired');
 			$this->_controller->getStatus()->addHint($name, $message);
 		}
         return (!$this->_controller->getStatus()->hasHints());

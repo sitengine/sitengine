@@ -76,7 +76,7 @@ abstract class Sitengine_Sitemap_Backend_ViewHelper extends Sitengine_View {
 				'GLOBALNAV',
 				$this->_controller->getFrontController()->getGlobalNavSection(
 					$this->_controller->getPermiso(),
-					$this->_controller->getDictionary(),
+					$this->_controller->getTranslate(),
 					$this->_queries,
 					'sitemapBackend'
 				)
@@ -99,13 +99,13 @@ abstract class Sitengine_Sitemap_Backend_ViewHelper extends Sitengine_View {
 			
 			require_once 'Sitengine/Env/Preferences/Sections.php';
 			
-			if(sizeof($this->_controller->getDictionary()->getAvailableLanguages()) > 1) {
+			if(sizeof($this->_controller->getTranslate()->getAvailableLanguages()) > 1) {
 				$this->setSection(
 					'LANGUAGE',
 					Sitengine_Env_Preferences_Sections::getLanguageForm(
 						$this->_controller->getPreferences()->getLanguage(),
-						$this->_controller->getDictionary()->getAvailableLanguages(),
-						$this->_controller->getDictionary()->getLocLangs(),
+						$this->_controller->getTranslate()->getAvailableLanguages(),
+						$this->_controller->getTranslate()->translateGroup('loclangs'),
 						'language'
 					)
 				);
@@ -219,46 +219,46 @@ abstract class Sitengine_Sitemap_Backend_ViewHelper extends Sitengine_View {
                 
                 $actionsBack = array(
                     'uri' => $uriBack,
-                    'label' => $this->_controller->getDictionary()->getFromLabels('actionsBack')
+                    'label' => $this->_controller->getTranslate()->translate('labelsActionsBack')
                 );
             }
             
             $actionsSearch = array(
                 'uri' => $uriSearch,
-                'label' => $this->_controller->getDictionary()->getFromLabels('actionsSearch')
+                'label' => $this->_controller->getTranslate()->translate('labelsActionsSearch')
             );
             $actionsList = array(
                 'uri' => $uriIndex,
-                'label' => $this->_controller->getDictionary()->getFromLabels('actionsList'),
+                'label' => $this->_controller->getTranslate()->translate('labelsActionsList'),
                 'postfix' => $childCount
             );
             $actionsNewSnippet = array(
                 'uri' => $uriNewSnippet,
-                'label' => $this->_controller->getDictionary()->getFromLabels('actionsNewSnippet')
+                'label' => $this->_controller->getTranslate()->translate('labelsActionsNewSnippet')
             );
             $actionsNewLayer = array(
                 'uri' => $uriNewLayer,
-                'label' => $this->_controller->getDictionary()->getFromLabels('actionsNewLayer')
+                'label' => $this->_controller->getTranslate()->translate('labelsActionsNewLayer')
             );
             $actionsNewFile = array(
                 'uri' => $uriNewFile,
-                'label' => $this->_controller->getDictionary()->getFromLabels('actionsNewFile')
+                'label' => $this->_controller->getTranslate()->translate('labelsActionsNewFile')
             );
             $actionsNewPage = array(
                 'uri' => $uriNewPage,
-                'label' => $this->_controller->getDictionary()->getFromLabels('actionsNewPage')
+                'label' => $this->_controller->getTranslate()->translate('labelsActionsNewPage')
             );
             /*
             $actionsNewMask = array(
                 'uri' => $uriNewMask,
-                'label' => $this->_controller->getDictionary()->getFromLabels('actionsNewMask')
+                'label' => $this->_controller->getTranslate()->translate('labelsActionsNewMask')
             );
             */
             
             
             if(!$subject) {
                 $type = '';
-                $title = $this->_controller->getDictionary()->getFromLabels('entityTitle');
+                $title = $this->_controller->getTranslate()->translate('labelsEntityTitle');
                 $uriUpdate = '';
                 $actions = array($actionsList, $actionsNewLayer, $actionsNewPage, $actionsNewSnippet, $actionsNewFile, $actionsSearch);
             }
@@ -296,7 +296,7 @@ abstract class Sitengine_Sitemap_Backend_ViewHelper extends Sitengine_View {
                     'type' => $type,
                     'title' => $title,
                     'uri' => $uriUpdate,
-                    'help' => $this->_controller->getDictionary()->getFromHelps($this->_controller->getRequest()->getActionName())
+                    'help' => ''
                 )
             );
             
@@ -465,7 +465,7 @@ abstract class Sitengine_Sitemap_Backend_ViewHelper extends Sitengine_View {
             $uriIndex = $this->_controller->getRequest()->getBasePath().'/'.$route->assemble($args, true);
                 
             $data[] = array(
-                'name' => $this->_controller->getDictionary()->getFromBreadcrumbs('pageEntity'),
+                'name' => $this->_controller->getTranslate()->translate('breadcrumbsPageEntity'),
                 'uriIndex' => $uriIndex
             );
             

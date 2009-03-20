@@ -83,13 +83,13 @@ abstract class Sitengine_Permiso_Frontend_User_ViewHelper extends Sitengine_View
 			
 			require_once 'Sitengine/Env/Preferences/Sections.php';
 			
-			if(sizeof($this->_controller->getDictionary()->getAvailableLanguages()) > 1) {
+			if(sizeof($this->_controller->getTranslate()->getAvailableLanguages()) > 1) {
 				$this->setSection(
 					'LANGUAGE',
 					Sitengine_Env_Preferences_Sections::getLanguageForm(
 						$this->_controller->getPreferences()->getLanguage(),
-						$this->_controller->getDictionary()->getAvailableLanguages(),
-						$this->_controller->getDictionary()->getLocLangs()
+						$this->_controller->getTranslate()->getAvailableLanguages(),
+						$this->_controller->getTranslate()->translateGroup('loclangs')
 					)
 				);
 			}

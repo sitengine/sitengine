@@ -8,7 +8,7 @@
 <meta http-equiv="Pragma" content="no-cache" />
 <meta name="robots" content="noindex, nofollow" />
 
-<title>Sitengine - <?=$this->html($this->DICTIONARY->LABELS->pageTitle);?></title>
+<title>Sitengine - <?=$this->html($this->translate('labelsPageTitle'));?></title>
 
 <link rel="stylesheet" type="text/css" href="<?=$this->_controller->getEnv()->getMediaRequestDir();?>/Frontend/Styles/Global.css" />
 <link rel="stylesheet" type="text/css" href="<?=$this->_controller->getEnv()->getMediaRequestDir();?>/Frontend/Styles/Lists.css" />
@@ -54,8 +54,8 @@
 <?=$this->SECTIONS->FILES->FILTER->hiddens;?>
 <?foreach($this->SECTIONS->FILES->FILTER->ELEMENTS as $v):?><?=$v;?><?endforeach;?>
 
-<input type="button" value="<?=$this->html($this->DICTIONARY->LABELS->filterSectionSubmit);?>" onclick="document.filterform.submit();" />
-<input type="button" value="<?=$this->html($this->DICTIONARY->LABELS->filterSectionReset);?>" onclick="window.location = '<?=$this->SECTIONS->FILES->FILTER->uriReset;?>';" />
+<input type="button" value="<?=$this->html($this->translate('labelsFilterSectionSubmit'));?>" onclick="document.filterform.submit();" />
+<input type="button" value="<?=$this->html($this->translate('labelsFilterSectionReset'));?>" onclick="window.location = '<?=$this->SECTIONS->FILES->FILTER->uriReset;?>';" />
 
 </form>
 </div>
@@ -71,7 +71,7 @@
 
 
 <div class="listformNoRecords">
-<span><?=$this->html($this->DICTIONARY->LABELS->listformNoUploads);?></span>
+<span><?=$this->html($this->translate('labelsListformNoUploads'));?></span>
 </div>
 
 
@@ -102,12 +102,12 @@
 <?$pagerLastItem = $this->SECTIONS->FILES->PAGER->lastItem;?>
 <?$pagerUriPrevPage = $this->SECTIONS->FILES->PAGER->uriPrevPage;?>
 <?$pagerUriNextPage = $this->SECTIONS->FILES->PAGER->uriNextPage;?>
-<?$pagerPrevLabel = $this->DICTIONARY->LABELS->pagerPreviousPage;?>
-<?$pagerNextLabel = $this->DICTIONARY->LABELS->pagerNextPage;?>
-<?$pagerOfLabel = $this->DICTIONARY->LABELS->pagerOf;?>
-<?$pagerPageLabel = $this->DICTIONARY->LABELS->pagerPage;?>
-<?$pagerPagesLabel = $this->DICTIONARY->LABELS->pagerPages;?>
-<?$pagerEntityLabel = $this->DICTIONARY->LABELS->pagerEntity;?>
+<?$pagerPrevLabel = $this->translate('labelsPagerPreviousPage');?>
+<?$pagerNextLabel = $this->translate('labelsPagerNextPage');?>
+<?$pagerOfLabel = $this->translate('labelsPagerOf');?>
+<?$pagerPageLabel = $this->translate('labelsPagerPage');?>
+<?$pagerPagesLabel = $this->translate('labelsPagerPages');?>
+<?$pagerEntityLabel = $this->translate('labelsPagerEntity');?>
 <?$pagerValClass = "pagerVal";?>
 <?$pagerTextClass = "pagerText";?>
 <?$pagerHrefPrevClass = "pagerHrefPrev";?>
@@ -136,9 +136,9 @@
 
 <tr class="listformTitleRow">
 <th valign="top" class="listformCheckboxCell"><input type="checkbox" onclick="setCheckboxes(this.checked,document.listform,'SELECTROWITEM');" /></th>
-<th valign="top"><?=$this->html($this->DICTIONARY->COLUMNS->name);?></th>
-<th valign="top" class="listformNumberCell"><?=$this->html($this->DICTIONARY->COLUMNS->size);?></th>
-<th valign="top" class="listformNumberCell"><?=$this->html($this->DICTIONARY->COLUMNS->udate);?></th>
+<th valign="top"><?=$this->html($this->translate('columnsName'));?></th>
+<th valign="top" class="listformNumberCell"><?=$this->html($this->translate('columnsSize'));?></th>
+<th valign="top" class="listformNumberCell"><?=$this->html($this->translate('columnsUdate'));?></th>
 
 </tr>
 
@@ -177,9 +177,9 @@
 
 <tr class="listformTitleRow">
 <th valign="top" class="listformCheckboxCell"><input type="checkbox" onclick="setCheckboxes(this.checked,document.listform,'SELECTROWITEM');" /></th>
-<th valign="top"><?=$this->html($this->DICTIONARY->COLUMNS->name);?></th>
-<th valign="top" class="listformNumberCell"><?=$this->html($this->DICTIONARY->COLUMNS->size);?></th>
-<th valign="top" class="listformNumberCell"><?=$this->html($this->DICTIONARY->COLUMNS->udate);?></th>
+<th valign="top"><?=$this->html($this->translate('columnsName'));?></th>
+<th valign="top" class="listformNumberCell"><?=$this->html($this->translate('columnsSize'));?></th>
+<th valign="top" class="listformNumberCell"><?=$this->html($this->translate('columnsUdate'));?></th>
 </tr>
 
 </table>
@@ -197,8 +197,8 @@
 
 <table width="100%" class="listControlsBottom"><tr><td valign="top">
 
-<input type="button" value="<?=$this->html($this->DICTIONARY->LABELS->listformBatchAssignSubmit);?>" onclick="assignConfirmSubmit(document.listform, '<?=$this->SECTIONS->FILES->METHODS->doBatchAssign;?>', '<?=$this->SECTIONS->FILES->URIS->submitDoBatchAssign;?>', '<?=$this->DICTIONARY->LABELS->listformConfirmAssign;?>');" />
-<input type="button" value="<?=$this->html($this->DICTIONARY->LABELS->listformBatchUnlinkSubmit);?>" onclick="assignConfirmSubmit(document.listform, '<?=$this->SECTIONS->FILES->METHODS->doBatchUnlink;?>', '<?=$this->SECTIONS->FILES->URIS->submitDoBatchUnlink;?>', '<?=$this->DICTIONARY->LABELS->listformConfirmUnlink;?>');" />
+<input type="button" value="<?=$this->html($this->translate('labelsListformBatchAssignSubmit'));?>" onclick="assignConfirmSubmit(document.listform, '<?=$this->SECTIONS->FILES->METHODS->doBatchAssign;?>', '<?=$this->SECTIONS->FILES->URIS->submitDoBatchAssign;?>', '<?=$this->translate('labelsListformConfirmAssign');?>');" />
+<input type="button" value="<?=$this->html($this->translate('labelsListformBatchUnlinkSubmit'));?>" onclick="assignConfirmSubmit(document.listform, '<?=$this->SECTIONS->FILES->METHODS->doBatchUnlink;?>', '<?=$this->SECTIONS->FILES->URIS->submitDoBatchUnlink;?>', '<?=$this->translate('labelsListformConfirmUnlink');?>');" />
 
 </td><td valign="top" align="right">
 

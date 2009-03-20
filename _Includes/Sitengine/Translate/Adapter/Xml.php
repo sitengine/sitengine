@@ -159,6 +159,17 @@ class Sitengine_Translate_Adapter_Xml extends Zend_Translate_Adapter
 	}
 	
 	
+	public function getAvailableLanguages()
+	{
+		$languages = array();
+		foreach($this->_translate as $language => $data)
+		{
+			$languages[] = $language;
+		}
+		return $languages;
+	}
+	
+	
 	protected function _merge(Sitengine_Translate_Adapter_Xml $adapter)
 	{
 		$tables = $adapter->getTranslationTable();
@@ -191,14 +202,14 @@ class Sitengine_Translate_Adapter_Xml extends Zend_Translate_Adapter
 	{
 		foreach($files as $file)
 		{
-			$translate = new Sitengine_Translate(Sitengine_Translate::AN_XLIFF, $file, $locale, $options);
+			$translate = new Sitengine_Translate(Sitengine_Translate::AN_XML, $file, $locale, $options);
 			$this->_merge($translate->getAdapter());
 		}
 	}
 	
 	
 	
-	public function getGroup($prefix, $locale = null)
+	public function translateGroup($prefix, $locale = null)
 	{
 		if($locale === null)
 		{
@@ -241,5 +252,6 @@ class Sitengine_Translate_Adapter_Xml extends Zend_Translate_Adapter
 		}
 		return $group;
 	}
+	
 }
 ?>

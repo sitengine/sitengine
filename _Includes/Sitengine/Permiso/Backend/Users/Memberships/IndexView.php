@@ -70,7 +70,7 @@ abstract class Sitengine_Permiso_Backend_Users_Memberships_IndexView extends Sit
 			'QUERIES' => $this->_queries,
 			'SECTIONS' => $this->_sections,
 			'SETTINGS' => $this->_settings,
-			'DICTIONARY' => $this->_controller->getDictionary()->getData()
+			#'DICTIONARY' => $this->_controller->getTranslate()->translateGroup('data')
 		);
     }
     
@@ -111,7 +111,7 @@ abstract class Sitengine_Permiso_Backend_Users_Memberships_IndexView extends Sit
         	$valueIpp = ($valueIpp <= 100 && $valueIpp >= 1) ? $valueIpp : $defaultIpp;
             
             $ippValues = array(
-                '' => $this->_controller->getDictionary()->getFromIndexView('settingsSectionItemsPerPage'),
+                '' => $this->_controller->getTranslate()->translate('indexViewSettingsSectionItemsPerPage'),
                 5 => 5,
                 10 => 10,
                 20 => 20,
@@ -418,7 +418,7 @@ abstract class Sitengine_Permiso_Backend_Users_Memberships_IndexView extends Sit
             
             return array(
                 'hiddens' => implode('', $hiddens),
-                'title' => $this->_controller->getDictionary()->getFromIndexView('title'),
+                'title' => $this->_controller->getTranslate()->translate('indexViewTitle'),
                 'URIS' => $uris,
                 'METHODS' => $methods,
                 'FILTER' => $filterData,

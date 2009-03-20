@@ -8,7 +8,7 @@
 		<meta http-equiv="Pragma" content="no-cache" />
 		<meta name="robots" content="noindex, nofollow" />
 		
-		<title>Sitengine - <?=$this->html($this->DICTIONARY->LABELS->pageTitle);?></title>
+		<title>Sitengine - <?=$this->html($this->translate('labelsPageTitle'));?></title>
 		
 		<link rel="stylesheet" type="text/css" href="<?=$this->_controller->getEnv()->getMediaRequestDir();?>/Backend/Styles/Global.css" />
 		<link rel="stylesheet" type="text/css" href="<?=$this->_controller->getEnv()->getMediaRequestDir();?>/Backend/Styles/Forms.css" />
@@ -45,12 +45,12 @@
 					
 					
 					
-					<form method="post" action="<?=$this->SECTIONS->VIEWFORM->submitUri;?>" enctype="multipart/form-data" name="viewform" class="viewform">
+					<form method="post" action="<?=$this->SECTIONS->VIEWFORM->submitUri;?>" enctype="multipart/form-data" name="viewForm" class="viewForm">
 						<?=$this->SECTIONS->VIEWFORM->hiddens;?>
 						
 						
 						<?if($this->SECTIONS->VIEWFORM->inputMode == Sitengine_Env::INPUTMODE_UPDATE):?>
-							<div class="viewformChildActions">
+							<div class="viewFormChildActions">
 							
 							<?$count = 0;?>
 							<?foreach($this->SECTIONS->VIEWFORM->CHILDACTIONS as $navItem):?>
@@ -68,18 +68,18 @@
 						
 						
 						
-						<div class="viewformMain">
+						<div class="viewFormMain">
 							
 							<br />
 							
 							<?$field = 'name';?>
-							<div class="viewformContainer">
-								<div class="viewformLabelContainer">
-									<label for="<?=$field;?>" class="viewformRequiredLabel">
-										<?=$this->html($this->DICTIONARY->FORMVIEWFIELDS->$field);?>
+							<div class="viewFormContainer">
+								<div class="viewFormLabelContainer">
+									<label for="<?=$field;?>" class="viewFormRequiredLabel">
+										<?=$this->html($this->translate('formViewFields'.ucfirst($field)));?>
 									</label>
 								</div>
-								<div class="viewformInputContainer">
+								<div class="viewFormInputContainer">
 									<?=$this->formText($field, $this->SECTIONS->VIEWFORM->DATA->$field, array('size' => 30));?>
 								</div>
 							</div>
@@ -88,13 +88,13 @@
 							
 							
 							<?$field = 'enabled';?>
-							<div class="viewformContainer">
-								<div class="viewformLabelContainer">
-									<label for="<?=$field;?>" class="viewformDefaultLabel">
-										<?=$this->html($this->DICTIONARY->FORMVIEWFIELDS->$field);?>
+							<div class="viewFormContainer">
+								<div class="viewFormLabelContainer">
+									<label for="<?=$field;?>" class="viewFormDefaultLabel">
+										<?=$this->html($this->translate('formViewFields'.ucfirst($field)));?>
 									</label>
 								</div>
-								<div class="viewformInputContainer">
+								<div class="viewFormInputContainer">
 									<?
 										print
 											($this->SECTIONS->VIEWFORM->DATA->$field) ?
@@ -107,13 +107,13 @@
 							
 							
 							<?$field = 'locked';?>
-							<div class="viewformContainer">
-								<div class="viewformLabelContainer">
-									<label for="<?=$field;?>" class="viewformDefaultLabel">
-										<?=$this->html($this->DICTIONARY->FORMVIEWFIELDS->$field);?>
+							<div class="viewFormContainer">
+								<div class="viewFormLabelContainer">
+									<label for="<?=$field;?>" class="viewFormDefaultLabel">
+										<?=$this->html($this->translate('formViewFields'.ucfirst($field)));?>
 									</label>
 								</div>
-								<div class="viewformInputContainer">
+								<div class="viewFormInputContainer">
 									<?
 										print
 											($this->SECTIONS->VIEWFORM->DATA->$field) ?
@@ -145,13 +145,13 @@
 								$mdate .= ' '.$date->get(Zend_Date::TIME_LONG, $this->_controller->getLocale());
 							?>
 							
-							<div class="viewformDate">
-								<span class="viewformDateLabel"><?=$this->html($this->DICTIONARY->VIEWFORM->dateSectionCdate);?></span>
-								<span class="viewformDateValue"><?=$this->html($cdate);?></span>
+							<div class="viewFormDate">
+								<span class="viewFormDateLabel"><?=$this->html($this->translate('viewFormDateSectionCdate'));?></span>
+								<span class="viewFormDateValue"><?=$this->html($cdate);?></span>
 								&nbsp;&nbsp;
 								
-								<span class="viewformDateLabel"><?=$this->html($this->DICTIONARY->VIEWFORM->dateSectionMdate);?></span>
-								<span class="viewformDateValue"><?=$this->html($mdate);?></span>
+								<span class="viewFormDateLabel"><?=$this->html($this->translate('viewFormDateSectionMdate'));?></span>
+								<span class="viewFormDateValue"><?=$this->html($mdate);?></span>
 								&nbsp;&nbsp;
 							</div>
 						
@@ -159,11 +159,11 @@
 						
 						
 						
-						<div class="viewformSubmit">
+						<div class="viewFormSubmit">
 							<?if($this->SECTIONS->VIEWFORM->inputMode == Sitengine_Env::INPUTMODE_UPDATE):?>
-								<input type="submit" value="<?=$this->html($this->DICTIONARY->FORMVIEW->updateSubmit);?>" />
+								<input type="submit" value="<?=$this->html($this->translate('formViewUpdateSubmit'));?>" />
 							<?else:?>
-								<input type="submit" value="<?=$this->html($this->DICTIONARY->FORMVIEW->insertSubmit);?>" />
+								<input type="submit" value="<?=$this->html($this->translate('formViewInsertSubmit'));?>" />
 							<?endif;?>
 						</div>
 					

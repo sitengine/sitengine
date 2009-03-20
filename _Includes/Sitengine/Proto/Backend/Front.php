@@ -224,7 +224,7 @@ abstract class Sitengine_Proto_Backend_Front extends Sitengine_Controller_Front
     
     
     public function getGlobalNavSection(
-        Sitengine_Dictionary $dictionary,
+        Sitengine_Translate $translate,
         array $queries,
         $current,
         $selectorPrefix=''
@@ -234,12 +234,12 @@ abstract class Sitengine_Proto_Backend_Front extends Sitengine_Controller_Front
         $items = array();
         
         $location = 'backendHome';
-        $items[$queries[$location]] = '> '.$dictionary->getFromLabels($location);
+        $items[$queries[$location]] = '> '.$translate->translate('labels'.ucfirst($location));
         
         $items['separator10'] = '----------------';
         
         $location = 'protoBackendGoodies';
-        $items[$queries[$location]] = '> '.$dictionary->getFromLabels($location);
+        $items[$queries[$location]] = '> '.$translate->translate('labels'.ucfirst($location));
         $selected = ($current=='protoBackendGoodies') ? $queries[$location] : $selected;
         
         $n = 'globalNav';

@@ -74,7 +74,7 @@ abstract class Sitengine_Proto_Backend_Goodies_ViewHelper extends Sitengine_View
 			$this->setSection(
 				'GLOBALNAV',
 				$this->_controller->getFrontController()->getGlobalNavSection(
-					$this->_controller->getDictionary(),
+					$this->_controller->getTranslate(),
 					$this->_queries,
 					'protoBackendGoodies'
 				)
@@ -97,13 +97,13 @@ abstract class Sitengine_Proto_Backend_Goodies_ViewHelper extends Sitengine_View
 			
 			require_once 'Sitengine/Env/Preferences/Sections.php';
 			
-			if(sizeof($this->_controller->getDictionary()->getAvailableLanguages()) > 1) {
+			if(sizeof($this->_controller->getTranslate()->getAvailableLanguages()) > 1) {
 				$this->setSection(
 					'LANGUAGE',
 					Sitengine_Env_Preferences_Sections::getLanguageForm(
 						$this->_controller->getPreferences()->getLanguage(),
-						$this->_controller->getDictionary()->getAvailableLanguages(),
-						$this->_controller->getDictionary()->getLocLangs(),
+						$this->_controller->getTranslate()->getAvailableLanguages(),
+						$this->_controller->getTranslate()->translateGroup('loclangs'),
 						'language'
 					)
 				);
@@ -121,9 +121,9 @@ abstract class Sitengine_Proto_Backend_Goodies_ViewHelper extends Sitengine_View
 			$this->setSection(
 				'ABSTRACT',
 				array(
-					'title' => $this->_controller->getDictionary()->getFromLabels('entityTitle'),
+					'title' => $this->_controller->getTranslate()->translate('labelsEntityTitle'),
 					'uri' => '',
-					'help' => $this->_controller->getDictionary()->getFromHelps($this->_controller->getRequest()->getActionName())
+					'help' => ''
 				)
 			);
 			
@@ -150,19 +150,19 @@ abstract class Sitengine_Proto_Backend_Goodies_ViewHelper extends Sitengine_View
 				array(
 					array(
 						'uri' => $uriIndex,
-						'label' => $this->_controller->getDictionary()->getFromLabels('actionsSectionIndex')
+						'label' => $this->_controller->getTranslate()->translate('labelsActionsSectionIndex')
 					),
 					array(
 						'uri' => $uriInsert,
-						'label' => $this->_controller->getDictionary()->getFromLabels('actionsSectionInsert')
+						'label' => $this->_controller->getTranslate()->translate('labelsActionsSectionInsert')
 					),
 					array(
 						'uri' => $uriAssign,
-						'label' => $this->_controller->getDictionary()->getFromLabels('actionsSectionAssign')
+						'label' => $this->_controller->getTranslate()->translate('labelsActionsSectionAssign')
 					),
 					array(
 						'uri' => $uriUpload,
-						'label' => $this->_controller->getDictionary()->getFromLabels('actionsSectionUpload')
+						'label' => $this->_controller->getTranslate()->translate('labelsActionsSectionUpload')
 					)
 				)
 			);

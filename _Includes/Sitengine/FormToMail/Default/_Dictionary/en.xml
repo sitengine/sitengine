@@ -1,11 +1,8 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
-
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <dictionary name="dictionary">
-
 	<item name="statusSendOk">Message has been sent successfully</item>
 	<item name="statusSendError">Message could not be sent</item>
 	<item name="hintFirstnameRequired">Input required for first name</item>
 	<item name="hintLastnameRequired">Input required for last name</item>
 	<item name="hintEmailRequired">Valid email address required</item>
-    
 </dictionary>

@@ -82,7 +82,7 @@ abstract class Sitengine_Proto_Backend_Goodies_Shouldies_UploadView extends Site
 			#'ORGANIZATION' => $this->_controller->getPermiso()->getOrganization()->getData(),
 			#'USER' => $this->_controller->getPermiso()->getAuth()->getData(),
 			#'Auth' => $this->_controller->getPermiso()->getAuth(),
-			'DICTIONARY' => $this->_controller->getDictionary()->getData()
+			#'DICTIONARY' => $this->_controller->getTranslate()->translateGroup('data')
 		);
     }
     

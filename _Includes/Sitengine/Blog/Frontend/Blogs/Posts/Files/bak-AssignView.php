@@ -85,7 +85,7 @@ abstract class Sitengine_Blog_Frontend_Blogs_Posts_Files_AssignView extends Site
 				#'ORGANIZATION' => $this->_controller->getPermiso()->getOrganization()->getData(),
 				#'USER' => $this->_controller->getPermiso()->getAuth()->getData(),
 				#'Auth' => $this->_controller->getPermiso()->getAuth(),
-				'DICTIONARY' => $this->_controller->getDictionary()->getData()
+				#'DICTIONARY' => $this->_controller->getTranslate()->translateGroup('data')
 			);
 		}
         catch (Exception $exception) {
@@ -228,7 +228,7 @@ abstract class Sitengine_Blog_Frontend_Blogs_Posts_Files_AssignView extends Site
             
             return array(
                 'hiddens' => implode('', $hiddens),
-                'title' => $this->_controller->getDictionary()->getFromLabels('assignformTitle'),
+                'title' => $this->_controller->getTranslate()->translate('labelsAssignformTitle'),
                 'URIS' => $uris,
                 'METHODS' => $methods,
                 'DATA' => $list,

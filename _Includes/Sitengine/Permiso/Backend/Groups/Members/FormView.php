@@ -75,7 +75,7 @@ abstract class Sitengine_Permiso_Backend_Groups_Members_FormView extends Sitengi
 			'QUERIES' => $this->_queries,
 			'SECTIONS' => $this->_sections,
 			'SETTINGS' => $this->_settings,
-			'DICTIONARY' => $this->_controller->getDictionary()->getData()
+			#'DICTIONARY' => $this->_controller->getTranslate()->translateGroup('data')
 		);
     }
     
@@ -171,12 +171,12 @@ abstract class Sitengine_Permiso_Backend_Groups_Members_FormView extends Sitengi
                 $route = $this->_controller->getFrontController()->getRouter()->getRoute(Sitengine_Permiso_Backend_Front::ROUTE_GROUPS_MEMBERS_NEW);
                 $submitUri = $this->_controller->getRequest()->getBasePath().'/'.$route->assemble($args, true);
                 
-                $title = $this->_controller->getDictionary()->getFromFormView('insertTitle');
+                $title = $this->_controller->getTranslate()->translate('formViewInsertTitle');
             }
             #Sitengine_Debug::print_r($data);
             
 			$data['userIdOptions'] = array_merge(
-				$this->_controller->getDictionary()->getFromFieldvals('userId'),
+				$this->_controller->getTranslate()->translateGroup('fieldValsUserId'),
 				$this->_controller->getPermiso()->getDirectory()->getAllUsers()
 			);
 			

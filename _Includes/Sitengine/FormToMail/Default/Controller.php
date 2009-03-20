@@ -240,15 +240,21 @@ abstract class Sitengine_FormToMail_Default_Controller extends Sitengine_Control
 		require_once 'Sitengine/Translate.php';
 		$translate = new Sitengine_Translate(
 			Sitengine_Translate::AN_XML,
-			$this->getEnv()->getIncludesDir().'/Sitengine/FormToMail/Default/_Translations/en.xml',
+			$this->getEnv()->getIncludesDir().'/Sitengine/Env/_Dictionary/global.xml',
 			Sitengine_Env::LANGUAGE_EN
 		);
 		
-		$translate->addTranslation(
-			$this->getEnv()->getIncludesDir().'/Sitengine/FormToMail/Default/_Translations/de.xml',
-			Sitengine_Env::LANGUAGE_DE
+		$en = array(
+			$this->getEnv()->getIncludesDir().'/Sitengine/FormToMail/Default/_Translations/en.xml'
 		);
 		
+		$de = array(
+			$this->getEnv()->getIncludesDir().'/Sitengine/Env/_Dictionary/global.xml',
+			$this->getEnv()->getIncludesDir().'/Sitengine/FormToMail/Default/_Translations/de.xml'
+		);
+		
+		$translate->addMergeTranslation($en, Sitengine_Env::LANGUAGE_EN);
+		$translate->addMergeTranslation($de, Sitengine_Env::LANGUAGE_DE);
 		return $translate;
     }
     
@@ -391,7 +397,7 @@ abstract class Sitengine_FormToMail_Default_Controller extends Sitengine_Control
 				return $this->_forwardToLogin();
 			}
 			
-			$group = $this->getTranslate()->getGroup('group');
+			$group = $this->getTranslate()->translateGroup('group');
 			Sitengine_Debug::print_r($group);
 			
 			$view = $this->_getIndexViewInstance();

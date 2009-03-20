@@ -43,7 +43,7 @@ abstract class Sitengine_Permiso_Binaries_Users_Controller extends Sitengine_Con
     public function getLocale() { return $this->_locale; }
     public function getPermiso() { return $this->_permiso; }
     public function getNamespace() { return $this->_namespace; }
-    public function getDictionary() { return $this->_dictionary; }
+    public function getTranslate() { return $this->_translate; }
     
     
 			

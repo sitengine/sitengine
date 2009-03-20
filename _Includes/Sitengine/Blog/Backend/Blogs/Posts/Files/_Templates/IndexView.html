@@ -8,7 +8,7 @@
 <meta http-equiv="Pragma" content="no-cache" />
 <meta name="robots" content="noindex, nofollow" />
 
-<title>Sitengine - <?=$this->html($this->DICTIONARY->LABELS->pageTitle);?></title>
+<title>Sitengine - <?=$this->html($this->translate('labelsPageTitle'));?></title>
 
 <link rel="stylesheet" type="text/css" href="<?=$this->_controller->getEnv()->getMediaRequestDir();?>/Backend/Styles/Global.css" />
 <link rel="stylesheet" type="text/css" href="<?=$this->_controller->getEnv()->getMediaRequestDir();?>/Backend/Styles/Lists.css" />
@@ -54,8 +54,8 @@
 <?=$this->SECTIONS->FILES->FILTER->hiddens;?>
 <?foreach($this->SECTIONS->FILES->FILTER->ELEMENTS as $v):?><?=$v;?><?endforeach;?>
 
-<input type="button" value="<?=$this->html($this->DICTIONARY->LABELS->filterSectionSubmit);?>" onclick="document.filterform.submit();" />
-<input type="button" value="<?=$this->html($this->DICTIONARY->LABELS->filterSectionReset);?>" onclick="window.location = '<?=$this->SECTIONS->FILES->FILTER->uriReset;?>';" />
+<input type="button" value="<?=$this->html($this->translate('labelsFilterSectionSubmit'));?>" onclick="document.filterform.submit();" />
+<input type="button" value="<?=$this->html($this->translate('labelsFilterSectionReset'));?>" onclick="window.location = '<?=$this->SECTIONS->FILES->FILTER->uriReset;?>';" />
 
 </form>
 </div>
@@ -72,10 +72,10 @@
 
 <div class="listformNoRecords">
 <?if($this->SECTIONS->FILES->FILTER->isActive):?>
-    <span><?=$this->html($this->DICTIONARY->LABELS->listformNoMatchingRecords);?></span><br />
-    <?=$this->html($this->DICTIONARY->LABELS->listformFilterIsActive);?>
+    <span><?=$this->html($this->translate('labelsListformNoMatchingRecords'));?></span><br />
+    <?=$this->html($this->translate('labelsListformFilterIsActive'));?>
 <?else:?>
-    <span><?=$this->html($this->DICTIONARY->LABELS->listformNoRecords);?></span>
+    <span><?=$this->html($this->translate('labelsListformNoRecords'));?></span>
 <?endif;?>
 </div>
 
@@ -107,12 +107,12 @@
 <?$pagerLastItem = $this->SECTIONS->FILES->PAGER->lastItem;?>
 <?$pagerUriPrevPage = $this->SECTIONS->FILES->PAGER->uriPrevPage;?>
 <?$pagerUriNextPage = $this->SECTIONS->FILES->PAGER->uriNextPage;?>
-<?$pagerPrevLabel = $this->DICTIONARY->LABELS->pagerPreviousPage;?>
-<?$pagerNextLabel = $this->DICTIONARY->LABELS->pagerNextPage;?>
-<?$pagerOfLabel = $this->DICTIONARY->LABELS->pagerOf;?>
-<?$pagerPageLabel = $this->DICTIONARY->LABELS->pagerPage;?>
-<?$pagerPagesLabel = $this->DICTIONARY->LABELS->pagerPages;?>
-<?$pagerEntityLabel = $this->DICTIONARY->LABELS->pagerEntity;?>
+<?$pagerPrevLabel = $this->translate('labelsPagerPreviousPage');?>
+<?$pagerNextLabel = $this->translate('labelsPagerNextPage');?>
+<?$pagerOfLabel = $this->translate('labelsPagerOf');?>
+<?$pagerPageLabel = $this->translate('labelsPagerPage');?>
+<?$pagerPagesLabel = $this->translate('labelsPagerPages');?>
+<?$pagerEntityLabel = $this->translate('labelsPagerEntity');?>
 <?$pagerValClass = "pagerVal";?>
 <?$pagerTextClass = "pagerText";?>
 <?$pagerHrefPrevClass = "pagerHrefPrev";?>
@@ -143,16 +143,16 @@
 <tr class="listformTitleRow">
 <th valign="top" class="listformCheckboxCell"><input type="checkbox" onclick="setCheckboxes(this.checked,document.listform,'SELECTROWITEM');" /></th>
 
-<th valign="top"><a href="<?=$this->SECTIONS->FILES->SORTING->QUERIES->title;?>" title="<?=$this->html($this->DICTIONARY->LABELS->listformColumnSortHref);?>"><?=$this->html($this->DICTIONARY->COLUMNS->title);?></a>
+<th valign="top"><a href="<?=$this->SECTIONS->FILES->SORTING->QUERIES->title;?>" title="<?=$this->html($this->translate('labelsListformColumnSortHref'));?>"><?=$this->html($this->translate('columnsTitle'));?></a>
 &nbsp;<img src="<?=$this->_controller->getEnv()->getMediaRequestDir();?>/Backend/Pics/Sort_<?=$this->SECTIONS->FILES->SORTING->COLUMNS->title;?>.gif" width="8" height="10" border="0" alt="" /></th>
 
-<th valign="top"><a href="<?=$this->SECTIONS->FILES->SORTING->QUERIES->sorting;?>" title="<?=$this->html($this->DICTIONARY->LABELS->listformColumnSortHref);?>"><?=$this->html($this->DICTIONARY->COLUMNS->sorting);?></a>
+<th valign="top"><a href="<?=$this->SECTIONS->FILES->SORTING->QUERIES->sorting;?>" title="<?=$this->html($this->translate('labelsListformColumnSortHref'));?>"><?=$this->html($this->translate('columnsSorting'));?></a>
 &nbsp;<img src="<?=$this->_controller->getEnv()->getMediaRequestDir();?>/Backend/Pics/Sort_<?=$this->SECTIONS->FILES->SORTING->COLUMNS->sorting;?>.gif" width="8" height="10" border="0" alt="" /></th>
 
-<th valign="top"><a href="<?=$this->SECTIONS->FILES->SORTING->QUERIES->publish;?>" title="<?=$this->html($this->DICTIONARY->LABELS->listformColumnSortHref);?>"><?=$this->html($this->DICTIONARY->COLUMNS->publish);?></a>
+<th valign="top"><a href="<?=$this->SECTIONS->FILES->SORTING->QUERIES->publish;?>" title="<?=$this->html($this->translate('labelsListformColumnSortHref'));?>"><?=$this->html($this->translate('columnsPublish'));?></a>
 &nbsp;<img src="<?=$this->_controller->getEnv()->getMediaRequestDir();?>/Backend/Pics/Sort_<?=$this->SECTIONS->FILES->SORTING->COLUMNS->publish;?>.gif" width="8" height="10" border="0" alt="" /></th>
 
-<th valign="top" class="listformNumberCell" title="<?=$this->html($this->DICTIONARY->LABELS->listformColumnSortHref);?>"><img src="<?=$this->_controller->getEnv()->getMediaRequestDir();?>/Backend/Pics/Sort_<?=$this->SECTIONS->FILES->SORTING->COLUMNS->cdate;?>.gif" width="8" height="10" border="0" alt="" />&nbsp;<a href="<?=$this->SECTIONS->FILES->SORTING->QUERIES->cdate;?>"><?=$this->html($this->DICTIONARY->COLUMNS->cdate);?></a>&nbsp;</th>
+<th valign="top" class="listformNumberCell" title="<?=$this->html($this->translate('labelsListformColumnSortHref'));?>"><img src="<?=$this->_controller->getEnv()->getMediaRequestDir();?>/Backend/Pics/Sort_<?=$this->SECTIONS->FILES->SORTING->COLUMNS->cdate;?>.gif" width="8" height="10" border="0" alt="" />&nbsp;<a href="<?=$this->SECTIONS->FILES->SORTING->QUERIES->cdate;?>"><?=$this->html($this->translate('columnsCdate'));?></a>&nbsp;</th>
 
 </tr>
 
@@ -208,16 +208,16 @@
 <tr class="listformTitleRow">
 <th valign="top" class="listformCheckboxCell"><input type="checkbox" onclick="setCheckboxes(this.checked,document.listform,'SELECTROWITEM');" /></th>
 
-<th valign="top"><a href="<?=$this->SECTIONS->FILES->SORTING->QUERIES->title;?>" title="<?=$this->html($this->DICTIONARY->LABELS->listformColumnSortHref);?>"><?=$this->html($this->DICTIONARY->COLUMNS->title);?></a>
+<th valign="top"><a href="<?=$this->SECTIONS->FILES->SORTING->QUERIES->title;?>" title="<?=$this->html($this->translate('labelsListformColumnSortHref'));?>"><?=$this->html($this->translate('columnsTitle'));?></a>
 &nbsp;<img src="<?=$this->_controller->getEnv()->getMediaRequestDir();?>/Backend/Pics/Sort_<?=$this->SECTIONS->FILES->SORTING->COLUMNS->title;?>.gif" width="8" height="10" border="0" alt="" /></th>
 
-<th valign="top"><a href="<?=$this->SECTIONS->FILES->SORTING->QUERIES->sorting;?>" title="<?=$this->html($this->DICTIONARY->LABELS->listformColumnSortHref);?>"><?=$this->html($this->DICTIONARY->COLUMNS->sorting);?></a>
+<th valign="top"><a href="<?=$this->SECTIONS->FILES->SORTING->QUERIES->sorting;?>" title="<?=$this->html($this->translate('labelsListformColumnSortHref'));?>"><?=$this->html($this->translate('columnsSorting'));?></a>
 &nbsp;<img src="<?=$this->_controller->getEnv()->getMediaRequestDir();?>/Backend/Pics/Sort_<?=$this->SECTIONS->FILES->SORTING->COLUMNS->sorting;?>.gif" width="8" height="10" border="0" alt="" /></th>
 
-<th valign="top"><a href="<?=$this->SECTIONS->FILES->SORTING->QUERIES->publish;?>" title="<?=$this->html($this->DICTIONARY->LABELS->listformColumnSortHref);?>"><?=$this->html($this->DICTIONARY->COLUMNS->publish);?></a>
+<th valign="top"><a href="<?=$this->SECTIONS->FILES->SORTING->QUERIES->publish;?>" title="<?=$this->html($this->translate('labelsListformColumnSortHref'));?>"><?=$this->html($this->translate('columnsPublish'));?></a>
 &nbsp;<img src="<?=$this->_controller->getEnv()->getMediaRequestDir();?>/Backend/Pics/Sort_<?=$this->SECTIONS->FILES->SORTING->COLUMNS->publish;?>.gif" width="8" height="10" border="0" alt="" /></th>
 
-<th valign="top" class="listformNumberCell" title="<?=$this->html($this->DICTIONARY->LABELS->listformColumnSortHref);?>"><img src="<?=$this->_controller->getEnv()->getMediaRequestDir();?>/Backend/Pics/Sort_<?=$this->SECTIONS->FILES->SORTING->COLUMNS->cdate;?>.gif" width="8" height="10" border="0" alt="" />&nbsp;<a href="<?=$this->SECTIONS->FILES->SORTING->QUERIES->cdate;?>"><?=$this->html($this->DICTIONARY->COLUMNS->cdate);?></a>&nbsp;</th>
+<th valign="top" class="listformNumberCell" title="<?=$this->html($this->translate('labelsListformColumnSortHref'));?>"><img src="<?=$this->_controller->getEnv()->getMediaRequestDir();?>/Backend/Pics/Sort_<?=$this->SECTIONS->FILES->SORTING->COLUMNS->cdate;?>.gif" width="8" height="10" border="0" alt="" />&nbsp;<a href="<?=$this->SECTIONS->FILES->SORTING->QUERIES->cdate;?>"><?=$this->html($this->translate('columnsCdate'));?></a>&nbsp;</th>
 
 </tr>
 
@@ -237,8 +237,8 @@
 
 <table width="100%" class="listControlsBottom"><tr><td valign="top">
 
-<input type="button" value="<?=$this->html($this->DICTIONARY->LABELS->listformBatchUpdateSubmit);?>" onclick="assignConfirmSubmit(document.listform, '<?=$this->SECTIONS->FILES->METHODS->doBatchUpdate;?>', '<?=$this->SECTIONS->FILES->URIS->submitDoBatchUpdate;?>', '<?=$this->DICTIONARY->LABELS->listformConfirmUpdate;?>');" />
-<input type="button" value="<?=$this->html($this->DICTIONARY->LABELS->listformBatchDeleteSubmit);?>" onclick="assignConfirmSubmit(document.listform, '<?=$this->SECTIONS->FILES->METHODS->doBatchDelete;?>', '<?=$this->SECTIONS->FILES->URIS->submitDoBatchDelete;?>', '<?=$this->DICTIONARY->LABELS->listformConfirmDelete;?>');" />
+<input type="button" value="<?=$this->html($this->translate('labelsListformBatchUpdateSubmit'));?>" onclick="assignConfirmSubmit(document.listform, '<?=$this->SECTIONS->FILES->METHODS->doBatchUpdate;?>', '<?=$this->SECTIONS->FILES->URIS->submitDoBatchUpdate;?>', '<?=$this->translate('labelsListformConfirmUpdate');?>');" />
+<input type="button" value="<?=$this->html($this->translate('labelsListformBatchDeleteSubmit'));?>" onclick="assignConfirmSubmit(document.listform, '<?=$this->SECTIONS->FILES->METHODS->doBatchDelete;?>', '<?=$this->SECTIONS->FILES->URIS->submitDoBatchDelete;?>', '<?=$this->translate('labelsListformConfirmDelete');?>');" />
 
 </td><td valign="top" align="right">
 

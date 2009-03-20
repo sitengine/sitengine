@@ -60,7 +60,7 @@ abstract class Sitengine_Error_IndexView extends Sitengine_View
 				#'ENV' => $this->_controller->getEnv()->getData(),
 				#'Env' => $this->_controller->getEnv(),
 				#'STATUS' => $this->_controller->getStatus()->getData(),
-				'DICTIONARY' => $this->_controller->getDictionary()->getData()
+				#'DICTIONARY' => $this->_controller->getTranslate()->translateGroup('data')
 			);
 		}
         catch (Exception $exception) {

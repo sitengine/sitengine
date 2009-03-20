@@ -8,7 +8,7 @@
 <meta http-equiv="Pragma" content="no-cache" />
 <meta name="robots" content="noindex, nofollow" />
 
-<title>Sitengine - <?=$this->html($this->DICTIONARY->LABELS->pageTitle);?></title>
+<title>Sitengine - <?=$this->html($this->translate('labelsPageTitle'));?></title>
 
 <link rel="stylesheet" type="text/css" href="<?=$this->_controller->getEnv()->getMediaRequestDir();?>/Frontend/Styles/Global.css" />
 <link rel="stylesheet" type="text/css" href="<?=$this->_controller->getEnv()->getMediaRequestDir();?>/Frontend/Styles/Forms.css" />
@@ -40,7 +40,7 @@
 <?if($this->SECTIONS->FILE->inputMode == Sitengine_Env::INPUTMODE_UPDATE):?>
 <a href="<?=$this->SECTIONS->FILE->queryUpdate;?>"><?=$this->html($this->SECTIONS->FILE->title);?></a>
 <?else:?>
-<?=$this->html($this->DICTIONARY->LABELS->viewformUploadTitle);?>
+<?=$this->html($this->translate('labelsViewformUploadTitle'));?>
 <?endif;?>
 </h2>
 </div>
@@ -49,12 +49,12 @@
 
 
 
-<form method="post" action="<?=$this->SECTIONS->FILE->submitUri;?>" enctype="multipart/form-data" name="viewform" class="viewform">
+<form method="post" action="<?=$this->SECTIONS->FILE->submitUri;?>" enctype="multipart/form-data" name="viewForm" class="viewForm">
 <?=$this->SECTIONS->FILE->hiddens;?>
 
 
 <?if($this->SECTIONS->FILE->inputMode == Sitengine_Env::INPUTMODE_UPDATE):?>
-	<div class="viewformChildActions">
+	<div class="viewFormChildActions">
 	
 	<?if(sizeof($this->SECTIONS->FILE->PAYLOADNAV) > 0):?>
 		<?$count = 0;?>
@@ -84,7 +84,7 @@
 
 
 
-<div class="viewformSubmit"></div>
+<div class="viewFormSubmit"></div>
 
 
 

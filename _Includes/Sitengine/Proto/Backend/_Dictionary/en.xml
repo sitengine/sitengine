@@ -1,18 +1,9 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
-
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <dictionary name="dictionary">
-    
-    <group name="LABELS">
-        <item name="backendHome">Home</item>
-        <item name="protoBackendGoodies">Proto</item>
-    </group>
-    
-    <group name="BREADCRUMBS">
-        <item name="title">Proto</item>
-        <item name="goodyEntity">Goodies</item>
-        <item name="shouldyEntity">Shouldies</item>
-        <item name="couldyEntity">Couldies</item>
-    </group>
-
+	<item name="labelsBackendHome">Home</item>
+	<item name="labelsProtoBackendGoodies">Proto</item>
+	<item name="breadcrumbsTitle">Proto</item>
+	<item name="breadcrumbsGoodyEntity">Goodies</item>
+	<item name="breadcrumbsShouldyEntity">Shouldies</item>
+	<item name="breadcrumbsCouldyEntity">Couldies</item>
 </dictionary>
-

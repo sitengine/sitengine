@@ -1,121 +1,84 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
-
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <dictionary name="dictionary">
-
-    <group name="LABELS">
-        <item name="pageTitle">Blog</item>
-        <item name="entityTitle">Blog</item>
-        <item name="actionsSectionIndex">Show all Blogs</item>
-        <item name="actionsSectionInsert">Create new Blog</item>
-        <item name="childActionsSectionPostsIndex">Show Posts</item>
-        <item name="childActionsSectionPostsInsert">Add Post</item>
-        <item name="listformTitle">Overview</item>
-        <item name="assignformTitle">Uploads</item>
-        <item name="listformPostsIndex">Show</item>
-        <item name="listformPostsInsert">New</item>
-        <item name="listformColumnSortHref">Click to sort the list by this column</item>
-        <item name="listformBatchDeleteSubmit">Delete selected</item>
-        <item name="listformBatchUpdateSubmit">Update list</item>
-        <item name="listformFilterIsActive">Filtering is active for the current view</item>
-        <item name="listformNoRecords">No Blogs in database</item>
-        <item name="listformNoMatchingRecords">No Blogs match your criteria</item>
-        <item name="listformConfirmDelete">Do you really want to delete the selected Blogs?</item>
-        <item name="listformConfirmUpdate">Do you really want to update all Blogs in the list?</item>
-        <item name="viewformInsertTitle">New Blog</item>
-        <item name="viewformUpdateTitle">Update Blog</item>
-        <item name="viewformPayloadNavTitleMain">Overview</item>
-        <item name="viewformContentSectionTitleDefault">Content</item>
-        <item name="viewformInsertSubmit">Save</item>
-        <item name="viewformUpdateSubmit">Save changes</item>
-        <item name="viewformInputRequired">Fields marked with red are required</item>
-        <item name="filterSectionTitle">Filter</item>
-        <item name="filterSectionSubmit">Find</item>
-        <item name="filterSectionReset">Reset</item>
-        <item name="settingsSectionTitle">Settings</item>
-        <item name="settingsSectionSubmit">Set</item>
-        <item name="settingsSectionReset">Reset</item>
-        <item name="settingsSectionItemsPerPage">Items per page</item>
-        <item name="pagerPage">Page</item>
-        <item name="pagerPages">Pages</item>
-        <item name="pagerOf">of</item>
-        <item name="pagerEntity">Records</item>
-        <item name="pagerPreviousPage">Previous</item>
-        <item name="pagerNextPage">Next</item>
-    </group>
-
-    <group name="HELPS">
-        <item name="_index"> </item>
-        <item name="_update"> </item>
-        <item name="_insert"> </item>
-    </group>
-    
-    <group name="COLUMNS">
-        <item name="title">Title</item>
-        <item name="slug">Slug</item>
-        <item name="type">Type</item>
-        <item name="locked">Locked</item>
-        <item name="publish">Publish</item>
-        <item name="cdate">Created</item>
-        <item name="sorting">Sorting</item>
-        <item name="displayThis">Homepage</item>
-        <item name="postAction">Posts</item>
-    </group>
-    
-    <group name="FIELDS">
-        <item name="type">Type</item>
-        <item name="locked">Locked</item>
-        <item name="publish">Publish</item>
-        <item name="title">Title</item>
-        <item name="slug">Slug</item>
-        <item name="markup">Text</item>
-        <item name="displayThis">Show on homepage</item>
-        <item name="transColor">Transparent Color</item>
-        <item name="transColorHint">RGB Value (For Gif's and Png's only)</item>
-        <item name="file1Original">File Upload</item>
-        <item name="file2Original">File Upload</item>
-        <item name="file1OriginalHint">Format gif, jpg, doc, xls oder pdf</item>
-        <item name="file2OriginalHint">Format gif, jpg, doc, xls oder pdf</item>
-        <item name="sorting">Sorting</item>
-        <item name="sortingHint">Smaller numbers appear at the end</item>
-    </group>
-
-    <group name="FIELDVALS">
-        <group name="gid">
-            <item name="noneSelected">Select group</item>
-        </group>
-        
-        <group name="displayThis">
-            <item name="0">No</item>
-            <item name="1">Yes</item>
-        </group>
-        
-        <group name="type">
-            <item name="noneSelected">Select Blog type</item>
-            <item name="collector">Collector</item>
-            <item name="fan">Fan</item>
-        </group>
-        
-        <group name="filterByType">
-            <item name="noneSelected">Filter by type</item>
-            <item name="collector">Collector</item>
-            <item name="fan">Fan</item>
-        </group>
-        
-        <group name="filterByUid">
-            <item name="noneSelected">Filter by owner</item>
-        </group>
-
-        <group name="filterByGid">
-            <item name="noneSelected">Filter by group</item>
-        </group>
-    </group>
-    
-    <group name="HINTS">
-        <item name="gidRequired">Please select a group</item>
-        <item name="titleRequired">Title: Input required</item>
-        <item name="slugRequired">Slug: Input required</item>
-        <item name="slugInvalid">Slugs may only contain numbers and letters</item>
-        <item name="slugExists">This slug is already in use</item>
-    </group>
-    
+	<item name="labelsPageTitle">Blog</item>
+	<item name="labelsEntityTitle">Blog</item>
+	<item name="labelsActionsSectionIndex">Show all Blogs</item>
+	<item name="labelsActionsSectionInsert">Create new Blog</item>
+	<item name="labelsChildActionsSectionPostsIndex">Show Posts</item>
+	<item name="labelsChildActionsSectionPostsInsert">Add Post</item>
+	<item name="labelsListformTitle">Overview</item>
+	<item name="labelsAssignformTitle">Uploads</item>
+	<item name="labelsListformPostsIndex">Show</item>
+	<item name="labelsListformPostsInsert">New</item>
+	<item name="labelsListformColumnSortHref">Click to sort the list by this column</item>
+	<item name="labelsListformBatchDeleteSubmit">Delete selected</item>
+	<item name="labelsListformBatchUpdateSubmit">Update list</item>
+	<item name="labelsListformFilterIsActive">Filtering is active for the current view</item>
+	<item name="labelsListformNoRecords">No Blogs in database</item>
+	<item name="labelsListformNoMatchingRecords">No Blogs match your criteria</item>
+	<item name="labelsListformConfirmDelete">Do you really want to delete the selected Blogs?</item>
+	<item name="labelsListformConfirmUpdate">Do you really want to update all Blogs in the list?</item>
+	<item name="labelsViewformInsertTitle">New Blog</item>
+	<item name="labelsViewformUpdateTitle">Update Blog</item>
+	<item name="labelsViewformPayloadNavTitleMain">Overview</item>
+	<item name="labelsViewformContentSectionTitleDefault">Content</item>
+	<item name="labelsViewformInsertSubmit">Save</item>
+	<item name="labelsViewformUpdateSubmit">Save changes</item>
+	<item name="labelsViewformInputRequired">Fields marked with red are required</item>
+	<item name="labelsFilterSectionTitle">Filter</item>
+	<item name="labelsFilterSectionSubmit">Find</item>
+	<item name="labelsFilterSectionReset">Reset</item>
+	<item name="labelsSettingsSectionTitle">Settings</item>
+	<item name="labelsSettingsSectionSubmit">Set</item>
+	<item name="labelsSettingsSectionReset">Reset</item>
+	<item name="labelsSettingsSectionItemsPerPage">Items per page</item>
+	<item name="labelsPagerPage">Page</item>
+	<item name="labelsPagerPages">Pages</item>
+	<item name="labelsPagerOf">of</item>
+	<item name="labelsPagerEntity">Records</item>
+	<item name="labelsPagerPreviousPage">Previous</item>
+	<item name="labelsPagerNextPage">Next</item>
+	<item name="helps_index"/>
+	<item name="helps_update"/>
+	<item name="helps_insert"/>
+	<item name="columnsTitle">Title</item>
+	<item name="columnsSlug">Slug</item>
+	<item name="columnsType">Type</item>
+	<item name="columnsLocked">Locked</item>
+	<item name="columnsPublish">Publish</item>
+	<item name="columnsCdate">Created</item>
+	<item name="columnsSorting">Sorting</item>
+	<item name="columnsDisplayThis">Homepage</item>
+	<item name="columnsPostAction">Posts</item>
+	<item name="fieldsType">Type</item>
+	<item name="fieldsLocked">Locked</item>
+	<item name="fieldsPublish">Publish</item>
+	<item name="fieldsTitle">Title</item>
+	<item name="fieldsSlug">Slug</item>
+	<item name="fieldsMarkup">Text</item>
+	<item name="fieldsDisplayThis">Show on homepage</item>
+	<item name="fieldsTransColor">Transparent Color</item>
+	<item name="fieldsTransColorHint">RGB Value (For Gif's and Png's only)</item>
+	<item name="fieldsFile1Original">File Upload</item>
+	<item name="fieldsFile2Original">File Upload</item>
+	<item name="fieldsFile1OriginalHint">Format gif, jpg, doc, xls oder pdf</item>
+	<item name="fieldsFile2OriginalHint">Format gif, jpg, doc, xls oder pdf</item>
+	<item name="fieldsSorting">Sorting</item>
+	<item name="fieldsSortingHint">Smaller numbers appear at the end</item>
+	<!-- array --><item name="fieldValsGidNoneSelected">Select group</item>
+	<!-- array --><item name="fieldValsDisplayThis0">No</item>
+	<!-- array --><item name="fieldValsDisplayThis1">Yes</item>
+	<!-- array --><item name="fieldValsTypeNoneSelected">Select Blog type</item>
+	<!-- array --><item name="fieldValsTypeCollector">Collector</item>
+	<!-- array --><item name="fieldValsTypeFan">Fan</item>
+	<!-- array --><item name="fieldValsFilterByTypeNoneSelected">Filter by type</item>
+	<!-- array --><item name="fieldValsFilterByTypeCollector">Collector</item>
+	<!-- array --><item name="fieldValsFilterByTypeFan">Fan</item>
+	<!-- array --><item name="fieldValsFilterByUidNoneSelected">Filter by owner</item>
+	<!-- array --><item name="fieldValsFilterByGidNoneSelected">Filter by group</item>
+	<item name="hintsGidRequired">Please select a group</item>
+	<item name="hintsTitleRequired">Title: Input required</item>
+	<item name="hintsSlugRequired">Slug: Input required</item>
+	<item name="hintsSlugInvalid">Slugs may only contain numbers and letters</item>
+	<item name="hintsSlugExists">This slug is already in use</item>
 </dictionary>

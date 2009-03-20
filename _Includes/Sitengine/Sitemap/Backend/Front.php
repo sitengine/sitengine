@@ -176,7 +176,7 @@ abstract class Sitengine_Sitemap_Backend_Front extends Sitengine_Controller_Fron
     
     public function getGlobalNavSection(
         Sitengine_Permiso $permiso,
-        Sitengine_Dictionary $dictionary,
+        Sitengine_Translate $translate,
         array $queries,
         $current,
         $selectorPrefix=''
@@ -186,13 +186,13 @@ abstract class Sitengine_Sitemap_Backend_Front extends Sitengine_Controller_Fron
         $items = array();
         
         $location = 'backendHome';
-        $items[$queries[$location]] = '> '.$dictionary->getFromLabels($location);
+        $items[$queries[$location]] = '> '.$translate->translate('labels'.ucfirst($location));
         $selected = ($current==$location) ? $queries[$location] : $selected;
         
         $items['separator50'] = '----------------';
         
         $location = 'sitemapBackend';
-        $items[$queries[$location]] = '> '.$dictionary->getFromLabels($location);
+        $items[$queries[$location]] = '> '.$translate->translate('labels'.ucfirst($location));
         $selected = ($current==$location) ? $queries[$location] : $selected;
         
         $n = 'globalNav';

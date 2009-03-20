@@ -89,7 +89,7 @@ abstract class Sitengine_Permiso_Backend_Users_Memberships_FormView extends Site
 				#'ORGANIZATION' => $this->_controller->getPermiso()->getOrganization()->getData(),
 				#'USER' => $this->_controller->getPermiso()->getAuth()->getData(),
 				#'Auth' => $this->_controller->getPermiso()->getAuth(),
-				'DICTIONARY' => $this->_controller->getDictionary()->getData()
+				#'DICTIONARY' => $this->_controller->getTranslate()->translateGroup('data')
 			);
        	}
         catch (Exception $exception) {
@@ -191,7 +191,7 @@ abstract class Sitengine_Permiso_Backend_Users_Memberships_FormView extends Site
                 $route = $this->_controller->getFrontController()->getRouter()->getRoute(Sitengine_Permiso_Backend_Front::ROUTE_USERS_MEMBERSHIPS);
                 $submitUri = $this->_controller->getRequest()->getBasePath().'/'.$route->assemble($args, true);
 				
-				$title = $this->_controller->getDictionary()->getFromLabels('viewformUpdateTitle');
+				$title = $this->_controller->getTranslate()->translate('labelsViewformUpdateTitle');
 			}
 			else
 			{
@@ -221,7 +221,7 @@ abstract class Sitengine_Permiso_Backend_Users_Memberships_FormView extends Site
                 $route = $this->_controller->getFrontController()->getRouter()->getRoute(Sitengine_Permiso_Backend_Front::ROUTE_USERS_MEMBERSHIPS);
                 $submitUri = $this->_controller->getRequest()->getBasePath().'/'.$route->assemble($args, true);
 				
-				$title = $this->_controller->getDictionary()->getFromLabels('viewformInsertTitle');
+				$title = $this->_controller->getTranslate()->translate('labelsViewformInsertTitle');
 			}
 			#Sitengine_Debug::print_r($data);
 			
@@ -238,18 +238,18 @@ abstract class Sitengine_Permiso_Backend_Users_Memberships_FormView extends Site
 				) {
 					$n = 'locked';
 					$e = new Sitengine_Form_Element($n, '1');
-					$e->setClass('viewformCheckbox');
-					$e->setId('viewform'.$n);
+					$e->setClass('viewFormCheckbox');
+					$e->setId('viewForm'.$n);
 					$elements[$n] = $e->getCheckbox($data[$n]);
 				}
 				
 				$n = 'groupId';
 				$e = new Sitengine_Form_Element($n, $data[$n]);
-				$e->setClass('viewformSelect');
-				$e->setId('viewform'.$n);
+				$e->setClass('viewFormSelect');
+				$e->setId('viewForm'.$n);
 				$groups = $this->_controller->getPermiso()->getDirectory()->getAllGroups();
 				unset($groups[Sitengine_Permiso::GID_LOSTFOUND]); # remove lostfound
-				$groups = array_merge($this->_controller->getDictionary()->getFromFieldvals('select'), $groups);
+				$groups = array_merge($this->_controller->getTranslate()->translateGroup('fieldValsSelect'), $groups);
 				$elements[$n] = $e->getSelect($groups);
 			}
 			

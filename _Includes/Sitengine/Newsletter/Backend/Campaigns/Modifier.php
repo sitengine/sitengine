@@ -107,7 +107,7 @@ abstract class Sitengine_Newsletter_Backend_Campaigns_Modifier
             {
             	$error = $this->_controller->getFrontController()->getNewsletterPackage()->getCampaignsTable()->getError();
             	if($error === null) { return null; }
-            	$message = $this->_controller->getDictionary()->getFromHints($error);
+            	$message = $this->_controller->getTranslate()->translate('hints'.ucfirst($error));
     			$this->_controller->getStatus()->addHint('record', $message);
     			return null;
             }
@@ -134,13 +134,13 @@ abstract class Sitengine_Newsletter_Backend_Campaigns_Modifier
             $data = array();
             
             if(!$this->_controller->getPermiso()->getDac()->updateAccessGranted($stored)) {
-                $message = $this->_controller->getDictionary()->getFromHints(Sitengine_Env::HINT_INVALID_ACTION);
+                $message = $this->_controller->getTranslate()->translate(Sitengine_Env::HINT_INVALID_ACTION);
                 $this->_controller->getStatus()->addHint('modifier', $message);
                 return null;
             }
             
             if($this->_controller->getRequest()->getPost('mdate') != $stored['mdate']) {
-                $message = $this->_controller->getDictionary()->getFromHints(Sitengine_Env::HINT_DATA_EXPIRED);
+                $message = $this->_controller->getTranslate()->translate(Sitengine_Env::HINT_DATA_EXPIRED);
                 $this->_controller->getStatus()->addHint('modifier', $message);
                 return null;
             }
@@ -176,7 +176,7 @@ abstract class Sitengine_Newsletter_Backend_Campaigns_Modifier
             {
             	$error = $this->_controller->getFrontController()->getNewsletterPackage()->getCampaignsTable()->getError();
             	if($error === null) { return null; }
-            	$message = $this->_controller->getDictionary()->getFromHints($error);
+            	$message = $this->_controller->getTranslate()->translate('hints'.ucfirst($error));
     			$this->_controller->getStatus()->addHint('record', $message);
     			return null;
             }
@@ -200,7 +200,7 @@ abstract class Sitengine_Newsletter_Backend_Campaigns_Modifier
         {
         	$name = 'title';
 			if(Sitengine_Validator::nada($this->_controller->getRequest()->getPost($name))) {
-				$message = $this->_controller->getDictionary()->getFromHints('titleRequired');
+				$message = $this->_controller->getTranslate()->translate('hintsTitleRequired');
 				$this->_controller->getStatus()->addHint($name, $message);
 			}
         

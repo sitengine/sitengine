@@ -29,14 +29,14 @@ if($url !== null) { $href = "<a href=\"$url\">"; $hrefend = '</a>'; }
 
 <div id="sysinfo">
 
-<?=$this->html($this->DICTIONARY->LABELS->currentUser);?>: 
+<?=$this->html($this->translate('labelsCurrentUser'));?>: 
 <?if(isset($this->QUERIES->myAccount)):?><a href="<?=$this->QUERIES->myAccount;?>"><?endif;?>
 <?=$this->_controller->getPermiso()->getAuth()->getIdentity();?>
 <?if(isset($this->QUERIES->myAccount)):?></a><?endif;?>
  // 
  <!--
 <?if($this->ORGANIZATION->name):?>
-<?=$this->html($this->DICTIONARY->LABELS->currentOrganization);?>: <?=$this->ORGANIZATION->name;?> // 
+<?=$this->html($this->translate('labelsCurrentOrganization'));?>: <?=$this->ORGANIZATION->name;?> // 
 <?endif;?>
 -->
 
@@ -52,9 +52,9 @@ if($url !== null) { $href = "<a href=\"$url\">"; $hrefend = '</a>'; }
 	}
 ?>
 
-<?=$this->html($this->DICTIONARY->LABELS->lastLogin);?>: <?=$lastLogin;?> 
+<?=$this->html($this->translate('labelsLastLogin'));?>: <?=$lastLogin;?> 
 //
-<a href="<?=$this->QUERIES->signOut;?>"><?=$this->html($this->DICTIONARY->LABELS->signOut);?></a>
+<a href="<?=$this->QUERIES->signOut;?>"><?=$this->html($this->translate('labelsSignOut'));?></a>
 </div>
 
 

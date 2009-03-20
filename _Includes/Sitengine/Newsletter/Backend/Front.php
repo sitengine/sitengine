@@ -205,7 +205,7 @@ abstract class Sitengine_Newsletter_Backend_Front extends Sitengine_Controller_F
     
     public function getGlobalNavSection(
         Sitengine_Permiso $permiso,
-        Sitengine_Dictionary $dictionary,
+        Sitengine_Translate $translate,
         array $queries,
         $current,
         $selectorPrefix=''
@@ -215,12 +215,12 @@ abstract class Sitengine_Newsletter_Backend_Front extends Sitengine_Controller_F
         $items = array();
         
         $location = 'backendHome';
-        $items[$queries[$location]] = '> '.$dictionary->getFromLabels($location);
+        $items[$queries[$location]] = '> '.$translate->translate('labels'.ucfirst($location));
         
         $items['separator10'] = '----------------';
         
         $location = 'newsletterBackendCampaigns';
-        $items[$queries[$location]] = '> '.$dictionary->getFromLabels($location);
+        $items[$queries[$location]] = '> '.$translate->translate('labels'.ucfirst($location));
         $selected = ($current=='newsletterBackendCampaigns') ? $queries[$location] : $selected;
         
         $n = 'globalNav';

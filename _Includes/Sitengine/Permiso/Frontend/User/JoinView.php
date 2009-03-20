@@ -73,7 +73,7 @@ abstract class Sitengine_Permiso_Frontend_User_JoinView extends Sitengine_View {
 				'QUERIES' => $this->_queries,
 				'SECTIONS' => $this->_sections,
 				'SETTINGS' => $this->_settings,
-				'DICTIONARY' => $this->_controller->getDictionary()->getData()
+				#'DICTIONARY' => $this->_controller->getTranslate()->translateGroup('data')
 			);
 		}
         catch (Exception $exception) {

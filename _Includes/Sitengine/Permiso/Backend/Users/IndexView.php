@@ -70,7 +70,7 @@ abstract class Sitengine_Permiso_Backend_Users_IndexView extends Sitengine_View
 			'QUERIES' => $this->_queries,
 			'SECTIONS' => $this->_sections,
 			'SETTINGS' => $this->_settings,
-			'DICTIONARY' => $this->_controller->getDictionary()->getData()
+			#'DICTIONARY' => $this->_controller->getTranslate()->translateGroup('data')
 		);
     }
     
@@ -113,7 +113,7 @@ abstract class Sitengine_Permiso_Backend_Users_IndexView extends Sitengine_View
         	$valueIpp = ($valueIpp <= 100 && $valueIpp >= 1) ? $valueIpp : $defaultIpp;
             
             $ippValues = array(
-                '' => $this->_controller->getDictionary()->getFromIndexView('settingsSectionItemsPerPage'),
+                '' => $this->_controller->getTranslate()->translate('indexViewSettingsSectionItemsPerPage'),
                 5 => 5,
                 10 => 10,
                 20 => 20,
@@ -155,11 +155,11 @@ abstract class Sitengine_Permiso_Backend_Users_IndexView extends Sitengine_View
 				$this->_controller->getNamespace()
             );
             
-            #$types = $this->_controller->getDictionary()->getFromFieldvals(Sitengine_Permiso_Backend_Users_Controller::PARAM_FILTER_BY_TYPE);
+            #$types = $this->_controller->getTranslate()->translateGroup('fieldValsFilterByType');
             #$users = $this->_controller->getPermiso()->getDirectory()->getAllUsers();
-            #$users = array_merge($this->_controller->getDictionary()->getFromFieldvals(Sitengine_Permiso_Backend_Users_Controller::PARAM_FILTER_BY_UID), $users);
+            #$users = array_merge($this->_controller->getTranslate()->translateGroup('fieldValsFilterByUid'), $users);
             #$groups = $this->_controller->getPermiso()->getDirectory()->getAllGroups();
-            #$groups = array_merge($this->_controller->getDictionary()->getFromFieldvals(Sitengine_Permiso_Backend_Users_Controller::PARAM_FILTER_BY_GID), $groups);
+            #$groups = array_merge($this->_controller->getTranslate()->translateGroup('fieldValsFilterByGid'), $groups);
             
             $hiddens = array(
                 Sitengine_Env::PARAM_SORT => $sorting->getActiveRule(),
@@ -417,7 +417,7 @@ abstract class Sitengine_Permiso_Backend_Users_IndexView extends Sitengine_View
             
             return array(
                 'hiddens' => implode('', $hiddens),
-                'title' => $this->_controller->getDictionary()->getFromIndexView('title'),
+                'title' => $this->_controller->getTranslate()->translate('indexViewTitle'),
                 'URIS' => $uris,
                 'METHODS' => $methods,
                 'FILTER' => $filterData,

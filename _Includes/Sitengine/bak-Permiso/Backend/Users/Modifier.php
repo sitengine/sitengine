@@ -89,7 +89,7 @@ abstract class Sitengine_Permiso_Backend_Users_Modifier
 				$name = 'password';
 				$password = $this->_controller->getRequest()->getPost($name);
 				if(Sitengine_Validator::nada($this->_controller->getRequest()->getPost($name))) {
-					$message = $this->_controller->getDictionary()->getFromHints($name.'Required');
+					$message = $this->_controller->getTranslate()->translate('hints'.ucfirst($name).'Required');
 					$this->_controller->getStatus()->addHint($name, $message);
 				}
 			}
@@ -123,7 +123,7 @@ abstract class Sitengine_Permiso_Backend_Users_Modifier
             }
             $error = $this->_controller->getRecord()->getError();
 			if($error === null) { return null; }
-			$message = $this->_controller->getDictionary()->getFromHints($error);
+			$message = $this->_controller->getTranslate()->translate('hints'.ucfirst($error));
 			$this->_controller->getStatus()->addHint('record', $message);
             return null;
         }
@@ -136,11 +136,11 @@ abstract class Sitengine_Permiso_Backend_Users_Modifier
     
     protected function _sendNotifyMail($data, $password)
     {
-		$subject = $this->_controller->getDictionary()->getFromWelcomeMail('subject');
+		$subject = $this->_controller->getTranslate()->translate('welcomemailSubject');
 		$subject = preg_replace('/%site%/', $_SERVER['SERVER_NAME'], $subject);
 		$find = array('/%site%/', '/%user%/', '/%password%/');
 		$repl = array($_SERVER['SERVER_NAME'], $data['name'], $password);
-		$body = $this->_controller->getDictionary()->getFromWelcomeMail('body');
+		$body = $this->_controller->getTranslate()->translate('welcomemailBody');
 		$body = preg_replace($find, $repl, $body);
 		
 		require_once 'Zend/Mail.php';
@@ -178,7 +178,7 @@ abstract class Sitengine_Permiso_Backend_Users_Modifier
                 !$this->_controller->getPermiso()->getAuth()->getId() == Sitengine_Permiso::UID_ROOT
             ) {
                 # only user root can change the root account
-                $message = $this->_controller->getDictionary()->getFromHints(Sitengine_Env::HINT_INVALID_ACTION);
+                $message = $this->_controller->getTranslate()->translate(Sitengine_Env::HINT_INVALID_ACTION);
                 $this->_controller->getStatus()->addHint('modifier', $message);
                 return null;
             }
@@ -188,7 +188,7 @@ abstract class Sitengine_Permiso_Backend_Users_Modifier
                 $id == Sitengine_Permiso::UID_LOSTFOUND
             ) {
                 # lostfound and guest can't be changed
-                $message = $this->_controller->getDictionary()->getFromHints(Sitengine_Env::HINT_INVALID_ACTION);
+                $message = $this->_controller->getTranslate()->translate(Sitengine_Env::HINT_INVALID_ACTION);
                 $this->_controller->getStatus()->addHint('modifier', $message);
                 return null;
             }
@@ -198,13 +198,13 @@ abstract class Sitengine_Permiso_Backend_Users_Modifier
                 !$this->_controller->getPermiso()->getDirectory()->userIsMember($this->_controller->getPermiso()->getAuth()->getId(), Sitengine_Permiso::GID_ADMINISTRATORS)
             ) {
                 # only administrators can update users that are administrators members
-                $message = $this->_controller->getDictionary()->getFromHints(Sitengine_Env::HINT_INVALID_ACTION);
+                $message = $this->_controller->getTranslate()->translate(Sitengine_Env::HINT_INVALID_ACTION);
                 $this->_controller->getStatus()->addHint('modifier', $message);
                 return null;
             }
             
             if($this->_controller->getRequest()->getPost('mdate') != $stored['mdate']) {
-                $message = $this->_controller->getDictionary()->getFromHints(Sitengine_Env::HINT_DATA_EXPIRED);
+                $message = $this->_controller->getTranslate()->translate(Sitengine_Env::HINT_DATA_EXPIRED);
                 $this->_controller->getStatus()->addHint('modifier', $message);
                 return null;
             }
@@ -255,7 +255,7 @@ abstract class Sitengine_Permiso_Backend_Users_Modifier
             {
             	$error = $this->_controller->getRecord()->getError();
             	if($error === null) { return null; }
-            	$message = $this->_controller->getDictionary()->getFromHints($error);
+            	$message = $this->_controller->getTranslate()->translate('hints'.ucfirst($error));
     			$this->_controller->getStatus()->addHint('record', $message);
     			return null;
             }
@@ -275,12 +275,12 @@ abstract class Sitengine_Permiso_Backend_Users_Modifier
         {
 			$name = 'language';
 			if(Sitengine_Validator::nada($this->_controller->getRequest()->getPost($name), Sitengine_Permiso_Backend_Users_Controller::VALUE_NONESELECTED)) {
-				$message = $this->_controller->getDictionary()->getFromHints($name.'Required');
+				$message = $this->_controller->getTranslate()->translate('hints'.ucfirst($name).'Required');
 				$this->_controller->getStatus()->addHint($name, $message);
 			}
 			$name = 'timezone';
 			if(Sitengine_Validator::nada($this->_controller->getRequest()->getPost($name), Sitengine_Permiso_Backend_Users_Controller::VALUE_NONESELECTED)) {
-				$message = $this->_controller->getDictionary()->getFromHints($name.'Required');
+				$message = $this->_controller->getTranslate()->translate('hints'.ucfirst($name).'Required');
 				$this->_controller->getStatus()->addHint($name, $message);
 			}
 			$name = 'name';
@@ -291,11 +291,11 @@ abstract class Sitengine_Permiso_Backend_Users_Modifier
 				$val != Sitengine_Permiso::LOSTFOUND_NAME
 			) {
 				if(Sitengine_Validator::nada($val)) {
-					$message = $this->_controller->getDictionary()->getFromHints($name.'Required');
+					$message = $this->_controller->getTranslate()->translate('hints'.ucfirst($name).'Required');
 					$this->_controller->getStatus()->addHint($name, $message);
 				}
 				else if(!Sitengine_Validator::emailAddress($val)) {
-					$message = $this->_controller->getDictionary()->getFromHints($name.'ValidEmailRequired');
+					$message = $this->_controller->getTranslate()->translate('hints'.ucfirst($name).'ValidEmailRequired');
 					$this->_controller->getStatus()->addHint($name, $message);
 					return false;
 				}
@@ -303,30 +303,30 @@ abstract class Sitengine_Permiso_Backend_Users_Modifier
 			$name = 'nickname';
 			$val = $this->_controller->getRequest()->getPost($name);
 			if(Sitengine_Validator::nada($val)) {
-				$message = $this->_controller->getDictionary()->getFromHints($name.'Required');
+				$message = $this->_controller->getTranslate()->translate('hints'.ucfirst($name).'Required');
 				$this->_controller->getStatus()->addHint($name, $message);
 			}
 			$name = 'firstname';
 			$val = $this->_controller->getRequest()->getPost($name);
 			if(Sitengine_Validator::nada($val)) {
-				$message = $this->_controller->getDictionary()->getFromHints($name.'Required');
+				$message = $this->_controller->getTranslate()->translate('hints'.ucfirst($name).'Required');
 				$this->_controller->getStatus()->addHint($name, $message);
 			}
 			$name = 'lastname';
 			$val = $this->_controller->getRequest()->getPost($name);
 			if(Sitengine_Validator::nada($val)) {
-				$message = $this->_controller->getDictionary()->getFromHints($name.'Required');
+				$message = $this->_controller->getTranslate()->translate('hints'.ucfirst($name).'Required');
 				$this->_controller->getStatus()->addHint($name, $message);
 			}
 			$name = 'password';
 			$val = $this->_controller->getRequest()->getPost($name);
 			# passwords must be made up of a-zA-Z0-9
 			if(!Sitengine_Validator::nada($val) && !Sitengine_Validator::word($val)) {
-				$message = $this->_controller->getDictionary()->getFromHints($name.'WordCharsOnly');
+				$message = $this->_controller->getTranslate()->translate('hints'.ucfirst($name).'WordCharsOnly');
 				$this->_controller->getStatus()->addHint($name, $message);
 			}
 			if($val!=$this->_controller->getRequest()->getPost('passwordConfirm')) {
-				$message = $this->_controller->getDictionary()->getFromHints('passwordsDontMatch');
+				$message = $this->_controller->getTranslate()->translate('hintsPasswordsDontMatch');
 				$this->_controller->getStatus()->addHint($name, $message);
 			}
 		}
@@ -343,12 +343,12 @@ abstract class Sitengine_Permiso_Backend_Users_Modifier
 		$val = $this->_controller->getRequest()->getPost($name);
 		# passwords must be made up of a-zA-Z0-9
 		if(Sitengine_Validator::nada($val) || !Sitengine_Validator::word($val)) {
-			$message = $this->_controller->getDictionary()->getFromHints($name.'WordCharsOnly');
+			$message = $this->_controller->getTranslate()->translate('hints'.ucfirst($name).'WordCharsOnly');
 			$this->_controller->getStatus()->addHint($name, $message);
 			return false;
 		}
 		if($val != $this->_controller->getRequest()->getPost('passwordConfirm')) {
-			$message = $this->_controller->getDictionary()->getFromHints('passwordsDontMatch');
+			$message = $this->_controller->getTranslate()->translate('hintsPasswordsDontMatch');
 			$this->_controller->getStatus()->addHint($name, $message);
 			return false;
 		}
@@ -379,7 +379,7 @@ abstract class Sitengine_Permiso_Backend_Users_Modifier
     {
         try {
             if(!$this->_ok2modify($id)) {
-                $message = $this->_controller->getDictionary()->getFromHints(Sitengine_Env::HINT_INVALID_ACTION);
+                $message = $this->_controller->getTranslate()->translate(Sitengine_Env::HINT_INVALID_ACTION);
                 $this->_controller->getStatus()->addHint('modifier', $message);
                 return 0;
             }
@@ -389,7 +389,7 @@ abstract class Sitengine_Permiso_Backend_Users_Modifier
                 !$this->_controller->getPermiso()->getDirectory()->userIsMember($this->_controller->getPermiso()->getAuth()->getId(), Sitengine_Permiso::GID_ADMINISTRATORS)
             ) {
                 # only administrators can delete users that are administrators members
-                $message = $this->_controller->getDictionary()->getFromHints(Sitengine_Env::HINT_INVALID_ACTION);
+                $message = $this->_controller->getTranslate()->translate(Sitengine_Env::HINT_INVALID_ACTION);
                 $this->_controller->getStatus()->addHint('modifier', $message);
                 return 0;
             }
@@ -441,7 +441,7 @@ abstract class Sitengine_Permiso_Backend_Users_Modifier
     {
         try {
             if(!$this->_ok2modify($id)) {
-                $message = $this->_controller->getDictionary()->getFromHints(Sitengine_Env::HINT_INVALID_ACTION);
+                $message = $this->_controller->getTranslate()->translate(Sitengine_Env::HINT_INVALID_ACTION);
                 $this->_controller->getStatus()->addHint('modifier', $message);
                 return 0;
             }
@@ -450,7 +450,7 @@ abstract class Sitengine_Permiso_Backend_Users_Modifier
             	!$this->_controller->getPermiso()->getDirectory()->userIsMember($this->_controller->getPermiso()->getAuth()->getId(), Sitengine_Permiso::GID_ADMINISTRATORS)
             )
             {
-            	$message = $this->_controller->getDictionary()->getFromHints(Sitengine_Env::HINT_INVALID_ACTION);
+            	$message = $this->_controller->getTranslate()->translate(Sitengine_Env::HINT_INVALID_ACTION);
                 $this->_controller->getStatus()->addHint('modifier', $message);
                 return 0;
             }

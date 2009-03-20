@@ -1,83 +1,57 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
-
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <dictionary name="dictionary">
-    
-    <group name="LABELS">
-        <item name="entityTitle">Gruppen</item>
-        <item name="actionsSectionIndex">Alle Gruppen anzeigen</item>
-        <item name="actionsSectionInsert">Neue Gruppe erstellen</item>
-        <item name="childActionsSectionMembersIndex">Mitglieder anzeigen</item>
-        <item name="childActionsSectionMembersInsert">Mitglied hinzufügen</item>
-        <item name="listformTitle">Übersicht</item>
-        <item name="listformMembersIndex">Zeigen</item>
-        <item name="listformMembersInsert">Neu</item>
-        <item name="listformColumnSortHref">Liste nach dieser Spalte sortieren</item>
-        <item name="listformBatchDeleteSubmit">Einträge löschen</item>
-        <item name="listformBatchUpdateSubmit">Liste aktualisieren</item>
-        <item name="listformFilterIsActive">Für die aktuelle Ansicht ist der Filter aktiviert</item>
-        <item name="listformNoRecords">Keine Gruppen in der Datenbank</item>
-        <item name="listformNoMatchingRecords">Es entsprechen keine Gruppen Ihren Filterkriterien</item>
-        <item name="listformConfirmDelete">Wollen Sie wirklich alle angewählten Gruppen löschen?</item>
-        <item name="listformConfirmUpdate">Wollen Sie wirklich alle Gruppen in dieser Liste aktualisieren?</item>
-        <item name="viewformInsertTitle">Neue Gruppe</item>
-        <item name="viewformUpdateTitle">Gruppe bearbeiten</item>
-        <item name="viewformInsertSubmit">Sichern</item>
-        <item name="viewformUpdateSubmit">Änderungen sichern</item>
-        <item name="viewformInputRequired">Mit rot markierte Felder müssen ausgefüllt werden</item>
-        <item name="filterSectionTitle">Filter</item>
-        <item name="filterSectionSubmit">Finde</item>
-        <item name="filterSectionReset">Zurückstellen</item>
-        <item name="settingsSectionTitle">Einstellungen</item>
-        <item name="settingsSectionSubmit">Speichern</item>
-        <item name="settingsSectionReset">Zurückstellen</item>
-        <item name="settingsSectionItemsPerPage">Einträge pro Seite</item>
-        <item name="pagerPage">Seite</item>
-        <item name="pagerPages">Seiten</item>
-        <item name="pagerOf">von</item>
-        <item name="pagerEntity">Einträgen</item>
-        <item name="pagerPreviousPage">Vorherige</item>
-        <item name="pagerNextPage">Nächste</item>
-    </group>
-    
-    <group name="HELPS">
-        <item name="index"> </item>
-        <item name="update"> </item>
-        <item name="insert"> </item>
-    </group>
-
-    <group name="COLUMNS">
-        <item name="locked">Gesperrt</item>
-        <item name="enabled">Aktiviert</item>
-        <item name="cdate">Erstellt</item>
-        <item name="name">Name</item>
-        <item name="memberAction">Mitglieder</item>
-    </group>
-    
-    <group name="FIELDS">
-        <item name="name">Name</item>
-        <item name="description">Beschrieb</item>
-        <item name="locked">Gesperrt</item>
-        <item name="enabled">Aktiviert</item>
-    </group>
-    
-    <group name="FIELDVALS">
-        <group name="enabled">
-            <item name="0">Nein</item>
-            <item name="1">Ja</item>
-        </group>
-        
-        <group name="locked">
-            <item name="0">Nein</item>
-            <item name="1">Ja</item>
-        </group>
-    </group>
-    
-    <group name="HINTS">
-        <item name="invalidRequest">Unzulässige Aktion</item>
-        <item name="nameExists">Ein existiert bereits eine Gruppe mit diesem Namen</item>
-        <item name="nameRequired">Name: Eingabe benötigt</item>
-        <item name="nameInvalid">Nur die Zeichen a-z, A-Z und 0-9 sind erlaubt in Namen</item>
-    </group>
-
+	<item name="labelsEntityTitle">Gruppen</item>
+	<item name="labelsActionsSectionIndex">Alle Gruppen anzeigen</item>
+	<item name="labelsActionsSectionInsert">Neue Gruppe erstellen</item>
+	<item name="labelsChildActionsSectionMembersIndex">Mitglieder anzeigen</item>
+	<item name="labelsChildActionsSectionMembersInsert">Mitglied hinzufügen</item>
+	<item name="labelsListformTitle">Übersicht</item>
+	<item name="labelsListformMembersIndex">Zeigen</item>
+	<item name="labelsListformMembersInsert">Neu</item>
+	<item name="labelsListformColumnSortHref">Liste nach dieser Spalte sortieren</item>
+	<item name="labelsListformBatchDeleteSubmit">Einträge löschen</item>
+	<item name="labelsListformBatchUpdateSubmit">Liste aktualisieren</item>
+	<item name="labelsListformFilterIsActive">Für die aktuelle Ansicht ist der Filter aktiviert</item>
+	<item name="labelsListformNoRecords">Keine Gruppen in der Datenbank</item>
+	<item name="labelsListformNoMatchingRecords">Es entsprechen keine Gruppen Ihren Filterkriterien</item>
+	<item name="labelsListformConfirmDelete">Wollen Sie wirklich alle angewählten Gruppen löschen?</item>
+	<item name="labelsListformConfirmUpdate">Wollen Sie wirklich alle Gruppen in dieser Liste aktualisieren?</item>
+	<item name="labelsViewformInsertTitle">Neue Gruppe</item>
+	<item name="labelsViewformUpdateTitle">Gruppe bearbeiten</item>
+	<item name="labelsViewformInsertSubmit">Sichern</item>
+	<item name="labelsViewformUpdateSubmit">Änderungen sichern</item>
+	<item name="labelsViewformInputRequired">Mit rot markierte Felder müssen ausgefüllt werden</item>
+	<item name="labelsFilterSectionTitle">Filter</item>
+	<item name="labelsFilterSectionSubmit">Finde</item>
+	<item name="labelsFilterSectionReset">Zurückstellen</item>
+	<item name="labelsSettingsSectionTitle">Einstellungen</item>
+	<item name="labelsSettingsSectionSubmit">Speichern</item>
+	<item name="labelsSettingsSectionReset">Zurückstellen</item>
+	<item name="labelsSettingsSectionItemsPerPage">Einträge pro Seite</item>
+	<item name="labelsPagerPage">Seite</item>
+	<item name="labelsPagerPages">Seiten</item>
+	<item name="labelsPagerOf">von</item>
+	<item name="labelsPagerEntity">Einträgen</item>
+	<item name="labelsPagerPreviousPage">Vorherige</item>
+	<item name="labelsPagerNextPage">Nächste</item>
+	<item name="helpsIndex"/>
+	<item name="helpsUpdate"/>
+	<item name="helpsInsert"/>
+	<item name="columnsLocked">Gesperrt</item>
+	<item name="columnsEnabled">Aktiviert</item>
+	<item name="columnsCdate">Erstellt</item>
+	<item name="columnsName">Name</item>
+	<item name="columnsMemberAction">Mitglieder</item>
+	<item name="fieldsName">Name</item>
+	<item name="fieldsDescription">Beschrieb</item>
+	<item name="fieldsLocked">Gesperrt</item>
+	<item name="fieldsEnabled">Aktiviert</item>
+	<!-- array --><item name="fieldValsEnabled0">Nein</item>
+	<!-- array --><item name="fieldValsEnabled1">Ja</item>
+	<!-- array --><item name="fieldValsLocked0">Nein</item>
+	<!-- array --><item name="fieldValsLocked1">Ja</item>
+	<item name="hintsInvalidRequest">Unzulässige Aktion</item>
+	<item name="hintsNameExists">Ein existiert bereits eine Gruppe mit diesem Namen</item>
+	<item name="hintsNameRequired">Name: Eingabe benötigt</item>
+	<item name="hintsNameInvalid">Nur die Zeichen a-z, A-Z und 0-9 sind erlaubt in Namen</item>
 </dictionary>
-

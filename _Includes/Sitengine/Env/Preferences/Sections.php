@@ -15,17 +15,14 @@
  */
 
 
-
-require_once 'Sitengine/Form/Element.php';
-require_once 'Sitengine/Env.php';
-
-
 class Sitengine_Env_Preferences_Sections
 {
     
     
     public static function getLanguageForm($language, array $languages, array $languageNames, $selector='')
     {
+    	#Sitengine_Debug::print_r($languages);
+    	#Sitengine_Debug::print_r($languageNames);
         $html = array();
         $hiddens = array();
         
@@ -33,6 +30,7 @@ class Sitengine_Env_Preferences_Sections
         foreach($languages as $k => $v) {
             $options[$v] = $languageNames[$v];
         }
+        require_once 'Sitengine/Form/Element.php';
         $e = new Sitengine_Form_Element(Sitengine_Env::PARAM_LANGUAGE, $language);
         $e->setId($selector.Sitengine_Env::PARAM_LANGUAGE);
         $e->setClass($selector.'Select');
@@ -52,6 +50,7 @@ class Sitengine_Env_Preferences_Sections
         $html = array();
         $hiddens = array();
         
+        require_once 'Sitengine/Form/Element.php';
         $e = new Sitengine_Form_Element(Sitengine_Env::PARAM_TIMEZONE, $timezone);
         $e->setId($selector.Sitengine_Env::PARAM_TIMEZONE);
         $e->setClass($selector.'Select');

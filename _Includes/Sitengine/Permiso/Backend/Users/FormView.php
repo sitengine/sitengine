@@ -76,7 +76,7 @@ abstract class Sitengine_Permiso_Backend_Users_FormView extends Sitengine_View
 			'QUERIES' => $this->_queries,
 			'SECTIONS' => $this->_sections,
 			'SETTINGS' => $this->_settings,
-			'DICTIONARY' => $this->_controller->getDictionary()->getData()
+			#'DICTIONARY' => $this->_controller->getTranslate()->translateGroup('data')
 		);
     }
     
@@ -152,7 +152,7 @@ abstract class Sitengine_Permiso_Backend_Users_FormView extends Sitengine_View
                 $uri = $this->_controller->getRequest()->getBasePath().'/'.$route->assemble($args, true);
                 $childActions['membershipsIndex'] = array(
                     'uri' => $uri,
-                    'label' => $this->_controller->getDictionary()->getFromFormView('childActionsSectionMembershipsIndex'),
+                    'label' => $this->_controller->getTranslate()->translate('formViewChildActionsSectionMembershipsIndex'),
                     'postfix' => ' ('.$this->_controller->getViewHelper()->countMemberships($stored['id']).')'
                 );
                 
@@ -191,14 +191,14 @@ abstract class Sitengine_Permiso_Backend_Users_FormView extends Sitengine_View
                 $route = $this->_controller->getFrontController()->getRouter()->getRoute(Sitengine_Permiso_Backend_Front::ROUTE_USERS_NEW);
                 $submitUri = $this->_controller->getRequest()->getBasePath().'/'.$route->assemble($args, true);
                 
-                $title = $this->_controller->getDictionary()->getFromFormView('insertTitle');
+                $title = $this->_controller->getTranslate()->translate('formViewInsertTitle');
                 $displayPermissionSettings = true;
             }
             #Sitengine_Debug::print_r($data);
             
             $data['countryOptions'] = array_merge(
-            	$this->_controller->getDictionary()->getFromFieldVals('country'),
-            	$this->_controller->getDictionary()->getCountries()
+            	$this->_controller->getTranslate()->translateGroup('fieldValsCountry'),
+            	$this->_controller->getTranslate()->translateGroup('countries')
             );
             
             

@@ -8,7 +8,7 @@
 <meta http-equiv="Pragma" content="no-cache" />
 <meta name="robots" content="noindex, nofollow" />
 
-<title>Sitengine - <?=$this->html($this->DICTIONARY->LABELS->entityTitle);?></title>
+<title>Sitengine - <?=$this->html($this->translate('labelsEntityTitle'));?></title>
 
 <link rel="stylesheet" type="text/css" href="<?=$this->_controller->getEnv()->getMediaRequestDir();?>/Backend/Styles/Global.css" />
 <link rel="stylesheet" type="text/css" href="<?=$this->_controller->getEnv()->getMediaRequestDir();?>/Backend/Styles/Lists.css" />
@@ -54,8 +54,8 @@
 <?=$this->SECTIONS->MEMBERSHIPLIST->FILTER->hiddens;?>
 <?foreach($this->SECTIONS->MEMBERSHIPLIST->FILTER->ELEMENTS as $v):?><?=$v;?><?endforeach;?>
 
-<input type="button" value="<?=$this->html($this->DICTIONARY->LABELS->filterSectionSubmit);?>" onclick="document.filterform.submit();" />
-<input type="button" value="<?=$this->html($this->DICTIONARY->LABELS->filterSectionReset);?>" onclick="window.location = '<?=$this->SECTIONS->MEMBERSHIPLIST->FILTER->uriReset;?>';" />
+<input type="button" value="<?=$this->html($this->translate('labelsFilterSectionSubmit'));?>" onclick="document.filterform.submit();" />
+<input type="button" value="<?=$this->html($this->translate('labelsFilterSectionReset'));?>" onclick="window.location = '<?=$this->SECTIONS->MEMBERSHIPLIST->FILTER->uriReset;?>';" />
 
 </form>
 </div>
@@ -72,10 +72,10 @@
 
 <div class="listformNoRecords">
 <?if($this->SECTIONS->MEMBERSHIPLIST->FILTER->isActive):?>
-    <span><?=$this->html($this->DICTIONARY->LABELS->listformNoMatchingRecords);?></span><br />
-    <?=$this->html($this->DICTIONARY->LABELS->listformFilterIsActive);?>
+    <span><?=$this->html($this->translate('labelsListformNoMatchingRecords'));?></span><br />
+    <?=$this->html($this->translate('labelsListformFilterIsActive'));?>
 <?else:?>
-    <span><?=$this->html($this->DICTIONARY->LABELS->listformNoRecords);?></span>
+    <span><?=$this->html($this->translate('labelsListformNoRecords'));?></span>
 <?endif;?>
 </div>
 
@@ -107,12 +107,12 @@
 <?$pagerLastItem = $this->SECTIONS->MEMBERSHIPLIST->PAGER->lastItem;?>
 <?$pagerUriPrevPage = $this->SECTIONS->MEMBERSHIPLIST->PAGER->uriPrevPage;?>
 <?$pagerUriNextPage = $this->SECTIONS->MEMBERSHIPLIST->PAGER->uriNextPage;?>
-<?$pagerPrevLabel = $this->DICTIONARY->LABELS->pagerPreviousPage;?>
-<?$pagerNextLabel = $this->DICTIONARY->LABELS->pagerNextPage;?>
-<?$pagerOfLabel = $this->DICTIONARY->LABELS->pagerOf;?>
-<?$pagerPageLabel = $this->DICTIONARY->LABELS->pagerPage;?>
-<?$pagerPagesLabel = $this->DICTIONARY->LABELS->pagerPages;?>
-<?$pagerEntityLabel = $this->DICTIONARY->LABELS->pagerEntity;?>
+<?$pagerPrevLabel = $this->translate('labelsPagerPreviousPage');?>
+<?$pagerNextLabel = $this->translate('labelsPagerNextPage');?>
+<?$pagerOfLabel = $this->translate('labelsPagerOf');?>
+<?$pagerPageLabel = $this->translate('labelsPagerPage');?>
+<?$pagerPagesLabel = $this->translate('labelsPagerPages');?>
+<?$pagerEntityLabel = $this->translate('labelsPagerEntity');?>
 <?$pagerValClass = "pagerVal";?>
 <?$pagerTextClass = "pagerText";?>
 <?$pagerHrefPrevClass = "pagerHrefPrev";?>
@@ -140,16 +140,16 @@
 <tr class="listformTitleRow">
 <th valign="top" class="listformCheckboxCell"><input type="checkbox" onclick="setCheckboxes(this.checked,document.listform,'SELECTROWITEM');" /></th>
 
-<th valign="top"><a href="<?=$this->SECTIONS->MEMBERSHIPLIST->SORTING->QUERIES->name;?>" title="<?=$this->html($this->DICTIONARY->LABELS->listformColumnSortHref);?>"><?=$this->html($this->DICTIONARY->COLUMNS->name);?></a>
+<th valign="top"><a href="<?=$this->SECTIONS->MEMBERSHIPLIST->SORTING->QUERIES->name;?>" title="<?=$this->html($this->translate('labelsListformColumnSortHref'));?>"><?=$this->html($this->translate('columnsName'));?></a>
 &nbsp;<img src="<?=$this->_controller->getEnv()->getMediaRequestDir();?>/Backend/Pics/Sort_<?=$this->SECTIONS->MEMBERSHIPLIST->SORTING->COLUMNS->name;?>.gif" width="8" height="10" border="0" alt="" /></th>
 
-<th valign="top"><a href="<?=$this->SECTIONS->MEMBERSHIPLIST->SORTING->QUERIES->enabled;?>" title="<?=$this->html($this->DICTIONARY->LABELS->listformColumnSortHref);?>"><?=$this->html($this->DICTIONARY->COLUMNS->enabled);?></a>
+<th valign="top"><a href="<?=$this->SECTIONS->MEMBERSHIPLIST->SORTING->QUERIES->enabled;?>" title="<?=$this->html($this->translate('labelsListformColumnSortHref'));?>"><?=$this->html($this->translate('columnsEnabled'));?></a>
 &nbsp;<img src="<?=$this->_controller->getEnv()->getMediaRequestDir();?>/Backend/Pics/Sort_<?=$this->SECTIONS->MEMBERSHIPLIST->SORTING->COLUMNS->enabled;?>.gif" width="8" height="10" border="0" alt="" /></th>
 
-<th valign="top"><a href="<?=$this->SECTIONS->MEMBERSHIPLIST->SORTING->QUERIES->locked;?>" title="<?=$this->html($this->DICTIONARY->LABELS->listformColumnSortHref);?>"><?=$this->html($this->DICTIONARY->COLUMNS->locked);?></a>
+<th valign="top"><a href="<?=$this->SECTIONS->MEMBERSHIPLIST->SORTING->QUERIES->locked;?>" title="<?=$this->html($this->translate('labelsListformColumnSortHref'));?>"><?=$this->html($this->translate('columnsLocked'));?></a>
 &nbsp;<img src="<?=$this->_controller->getEnv()->getMediaRequestDir();?>/Backend/Pics/Sort_<?=$this->SECTIONS->MEMBERSHIPLIST->SORTING->COLUMNS->locked;?>.gif" width="8" height="10" border="0" alt="" /></th>
 
-<th valign="top" class="listformNumberCell" title="<?=$this->html($this->DICTIONARY->LABELS->listformColumnSortHref);?>"><img src="<?=$this->_controller->getEnv()->getMediaRequestDir();?>/Backend/Pics/Sort_<?=$this->SECTIONS->MEMBERSHIPLIST->SORTING->COLUMNS->cdate;?>.gif" width="8" height="10" border="0" alt="" />&nbsp;<a href="<?=$this->SECTIONS->MEMBERSHIPLIST->SORTING->QUERIES->cdate;?>"><?=$this->html($this->DICTIONARY->COLUMNS->cdate);?></a>&nbsp;</th>
+<th valign="top" class="listformNumberCell" title="<?=$this->html($this->translate('labelsListformColumnSortHref'));?>"><img src="<?=$this->_controller->getEnv()->getMediaRequestDir();?>/Backend/Pics/Sort_<?=$this->SECTIONS->MEMBERSHIPLIST->SORTING->COLUMNS->cdate;?>.gif" width="8" height="10" border="0" alt="" />&nbsp;<a href="<?=$this->SECTIONS->MEMBERSHIPLIST->SORTING->QUERIES->cdate;?>"><?=$this->html($this->translate('columnsCdate'));?></a>&nbsp;</th>
 
 </tr>
 
@@ -192,16 +192,16 @@
 <tr class="listformTitleRow">
 <th valign="top" class="listformCheckboxCell"><input type="checkbox" onclick="setCheckboxes(this.checked,document.listform,'SELECTROWITEM');" /></th>
 
-<th valign="top"><a href="<?=$this->SECTIONS->MEMBERSHIPLIST->SORTING->QUERIES->name;?>" title="<?=$this->html($this->DICTIONARY->LABELS->listformColumnSortHref);?>"><?=$this->html($this->DICTIONARY->COLUMNS->name);?></a>
+<th valign="top"><a href="<?=$this->SECTIONS->MEMBERSHIPLIST->SORTING->QUERIES->name;?>" title="<?=$this->html($this->translate('labelsListformColumnSortHref'));?>"><?=$this->html($this->translate('columnsName'));?></a>
 &nbsp;<img src="<?=$this->_controller->getEnv()->getMediaRequestDir();?>/Backend/Pics/Sort_<?=$this->SECTIONS->MEMBERSHIPLIST->SORTING->COLUMNS->name;?>.gif" width="8" height="10" border="0" alt="" /></th>
 
-<th valign="top"><a href="<?=$this->SECTIONS->MEMBERSHIPLIST->SORTING->QUERIES->enabled;?>" title="<?=$this->html($this->DICTIONARY->LABELS->listformColumnSortHref);?>"><?=$this->html($this->DICTIONARY->COLUMNS->enabled);?></a>
+<th valign="top"><a href="<?=$this->SECTIONS->MEMBERSHIPLIST->SORTING->QUERIES->enabled;?>" title="<?=$this->html($this->translate('labelsListformColumnSortHref'));?>"><?=$this->html($this->translate('columnsEnabled'));?></a>
 &nbsp;<img src="<?=$this->_controller->getEnv()->getMediaRequestDir();?>/Backend/Pics/Sort_<?=$this->SECTIONS->MEMBERSHIPLIST->SORTING->COLUMNS->enabled;?>.gif" width="8" height="10" border="0" alt="" /></th>
 
-<th valign="top"><a href="<?=$this->SECTIONS->MEMBERSHIPLIST->SORTING->QUERIES->locked;?>" title="<?=$this->html($this->DICTIONARY->LABELS->listformColumnSortHref);?>"><?=$this->html($this->DICTIONARY->COLUMNS->locked);?></a>
+<th valign="top"><a href="<?=$this->SECTIONS->MEMBERSHIPLIST->SORTING->QUERIES->locked;?>" title="<?=$this->html($this->translate('labelsListformColumnSortHref'));?>"><?=$this->html($this->translate('columnsLocked'));?></a>
 &nbsp;<img src="<?=$this->_controller->getEnv()->getMediaRequestDir();?>/Backend/Pics/Sort_<?=$this->SECTIONS->MEMBERSHIPLIST->SORTING->COLUMNS->locked;?>.gif" width="8" height="10" border="0" alt="" /></th>
 
-<th valign="top" class="listformNumberCell" title="<?=$this->html($this->DICTIONARY->LABELS->listformColumnSortHref);?>"><img src="<?=$this->_controller->getEnv()->getMediaRequestDir();?>/Backend/Pics/Sort_<?=$this->SECTIONS->MEMBERSHIPLIST->SORTING->COLUMNS->cdate;?>.gif" width="8" height="10" border="0" alt="" />&nbsp;<a href="<?=$this->SECTIONS->MEMBERSHIPLIST->SORTING->QUERIES->cdate;?>"><?=$this->html($this->DICTIONARY->COLUMNS->cdate);?></a>&nbsp;</th>
+<th valign="top" class="listformNumberCell" title="<?=$this->html($this->translate('labelsListformColumnSortHref'));?>"><img src="<?=$this->_controller->getEnv()->getMediaRequestDir();?>/Backend/Pics/Sort_<?=$this->SECTIONS->MEMBERSHIPLIST->SORTING->COLUMNS->cdate;?>.gif" width="8" height="10" border="0" alt="" />&nbsp;<a href="<?=$this->SECTIONS->MEMBERSHIPLIST->SORTING->QUERIES->cdate;?>"><?=$this->html($this->translate('columnsCdate'));?></a>&nbsp;</th>
 
 </tr>
 
@@ -218,8 +218,8 @@
 
 <table width="100%" class="listControlsBottom"><tr><td valign="top">
 
-<input type="button" value="<?=$this->html($this->DICTIONARY->LABELS->listformBatchUpdateSubmit);?>" onclick="doConfirmedSubmit(document.listform, '<?=$this->SECTIONS->MEMBERSHIPLIST->URIS->submitDoBatchUpdate;?>', '<?=$this->DICTIONARY->LABELS->listformConfirmUpdate;?>');" />
-<input type="button" value="<?=$this->html($this->DICTIONARY->LABELS->listformBatchDeleteSubmit);?>" onclick="doConfirmedSubmit(document.listform, '<?=$this->SECTIONS->MEMBERSHIPLIST->URIS->submitDoBatchDelete;?>', '<?=$this->DICTIONARY->LABELS->listformConfirmDelete;?>');" />
+<input type="button" value="<?=$this->html($this->translate('labelsListformBatchUpdateSubmit'));?>" onclick="doConfirmedSubmit(document.listform, '<?=$this->SECTIONS->MEMBERSHIPLIST->URIS->submitDoBatchUpdate;?>', '<?=$this->translate('labelsListformConfirmUpdate');?>');" />
+<input type="button" value="<?=$this->html($this->translate('labelsListformBatchDeleteSubmit'));?>" onclick="doConfirmedSubmit(document.listform, '<?=$this->SECTIONS->MEMBERSHIPLIST->URIS->submitDoBatchDelete;?>', '<?=$this->translate('labelsListformConfirmDelete');?>');" />
 
 </td><td valign="top" align="right">
 

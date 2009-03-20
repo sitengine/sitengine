@@ -74,7 +74,7 @@ abstract class Sitengine_Proto_Backend_Goodies_Shouldies_Couldies_ViewHelper ext
 			$this->setSection(
 				'GLOBALNAV',
 				$this->_controller->getFrontController()->getGlobalNavSection(
-					$this->_controller->getDictionary(),
+					$this->_controller->getTranslate(),
 					$this->_queries,
 					'protoBackendGoodies'
 				)
@@ -97,13 +97,13 @@ abstract class Sitengine_Proto_Backend_Goodies_Shouldies_Couldies_ViewHelper ext
 			
 			require_once 'Sitengine/Env/Preferences/Sections.php';
 			
-			if(sizeof($this->_controller->getDictionary()->getAvailableLanguages()) > 1) {
+			if(sizeof($this->_controller->getTranslate()->getAvailableLanguages()) > 1) {
 				$this->setSection(
 					'LANGUAGE',
 					Sitengine_Env_Preferences_Sections::getLanguageForm(
 						$this->_controller->getPreferences()->getLanguage(),
-						$this->_controller->getDictionary()->getAvailableLanguages(),
-						$this->_controller->getDictionary()->getLocLangs(),
+						$this->_controller->getTranslate()->getAvailableLanguages(),
+						$this->_controller->getTranslate()->translateGroup('loclangs'),
 						'language'
 					)
 				);
@@ -123,7 +123,7 @@ abstract class Sitengine_Proto_Backend_Goodies_Shouldies_Couldies_ViewHelper ext
 			$this->setSection(
 				'BREADCRUMBS',
 				array(
-					'title' => $this->_controller->getDictionary()->getFromBreadcrumbs('title'),
+					'title' => $this->_controller->getTranslate()->translate('breadcrumbsTitle'),
 					'DATA' => $breadcrumbs
 				)
 			);
@@ -133,7 +133,7 @@ abstract class Sitengine_Proto_Backend_Goodies_Shouldies_Couldies_ViewHelper ext
 				array(
 					'title' => $breadcrumbs['shouldy']['title'],
 					'uri' => $breadcrumbs['shouldy']['uriUpdate'],
-					'help' => $this->_controller->getDictionary()->getFromHelps($this->_controller->getRequest()->getActionName())
+					'help' => ''
 				)
 			);
 			
@@ -170,19 +170,19 @@ abstract class Sitengine_Proto_Backend_Goodies_Shouldies_Couldies_ViewHelper ext
 				array(
 					array(
 						'uri' => $uriIndex,
-						'label' => $this->_controller->getDictionary()->getFromLabels('actionsSectionIndex')
+						'label' => $this->_controller->getTranslate()->translate('labelsActionsSectionIndex')
 					),
 					array(
 						'uri' => $uriInsert,
-						'label' => $this->_controller->getDictionary()->getFromLabels('actionsSectionInsert')
+						'label' => $this->_controller->getTranslate()->translate('labelsActionsSectionInsert')
 					),
 					array(
 						'uri' => $uriAssign,
-						'label' => $this->_controller->getDictionary()->getFromLabels('actionsSectionAssign')
+						'label' => $this->_controller->getTranslate()->translate('labelsActionsSectionAssign')
 					),
 					array(
 						'uri' => $uriUpload,
-						'label' => $this->_controller->getDictionary()->getFromLabels('actionsSectionUpload')
+						'label' => $this->_controller->getTranslate()->translate('labelsActionsSectionUpload')
 					)
 				)
 			);
@@ -216,7 +216,7 @@ abstract class Sitengine_Proto_Backend_Goodies_Shouldies_Couldies_ViewHelper ext
         $route = $this->_controller->getFrontController()->getRouter()->getRoute(Sitengine_Proto_Backend_Front::ROUTE_GOODIES);
         $uriIndex = $this->_controller->getRequest()->getBasePath().'/'.$route->assemble($args, true);
         $extras = array(
-            'name' => $this->_controller->getDictionary()->getFromBreadcrumbs('goodyEntity'),
+            'name' => $this->_controller->getTranslate()->translate('breadcrumbsGoodyEntity'),
             'uriIndex' => $uriIndex,
             'uriUpdate' => $uriUpdate
         );
@@ -243,7 +243,7 @@ abstract class Sitengine_Proto_Backend_Goodies_Shouldies_Couldies_ViewHelper ext
         $uriIndex = $this->_controller->getRequest()->getBasePath().'/'.$route->assemble($args, true);
         
         $extras = array(
-            'name' => $this->_controller->getDictionary()->getFromBreadcrumbs('shouldyEntity'),
+            'name' => $this->_controller->getTranslate()->translate('breadcrumbsShouldyEntity'),
             'uriIndex' => $uriIndex,
             'uriUpdate' => $uriUpdate
         );
@@ -261,9 +261,9 @@ abstract class Sitengine_Proto_Backend_Goodies_Shouldies_Couldies_ViewHelper ext
         $route = $this->_controller->getFrontController()->getRouter()->getRoute(Sitengine_Proto_Backend_Front::ROUTE_GOODIES_SHOULDIES_COULDIES);
         $uriIndex = $this->_controller->getRequest()->getBasePath().'/'.$route->assemble($args, true);
         
-        $name = $this->_controller->getDictionary()->getFromBreadcrumbs('couldyEntity');
+        $name = $this->_controller->getTranslate()->translate('breadcrumbsCouldyEntity');
         $level = array();
-        $level['name'] = $this->_controller->getDictionary()->getFromBreadcrumbs('couldyEntity');
+        $level['name'] = $this->_controller->getTranslate()->translate('breadcrumbsCouldyEntity');
         $level['uriIndex'] = $uriIndex;
         
         if($breadcrumbs['couldy'] !== null)

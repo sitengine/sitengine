@@ -75,7 +75,7 @@ abstract class Sitengine_Proto_Backend_Goodies_Shouldies_FormView extends Siteng
 			'QUERIES' => $this->_queries,
 			'SECTIONS' => $this->_sections,
 			'SETTINGS' => $this->_settings,
-			'DICTIONARY' => $this->_controller->getDictionary()->getData()
+			#'DICTIONARY' => $this->_controller->getTranslate()->translateGroup('data')
 		);
     }
     
@@ -168,7 +168,7 @@ abstract class Sitengine_Proto_Backend_Goodies_Shouldies_FormView extends Siteng
                 $uri = $this->_controller->getRequest()->getBasePath().'/'.$route->assemble($args, true);
                 $childActions['couldiesList'] = array(
                     'uri' => $uri,
-                    'label' => $this->_controller->getDictionary()->getFromFormView('childActionsSectionCouldiesIndex'),
+                    'label' => $this->_controller->getTranslate()->translate('formViewChildActionsSectionCouldiesIndex'),
                     'postfix' => ' ('.$this->_controller->getViewHelper()->countCouldies($stored['id']).')'
                 );
                 
@@ -250,14 +250,14 @@ abstract class Sitengine_Proto_Backend_Goodies_Shouldies_FormView extends Siteng
                 $route = $this->_controller->getFrontController()->getRouter()->getRoute(Sitengine_Proto_Backend_Front::ROUTE_GOODIES_SHOULDIES_NEW);
                 $submitUri = $this->_controller->getRequest()->getBasePath().'/'.$route->assemble($args, true);
                 
-                $title = $this->_controller->getDictionary()->getFromFormView('insertTitle');
+                $title = $this->_controller->getTranslate()->translate('formViewInsertTitle');
                 $displayPermissionSettings = true;
             }
             #Sitengine_Debug::print_r($data);
             
             $data['uidOptions'] = $this->_controller->getPermiso()->getDirectory()->getAllUsers();
 			$data['gidOptions'] = array_merge(
-				$this->_controller->getDictionary()->getFromFieldvals(Sitengine_Permiso::FIELD_GID),
+				$this->_controller->getTranslate()->translateGroup('fieldValsGid'),
 				$this->_controller->getPermiso()->getDirectory()->getAllGroups()
 			);
             
@@ -266,13 +266,13 @@ abstract class Sitengine_Proto_Backend_Goodies_Shouldies_FormView extends Siteng
             ########################################################################
             #### CONTENT PAYLOAD SECTION TITLE
             ########################################################################
-            $contentSectionTitle = $this->_controller->getDictionary()->getFromFormView('contentSectionTitleDefault');
+            $contentSectionTitle = $this->_controller->getTranslate()->translate('formViewContentSectionTitleDefault');
             
             if(sizeof($translations->get()) > 1)
             {
             	if(!$payloads->isMain()) { $symbol = $payloads->getTranslationSymbol(); }
             	else { $symbol = $translations->getDefaultSymbol(); }
-            	$contentSectionTitle .= ' ('.$this->_controller->getDictionary()->getFromLanguages($symbol).')';
+            	$contentSectionTitle .= ' ('.$this->_controller->getTranslate()->translate('languages'.ucfirst($symbol)).')';
             }
             
             
@@ -299,7 +299,7 @@ abstract class Sitengine_Proto_Backend_Goodies_Shouldies_FormView extends Siteng
 				
 				$payloadNav[$payloads->getMainName()] = array(
 					'uri' => $uri,
-					'label' => $this->_controller->getDictionary()->getFromFormView('payloadNavTitleMain')
+					'label' => $this->_controller->getTranslate()->translate('formViewPayloadNavTitleMain')
 				);
 				
 				foreach($translations->get() as $index => $symbol)
@@ -320,10 +320,10 @@ abstract class Sitengine_Proto_Backend_Goodies_Shouldies_FormView extends Siteng
 					$uri .= Sitengine_Controller_Request_Http::makeNameValueQuery($query);
 					
 					if(sizeof($translations->get()) > 1) {
-						$label = $this->_controller->getDictionary()->getFromLanguages($symbol);
+						$label = $this->_controller->getTranslate()->translate('languages'.ucfirst($symbol));
 					}
 					else {
-						$label = $this->_controller->getDictionary()->getFromFormView('contentSectionTitleDefault');
+						$label = $this->_controller->getTranslate()->translate('formViewContentSectionTitleDefault');
 					}
 					
 					$payloadNav[$currentPayload] = array(

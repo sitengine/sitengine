@@ -43,7 +43,7 @@ abstract class Sitengine_Proto_Binaries_Shouldies_Controller extends Sitengine_C
     public function getLocale() { return $this->_locale; }
     public function getPermiso() { return $this->_permiso; }
     public function getNamespace() { return $this->_namespace; }
-    public function getDictionary() { return $this->_dictionary; }
+    public function getTranslate() { return $this->_translate; }
     
     
 			

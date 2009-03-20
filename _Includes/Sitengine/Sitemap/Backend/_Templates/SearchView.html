@@ -8,7 +8,7 @@
 <meta http-equiv="Pragma" content="no-cache" />
 <meta name="robots" content="noindex, nofollow" />
 
-<title>Sitengine - <?=$this->html($this->DICTIONARY->LABELS->entityTitle);?></title>
+<title>Sitengine - <?=$this->html($this->translate('labelsEntityTitle'));?></title>
 
 <link rel="stylesheet" type="text/css" href="<?=$this->_controller->getEnv()->getMediaRequestDir();?>/Backend/Styles/Global.css" />
 <link rel="stylesheet" type="text/css" href="<?=$this->_controller->getEnv()->getMediaRequestDir();?>/Backend/Styles/Lists.css" />
@@ -54,8 +54,8 @@
 <?=$this->SECTIONS->ELEMENTLIST->FILTER->hiddens;?>
 <?foreach($this->SECTIONS->ELEMENTLIST->FILTER->ELEMENTS as $v):?><?=$v;?><?endforeach;?>
 
-<input type="button" value="<?=$this->html($this->DICTIONARY->LABELS->searchFormSubmit);?>" onclick="document.searchform.submit();" />
-<input type="button" value="<?=$this->html($this->DICTIONARY->LABELS->searchFormReset);?>" onclick="window.location = '<?=$this->SECTIONS->ELEMENTLIST->FILTER->uriReset;?>';" />
+<input type="button" value="<?=$this->html($this->translate('labelsSearchFormSubmit'));?>" onclick="document.searchform.submit();" />
+<input type="button" value="<?=$this->html($this->translate('labelsSearchFormReset'));?>" onclick="window.location = '<?=$this->SECTIONS->ELEMENTLIST->FILTER->uriReset;?>';" />
 
 </form>
 </div>
@@ -72,7 +72,7 @@
 
 <div class="listformNoRecords">
 <?if($this->SECTIONS->ELEMENTLIST->FILTER->isActive):?>
-    <span><?=$this->html($this->DICTIONARY->LABELS->listformNoMatchingRecords);?></span><br />
+    <span><?=$this->html($this->translate('labelsListformNoMatchingRecords'));?></span><br />
 <?endif;?>
 </div>
 
@@ -104,12 +104,12 @@
 <?$pagerLastItem = $this->SECTIONS->ELEMENTLIST->PAGER->lastItem;?>
 <?$pagerUriPrevPage = $this->SECTIONS->ELEMENTLIST->PAGER->uriPrevPage;?>
 <?$pagerUriNextPage = $this->SECTIONS->ELEMENTLIST->PAGER->uriNextPage;?>
-<?$pagerPrevLabel = $this->DICTIONARY->LABELS->pagerPreviousPage;?>
-<?$pagerNextLabel = $this->DICTIONARY->LABELS->pagerNextPage;?>
-<?$pagerOfLabel = $this->DICTIONARY->LABELS->pagerOf;?>
-<?$pagerPageLabel = $this->DICTIONARY->LABELS->pagerPage;?>
-<?$pagerPagesLabel = $this->DICTIONARY->LABELS->pagerPages;?>
-<?$pagerEntityLabel = $this->DICTIONARY->LABELS->pagerEntity;?>
+<?$pagerPrevLabel = $this->translate('labelsPagerPreviousPage');?>
+<?$pagerNextLabel = $this->translate('labelsPagerNextPage');?>
+<?$pagerOfLabel = $this->translate('labelsPagerOf');?>
+<?$pagerPageLabel = $this->translate('labelsPagerPage');?>
+<?$pagerPagesLabel = $this->translate('labelsPagerPages');?>
+<?$pagerEntityLabel = $this->translate('labelsPagerEntity');?>
 <?$pagerValClass = "pagerVal";?>
 <?$pagerTextClass = "pagerText";?>
 <?$pagerHrefPrevClass = "pagerHrefPrev";?>
@@ -138,13 +138,13 @@
 
 
 <tr class="listformTitleRow">
-<th valign="top"><a href="<?=$this->SECTIONS->ELEMENTLIST->SORTING->QUERIES->type;?>" title="<?=$this->html($this->DICTIONARY->LABELS->listformColumnSortHref);?>"><?=$this->html($this->DICTIONARY->COLUMNS->type);?></a>
+<th valign="top"><a href="<?=$this->SECTIONS->ELEMENTLIST->SORTING->QUERIES->type;?>" title="<?=$this->html($this->translate('labelsListformColumnSortHref'));?>"><?=$this->html($this->translate('columnsType'));?></a>
 &nbsp;<img src="<?=$this->_controller->getEnv()->getMediaRequestDir();?>/Backend/Pics/Sort_<?=$this->SECTIONS->ELEMENTLIST->SORTING->COLUMNS->type;?>.gif" width="8" height="10" border="0" alt="" /></th>
 
-<th valign="top"><a href="<?=$this->SECTIONS->ELEMENTLIST->SORTING->QUERIES->keyword;?>" title="<?=$this->html($this->DICTIONARY->LABELS->listformColumnSortHref);?>"><?=$this->html($this->DICTIONARY->COLUMNS->keyword);?></a>
+<th valign="top"><a href="<?=$this->SECTIONS->ELEMENTLIST->SORTING->QUERIES->keyword;?>" title="<?=$this->html($this->translate('labelsListformColumnSortHref'));?>"><?=$this->html($this->translate('columnsKeyword'));?></a>
 &nbsp;<img src="<?=$this->_controller->getEnv()->getMediaRequestDir();?>/Backend/Pics/Sort_<?=$this->SECTIONS->ELEMENTLIST->SORTING->COLUMNS->keyword;?>.gif" width="8" height="10" border="0" alt="" /></th>
 
-<th valign="top" class="listformNumberCell" title="<?=$this->html($this->DICTIONARY->LABELS->listformColumnSortHref);?>"><img src="<?=$this->_controller->getEnv()->getMediaRequestDir();?>/Backend/Pics/Sort_<?=$this->SECTIONS->ELEMENTLIST->SORTING->COLUMNS->cdate;?>.gif" width="8" height="10" border="0" alt="" />&nbsp;<a href="<?=$this->SECTIONS->ELEMENTLIST->SORTING->QUERIES->cdate;?>"><?=$this->html($this->DICTIONARY->COLUMNS->cdate);?></a>&nbsp;</th>
+<th valign="top" class="listformNumberCell" title="<?=$this->html($this->translate('labelsListformColumnSortHref'));?>"><img src="<?=$this->_controller->getEnv()->getMediaRequestDir();?>/Backend/Pics/Sort_<?=$this->SECTIONS->ELEMENTLIST->SORTING->COLUMNS->cdate;?>.gif" width="8" height="10" border="0" alt="" />&nbsp;<a href="<?=$this->SECTIONS->ELEMENTLIST->SORTING->QUERIES->cdate;?>"><?=$this->html($this->translate('columnsCdate'));?></a>&nbsp;</th>
 
 </tr>
 
@@ -185,13 +185,13 @@
 
 
 <tr class="listformTitleRow">
-<th valign="top"><a href="<?=$this->SECTIONS->ELEMENTLIST->SORTING->QUERIES->type;?>" title="<?=$this->html($this->DICTIONARY->LABELS->listformColumnSortHref);?>"><?=$this->html($this->DICTIONARY->COLUMNS->type);?></a>
+<th valign="top"><a href="<?=$this->SECTIONS->ELEMENTLIST->SORTING->QUERIES->type;?>" title="<?=$this->html($this->translate('labelsListformColumnSortHref'));?>"><?=$this->html($this->translate('columnsType'));?></a>
 &nbsp;<img src="<?=$this->_controller->getEnv()->getMediaRequestDir();?>/Backend/Pics/Sort_<?=$this->SECTIONS->ELEMENTLIST->SORTING->COLUMNS->type;?>.gif" width="8" height="10" border="0" alt="" /></th>
 
-<th valign="top"><a href="<?=$this->SECTIONS->ELEMENTLIST->SORTING->QUERIES->keyword;?>" title="<?=$this->html($this->DICTIONARY->LABELS->listformColumnSortHref);?>"><?=$this->html($this->DICTIONARY->COLUMNS->keyword);?></a>
+<th valign="top"><a href="<?=$this->SECTIONS->ELEMENTLIST->SORTING->QUERIES->keyword;?>" title="<?=$this->html($this->translate('labelsListformColumnSortHref'));?>"><?=$this->html($this->translate('columnsKeyword'));?></a>
 &nbsp;<img src="<?=$this->_controller->getEnv()->getMediaRequestDir();?>/Backend/Pics/Sort_<?=$this->SECTIONS->ELEMENTLIST->SORTING->COLUMNS->keyword;?>.gif" width="8" height="10" border="0" alt="" /></th>
 
-<th valign="top" class="listformNumberCell" title="<?=$this->html($this->DICTIONARY->LABELS->listformColumnSortHref);?>"><img src="<?=$this->_controller->getEnv()->getMediaRequestDir();?>/Backend/Pics/Sort_<?=$this->SECTIONS->ELEMENTLIST->SORTING->COLUMNS->cdate;?>.gif" width="8" height="10" border="0" alt="" />&nbsp;<a href="<?=$this->SECTIONS->ELEMENTLIST->SORTING->QUERIES->cdate;?>"><?=$this->html($this->DICTIONARY->COLUMNS->cdate);?></a>&nbsp;</th>
+<th valign="top" class="listformNumberCell" title="<?=$this->html($this->translate('labelsListformColumnSortHref'));?>"><img src="<?=$this->_controller->getEnv()->getMediaRequestDir();?>/Backend/Pics/Sort_<?=$this->SECTIONS->ELEMENTLIST->SORTING->COLUMNS->cdate;?>.gif" width="8" height="10" border="0" alt="" />&nbsp;<a href="<?=$this->SECTIONS->ELEMENTLIST->SORTING->QUERIES->cdate;?>"><?=$this->html($this->translate('columnsCdate'));?></a>&nbsp;</th>
 
 </tr>
 

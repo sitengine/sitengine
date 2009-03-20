@@ -1,84 +1,55 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
-
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <dictionary name="dictionary">
-
-    <group name="LABELS">
-        <item name="pageTitle">Blog - Comments</item>
-        <item name="entityTitle">Blog - Comments</item>
-        <item name="actionsSectionIndex">Show Comments</item>
-        <item name="actionsSectionInsert">Add Comment to this Post</item>
-        <item name="listformTitle">Comments</item>
-        <item name="assignformTitle">Uploads</item>
-        <item name="viewformInsertTitle">New Comment</item>
-        <item name="viewformUpdateTitle">Update Comment</item>
-        <item name="viewformPayloadNavTitleMain">Overview</item>
-        <item name="viewformContentSectionTitleDefault">Content</item>
-        <item name="viewformInsertSubmit">Save</item>
-        <item name="viewformUpdateSubmit">Save changes</item>
-        <item name="viewformInputRequired">Fields marked with red are required</item>
-        <item name="listformColumnSortHref">Click to sort the list by this column</item>
-        <item name="listformBatchDeleteSubmit">Delete selected</item>
-        <item name="listformBatchUpdateSubmit">Update list</item>
-        <item name="listformFilterIsActive">Filtering is active for the current view</item>
-        <item name="listformNoRecords">No Comments in database</item>
-        <item name="listformNoMatchingRecords">No Comments match your criteria</item>
-        <item name="listformConfirmDelete">Do you really want to delete the selected Comments?</item>
-        <item name="listformConfirmUpdate">Do you really want to update all Comments in the list?</item>
-        <item name="filterSectionTitle">Filter</item>
-        <item name="filterSectionSubmit">Find</item>
-        <item name="filterSectionReset">Reset</item>
-        <item name="settingsSectionTitle">Settings</item>
-        <item name="settingsSectionSubmit">Set</item>
-        <item name="settingsSectionReset">Reset</item>
-        <item name="settingsSectionItemsPerPage">Items per page</item>
-        <item name="pagerPage">Page</item>
-        <item name="pagerPages">Pages</item>
-        <item name="pagerOf">of</item>
-        <item name="pagerEntity">Records</item>
-        <item name="pagerPreviousPage">Previous</item>
-        <item name="pagerNextPage">Next</item>
-    </group>
-    
-    <group name="BREADCRUMBS">
-        <!--
-        <item name="title">Blog</item>
-        -->
-        <item name="blogEntity">Blog</item>
-        <item name="postEntity">Posts</item>
-        <item name="commentEntity">Comments</item>
-    </group>
-
-    <group name="HELPS">
-        <item name="_index"> </item>
-        <item name="_update"> </item>
-        <item name="_insert"> </item>
-    </group>
-
-    <group name="COLUMNS">
-        <item name="name">Name</item>
-        <item name="firstname">Firstname</item>
-        <item name="lastname">Lastname</item>
-        <item name="comment">Comment</item>
-        <item name="approve">Approve</item>
-        <item name="cdate">Created</item>
-    </group>
-    
-    <group name="FIELDS">
-        <item name="comment">Comment</item>
-        <item name="approve">Approve</item>
-        <item name="cdate">Created</item>
-    </group>
-
-    <group name="FIELDVALS">
-        <group name="gid">
-            <item name="noneSelected">Select group</item>
-        </group>
-    </group>
-    
-    <group name="HINTS">
-        <item name="gidRequired">Please select a group</item>
-        <item name="commentRequired">Comment: Input required</item>
-    </group>
-    
+	<item name="labelsPageTitle">Blog - Comments</item>
+	<item name="labelsEntityTitle">Blog - Comments</item>
+	<item name="labelsActionsSectionIndex">Show Comments</item>
+	<item name="labelsActionsSectionInsert">Add Comment to this Post</item>
+	<item name="labelsListformTitle">Comments</item>
+	<item name="labelsAssignformTitle">Uploads</item>
+	<item name="labelsViewformInsertTitle">New Comment</item>
+	<item name="labelsViewformUpdateTitle">Update Comment</item>
+	<item name="labelsViewformPayloadNavTitleMain">Overview</item>
+	<item name="labelsViewformContentSectionTitleDefault">Content</item>
+	<item name="labelsViewformInsertSubmit">Save</item>
+	<item name="labelsViewformUpdateSubmit">Save changes</item>
+	<item name="labelsViewformInputRequired">Fields marked with red are required</item>
+	<item name="labelsListformColumnSortHref">Click to sort the list by this column</item>
+	<item name="labelsListformBatchDeleteSubmit">Delete selected</item>
+	<item name="labelsListformBatchUpdateSubmit">Update list</item>
+	<item name="labelsListformFilterIsActive">Filtering is active for the current view</item>
+	<item name="labelsListformNoRecords">No Comments in database</item>
+	<item name="labelsListformNoMatchingRecords">No Comments match your criteria</item>
+	<item name="labelsListformConfirmDelete">Do you really want to delete the selected Comments?</item>
+	<item name="labelsListformConfirmUpdate">Do you really want to update all Comments in the list?</item>
+	<item name="labelsFilterSectionTitle">Filter</item>
+	<item name="labelsFilterSectionSubmit">Find</item>
+	<item name="labelsFilterSectionReset">Reset</item>
+	<item name="labelsSettingsSectionTitle">Settings</item>
+	<item name="labelsSettingsSectionSubmit">Set</item>
+	<item name="labelsSettingsSectionReset">Reset</item>
+	<item name="labelsSettingsSectionItemsPerPage">Items per page</item>
+	<item name="labelsPagerPage">Page</item>
+	<item name="labelsPagerPages">Pages</item>
+	<item name="labelsPagerOf">of</item>
+	<item name="labelsPagerEntity">Records</item>
+	<item name="labelsPagerPreviousPage">Previous</item>
+	<item name="labelsPagerNextPage">Next</item>
+	<item name="breadcrumbsBlogEntity">Blog</item>
+	<item name="breadcrumbsPostEntity">Posts</item>
+	<item name="breadcrumbsCommentEntity">Comments</item>
+	<item name="helps_index"/>
+	<item name="helps_update"/>
+	<item name="helps_insert"/>
+	<item name="columnsName">Name</item>
+	<item name="columnsFirstname">Firstname</item>
+	<item name="columnsLastname">Lastname</item>
+	<item name="columnsComment">Comment</item>
+	<item name="columnsApprove">Approve</item>
+	<item name="columnsCdate">Created</item>
+	<item name="fieldsComment">Comment</item>
+	<item name="fieldsApprove">Approve</item>
+	<item name="fieldsCdate">Created</item>
+	<!-- array --><item name="fieldValsGidNoneSelected">Select group</item>
+	<item name="hintsGidRequired">Please select a group</item>
+	<item name="hintsCommentRequired">Comment: Input required</item>
 </dictionary>
-

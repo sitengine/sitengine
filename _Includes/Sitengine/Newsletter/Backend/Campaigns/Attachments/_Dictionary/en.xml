@@ -1,107 +1,62 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
-
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <dictionary name="dictionary">
-	
-    <group name="LABELS">
-        <item name="pageTitle">Newsletter - Attachments</item>
-        <item name="entityTitle">Newsletter - Attachments</item>
-        <item name="actionsSectionIndex">Show all Attachments</item>
-        <item name="actionsSectionInsert">Create new Attachment</item>
-        <item name="actionsSectionUpload">Batch Upload</item>
-        <item name="actionsSectionAssign">Show Uploads</item>
-        <item name="columnSortHref">Click to sort the list by this column</item>
-    </group>
-    
-    
-    <group name="HELPS">
-        <item name="_index"> </item>
-        <item name="_update"> </item>
-        <item name="_insert"> </item>
-        <item name="_upload"> </item>
-        <item name="_assign"> </item>
-    </group>
-    
-    
-    <group name="INDEXVIEW">
-        <item name="title">Overview</item>
-        <item name="batchDeleteSubmit">Delete selected</item>
-        <item name="batchUpdateSubmit">Update list</item>
-        <item name="filterIsActive">Filtering is active for the current view</item>
-        <item name="noRecords">No Attachments in database</item>
-        <item name="noMatchingRecords">No Attachments match your criteria</item>
-        <item name="confirmDelete">Do you really want to delete the selected Attachments?</item>
-        <item name="confirmUpdate">Do you really want to update all Attachments in the list?</item>
-        <item name="filterSectionTitle">Filter</item>
-        <item name="filterSectionSubmit">Find</item>
-        <item name="filterSectionReset">Reset</item>
-        <item name="settingsSectionTitle">Settings</item>
-        <item name="settingsSectionSubmit">Set</item>
-        <item name="settingsSectionReset">Reset</item>
-        <item name="settingsSectionItemsPerPage">Items per page</item>
-    </group>
-    
-    
-    <group name="INDEXVIEWCOLUMNS">
-        <item name="title">Title</item>
-        <item name="file1OriginalElement">Copy/Past URL</item>
-        <item name="cdate">Created</item>
-    </group>
-    
-    
-    <group name="FORMVIEW">
-        <item name="insertTitle">New Attachment</item>
-        <item name="updateTitle">Update Attachment</item>
-        <item name="insertSubmit">Save</item>
-        <item name="updateSubmit">Save changes</item>
-        <item name="inputRequired">Fields marked with red are required</item>
-    </group>
-    
-    
-    <group name="FORMVIEWFIELDS">
-        <item name="title">Title</item>
-        <item name="file1Original">File Upload</item>
-        <item name="file1OriginalHint">Format gif, jpg, doc, xls oder pdf</item>
-    </group>
-    
-    
-    <group name="ASSIGNVIEW">
-    	<item name="assignFormTitle">Uploads</item>
-        <item name="batchAssignSubmit">Assign Configured Uploads</item>
-        <item name="batchUnlinkSubmit">Delete Selected Uploads</item>
-        <item name="noUploads">No Uploads available</item>
-        <item name="confirmAssign">Do you really want to assign all configured Uploads in the list?</item>
-        <item name="confirmUnlink">Do you really want to delete all selected Uploads in the list?</item>
-    </group>
-    
-    
-    <group name="ASSIGNVIEWCOLUMNS">
-        <item name="name">Name</item>
-        <item name="size">Size</item>
-        <item name="type">Type</item>
-        <item name="udate">Uploaded</item>
-    </group>
-    
-    
-    <group name="UPLOADVIEW">
-        <item name="uploadFormTitle">Batch Upload</item>
-    </group>
-    
-    
-    <group name="PAGER">
-        <item name="page">Page</item>
-        <item name="pages">Pages</item>
-        <item name="of">of</item>
-        <item name="entity">Records</item>
-        <item name="previousPage">Previous</item>
-        <item name="nextPage">Next</item>
-    </group>
-    
-    
-    <group name="HINTS">
-        <item name="titleRequired">Title: Input required</item>
-        <item name="file1OriginalRequired">Please select a file to upload</item>
-        <item name="file1OriginalFiletype">File Upload: Wrong format</item>
-        <item name="file1OriginalFilesize">File Upload: Filesize exceeded</item>
-    </group>
-    
+	<item name="labelsPageTitle">Newsletter - Attachments</item>
+	<item name="labelsEntityTitle">Newsletter - Attachments</item>
+	<item name="labelsActionsSectionIndex">Show all Attachments</item>
+	<item name="labelsActionsSectionInsert">Create new Attachment</item>
+	<item name="labelsActionsSectionUpload">Batch Upload</item>
+	<item name="labelsActionsSectionAssign">Show Uploads</item>
+	<item name="labelsColumnSortHref">Click to sort the list by this column</item>
+	<item name="helps_index"/>
+	<item name="helps_update"/>
+	<item name="helps_insert"/>
+	<item name="helps_upload"/>
+	<item name="helps_assign"/>
+	<item name="indexViewTitle">Overview</item>
+	<item name="indexViewBatchDeleteSubmit">Delete selected</item>
+	<item name="indexViewBatchUpdateSubmit">Update list</item>
+	<item name="indexViewFilterIsActive">Filtering is active for the current view</item>
+	<item name="indexViewNoRecords">No Attachments in database</item>
+	<item name="indexViewNoMatchingRecords">No Attachments match your criteria</item>
+	<item name="indexViewConfirmDelete">Do you really want to delete the selected Attachments?</item>
+	<item name="indexViewConfirmUpdate">Do you really want to update all Attachments in the list?</item>
+	<item name="indexViewFilterSectionTitle">Filter</item>
+	<item name="indexViewFilterSectionSubmit">Find</item>
+	<item name="indexViewFilterSectionReset">Reset</item>
+	<item name="indexViewSettingsSectionTitle">Settings</item>
+	<item name="indexViewSettingsSectionSubmit">Set</item>
+	<item name="indexViewSettingsSectionReset">Reset</item>
+	<item name="indexViewSettingsSectionItemsPerPage">Items per page</item>
+	<item name="indexViewColumnsTitle">Title</item>
+	<item name="indexViewColumnsFile1OriginalElement">Copy/Past URL</item>
+	<item name="indexViewColumnsCdate">Created</item>
+	<item name="formViewInsertTitle">New Attachment</item>
+	<item name="formViewUpdateTitle">Update Attachment</item>
+	<item name="formViewInsertSubmit">Save</item>
+	<item name="formViewUpdateSubmit">Save changes</item>
+	<item name="formViewInputRequired">Fields marked with red are required</item>
+	<item name="formViewFieldsTitle">Title</item>
+	<item name="formViewFieldsFile1Original">File Upload</item>
+	<item name="formViewFieldsFile1OriginalHint">Format gif, jpg, doc, xls oder pdf</item>
+	<item name="assignViewAssignFormTitle">Uploads</item>
+	<item name="assignViewBatchAssignSubmit">Assign Configured Uploads</item>
+	<item name="assignViewBatchUnlinkSubmit">Delete Selected Uploads</item>
+	<item name="assignViewNoUploads">No Uploads available</item>
+	<item name="assignViewConfirmAssign">Do you really want to assign all configured Uploads in the list?</item>
+	<item name="assignViewConfirmUnlink">Do you really want to delete all selected Uploads in the list?</item>
+	<item name="assignViewcolumnsName">Name</item>
+	<item name="assignViewcolumnsSize">Size</item>
+	<item name="assignViewcolumnsType">Type</item>
+	<item name="assignViewcolumnsUdate">Uploaded</item>
+	<item name="uploadViewUploadFormTitle">Batch Upload</item>
+	<item name="pagerPage">Page</item>
+	<item name="pagerPages">Pages</item>
+	<item name="pagerOf">of</item>
+	<item name="pagerEntity">Records</item>
+	<item name="pagerPreviousPage">Previous</item>
+	<item name="pagerNextPage">Next</item>
+	<item name="hintsTitleRequired">Title: Input required</item>
+	<item name="hintsFile1OriginalRequired">Please select a file to upload</item>
+	<item name="hintsFile1OriginalFiletype">File Upload: Wrong format</item>
+	<item name="hintsFile1OriginalFilesize">File Upload: Filesize exceeded</item>
 </dictionary>

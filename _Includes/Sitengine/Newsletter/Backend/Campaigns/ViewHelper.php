@@ -76,7 +76,7 @@ abstract class Sitengine_Newsletter_Backend_Campaigns_ViewHelper extends Sitengi
 				'GLOBALNAV',
 				$this->_controller->getFrontController()->getGlobalNavSection(
 					$this->_controller->getPermiso(),
-					$this->_controller->getDictionary(),
+					$this->_controller->getTranslate(),
 					$this->_queries,
 					'newsletterBackendCampaigns'
 				)
@@ -99,13 +99,13 @@ abstract class Sitengine_Newsletter_Backend_Campaigns_ViewHelper extends Sitengi
 			
 			require_once 'Sitengine/Env/Preferences/Sections.php';
 			
-			if(sizeof($this->_controller->getDictionary()->getAvailableLanguages()) > 1) {
+			if(sizeof($this->_controller->getTranslate()->getAvailableLanguages()) > 1) {
 				$this->setSection(
 					'LANGUAGE',
 					Sitengine_Env_Preferences_Sections::getLanguageForm(
 						$this->_controller->getPreferences()->getLanguage(),
-						$this->_controller->getDictionary()->getAvailableLanguages(),
-						$this->_controller->getDictionary()->getLocLangs(),
+						$this->_controller->getTranslate()->getAvailableLanguages(),
+						$this->_controller->getTranslate()->translateGroup('loclangs'),
 						'language'
 					)
 				);
@@ -123,9 +123,9 @@ abstract class Sitengine_Newsletter_Backend_Campaigns_ViewHelper extends Sitengi
 			$this->setSection(
 				'ABSTRACT',
 				array(
-					'title' => $this->_controller->getDictionary()->getFromLabels('entityTitle'),
+					'title' => $this->_controller->getTranslate()->translate('labelsEntityTitle'),
 					'uri' => '',
-					'help' => $this->_controller->getDictionary()->getFromHelps($this->_controller->getRequest()->getActionName())
+					'help' => ''
 				)
 			);
 			
@@ -144,11 +144,11 @@ abstract class Sitengine_Newsletter_Backend_Campaigns_ViewHelper extends Sitengi
 				array(
 					array(
 						'uri' => $uriIndex,
-						'label' => $this->_controller->getDictionary()->getFromLabels('actionsSectionIndex')
+						'label' => $this->_controller->getTranslate()->translate('labelsActionsSectionIndex')
 					),
 					array(
 						'uri' => $uriInsert,
-						'label' => $this->_controller->getDictionary()->getFromLabels('actionsSectionInsert')
+						'label' => $this->_controller->getTranslate()->translate('labelsActionsSectionInsert')
 					)
 				)
 			);

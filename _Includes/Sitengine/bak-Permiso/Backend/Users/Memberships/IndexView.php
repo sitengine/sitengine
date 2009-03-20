@@ -85,7 +85,7 @@ abstract class Sitengine_Permiso_Backend_Users_Memberships_IndexView extends Sit
 				#'ORGANIZATION' => $this->_controller->getPermiso()->getOrganization()->getData(),
 				#'USER' => $this->_controller->getPermiso()->getAuth()->getData(),
 				#'Auth' => $this->_controller->getPermiso()->getAuth(),
-				'DICTIONARY' => $this->_controller->getDictionary()->getData()
+				#'DICTIONARY' => $this->_controller->getTranslate()->translateGroup('data')
 			);
 		}
         catch (Exception $exception) {
@@ -126,7 +126,7 @@ abstract class Sitengine_Permiso_Backend_Users_Memberships_IndexView extends Sit
         	$valueIpp = ($valueIpp <= 100 && $valueIpp >= 1) ? $valueIpp : $defaultIpp;
             # set html input element
             $ippValues = array(
-                '' => $this->_controller->getDictionary()->getFromLabels('settingsSectionItemsPerPage'),
+                '' => $this->_controller->getTranslate()->translate('labelsSettingsSectionItemsPerPage'),
                 5 => 5,
                 10 => 10,
                 20 => 20,
@@ -291,7 +291,7 @@ abstract class Sitengine_Permiso_Backend_Users_Memberships_IndexView extends Sit
                     $row['rowSelectCheckbox'] = $e->getCheckbox($s);
                 }
                 
-                $l = $this->_controller->getDictionary()->getFromFieldvals('locked');
+                $l = $this->_controller->getTranslate()->translateGroup('fieldValsLocked');
                 
                 if(
                     $row['id']==Sitengine_Permiso::ID_ROOT_MEMBERSHIP
@@ -321,7 +321,7 @@ abstract class Sitengine_Permiso_Backend_Users_Memberships_IndexView extends Sit
                 $uriUpdate = $this->_controller->getRequest()->getBasePath().'/'.$route->assemble($args, true);
                 
                 
-                $e = $this->_controller->getDictionary()->getFromFieldvals('enabled');
+                $e = $this->_controller->getTranslate()->translateGroup('fieldValsEnabled');
                 
                 $row['isMarked'] = (isset($markedRows[$row['id']])) ? $markedRows[$row['id']] : 0;
                 $row['uriUpdate'] = $uriUpdate;
@@ -431,7 +431,7 @@ abstract class Sitengine_Permiso_Backend_Users_Memberships_IndexView extends Sit
             
             return array(
                 'hiddens' => implode('', $hiddens),
-                'title' => $this->_controller->getDictionary()->getFromLabels('listformTitle'),
+                'title' => $this->_controller->getTranslate()->translate('labelsListformTitle'),
                 'URIS' => $uris,
                 'FILTER' => $filterData,
                 'SETTINGS' => $settingsData,

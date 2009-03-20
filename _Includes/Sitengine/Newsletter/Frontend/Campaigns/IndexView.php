@@ -92,7 +92,7 @@ abstract class Sitengine_Newsletter_Frontend_Campaigns_IndexView extends Sitengi
 			#'ORGANIZATION' => $this->_controller->getPermiso()->getOrganization()->getData(),
 			#'USER' => $this->_controller->getPermiso()->getAuth()->getData(),
 			#'Auth' => $this->_controller->getPermiso()->getAuth(),
-			'DICTIONARY' => $this->_controller->getDictionary()->getData()
+			#'DICTIONARY' => $this->_controller->getTranslate()->translateGroup('data')
 		);
     }
     
@@ -145,7 +145,7 @@ abstract class Sitengine_Newsletter_Frontend_Campaigns_IndexView extends Sitengi
         	$valueIpp = ($valueIpp <= 100 && $valueIpp >= 1) ? $valueIpp : $defaultIpp;
             # set html input element
             $ippValues = array(
-                '' => $this->_controller->getDictionary()->getFromIndexView('settingsSectionItemsPerPage'),
+                '' => $this->_controller->getTranslate()->translate('indexViewSettingsSectionItemsPerPage'),
                 5 => 5,
                 10 => 10,
                 20 => 20,

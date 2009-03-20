@@ -35,7 +35,7 @@ abstract class Sitengine_Permiso_Login_Controller extends Sitengine_Controller_A
     protected $_locale = null;
     protected $_permiso = null;
     protected $_namespace = null;
-    protected $_dictionary = null;
+    protected $_translate = null;
     protected $_templateIndexView = null;
     
     
@@ -47,7 +47,7 @@ abstract class Sitengine_Permiso_Login_Controller extends Sitengine_Controller_A
     public function getLocale() { return $this->_locale; }
     public function getPermiso() { return $this->_permiso; }
     public function getNamespace() { return $this->_namespace; }
-    public function getDictionary() { return $this->_dictionary; }
+    public function getTranslate() { return $this->_translate; }
     
     
     
@@ -99,7 +99,7 @@ abstract class Sitengine_Permiso_Login_Controller extends Sitengine_Controller_A
 			$this->_preferences = Sitengine_Env_Preferences::getInstance();
 			$this->_locale = $this->getEnv()->getLocaleInstance();
 			$this->_permiso = $this->getFrontController()->getPermisoPackage()->start($this->getDatabase());
-        	$this->_dictionary = $this->_getDictionaryInstance();
+        	$this->_translate = $this->_getTranslateInstance();
         	require_once 'Zend/Session/Namespace.php';
     		$this->_namespace = new Zend_Session_Namespace(get_class($this));
         	$this->_setTemplates();
@@ -150,29 +150,27 @@ abstract class Sitengine_Permiso_Login_Controller extends Sitengine_Controller_A
     
     
     
-    protected function _getDictionaryInstance()
+    protected function _getTranslateInstance()
     {
-    	require_once 'Sitengine/Dictionary.php';
-        $dictionary = new Sitengine_Dictionary($this->getEnv()->getDebugControl());
-        
-        # english
-        $dictionary->addFiles(
-            Sitengine_Env::LANGUAGE_EN,
-            array(
-				$this->getEnv()->getIncludesDir().'/Sitengine/Env/_Dictionary/global.xml',
-				$this->getEnv()->getIncludesDir().'/Sitengine/Permiso/Login/_Dictionary/en.xml'
-			)
-        );
-        
-        # deutsch
-        $dictionary->addFiles(
-            Sitengine_Env::LANGUAGE_DE,
-            array(
-				$this->getEnv()->getIncludesDir().'/Sitengine/Env/_Dictionary/global.xml',
-				$this->getEnv()->getIncludesDir().'/Sitengine/Permiso/Login/_Dictionary/de.xml'
-			)
-        );
-        return $dictionary;
+    	require_once 'Sitengine/Translate.php';
+		$translate = new Sitengine_Translate(
+			Sitengine_Translate::AN_XML,
+			$this->getEnv()->getIncludesDir().'/Sitengine/Env/_Dictionary/global.xml',
+			Sitengine_Env::LANGUAGE_EN
+		);
+		
+		$en = array(
+			$this->getEnv()->getIncludesDir().'/Sitengine/Permiso/Login/_Dictionary/en.xml'
+		);
+		
+		$de = array(
+			$this->getEnv()->getIncludesDir().'/Sitengine/Env/_Dictionary/global.xml',
+			$this->getEnv()->getIncludesDir().'/Sitengine/Permiso/Login/_Dictionary/de.xml'
+		);
+		
+		$translate->addMergeTranslation($en, Sitengine_Env::LANGUAGE_EN);
+		$translate->addMergeTranslation($de, Sitengine_Env::LANGUAGE_DE);
+		return $translate;
     }
     
     
@@ -253,8 +251,16 @@ abstract class Sitengine_Permiso_Login_Controller extends Sitengine_Controller_A
 					Sitengine_Debug::action($this->getPreferences()->getDebugMode());
 				}
 				
-				$this->getLocale()->setLocale($this->getPreferences()->getLanguage());
-				$this->getDictionary()->readFiles($this->getPreferences()->getLanguage());
+				$this->getLocale()->setLocale(Sitengine_Env::LANGUAGE_EN);
+				
+				if($this->getTranslate()->isAvailable($this->getPreferences()->getLanguage()))
+				{
+					$this->getLocale()->setLocale($this->getPreferences()->getLanguage());
+					$this->getTranslate()->setLocale($this->getPreferences()->getLanguage());
+				}
+				
+				require_once 'Zend/Registry.php';
+				Zend_Registry::set('Zend_Translate', $this->getTranslate()->getAdapter());
 			}
 		}
         catch (Exception $exception) {

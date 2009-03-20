@@ -8,7 +8,7 @@
 <meta http-equiv="Pragma" content="no-cache" />
 <meta name="robots" content="noindex, nofollow" />
 
-<title>Sitengine - <?=$this->html($this->DICTIONARY->LABELS->pageTitle);?></title>
+<title>Sitengine - <?=$this->html($this->translate('labelsPageTitle'));?></title>
 
 <link rel="stylesheet" type="text/css" href="<?=$this->_controller->getEnv()->getMediaRequestDir();?>/Backend/Styles/Global.css" />
 <link rel="stylesheet" type="text/css" href="<?=$this->_controller->getEnv()->getMediaRequestDir();?>/Backend/Styles/Forms.css" />
@@ -49,12 +49,12 @@
 
 
 
-<form method="post" action="<?=$this->SECTIONS->VIEWFORM->submitUri;?>" enctype="multipart/form-data" name="viewform" class="viewform">
+<form method="post" action="<?=$this->SECTIONS->VIEWFORM->submitUri;?>" enctype="multipart/form-data" name="viewForm" class="viewForm">
 <?=$this->SECTIONS->VIEWFORM->hiddens;?>
 
 
 <?if($this->SECTIONS->VIEWFORM->inputMode == Sitengine_Env::INPUTMODE_UPDATE):?>
-	<div class="viewformChildActions">
+	<div class="viewFormChildActions">
 	
 	<?if(sizeof($this->SECTIONS->VIEWFORM->PAYLOADNAV) > 0):?>
 		<?$count = 0;?>
@@ -81,22 +81,22 @@
 
 
 <?if($this->SECTIONS->VIEWFORM->payloadIsMain):?>
-<div class="viewformMain">
+<div class="viewFormMain">
 
 <!--
-<div class="viewformRequirements"><?=$this->html($this->DICTIONARY->LABELS->viewformInputRequired);?></div><br />
+<div class="viewFormRequirements"><?=$this->html($this->translate('labelsViewformInputRequired'));?></div><br />
 
-<div class="viewformSectionTitle"><?=$this->html($this->SECTIONS->VIEWFORM->contentSectionTitle);?></div>
+<div class="viewFormSectionTitle"><?=$this->html($this->SECTIONS->VIEWFORM->contentSectionTitle);?></div>
 -->
-<div class="viewformContainer">
-<div class="viewformLabelContainer"><label for="title" class="viewformRequiredLabel"><?=$this->html($this->DICTIONARY->FIELDS->title);?></label></div>
-<div class="viewformInputContainer"><?=$this->SECTIONS->VIEWFORM->ELEMENTS->title;?></div>
+<div class="viewFormContainer">
+<div class="viewFormLabelContainer"><label for="title" class="viewFormRequiredLabel"><?=$this->html($this->translate('fieldsTitle'));?></label></div>
+<div class="viewFormInputContainer"><?=$this->SECTIONS->VIEWFORM->ELEMENTS->title;?></div>
 </div>
 
 
-<div class="viewformContainer">
-<div class="viewformLabelContainer"><label for="slug" class="viewformRequiredLabel"><?=$this->html($this->DICTIONARY->FIELDS->slug);?></label></div>
-<div class="viewformInputContainer"><?=$this->SECTIONS->VIEWFORM->ELEMENTS->slug;?></div>
+<div class="viewFormContainer">
+<div class="viewFormLabelContainer"><label for="slug" class="viewFormRequiredLabel"><?=$this->html($this->translate('fieldsSlug'));?></label></div>
+<div class="viewFormInputContainer"><?=$this->SECTIONS->VIEWFORM->ELEMENTS->slug;?></div>
 </div>
 
 <br />
@@ -106,14 +106,14 @@
 
 
 
-<div class="viewformMeta">
+<div class="viewFormMeta">
 
-<div class="viewformSectionTitle"><?=$this->html($this->DICTIONARY->VIEWFORM->metaSectionTitle);?></div>
+<div class="viewFormSectionTitle"><?=$this->html($this->translate('viewFormMetaSectionTitle'));?></div>
 
 
-<div class="viewformContainer">
-<div class="viewformLabelContainer"><label for="publish" class="viewformDefaultLabel"><?=$this->html($this->DICTIONARY->FIELDS->publish);?></label></div>
-<div class="viewformInputContainer"><?=$this->SECTIONS->VIEWFORM->ELEMENTS->publish;?></div>
+<div class="viewFormContainer">
+<div class="viewFormLabelContainer"><label for="publish" class="viewFormDefaultLabel"><?=$this->html($this->translate('fieldsPublish'));?></label></div>
+<div class="viewFormInputContainer"><?=$this->SECTIONS->VIEWFORM->ELEMENTS->publish;?></div>
 </div>
 
 
@@ -127,24 +127,24 @@
 
 
 
-<div class="viewformMain">
+<div class="viewFormMain">
 
-<div class="viewformSectionTitle"><?=$this->html($this->SECTIONS->VIEWFORM->contentSectionTitle);?></div>
+<div class="viewFormSectionTitle"><?=$this->html($this->SECTIONS->VIEWFORM->contentSectionTitle);?></div>
 
 <?
-$labelClass = ($this->SECTIONS->VIEWFORM->payloadIsDefaultTranslation) ? 'viewformRequiredLabel' : 'viewformDefaultLabel';
+$labelClass = ($this->SECTIONS->VIEWFORM->payloadIsDefaultTranslation) ? 'viewFormRequiredLabel' : 'viewFormDefaultLabel';
 ?>
 	
 
-<div class="viewformContainer">
-<div class="viewformLabelContainer"><label for="title" class="<?=$labelClass?>"><?=$this->html($this->DICTIONARY->FIELDS->title);?></label></div>
-<div class="viewformInputContainer"><?=$this->SECTIONS->VIEWFORM->ELEMENTS->title;?></div>
+<div class="viewFormContainer">
+<div class="viewFormLabelContainer"><label for="title" class="<?=$labelClass?>"><?=$this->html($this->translate('fieldsTitle'));?></label></div>
+<div class="viewFormInputContainer"><?=$this->SECTIONS->VIEWFORM->ELEMENTS->title;?></div>
 </div>
 
 
-<div class="viewformContainer">
-<div class="viewformLabelContainer"><label for="markup" class="viewformDefaultLabel"><?=$this->html($this->DICTIONARY->FIELDS->markup);?></label></div>
-<div class="viewformInputContainer"><?=$this->SECTIONS->VIEWFORM->ELEMENTS->markup;?></div>
+<div class="viewFormContainer">
+<div class="viewFormLabelContainer"><label for="markup" class="viewFormDefaultLabel"><?=$this->html($this->translate('fieldsMarkup'));?></label></div>
+<div class="viewFormInputContainer"><?=$this->SECTIONS->VIEWFORM->ELEMENTS->markup;?></div>
 </div>
 
 <br />
@@ -170,13 +170,13 @@ $labelClass = ($this->SECTIONS->VIEWFORM->payloadIsDefaultTranslation) ? 'viewfo
 		$mdate .= ' '.$date->get(Zend_Date::TIME_LONG, $this->_controller->getLocale());
 	?>
 	
-	<div class="viewformDate">
-		<span class="viewformDateLabel"><?=$this->html($this->DICTIONARY->VIEWFORM->dateSectionCdate);?></span>
-		<span class="viewformDateValue"><?=$this->html($cdate);?></span>
+	<div class="viewFormDate">
+		<span class="viewFormDateLabel"><?=$this->html($this->translate('viewFormDateSectionCdate'));?></span>
+		<span class="viewFormDateValue"><?=$this->html($cdate);?></span>
 		&nbsp;&nbsp;
 		
-		<span class="viewformDateLabel"><?=$this->html($this->DICTIONARY->VIEWFORM->dateSectionMdate);?></span>
-		<span class="viewformDateValue"><?=$this->html($mdate);?></span>
+		<span class="viewFormDateLabel"><?=$this->html($this->translate('viewFormDateSectionMdate'));?></span>
+		<span class="viewFormDateValue"><?=$this->html($mdate);?></span>
 		&nbsp;&nbsp;
 	</div>
 
@@ -185,11 +185,11 @@ $labelClass = ($this->SECTIONS->VIEWFORM->payloadIsDefaultTranslation) ? 'viewfo
 
 
 
-<div class="viewformSubmit">
+<div class="viewFormSubmit">
 <?if($this->SECTIONS->VIEWFORM->inputMode == Sitengine_Env::INPUTMODE_UPDATE):?>
-    <input type="submit" value="<?=$this->html($this->DICTIONARY->LABELS->viewformUpdateSubmit);?>" />
+    <input type="submit" value="<?=$this->html($this->translate('labelsViewformUpdateSubmit'));?>" />
 <?else:?>
-    <input type="submit" value="<?=$this->html($this->DICTIONARY->LABELS->viewformInsertSubmit);?>" />
+    <input type="submit" value="<?=$this->html($this->translate('labelsViewformInsertSubmit'));?>" />
 <?endif;?>
 </div>
 

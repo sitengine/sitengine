@@ -86,7 +86,7 @@ abstract class Sitengine_Sitemap_Backend_IndexView extends Sitengine_View {
 				#'ORGANIZATION' => $this->_controller->getPermiso()->getOrganization()->getData(),
 				#'USER' => $this->_controller->getPermiso()->getAuth()->getData(),
 				#'Auth' => $this->_controller->getPermiso()->getAuth(),
-				'DICTIONARY' => $this->_controller->getDictionary()->getData()
+				#'DICTIONARY' => $this->_controller->getTranslate()->translateGroup('data')
 			);
 		}
         catch (Exception $exception) {
@@ -128,7 +128,7 @@ abstract class Sitengine_Sitemap_Backend_IndexView extends Sitengine_View {
             # set html input element
             $languages = array();
             foreach($this->_controller->getTranslations()->get() as $symbol) {
-            	$languages[$symbol] = $this->_controller->getDictionary()->getFromLanguages($symbol);
+            	$languages[$symbol] = $this->_controller->getTranslate()->translate('languages'.ucfirst($symbol));
             }
             $e = new Sitengine_Form_Element(Sitengine_Env::PARAM_TRANSLATION, $this->_controller->getTranslations()->getSymbol());
             $e->setId('settings'.Sitengine_Env::PARAM_TRANSLATION);
@@ -143,7 +143,7 @@ abstract class Sitengine_Sitemap_Backend_IndexView extends Sitengine_View {
         	$valueIpp = ($valueIpp <= 100 && $valueIpp >= 1) ? $valueIpp : $defaultIpp;
             # set html input element
             $ippValues = array(
-                '' => $this->_controller->getDictionary()->getFromLabels('settingsSectionItemsPerPage'),
+                '' => $this->_controller->getTranslate()->translate('labelsSettingsSectionItemsPerPage'),
                 5 => 5,
                 10 => 10,
                 20 => 20,
@@ -180,7 +180,7 @@ abstract class Sitengine_Sitemap_Backend_IndexView extends Sitengine_View {
             $e = new Sitengine_Form_Element(Sitengine_Sitemap_Backend_Controller::PARAM_FILTER_BY_TYPE, $filter->getVal(Sitengine_Sitemap_Backend_Controller::PARAM_FILTER_BY_TYPE));
             $e->setId('filter'.Sitengine_Sitemap_Backend_Controller::PARAM_FILTER_BY_TYPE);
             $e->setClass('filterSelect');
-            $filter->setElement(Sitengine_Sitemap_Backend_Controller::PARAM_FILTER_BY_TYPE, $e->getSelect($this->_controller->getDictionary()->getFromFieldvals(Sitengine_Sitemap_Backend_Controller::PARAM_FILTER_BY_TYPE)));
+            $filter->setElement(Sitengine_Sitemap_Backend_Controller::PARAM_FILTER_BY_TYPE, $e->getSelect($this->_controller->getTranslate()->translateGroup('fieldValsFilterByType')));
             
             $e = new Sitengine_Form_Element(Sitengine_Sitemap_Backend_Controller::PARAM_FILTER_BY_FIND, $filter->getVal(Sitengine_Sitemap_Backend_Controller::PARAM_FILTER_BY_FIND));
             $e->setId('filter'.Sitengine_Sitemap_Backend_Controller::PARAM_FILTER_BY_FIND);
@@ -425,11 +425,11 @@ abstract class Sitengine_Sitemap_Backend_IndexView extends Sitengine_View {
                     $row['childCount'] = $this->_controller->getViewHelper()->countChildren($row['id']);
                     
                     $indexActions = array(
-                        '' => $this->_controller->getDictionary()->getFromLabels('listformElementActionTitleFiles').' ('.$row['childCount'].')',
-                        $uriUpdate => $this->_controller->getDictionary()->getFromLabels('listformElementActionUpdate'),
-                        $uriChildIndex => $this->_controller->getDictionary()->getFromLabels('listformElementActionChildIndex'),
-                        $uriChildNewFile => $this->_controller->getDictionary()->getFromLabels('listformElementActionNewFile'),
-                        $uriChildNewSnippet => $this->_controller->getDictionary()->getFromLabels('listformElementActionNewSnippet')
+                        '' => $this->_controller->getTranslate()->translate('labelsListformElementActionTitleFiles').' ('.$row['childCount'].')',
+                        $uriUpdate => $this->_controller->getTranslate()->translate('labelsListformElementActionUpdate'),
+                        $uriChildIndex => $this->_controller->getTranslate()->translate('labelsListformElementActionChildIndex'),
+                        $uriChildNewFile => $this->_controller->getTranslate()->translate('labelsListformElementActionNewFile'),
+                        $uriChildNewSnippet => $this->_controller->getTranslate()->translate('labelsListformElementActionNewSnippet')
                     );
                     
                     $e = new Sitengine_Form_Element('functions_'.$row['id'], '');
@@ -443,14 +443,14 @@ abstract class Sitengine_Sitemap_Backend_IndexView extends Sitengine_View {
                     $row['childCount'] = $this->_controller->getViewHelper()->countChildren($row['id']);
                     
                     $indexActions = array(
-                        '' => $this->_controller->getDictionary()->getFromLabels('listformElementActionTitle').' ('.$row['childCount'].')',
-                        $uriUpdate => $this->_controller->getDictionary()->getFromLabels('listformElementActionUpdate'),
-                        $uriChildIndex => $this->_controller->getDictionary()->getFromLabels('listformElementActionChildIndex'),
-                        $uriChildNewLayer => $this->_controller->getDictionary()->getFromLabels('listformElementActionNewLayer'),
-                        $uriChildNewPage => $this->_controller->getDictionary()->getFromLabels('listformElementActionNewPage'),
-                        #$uriChildNewMask => $this->_controller->getDictionary()->getFromLabels('listformElementActionNewMask'),
-                        $uriChildNewSnippet => $this->_controller->getDictionary()->getFromLabels('listformElementActionNewSnippet'),
-                        $uriChildNewFile => $this->_controller->getDictionary()->getFromLabels('listformElementActionNewFile')
+                        '' => $this->_controller->getTranslate()->translate('labelsListformElementActionTitle').' ('.$row['childCount'].')',
+                        $uriUpdate => $this->_controller->getTranslate()->translate('labelsListformElementActionUpdate'),
+                        $uriChildIndex => $this->_controller->getTranslate()->translate('labelsListformElementActionChildIndex'),
+                        $uriChildNewLayer => $this->_controller->getTranslate()->translate('labelsListformElementActionNewLayer'),
+                        $uriChildNewPage => $this->_controller->getTranslate()->translate('labelsListformElementActionNewPage'),
+                        #$uriChildNewMask => $this->_controller->getTranslate()->translate('labelsListformElementActionNewMask'),
+                        $uriChildNewSnippet => $this->_controller->getTranslate()->translate('labelsListformElementActionNewSnippet'),
+                        $uriChildNewFile => $this->_controller->getTranslate()->translate('labelsListformElementActionNewFile')
                     );
                     
                     $e = new Sitengine_Form_Element('functions_'.$row['id'], '');
@@ -571,7 +571,7 @@ abstract class Sitengine_Sitemap_Backend_IndexView extends Sitengine_View {
             
             return array(
                 'hiddens' => implode('', $hiddens),
-                'title' => $this->_controller->getDictionary()->getFromLabels($formTitle),
+                'title' => $this->_controller->getTranslate()->translate('labels'.ucfirst($formTitle)),
                 'URIS' => $uris,
                 'FILTER' => $filterData,
                 'SETTINGS' => $settingsData,

@@ -1,9 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
-
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <dictionary name="dictionary">
-
-    <group name="LABELS">
-        <item name="pageTitle">Error</item>
-    </group>
-    
+	<item name="labelsPageTitle">Error</item>
 </dictionary>

@@ -89,7 +89,7 @@ abstract class Sitengine_Blog_Frontend_Blogs_Posts_Comments_FormView extends Sit
 				#'ORGANIZATION' => $this->_controller->getPermiso()->getOrganization()->getData(),
 				#'USER' => $this->_controller->getPermiso()->getAuth()->getData(),
 				#'Auth' => $this->_controller->getPermiso()->getAuth(),
-				'DICTIONARY' => $this->_controller->getDictionary()->getData()
+				#'DICTIONARY' => $this->_controller->getTranslate()->translateGroup('data')
 			);
        	}
         catch (Exception $exception) {
@@ -199,7 +199,7 @@ abstract class Sitengine_Blog_Frontend_Blogs_Posts_Comments_FormView extends Sit
                 $route = $this->_controller->getFrontController()->getRouter()->getRoute(Sitengine_Blog_Frontend_Front::ROUTE_BLOGS_POSTS_COMMENTS_SHARP);
                 $submitUri = $this->_controller->getRequest()->getBasePath().'/'.$route->assemble($args, true);
                 
-                $title = $this->_controller->getDictionary()->getFromLabels('viewformUpdateTitle');
+                $title = $this->_controller->getTranslate()->translate('labelsViewformUpdateTitle');
             }
             else
             {
@@ -228,7 +228,7 @@ abstract class Sitengine_Blog_Frontend_Blogs_Posts_Comments_FormView extends Sit
                 $route = $this->_controller->getFrontController()->getRouter()->getRoute(Sitengine_Blog_Frontend_Front::ROUTE_BLOGS_POSTS_COMMENTS);
                 $submitUri = $this->_controller->getRequest()->getBasePath().'/'.$route->assemble($args, true);
                 
-                #$title = $this->_controller->getDictionary()->getFromLabels('viewformInsertTitle');
+                #$title = $this->_controller->getTranslate()->translate('labelsViewformInsertTitle');
             #}
             #Sitengine_Debug::print_r($data);
             
@@ -239,8 +239,8 @@ abstract class Sitengine_Blog_Frontend_Blogs_Posts_Comments_FormView extends Sit
 			
 			$n = 'comment';
 			$e = new Sitengine_Form_Element($n, $data[$n]);
-			$e->setClass('viewformTextarea');
-			$e->setId('viewform'.$n);
+			$e->setClass('viewFormTextarea');
+			$e->setId('viewForm'.$n);
 			$elements[$n] = $e->getTextarea(40, 10);
 			
             

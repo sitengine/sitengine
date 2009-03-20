@@ -3,22 +3,22 @@
     $this->SECTIONS->VIEWFORM->ELEMENTS->locked
 ):?>
 
-<div class="viewformMeta">
+<div class="viewFormMeta">
 
-<div class="viewformSectionTitle"><?=$this->html($this->DICTIONARY->VIEWFORM->metaSectionTitle);?></div>
+<div class="viewFormSectionTitle"><?=$this->html($this->translate('viewFormMetaSectionTitle'));?></div>
 
 <?if($this->SECTIONS->VIEWFORM->ELEMENTS->enabled):?>
-<div class="viewformContainer">
-<div class="viewformLabelContainer"><label for="enabled" class="viewformDefaultLabel"><?=$this->html($this->DICTIONARY->VIEWFORM->metaSectionEnabledField);?></label></div>
-<div class="viewformInputContainer"><?=$this->SECTIONS->VIEWFORM->ELEMENTS->enabled;?></div>
+<div class="viewFormContainer">
+<div class="viewFormLabelContainer"><label for="enabled" class="viewFormDefaultLabel"><?=$this->html($this->translate('viewFormMetaSectionEnabledField'));?></label></div>
+<div class="viewFormInputContainer"><?=$this->SECTIONS->VIEWFORM->ELEMENTS->enabled;?></div>
 </div>
 <?endif;?>
 
 
 <?if($this->SECTIONS->VIEWFORM->ELEMENTS->locked):?>
-<div class="viewformContainer">
-<div class="viewformLabelContainer"><label for="locked" class="viewformDefaultLabel"><?=$this->html($this->DICTIONARY->VIEWFORM->metaSectionLockedField);?></label></div>
-<div class="viewformInputContainer"><?=$this->SECTIONS->VIEWFORM->ELEMENTS->locked;?></div>
+<div class="viewFormContainer">
+<div class="viewFormLabelContainer"><label for="locked" class="viewFormDefaultLabel"><?=$this->html($this->translate('viewFormMetaSectionLockedField'));?></label></div>
+<div class="viewFormInputContainer"><?=$this->SECTIONS->VIEWFORM->ELEMENTS->locked;?></div>
 </div>
 <?endif;?>
 

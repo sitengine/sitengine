@@ -89,7 +89,7 @@ abstract class Sitengine_Blog_Backend_Blogs_Posts_Files_FormView extends Sitengi
 				#'ORGANIZATION' => $this->_controller->getPermiso()->getOrganization()->getData(),
 				#'USER' => $this->_controller->getPermiso()->getAuth()->getData(),
 				#'Auth' => $this->_controller->getPermiso()->getAuth(),
-				'DICTIONARY' => $this->_controller->getDictionary()->getData()
+				#'DICTIONARY' => $this->_controller->getTranslate()->translateGroup('data')
 			);
        	}
         catch (Exception $exception) {
@@ -215,8 +215,8 @@ abstract class Sitengine_Blog_Backend_Blogs_Posts_Files_FormView extends Sitengi
 				
                 $n = 'uri';
 				$e = new Sitengine_Form_Element($n, preg_replace('/&amp;/', '&', $stored['file1OriginalUri']));
-				$e->setClass('viewformInput');
-				$e->setId('viewform'.$n);
+				$e->setClass('viewFormInput');
+				$e->setId('viewForm'.$n);
 				$elements[$n] = $e->getText(60);
             }
             else
@@ -267,10 +267,10 @@ abstract class Sitengine_Blog_Backend_Blogs_Posts_Files_FormView extends Sitengi
                 
                 $type = $this->_controller->getEntity()->getAncestorType();
 				if($type == Sitengine_Blog_Posts_Table::TYPE_GALLERY) {
-					$title = $this->_controller->getDictionary()->getFromLabels('viewformInsertPhotoTitle');
+					$title = $this->_controller->getTranslate()->translate('labelsViewformInsertPhotoTitle');
 				}
 				else {
-					$title = $this->_controller->getDictionary()->getFromLabels('viewformInsertFileTitle');
+					$title = $this->_controller->getTranslate()->translate('labelsViewformInsertFileTitle');
 				}
             }
             #Sitengine_Debug::print_r($data);
@@ -292,84 +292,84 @@ abstract class Sitengine_Blog_Backend_Blogs_Posts_Files_FormView extends Sitengi
 				{
 					$n = Sitengine_Permiso::FIELD_UID;
 					$e = new Sitengine_Form_Element($n, $data[$n]);
-					$e->setClass('viewformSelect');
-					$e->setId('viewform'.$n);
+					$e->setClass('viewFormSelect');
+					$e->setId('viewForm'.$n);
 					$users = $this->_controller->getPermiso()->getDirectory()->getAllUsers();
 					$elements[$n] = $e->getSelect($users);
 					
 					$n = Sitengine_Permiso::FIELD_GID;
 					$e = new Sitengine_Form_Element($n, $data[$n]);
-					$e->setClass('viewformSelect');
-					$e->setId('viewform'.$n);
+					$e->setClass('viewFormSelect');
+					$e->setId('viewForm'.$n);
 					$groups = $this->_controller->getPermiso()->getDirectory()->getAllGroups();
-					$groups = array_merge($this->_controller->getDictionary()->getFromFieldvals(Sitengine_Permiso::FIELD_GID), $groups);
+					$groups = array_merge($this->_controller->getTranslate()->translateGroup('fieldValsGid'), $groups);
 					$elements[$n] = $e->getSelect($groups);
 					
 					$n = Sitengine_Permiso::FIELD_RAG;
 					$e = new Sitengine_Form_Element($n, '1');
-					$e->setClass('viewformCheckbox');
-					$e->setId('viewform'.$n);
+					$e->setClass('viewFormCheckbox');
+					$e->setId('viewForm'.$n);
 					$elements[$n] = $e->getCheckbox($data[$n]);
 					
 					$n = Sitengine_Permiso::FIELD_RAW;
 					$e = new Sitengine_Form_Element($n, '1');
-					$e->setClass('viewformCheckbox');
-					$e->setId('viewform'.$n);
+					$e->setClass('viewFormCheckbox');
+					$e->setId('viewForm'.$n);
 					$elements[$n] = $e->getCheckbox($data[$n]);
 					
 					$n = Sitengine_Permiso::FIELD_UAG;
 					$e = new Sitengine_Form_Element($n, '1');
-					$e->setClass('viewformCheckbox');
-					$e->setId('viewform'.$n);
+					$e->setClass('viewFormCheckbox');
+					$e->setId('viewForm'.$n);
 					$elements[$n] = $e->getCheckbox($data[$n]);
 					
 					$n = Sitengine_Permiso::FIELD_UAW;
 					$e = new Sitengine_Form_Element($n, '1');
-					$e->setClass('viewformCheckbox');
-					$e->setId('viewform'.$n);
+					$e->setClass('viewFormCheckbox');
+					$e->setId('viewForm'.$n);
 					$elements[$n] = $e->getCheckbox($data[$n]);
 					
 					$n = Sitengine_Permiso::FIELD_DAG;
 					$e = new Sitengine_Form_Element($n, '1');
-					$e->setClass('viewformCheckbox');
-					$e->setId('viewform'.$n);
+					$e->setClass('viewFormCheckbox');
+					$e->setId('viewForm'.$n);
 					$elements[$n] = $e->getCheckbox($data[$n]);
 					
 					$n = Sitengine_Permiso::FIELD_DAW;
 					$e = new Sitengine_Form_Element($n, '1');
-					$e->setClass('viewformCheckbox');
-					$e->setId('viewform'.$n);
+					$e->setClass('viewFormCheckbox');
+					$e->setId('viewForm'.$n);
 					$elements[$n] = $e->getCheckbox($data[$n]);
 				}
 				*/
 				$n = 'titleLang'.$translations->getDefaultIndex();
 				$e = new Sitengine_Form_Element($n, $data[$n]);
-				$e->setClass('viewformInput');
-				$e->setId('viewform'.$n);
+				$e->setClass('viewFormInput');
+				$e->setId('viewForm'.$n);
 				$elements['title'] = $e->getText(40);
 				
 				$n = 'publish';
 				$e = new Sitengine_Form_Element($n, '1');
-				$e->setClass('viewformCheckbox');
-				$e->setId('viewform'.$n);
+				$e->setClass('viewFormCheckbox');
+				$e->setId('viewForm'.$n);
 				$elements[$n] = $e->getCheckbox($data[$n]);
 				
 				$n = 'sorting';
 				$e = new Sitengine_Form_Element($n, $data[$n]);
-				$e->setClass('viewformInput');
-				$e->setId('viewform'.$n);
+				$e->setClass('viewFormInput');
+				$e->setId('viewForm'.$n);
 				$elements[$n] = $e->getText(5);
 				
 				$n = 'file1Original';
 				$e = new Sitengine_Form_Element($n);
-				$e->setClass('viewformFile');
-				$e->setId('viewform'.$n);
+				$e->setClass('viewFormFile');
+				$e->setId('viewForm'.$n);
 				$elements[$n] = $e->getFile(40);
             }
 			$n = 'titleLang'.$payloads->getTranslationIndex();
 			$e = new Sitengine_Form_Element($n, $data[$n]);
-			$e->setClass('viewformInput');
-			$e->setId('viewform'.$n);
+			$e->setClass('viewFormInput');
+			$e->setId('viewForm'.$n);
 			$elements['title'] = $e->getText(40);
 			
 			#$n = 'markupLang'.$payloads->getTranslationIndex();
@@ -377,7 +377,7 @@ abstract class Sitengine_Blog_Backend_Blogs_Posts_Files_FormView extends Sitengi
 			
 			$n = 'markupLang'.$payloads->getTranslationIndex();
 			$e = new Sitengine_Form_Element($n, $data[$n]);
-			$e->setClass('viewformTextarea');
+			$e->setClass('viewFormTextarea');
 			$e->setId('markupTextarea');
 			$elements['markup'] = $e->getTextarea(40, 10);
             
@@ -387,13 +387,13 @@ abstract class Sitengine_Blog_Backend_Blogs_Posts_Files_FormView extends Sitengi
             ########################################################################
             #### CONTENT PAYLOAD SECTION TITLE
             ########################################################################
-            $contentSectionTitle = $this->_controller->getDictionary()->getFromLabels('viewformContentSectionTitleDefault');
+            $contentSectionTitle = $this->_controller->getTranslate()->translate('labelsViewformContentSectionTitleDefault');
             
             if(sizeof($translations->get()) > 1)
             {
             	if(!$payloads->isMain()) { $symbol = $payloads->getTranslationSymbol(); }
             	else { $symbol = $translations->getDefaultSymbol(); }
-            	$contentSectionTitle .= ' ('.$this->_controller->getDictionary()->getFromLanguages($symbol).')';
+            	$contentSectionTitle .= ' ('.$this->_controller->getTranslate()->translate('languages'.ucfirst($symbol)).')';
             }
             
             
@@ -419,7 +419,7 @@ abstract class Sitengine_Blog_Backend_Blogs_Posts_Files_FormView extends Sitengi
 				
 				$payloadNav[$payloads->getMainName()] = array(
 					'uri' => $uri,
-					'label' => $this->_controller->getDictionary()->getFromLabels('viewformPayloadNavTitleMain')
+					'label' => $this->_controller->getTranslate()->translate('labelsViewformPayloadNavTitleMain')
 				);
 				
 				$count = 0;
@@ -444,9 +444,9 @@ abstract class Sitengine_Blog_Backend_Blogs_Posts_Files_FormView extends Sitengi
 						$uri .= Sitengine_Controller_Request_Http::makeNameValueQuery($query);
 						
 						if(sizeof($translations->get()) > 1) {
-							$label = $this->_controller->getDictionary()->getFromLanguages($symbol);
+							$label = $this->_controller->getTranslate()->translate('languages'.ucfirst($symbol));
 						}else {
-							$label = $this->_controller->getDictionary()->getFromLabels('viewformContentSectionTitleDefault');
+							$label = $this->_controller->getTranslate()->translate('labelsViewformContentSectionTitleDefault');
 						}
 						
 						$payloadNav[$currentPayload] = array(

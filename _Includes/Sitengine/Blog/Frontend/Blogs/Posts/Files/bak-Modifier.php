@@ -98,7 +98,7 @@ abstract class Sitengine_Blog_Frontend_Blogs_Posts_Files_Modifier
 			$upload = new Sitengine_Upload($name);
 			
             if(!$upload->isFile()) {
-				$message = $this->_controller->getDictionary()->getFromHints('file1OriginalRequired');
+				$message = $this->_controller->getTranslate()->translate('hintsFile1OriginalRequired');
 				$this->_controller->getStatus()->addHint($name, $message);
 				return null;
 			}
@@ -128,7 +128,7 @@ abstract class Sitengine_Blog_Frontend_Blogs_Posts_Files_Modifier
             {
             	$error = $this->_controller->getRecord()->getError();
             	if($error === null) { return null; }
-            	$message = $this->_controller->getDictionary()->getFromHints($error);
+            	$message = $this->_controller->getTranslate()->translate('hints'.ucfirst($error));
     			$this->_controller->getStatus()->addHint('record', $message);
     			return null;
             }
@@ -152,12 +152,12 @@ abstract class Sitengine_Blog_Frontend_Blogs_Posts_Files_Modifier
             $data = array();
             
             if(!$this->_controller->getPermiso()->getDac()->updateAccessGranted($stored)) {
-                $message = $this->_controller->getDictionary()->getFromHints(Sitengine_Env::HINT_INVALID_ACTION);
+                $message = $this->_controller->getTranslate()->translate(Sitengine_Env::HINT_INVALID_ACTION);
                 $this->_controller->getStatus()->addHint('modifier', $message);
                 return null;
             }
             if($this->_controller->getRequest()->getPost('mdate') != $stored['mdate']) {
-                $message = $this->_controller->getDictionary()->getFromHints(Sitengine_Env::HINT_DATA_EXPIRED);
+                $message = $this->_controller->getTranslate()->translate(Sitengine_Env::HINT_DATA_EXPIRED);
                 $this->_controller->getStatus()->addHint('modifier', $message);
                 return null;
             }
@@ -203,7 +203,7 @@ abstract class Sitengine_Blog_Frontend_Blogs_Posts_Files_Modifier
             {
             	$error = $this->_controller->getRecord()->getError();
             	if($error === null) { return null; }
-            	$message = $this->_controller->getDictionary()->getFromHints($error);
+            	$message = $this->_controller->getTranslate()->translate('hints'.ucfirst($error));
     			$this->_controller->getStatus()->addHint('record', $message);
     			return null;
             }
@@ -224,13 +224,13 @@ abstract class Sitengine_Blog_Frontend_Blogs_Posts_Files_Modifier
         {
         	$name = 'titleLang'.$this->_controller->getRecord()->getTranslations()->getDefaultIndex();
 			if(Sitengine_Validator::nada($this->_controller->getRequest()->getPost($name))) {
-				$message = $this->_controller->getDictionary()->getFromHints('titleRequired');
+				$message = $this->_controller->getTranslate()->translate('hintsTitleRequired');
 				$this->_controller->getStatus()->addHint($name, $message);
 			}
 			
 			$name = 'gid';
 			if($this->_controller->getRequest()->getPost($name)==Sitengine_Blog_Frontend_Blogs_Posts_Files_Controller::VALUE_NONESELECTED) {
-				$message = $this->_controller->getDictionary()->getFromHints('gidRequired');
+				$message = $this->_controller->getTranslate()->translate('hintsGidRequired');
 				$this->_controller->getStatus()->addHint($name, $message);
 			}
         
@@ -250,10 +250,10 @@ abstract class Sitengine_Blog_Frontend_Blogs_Posts_Files_Modifier
 				$messages = array();
 				
 				if(!preg_match($typesPattern, $upload->getMime())) {
-					$messages[] = $this->_controller->getDictionary()->getFromHints('file1OriginalFiletype');
+					$messages[] = $this->_controller->getTranslate()->translate('hintsFile1OriginalFiletype');
 				}
 				if($upload->getSize() > 1024*1024*15) {
-					$messages[] = $this->_controller->getDictionary()->getFromHints('file1OriginalFilesize');
+					$messages[] = $this->_controller->getTranslate()->translate('hintsFile1OriginalFilesize');
 				}
 				if(sizeof($messages)) {
 					$this->_controller->getStatus()->addHint($fileId, $messages);

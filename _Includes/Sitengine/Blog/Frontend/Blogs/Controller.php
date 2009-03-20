@@ -44,7 +44,7 @@ abstract class Sitengine_Blog_Frontend_Blogs_Controller extends Sitengine_Contro
     protected $_locale = null;
     protected $_permiso = null;
     protected $_namespace = null;
-    protected $_dictionary = null;
+    protected $_translate = null;
     #protected $_entity = null;
     protected $_markedRows = array();
     protected $_templateIndexView = null;
@@ -58,7 +58,7 @@ abstract class Sitengine_Blog_Frontend_Blogs_Controller extends Sitengine_Contro
     public function getLocale() { return $this->_locale; }
     public function getPermiso() { return $this->_permiso; }
     public function getNamespace() { return $this->_namespace; }
-    public function getDictionary() { return $this->_dictionary; }
+    public function getTranslate() { return $this->_translate; }
     #public function getEntity() { return $this->_entity; }
     #public function getMarkedRows() { return $this->_markedRows; }
     
@@ -116,7 +116,7 @@ abstract class Sitengine_Blog_Frontend_Blogs_Controller extends Sitengine_Contro
 			$this->_preferences = Sitengine_Env_Preferences::getInstance();
 			$this->_locale = $this->getEnv()->getLocaleInstance();
 			$this->_permiso = $this->getFrontController()->getPermisoPackage()->start($this->getDatabase());
-        	$this->_dictionary = $this->_getDictionaryInstance();
+        	$this->_translate = $this->_getTranslateInstance();
         	#$this->_entity = $this->_getEntityModelInstance();
 			require_once 'Zend/Session/Namespace.php';
     		$this->_namespace = new Zend_Session_Namespace(get_class($this));
@@ -183,22 +183,23 @@ abstract class Sitengine_Blog_Frontend_Blogs_Controller extends Sitengine_Contro
     
     
     
-    protected function _getDictionaryInstance()
+    protected function _getTranslateInstance()
     {
-    	require_once 'Sitengine/Dictionary.php';
-        $dictionary = new Sitengine_Dictionary($this->getEnv()->getDebugControl());
-        
-        # english
-        $dictionary->addFiles(
-            Sitengine_Env::LANGUAGE_EN,
-            array(
-				$this->getEnv()->getIncludesDir().'/Sitengine/Env/_Dictionary/global.xml',
-				$this->getEnv()->getIncludesDir().'/Sitengine/Env/_Dictionary/en.xml',
-				$this->getEnv()->getIncludesDir().'/Sitengine/Blog/Frontend/_Dictionary/en.xml',
-				$this->getEnv()->getIncludesDir().'/Sitengine/Blog/Frontend/Blogs/_Dictionary/en.xml'
-			)
-        );
-        return $dictionary;
+    	require_once 'Sitengine/Translate.php';
+		$translate = new Sitengine_Translate(
+			Sitengine_Translate::AN_XML,
+			$this->getEnv()->getIncludesDir().'/Sitengine/Env/_Dictionary/global.xml',
+			Sitengine_Env::LANGUAGE_EN
+		);
+		
+		$en = array(
+			$this->getEnv()->getIncludesDir().'/Sitengine/Env/_Dictionary/en.xml',
+			$this->getEnv()->getIncludesDir().'/Sitengine/Blog/Frontend/_Dictionary/en.xml',
+			$this->getEnv()->getIncludesDir().'/Sitengine/Blog/Frontend/Blogs/_Dictionary/en.xml'
+		);
+		
+		$translate->addMergeTranslation($en, Sitengine_Env::LANGUAGE_EN);
+		return $translate;
     }
     
     
@@ -254,8 +255,17 @@ abstract class Sitengine_Blog_Frontend_Blogs_Controller extends Sitengine_Contro
 					Sitengine_Debug::action($this->getPreferences()->getDebugMode());
 				}
 				
-				$this->getLocale()->setLocale($this->getPreferences()->getLanguage());
-				$this->getDictionary()->readFiles($this->getPreferences()->getLanguage());
+				$this->getLocale()->setLocale(Sitengine_Env::LANGUAGE_EN);
+				
+				if($this->getTranslate()->isAvailable($this->getPreferences()->getLanguage()))
+				{
+					$this->getLocale()->setLocale($this->getPreferences()->getLanguage());
+					$this->getTranslate()->setLocale($this->getPreferences()->getLanguage());
+				}
+				
+				require_once 'Zend/Registry.php';
+				Zend_Registry::set('Zend_Translate', $this->getTranslate()->getAdapter());
+				
 				
 				$this->getStatus()->restore();
 				if($this->getStatus()->getCode() != Sitengine_Env::STATUS_OKINSERT) {

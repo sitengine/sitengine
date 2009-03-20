@@ -72,7 +72,7 @@ abstract class Sitengine_Blog_Frontend_Blogs_Posts_ViewHelper extends Sitengine_
 			$this->setSection(
 				'GLOBALNAV',
 				$this->_controller->getFrontController()->getGlobalNavSection(
-					$this->_controller->getDictionary(),
+					$this->_controller->getTranslate(),
 					$this->_queries,
 					'blogFrontendBlogs'
 				)
@@ -95,13 +95,13 @@ abstract class Sitengine_Blog_Frontend_Blogs_Posts_ViewHelper extends Sitengine_
 			
 			require_once 'Sitengine/Env/Preferences/Sections.php';
 			
-			if(sizeof($this->_controller->getDictionary()->getAvailableLanguages()) > 1) {
+			if(sizeof($this->_controller->getTranslate()->getAvailableLanguages()) > 1) {
 				$this->setSection(
 					'LANGUAGE',
 					Sitengine_Env_Preferences_Sections::getLanguageForm(
 						$this->_controller->getPreferences()->getLanguage(),
-						$this->_controller->getDictionary()->getAvailableLanguages(),
-						$this->_controller->getDictionary()->getLocLangs(),
+						$this->_controller->getTranslate()->getAvailableLanguages(),
+						$this->_controller->getTranslate()->translateGroup('loclangs'),
 						'language'
 					)
 				);
@@ -121,7 +121,7 @@ abstract class Sitengine_Blog_Frontend_Blogs_Posts_ViewHelper extends Sitengine_
 			$this->setSection(
 				'BREADCRUMBS',
 				array(
-					#'title' => $this->_controller->getDictionary()->getFromBreadcrumbs('title'),
+					#'title' => $this->_controller->getTranslate()->translate('breadcrumbsTitle'),
 					'RAW' => $this->_controller->getEntity()->getBreadcrumbsData(),
 					'DATA' => $breadcrumbs
 				)
@@ -132,7 +132,7 @@ abstract class Sitengine_Blog_Frontend_Blogs_Posts_ViewHelper extends Sitengine_
 				array(
 					'title' => $breadcrumbs['blog']['title'],
 					#'uri' => $breadcrumbs[sizeof($breadcrumbs)-2]['uriView'],
-					#'help' => $this->_controller->getDictionary()->getFromHelps($this->_controller->getRequest()->getActionName())
+					#'help' => ''
 				)
 			);
 			
@@ -229,39 +229,39 @@ abstract class Sitengine_Blog_Frontend_Blogs_Posts_ViewHelper extends Sitengine_
 				array(
 					array(
 						'uri' => $uriIndex,
-						'label' => $this->_controller->getDictionary()->getFromLabels('actionsSectionIndex')
+						'label' => $this->_controller->getTranslate()->translate('labelsActionsSectionIndex')
 					),
 					array(
 						'uri' => $uriInsert,
-						'label' => $this->_controller->getDictionary()->getFromLabels('actionsSectionInsert')
+						'label' => $this->_controller->getTranslate()->translate('labelsActionsSectionInsert')
 					),
 					array(
 						'uri' => $uriTextInsert,
-						'label' => $this->_controller->getDictionary()->getFromLabels('actionsSectionInsertText')
+						'label' => $this->_controller->getTranslate()->translate('labelsActionsSectionInsertText')
 					),
 					array(
 						'uri' => $uriPhotoInsert,
-						'label' => $this->_controller->getDictionary()->getFromLabels('actionsSectionInsertPhoto')
+						'label' => $this->_controller->getTranslate()->translate('labelsActionsSectionInsertPhoto')
 					),
 					array(
 						'uri' => $uriGalleryInsert,
-						'label' => $this->_controller->getDictionary()->getFromLabels('actionsSectionInsertGallery')
+						'label' => $this->_controller->getTranslate()->translate('labelsActionsSectionInsertGallery')
 					),
 					array(
 						'uri' => $uriQuoteInsert,
-						'label' => $this->_controller->getDictionary()->getFromLabels('actionsSectionInsertQuote')
+						'label' => $this->_controller->getTranslate()->translate('labelsActionsSectionInsertQuote')
 					),
 					array(
 						'uri' => $uriLinkInsert,
-						'label' => $this->_controller->getDictionary()->getFromLabels('actionsSectionInsertLink')
+						'label' => $this->_controller->getTranslate()->translate('labelsActionsSectionInsertLink')
 					),
 					array(
 						'uri' => $uriAudioInsert,
-						'label' => $this->_controller->getDictionary()->getFromLabels('actionsSectionInsertAudio')
+						'label' => $this->_controller->getTranslate()->translate('labelsActionsSectionInsertAudio')
 					),
 					array(
 						'uri' => $uriVideoInsert,
-						'label' => $this->_controller->getDictionary()->getFromLabels('actionsSectionInsertVideo')
+						'label' => $this->_controller->getTranslate()->translate('labelsActionsSectionInsertVideo')
 					)
 				)
 			);
@@ -288,7 +288,7 @@ abstract class Sitengine_Blog_Frontend_Blogs_Posts_ViewHelper extends Sitengine_
 		$uri = $this->_controller->getRequest()->getBasePath().'/'.$route->assemble($args, true);
 		$childActions['commentList'] = array(
 			'uri' => $uri,
-			'label' => $this->_controller->getDictionary()->getFromLabels('childActionsSectionCommentsIndex'),
+			'label' => $this->_controller->getTranslate()->translate('labelsChildActionsSectionCommentsIndex'),
 			'postfix' => ' ('.$this->_controller->getViewHelper()->countComments($id).')'
 		);
 		*/
@@ -300,7 +300,7 @@ abstract class Sitengine_Blog_Frontend_Blogs_Posts_ViewHelper extends Sitengine_
 		$uri = $this->_controller->getRequest()->getBasePath().'/'.$route->assemble($args, true);
 		$childActions['commentInsert'] = array(
 			'uri' => $uri,
-			'label' => $this->_controller->getDictionary()->getFromLabels('childActionsSectionCommentsInsert')
+			'label' => $this->_controller->getTranslate()->translate('labelsChildActionsSectionCommentsInsert')
 		);
 		return $childActions;
     }
@@ -470,7 +470,7 @@ abstract class Sitengine_Blog_Frontend_Blogs_Posts_ViewHelper extends Sitengine_
         $route = $this->_controller->getFrontController()->getRouter()->getRoute(Sitengine_Blog_Frontend_Front::ROUTE_BLOGS);
         $uriIndex = $this->_controller->getRequest()->getBasePath().'/'.$route->assemble($args, true);
         $data['blog'] = array(
-            'name' => $this->_controller->getDictionary()->getFromBreadcrumbs('blogEntity'),
+            'name' => $this->_controller->getTranslate()->translate('breadcrumbsBlogEntity'),
             'uriIndex' => $uriIndex,
             'title' => $blog['title'],
             #'uriView' => $uriView
@@ -487,7 +487,7 @@ abstract class Sitengine_Blog_Frontend_Blogs_Posts_ViewHelper extends Sitengine_
         $route = $this->_controller->getFrontController()->getRouter()->getRoute(Sitengine_Blog_Frontend_Front::ROUTE_BLOGS_POSTS);
         $uriIndex = $this->_controller->getRequest()->getBasePath().'/'.$route->assemble($args, true);
         $level = array();
-        $level['name'] = $this->_controller->getDictionary()->getFromBreadcrumbs('postEntity');
+        $level['name'] = $this->_controller->getTranslate()->translate('breadcrumbsPostEntity');
         $level['uriIndex'] = $uriIndex;
         
         if($breadcrumbs['post'])

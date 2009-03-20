@@ -160,12 +160,12 @@ abstract class Sitengine_Blog_Frontend_Blogs_Posts_Modifier
         {
         	$name = 'titleLang'.$this->_controller->getRecord()->getTranslations()->getDefaultIndex();
 			if(Sitengine_Validator::nada($this->_controller->getRequest()->getPost($name))) {
-				$message = $this->_controller->getDictionary()->getFromTextPostHints('titleRequired');
+				$message = $this->_controller->getTranslate()->translate('textposthintsTitleRequired');
 				$this->_controller->getStatus()->addHint($name, $message);
 			}
 			$name = 'markupLang'.$this->_controller->getRecord()->getTranslations()->getDefaultIndex();
 			if(Sitengine_Validator::nada($this->_controller->getRequest()->getPost($name))) {
-				$message = $this->_controller->getDictionary()->getFromTextPostHints('markupRequired');
+				$message = $this->_controller->getTranslate()->translate('textposthintsMarkupRequired');
 				$this->_controller->getStatus()->addHint($name, $message);
 			}
         
@@ -175,7 +175,7 @@ abstract class Sitengine_Blog_Frontend_Blogs_Posts_Modifier
         {
 			$name = 'gid';
 			if($this->_controller->getRequest()->getPost($name)==Sitengine_Blog_Frontend_Blogs_Posts_Controller::VALUE_NONESELECTED) {
-				$message = $this->_controller->getDictionary()->getFromTextPostHints('gidRequired');
+				$message = $this->_controller->getTranslate()->translate('textposthintsGidRequired');
 				$this->_controller->getStatus()->addHint($name, $message);
 			}
         }
@@ -217,7 +217,7 @@ abstract class Sitengine_Blog_Frontend_Blogs_Posts_Modifier
             {
             	$error = $this->_controller->getRecord()->getError();
             	if($error === null) { return null; }
-            	$message = $this->_controller->getDictionary()->getFromHints($error);
+            	$message = $this->_controller->getTranslate()->translate('hints'.ucfirst($error));
     			$this->_controller->getStatus()->addHint('record', $message);
     			return null;
             }
@@ -240,12 +240,12 @@ abstract class Sitengine_Blog_Frontend_Blogs_Posts_Modifier
             $data = array();
             
             if(!$this->_controller->getPermiso()->getDac()->updateAccessGranted($stored)) {
-                $message = $this->_controller->getDictionary()->getFromHints(Sitengine_Env::HINT_INVALID_ACTION);
+                $message = $this->_controller->getTranslate()->translate(Sitengine_Env::HINT_INVALID_ACTION);
                 $this->_controller->getStatus()->addHint('modifier', $message);
                 return null;
             }
             if($this->_controller->getRequest()->getPost('mdate') != $stored['mdate']) {
-                $message = $this->_controller->getDictionary()->getFromHints(Sitengine_Env::HINT_DATA_EXPIRED);
+                $message = $this->_controller->getTranslate()->translate(Sitengine_Env::HINT_DATA_EXPIRED);
                 $this->_controller->getStatus()->addHint('modifier', $message);
                 return null;
             }
@@ -289,7 +289,7 @@ abstract class Sitengine_Blog_Frontend_Blogs_Posts_Modifier
             {
             	$error = $this->_controller->getRecord()->getError();
             	if($error === null) { return null; }
-            	$message = $this->_controller->getDictionary()->getFromHints($error);
+            	$message = $this->_controller->getTranslate()->translate('hints'.ucfirst($error));
     			$this->_controller->getStatus()->addHint('record', $message);
     			return null;
             }
@@ -368,7 +368,7 @@ abstract class Sitengine_Blog_Frontend_Blogs_Posts_Modifier
         {
 			$name = 'gid';
 			if($this->_controller->getRequest()->getPost($name)==Sitengine_Blog_Frontend_Blogs_Posts_Controller::VALUE_NONESELECTED) {
-				$message = $this->_controller->getDictionary()->getFromPhotoPostHints('gidRequired');
+				$message = $this->_controller->getTranslate()->translate('photoposthintsGidRequired');
 				$this->_controller->getStatus()->addHint($name, $message);
 			}
 			
@@ -380,10 +380,10 @@ abstract class Sitengine_Blog_Frontend_Blogs_Posts_Modifier
 				$messages = array();
 				
 				if(!preg_match('/(gif|jpg|jpeg|png)/i', $upload->getMime())) {
-					$messages[] = $this->_controller->getDictionary()->getFromPhotoPostHints('file1OriginalFiletype');
+					$messages[] = $this->_controller->getTranslate()->translate('photoposthintsFile1OriginalFiletype');
 				}
 				if($upload->getSize() > 1024*1024*2) {
-					$messages[] = $this->_controller->getDictionary()->getFromPhotoPostHints('file1OriginalFilesize');
+					$messages[] = $this->_controller->getTranslate()->translate('photoposthintsFile1OriginalFilesize');
 				}
 				if(sizeof($messages)) {
 					$this->_controller->getStatus()->addHint($fileId, $messages);
@@ -411,7 +411,7 @@ abstract class Sitengine_Blog_Frontend_Blogs_Posts_Modifier
             if(!$upload->isFile()) {
 				$name = 'file1Original';
 				if(!$upload->isFile()) {
-					$message = $this->_controller->getDictionary()->getFromPhotoPostHints('file1OriginalRequired');
+					$message = $this->_controller->getTranslate()->translate('photoposthintsFile1OriginalRequired');
 					$this->_controller->getStatus()->addHint($name, $message);
 					return null;
 				}
@@ -443,7 +443,7 @@ abstract class Sitengine_Blog_Frontend_Blogs_Posts_Modifier
             {
             	$error = $this->_controller->getRecord()->getError();
             	if($error === null) { return null; }
-            	$message = $this->_controller->getDictionary()->getFromHints($error);
+            	$message = $this->_controller->getTranslate()->translate('hints'.ucfirst($error));
     			$this->_controller->getStatus()->addHint('record', $message);
     			return null;
             }
@@ -466,12 +466,12 @@ abstract class Sitengine_Blog_Frontend_Blogs_Posts_Modifier
             $data = array();
             
             if(!$this->_controller->getPermiso()->getDac()->updateAccessGranted($stored)) {
-                $message = $this->_controller->getDictionary()->getFromHints(Sitengine_Env::HINT_INVALID_ACTION);
+                $message = $this->_controller->getTranslate()->translate(Sitengine_Env::HINT_INVALID_ACTION);
                 $this->_controller->getStatus()->addHint('modifier', $message);
                 return null;
             }
             if($this->_controller->getRequest()->getPost('mdate') != $stored['mdate']) {
-                $message = $this->_controller->getDictionary()->getFromHints(Sitengine_Env::HINT_DATA_EXPIRED);
+                $message = $this->_controller->getTranslate()->translate(Sitengine_Env::HINT_DATA_EXPIRED);
                 $this->_controller->getStatus()->addHint('modifier', $message);
                 return null;
             }
@@ -517,7 +517,7 @@ abstract class Sitengine_Blog_Frontend_Blogs_Posts_Modifier
             {
             	$error = $this->_controller->getRecord()->getError();
             	if($error === null) { return null; }
-            	$message = $this->_controller->getDictionary()->getFromHints($error);
+            	$message = $this->_controller->getTranslate()->translate('hints'.ucfirst($error));
     			$this->_controller->getStatus()->addHint('record', $message);
     			return null;
             }
@@ -589,7 +589,7 @@ abstract class Sitengine_Blog_Frontend_Blogs_Posts_Modifier
         {
 			$name = 'gid';
 			if($this->_controller->getRequest()->getPost($name)==Sitengine_Blog_Frontend_Blogs_Posts_Controller::VALUE_NONESELECTED) {
-				$message = $this->_controller->getDictionary()->getFromGalleryPostHints('gidRequired');
+				$message = $this->_controller->getTranslate()->translate('galleryposthintsGidRequired');
 				$this->_controller->getStatus()->addHint($name, $message);
 			}
 			/*
@@ -601,10 +601,10 @@ abstract class Sitengine_Blog_Frontend_Blogs_Posts_Modifier
 				$messages = array();
 				
 				if(!preg_match('/(gif|jpg|jpeg|png)/i', $upload->getMime())) {
-					$messages[] = $this->_controller->getDictionary()->getFromGalleryPostHints('file1OriginalFiletype');
+					$messages[] = $this->_controller->getTranslate()->translate('galleryposthintsFile1OriginalFiletype');
 				}
 				if($upload->getSize() > 1024*1024*2) {
-					$messages[] = $this->_controller->getDictionary()->getFromGalleryPostHints('file1OriginalFilesize');
+					$messages[] = $this->_controller->getTranslate()->translate('galleryposthintsFile1OriginalFilesize');
 				}
 				if(sizeof($messages)) {
 					$this->_controller->getStatus()->addHint($fileId, $messages);
@@ -619,7 +619,7 @@ abstract class Sitengine_Blog_Frontend_Blogs_Posts_Modifier
         {
         	$name = 'titleLang'.$this->_controller->getRecord()->getTranslations()->getDefaultIndex();
 			if(Sitengine_Validator::nada($this->_controller->getRequest()->getPost($name))) {
-				$message = $this->_controller->getDictionary()->getFromGalleryPostHints('titleRequired');
+				$message = $this->_controller->getTranslate()->translate('galleryposthintsTitleRequired');
 				$this->_controller->getStatus()->addHint($name, $message);
 			}
         }
@@ -644,7 +644,7 @@ abstract class Sitengine_Blog_Frontend_Blogs_Posts_Modifier
             if(!$upload->isFile()) {
 				$name = 'file1Original';
 				if(!$upload->isFile()) {
-					$message = $this->_controller->getDictionary()->getFromGalleryPostHints('file1OriginalRequired');
+					$message = $this->_controller->getTranslate()->translate('galleryposthintsFile1OriginalRequired');
 					$this->_controller->getStatus()->addHint($name, $message);
 					return null;
 				}
@@ -676,7 +676,7 @@ abstract class Sitengine_Blog_Frontend_Blogs_Posts_Modifier
             {
             	$error = $this->_controller->getRecord()->getError();
             	if($error === null) { return null; }
-            	$message = $this->_controller->getDictionary()->getFromHints($error);
+            	$message = $this->_controller->getTranslate()->translate('hints'.ucfirst($error));
     			$this->_controller->getStatus()->addHint('record', $message);
     			return null;
             }
@@ -699,12 +699,12 @@ abstract class Sitengine_Blog_Frontend_Blogs_Posts_Modifier
             $data = array();
             
             if(!$this->_controller->getPermiso()->getDac()->updateAccessGranted($stored)) {
-                $message = $this->_controller->getDictionary()->getFromHints(Sitengine_Env::HINT_INVALID_ACTION);
+                $message = $this->_controller->getTranslate()->translate(Sitengine_Env::HINT_INVALID_ACTION);
                 $this->_controller->getStatus()->addHint('modifier', $message);
                 return null;
             }
             if($this->_controller->getRequest()->getPost('mdate') != $stored['mdate']) {
-                $message = $this->_controller->getDictionary()->getFromHints(Sitengine_Env::HINT_DATA_EXPIRED);
+                $message = $this->_controller->getTranslate()->translate(Sitengine_Env::HINT_DATA_EXPIRED);
                 $this->_controller->getStatus()->addHint('modifier', $message);
                 return null;
             }
@@ -750,7 +750,7 @@ abstract class Sitengine_Blog_Frontend_Blogs_Posts_Modifier
             {
             	$error = $this->_controller->getRecord()->getError();
             	if($error === null) { return null; }
-            	$message = $this->_controller->getDictionary()->getFromHints($error);
+            	$message = $this->_controller->getTranslate()->translate('hints'.ucfirst($error));
     			$this->_controller->getStatus()->addHint('record', $message);
     			return null;
             }
@@ -820,7 +820,7 @@ abstract class Sitengine_Blog_Frontend_Blogs_Posts_Modifier
         {
 			$name = 'gid';
 			if($this->_controller->getRequest()->getPost($name)==Sitengine_Blog_Frontend_Blogs_Posts_Controller::VALUE_NONESELECTED) {
-				$message = $this->_controller->getDictionary()->getFromQuotePostHints('gidRequired');
+				$message = $this->_controller->getTranslate()->translate('quoteposthintsGidRequired');
 				$this->_controller->getStatus()->addHint($name, $message);
 			}
         }
@@ -831,7 +831,7 @@ abstract class Sitengine_Blog_Frontend_Blogs_Posts_Modifier
         {
         	$name = 'markupLang'.$this->_controller->getRecord()->getTranslations()->getDefaultIndex();
 			if(Sitengine_Validator::nada($this->_controller->getRequest()->getPost($name))) {
-				$message = $this->_controller->getDictionary()->getFromQuotePostHints('markupRequired');
+				$message = $this->_controller->getTranslate()->translate('quoteposthintsMarkupRequired');
 				$this->_controller->getStatus()->addHint($name, $message);
 			}
         }
@@ -873,7 +873,7 @@ abstract class Sitengine_Blog_Frontend_Blogs_Posts_Modifier
             {
             	$error = $this->_controller->getRecord()->getError();
             	if($error === null) { return null; }
-            	$message = $this->_controller->getDictionary()->getFromHints($error);
+            	$message = $this->_controller->getTranslate()->translate('hints'.ucfirst($error));
     			$this->_controller->getStatus()->addHint('record', $message);
     			return null;
             }
@@ -896,12 +896,12 @@ abstract class Sitengine_Blog_Frontend_Blogs_Posts_Modifier
             $data = array();
             
             if(!$this->_controller->getPermiso()->getDac()->updateAccessGranted($stored)) {
-                $message = $this->_controller->getDictionary()->getFromHints(Sitengine_Env::HINT_INVALID_ACTION);
+                $message = $this->_controller->getTranslate()->translate(Sitengine_Env::HINT_INVALID_ACTION);
                 $this->_controller->getStatus()->addHint('modifier', $message);
                 return null;
             }
             if($this->_controller->getRequest()->getPost('mdate') != $stored['mdate']) {
-                $message = $this->_controller->getDictionary()->getFromHints(Sitengine_Env::HINT_DATA_EXPIRED);
+                $message = $this->_controller->getTranslate()->translate(Sitengine_Env::HINT_DATA_EXPIRED);
                 $this->_controller->getStatus()->addHint('modifier', $message);
                 return null;
             }
@@ -945,7 +945,7 @@ abstract class Sitengine_Blog_Frontend_Blogs_Posts_Modifier
             {
             	$error = $this->_controller->getRecord()->getError();
             	if($error === null) { return null; }
-            	$message = $this->_controller->getDictionary()->getFromHints($error);
+            	$message = $this->_controller->getTranslate()->translate('hints'.ucfirst($error));
     			$this->_controller->getStatus()->addHint('record', $message);
     			return null;
             }
@@ -1019,7 +1019,7 @@ abstract class Sitengine_Blog_Frontend_Blogs_Posts_Modifier
         {
 			$name = 'gid';
 			if($this->_controller->getRequest()->getPost($name)==Sitengine_Blog_Frontend_Blogs_Posts_Controller::VALUE_NONESELECTED) {
-				$message = $this->_controller->getDictionary()->getFromLinkPostHints('gidRequired');
+				$message = $this->_controller->getTranslate()->translate('linkposthintsGidRequired');
 				$this->_controller->getStatus()->addHint($name, $message);
 			}
         }
@@ -1030,13 +1030,13 @@ abstract class Sitengine_Blog_Frontend_Blogs_Posts_Modifier
         {
         	$name = 'titleLang'.$this->_controller->getRecord()->getTranslations()->getDefaultIndex();
 			if(Sitengine_Validator::nada($this->_controller->getRequest()->getPost($name))) {
-				$message = $this->_controller->getDictionary()->getFromLinkPostHints('titleRequired');
+				$message = $this->_controller->getTranslate()->translate('linkposthintsTitleRequired');
 				$this->_controller->getStatus()->addHint($name, $message);
 			}
 			
 			$name = 'url';
 			if(Sitengine_Validator::nada($this->_controller->getRequest()->getPost($name))) {
-				$message = $this->_controller->getDictionary()->getFromLinkPostHints('urlRequired');
+				$message = $this->_controller->getTranslate()->translate('linkposthintsUrlRequired');
 				$this->_controller->getStatus()->addHint($name, $message);
 			}
         }
@@ -1078,7 +1078,7 @@ abstract class Sitengine_Blog_Frontend_Blogs_Posts_Modifier
             {
             	$error = $this->_controller->getRecord()->getError();
             	if($error === null) { return null; }
-            	$message = $this->_controller->getDictionary()->getFromHints($error);
+            	$message = $this->_controller->getTranslate()->translate('hints'.ucfirst($error));
     			$this->_controller->getStatus()->addHint('record', $message);
     			return null;
             }
@@ -1101,12 +1101,12 @@ abstract class Sitengine_Blog_Frontend_Blogs_Posts_Modifier
             $data = array();
             
             if(!$this->_controller->getPermiso()->getDac()->updateAccessGranted($stored)) {
-                $message = $this->_controller->getDictionary()->getFromHints(Sitengine_Env::HINT_INVALID_ACTION);
+                $message = $this->_controller->getTranslate()->translate(Sitengine_Env::HINT_INVALID_ACTION);
                 $this->_controller->getStatus()->addHint('modifier', $message);
                 return null;
             }
             if($this->_controller->getRequest()->getPost('mdate') != $stored['mdate']) {
-                $message = $this->_controller->getDictionary()->getFromHints(Sitengine_Env::HINT_DATA_EXPIRED);
+                $message = $this->_controller->getTranslate()->translate(Sitengine_Env::HINT_DATA_EXPIRED);
                 $this->_controller->getStatus()->addHint('modifier', $message);
                 return null;
             }
@@ -1150,7 +1150,7 @@ abstract class Sitengine_Blog_Frontend_Blogs_Posts_Modifier
             {
             	$error = $this->_controller->getRecord()->getError();
             	if($error === null) { return null; }
-            	$message = $this->_controller->getDictionary()->getFromHints($error);
+            	$message = $this->_controller->getTranslate()->translate('hints'.ucfirst($error));
     			$this->_controller->getStatus()->addHint('record', $message);
     			return null;
             }
@@ -1229,7 +1229,7 @@ abstract class Sitengine_Blog_Frontend_Blogs_Posts_Modifier
         {
 			$name = 'gid';
 			if($this->_controller->getRequest()->getPost($name)==Sitengine_Blog_Frontend_Blogs_Posts_Controller::VALUE_NONESELECTED) {
-				$message = $this->_controller->getDictionary()->getFromAudioPostHints('gidRequired');
+				$message = $this->_controller->getTranslate()->translate('audioposthintsGidRequired');
 				$this->_controller->getStatus()->addHint($name, $message);
 			}
 			
@@ -1241,10 +1241,10 @@ abstract class Sitengine_Blog_Frontend_Blogs_Posts_Modifier
 				$messages = array();
 				
 				if(!preg_match('/(mp3|mpg|mpeg)/i', $upload->getMime())) {
-					$messages[] = $this->_controller->getDictionary()->getFromAudioPostHints('file1OriginalFiletype');
+					$messages[] = $this->_controller->getTranslate()->translate('audioposthintsFile1OriginalFiletype');
 				}
 				if($upload->getSize() > 1024*1024*15) {
-					$messages[] = $this->_controller->getDictionary()->getFromAudioPostHints('file1OriginalFilesize');
+					$messages[] = $this->_controller->getTranslate()->translate('audioposthintsFile1OriginalFilesize');
 				}
 				if(sizeof($messages)) {
 					$this->_controller->getStatus()->addHint($fileId, $messages);
@@ -1270,7 +1270,7 @@ abstract class Sitengine_Blog_Frontend_Blogs_Posts_Modifier
 			$upload = new Sitengine_Upload($name);
 			
             if(!$upload->isFile()) {
-				$message = $this->_controller->getDictionary()->getFromAudioPostHints('file1OriginalRequired');
+				$message = $this->_controller->getTranslate()->translate('audioposthintsFile1OriginalRequired');
 				$this->_controller->getStatus()->addHint($name, $message);
 				return null;
 			}
@@ -1301,7 +1301,7 @@ abstract class Sitengine_Blog_Frontend_Blogs_Posts_Modifier
             {
             	$error = $this->_controller->getRecord()->getError();
             	if($error === null) { return null; }
-            	$message = $this->_controller->getDictionary()->getFromHints($error);
+            	$message = $this->_controller->getTranslate()->translate('hints'.ucfirst($error));
     			$this->_controller->getStatus()->addHint('record', $message);
     			return null;
             }
@@ -1324,12 +1324,12 @@ abstract class Sitengine_Blog_Frontend_Blogs_Posts_Modifier
             $data = array();
             
             if(!$this->_controller->getPermiso()->getDac()->updateAccessGranted($stored)) {
-                $message = $this->_controller->getDictionary()->getFromHints(Sitengine_Env::HINT_INVALID_ACTION);
+                $message = $this->_controller->getTranslate()->translate(Sitengine_Env::HINT_INVALID_ACTION);
                 $this->_controller->getStatus()->addHint('modifier', $message);
                 return null;
             }
             if($this->_controller->getRequest()->getPost('mdate') != $stored['mdate']) {
-                $message = $this->_controller->getDictionary()->getFromHints(Sitengine_Env::HINT_DATA_EXPIRED);
+                $message = $this->_controller->getTranslate()->translate(Sitengine_Env::HINT_DATA_EXPIRED);
                 $this->_controller->getStatus()->addHint('modifier', $message);
                 return null;
             }
@@ -1375,7 +1375,7 @@ abstract class Sitengine_Blog_Frontend_Blogs_Posts_Modifier
             {
             	$error = $this->_controller->getRecord()->getError();
             	if($error === null) { return null; }
-            	$message = $this->_controller->getDictionary()->getFromHints($error);
+            	$message = $this->_controller->getTranslate()->translate('hints'.ucfirst($error));
     			$this->_controller->getStatus()->addHint('record', $message);
     			return null;
             }
@@ -1456,13 +1456,13 @@ abstract class Sitengine_Blog_Frontend_Blogs_Posts_Modifier
         {
 			$name = 'gid';
 			if($this->_controller->getRequest()->getPost($name)==Sitengine_Blog_Frontend_Blogs_Posts_Controller::VALUE_NONESELECTED) {
-				$message = $this->_controller->getDictionary()->getFromVideoPostHints('gidRequired');
+				$message = $this->_controller->getTranslate()->translate('videoposthintsGidRequired');
 				$this->_controller->getStatus()->addHint($name, $message);
 			}
 			
 			$name = 'embedTag';
 			if(Sitengine_Validator::nada($this->_controller->getRequest()->getPost($name))) {
-				$message = $this->_controller->getDictionary()->getFromVideoPostHints('embedTagRequired');
+				$message = $this->_controller->getTranslate()->translate('videoposthintsEmbedTagRequired');
 				$this->_controller->getStatus()->addHint($name, $message);
 			}
         }
@@ -1473,7 +1473,7 @@ abstract class Sitengine_Blog_Frontend_Blogs_Posts_Modifier
         {
         	$name = 'titleLang'.$this->_controller->getRecord()->getTranslations()->getDefaultIndex();
 			if(Sitengine_Validator::nada($this->_controller->getRequest()->getPost($name))) {
-				$message = $this->_controller->getDictionary()->getFromVideoPostHints('titleRequired');
+				$message = $this->_controller->getTranslate()->translate('videoposthintsTitleRequired');
 				$this->_controller->getStatus()->addHint($name, $message);
 			}
         }
@@ -1515,7 +1515,7 @@ abstract class Sitengine_Blog_Frontend_Blogs_Posts_Modifier
             {
             	$error = $this->_controller->getRecord()->getError();
             	if($error === null) { return null; }
-            	$message = $this->_controller->getDictionary()->getFromHints($error);
+            	$message = $this->_controller->getTranslate()->translate('hints'.ucfirst($error));
     			$this->_controller->getStatus()->addHint('record', $message);
     			return null;
             }
@@ -1538,12 +1538,12 @@ abstract class Sitengine_Blog_Frontend_Blogs_Posts_Modifier
             $data = array();
             
             if(!$this->_controller->getPermiso()->getDac()->updateAccessGranted($stored)) {
-                $message = $this->_controller->getDictionary()->getFromHints(Sitengine_Env::HINT_INVALID_ACTION);
+                $message = $this->_controller->getTranslate()->translate(Sitengine_Env::HINT_INVALID_ACTION);
                 $this->_controller->getStatus()->addHint('modifier', $message);
                 return null;
             }
             if($this->_controller->getRequest()->getPost('mdate') != $stored['mdate']) {
-                $message = $this->_controller->getDictionary()->getFromHints(Sitengine_Env::HINT_DATA_EXPIRED);
+                $message = $this->_controller->getTranslate()->translate(Sitengine_Env::HINT_DATA_EXPIRED);
                 $this->_controller->getStatus()->addHint('modifier', $message);
                 return null;
             }
@@ -1587,7 +1587,7 @@ abstract class Sitengine_Blog_Frontend_Blogs_Posts_Modifier
             {
             	$error = $this->_controller->getRecord()->getError();
             	if($error === null) { return null; }
-            	$message = $this->_controller->getDictionary()->getFromHints($error);
+            	$message = $this->_controller->getTranslate()->translate('hints'.ucfirst($error));
     			$this->_controller->getStatus()->addHint('record', $message);
     			return null;
             }

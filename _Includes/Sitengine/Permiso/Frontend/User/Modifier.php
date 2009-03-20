@@ -69,14 +69,14 @@ class Sitengine_Permiso_Frontend_User_Modifier
             $name = 'password';
             if(Sitengine_Validator::nada($this->_controller->getRequest()->getPost($name)))
             {
-                $message = $this->_controller->getDictionary()->getFromHints('passwordRequired');
+                $message = $this->_controller->getTranslate()->translate('hintsPasswordRequired');
                 $this->_controller->getStatus()->addHint($name, $message);
             }
             
             if(!$this->_controller->getPermiso()->getUsersTable()->checkUserModifyData(
 					$this->_controller->getStatus(),
 					$this->_controller->getRequest(),
-					$this->_controller->getDictionary()
+					$this->_controller->getTranslate()
 				)
 			)
             {
@@ -109,7 +109,7 @@ class Sitengine_Permiso_Frontend_User_Modifier
             {
             	$error = $this->_controller->getFrontController()->getPermisoPackage()->getUsersTable()->getError();
             	if($error === null) { return null; }
-            	$message = $this->_controller->getDictionary()->getFromHints($error);
+            	$message = $this->_controller->getTranslate()->translate('hints'.ucfirst($error));
     			$this->_controller->getStatus()->addHint('record', $message);
     			return null;
             }
@@ -138,7 +138,7 @@ class Sitengine_Permiso_Frontend_User_Modifier
                 $id == Sitengine_Permiso::UID_LOSTFOUND
             ) {
                 # root, lostfound and guest can't be changed
-                $message = $this->_controller->getDictionary()->getFromHints('invalidAction');
+                $message = $this->_controller->getTranslate()->translate('hintsInvalidAction');
                 $this->_controller->getStatus()->addHint('modifier', $message);
                 return null;
             }
@@ -146,7 +146,7 @@ class Sitengine_Permiso_Frontend_User_Modifier
             if(!$this->_controller->getPermiso()->getUsersTable()->checkUserModifyData(
 					$this->_controller->getStatus(),
 					$this->_controller->getRequest(),
-					$this->_controller->getDictionary()
+					$this->_controller->getTranslate()
 				)
 			)
             {
@@ -177,7 +177,7 @@ class Sitengine_Permiso_Frontend_User_Modifier
             {
             	$error = $this->_controller->getFrontController()->getPermisoPackage()->getUsersTable()->getError();
             	if($error === null) { return null; }
-            	$message = $this->_controller->getDictionary()->getFromHints($error);
+            	$message = $this->_controller->getTranslate()->translate('hints'.ucfirst($error));
     			$this->_controller->getStatus()->addHint('record', $message);
     			return null;
             }
@@ -199,41 +199,41 @@ class Sitengine_Permiso_Frontend_User_Modifier
 		$name = 'name';
 		$val = $this->_controller->getRequest()->getPost($name);
 		if(Sitengine_Validator::nada($val)) {
-			$message = $this->_controller->getDictionary()->getFromHints('nameRequired');
+			$message = $this->_controller->getTranslate()->translate('hintsNameRequired');
 			$this->_controller->getStatus()->addHint($name, $message);
 		}
 		else if(!Sitengine_Validator::emailAddress($val)) {
-			$message = $this->_controller->getDictionary()->getFromHints('nameValidEmailRequired');
+			$message = $this->_controller->getTranslate()->translate('hintsNameValidEmailRequired');
 			$this->_controller->getStatus()->addHint($name, $message);
 			return false;
 		}
 		$name = 'firstname';
 		$val = $this->_controller->getRequest()->getPost($name);
 		if(Sitengine_Validator::nada($val)) {
-			$message = $this->_controller->getDictionary()->getFromHints('firstnameRequired');
+			$message = $this->_controller->getTranslate()->translate('hintsFirstnameRequired');
 			$this->_controller->getStatus()->addHint($name, $message);
 		}
 		$name = 'lastname';
 		$val = $this->_controller->getRequest()->getPost($name);
 		if(Sitengine_Validator::nada($val)) {
-			$message = $this->_controller->getDictionary()->getFromHints('lastnameRequired');
+			$message = $this->_controller->getTranslate()->translate('hintsLastnameRequired');
 			$this->_controller->getStatus()->addHint($name, $message);
 		}
 		$name = 'nickname';
 		$val = $this->_controller->getRequest()->getPost($name);
 		if(Sitengine_Validator::nada($val)) {
-			$message = $this->_controller->getDictionary()->getFromHints('nicknameRequired');
+			$message = $this->_controller->getTranslate()->translate('hintsNicknameRequired');
 			$this->_controller->getStatus()->addHint($name, $message);
 		}
 		$name = 'password';
 		$val = $this->_controller->getRequest()->getPost($name);
 		# passwords must be made up of a-zA-Z0-9
 		if(!Sitengine_Validator::nada($val) && !Sitengine_Validator::word($val)) {
-			$message = $this->_controller->getDictionary()->getFromHints('passwordWordCharsOnly');
+			$message = $this->_controller->getTranslate()->translate('hintsPasswordWordCharsOnly');
 			$this->_controller->getStatus()->addHint($name, $message);
 		}
 		if($val!=$this->_controller->getRequest()->getPost('passwordConfirm')) {
-			$message = $this->_controller->getDictionary()->getFromHints('passwordsDontMatch');
+			$message = $this->_controller->getTranslate()->translate('hintsPasswordsDontMatch');
 			$this->_controller->getStatus()->addHint($name, $message);
 		}
 		
@@ -245,7 +245,7 @@ class Sitengine_Permiso_Frontend_User_Modifier
 			);
 			
 			$validator->setMessage(
-				$this->_controller->getDictionary()->getFromHints('passwordTooShort'),
+				$this->_controller->getTranslate()->translate('hintsPasswordTooShort'),
 				Zend_Validate_StringLength::TOO_SHORT)
 			;
 			
@@ -258,7 +258,7 @@ class Sitengine_Permiso_Frontend_User_Modifier
 		
 		$name = 'country';
 		if(Sitengine_Validator::nada($this->_controller->getRequest()->getPost($name), 'noneSelected')) {
-			$message = $this->_controller->getDictionary()->getFromHints('countryRequired');
+			$message = $this->_controller->getTranslate()->translate('hintsCountryRequired');
 			$this->_controller->getStatus()->addHint($name, $message);
 		}
 		
