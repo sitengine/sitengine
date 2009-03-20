@@ -337,8 +337,10 @@ abstract class Sitengine_FormToMail_Default_Controller extends Sitengine_Control
     			break;
     		}
     	}
-    	if($action === null) {
-    		$exception = $this->getExceptionInstance(
+    	if($action === null)
+    	{
+    		require_once 'Sitengine/FormToMail/Default/Exception.php';
+    		$exception = new Sitengine_FormToMail_Default_Exception(
     			'method not supported',
     			Sitengine_Env::ERROR_NOT_SUPPORTED
     		);

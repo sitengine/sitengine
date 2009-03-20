@@ -294,12 +294,17 @@ class Sitengine_Env
     	return $this;
     }
     
-    
+    /*
     public function getUriSelfSubmit()
     {
     	return $this->_uriSelfSubmit;
     }
+    */
     
+    public function getUriSelfSubmit()
+    {
+		return preg_replace('/\?.* /', '', $_SERVER['REQUEST_URI']);
+    }
 	
 	
 	

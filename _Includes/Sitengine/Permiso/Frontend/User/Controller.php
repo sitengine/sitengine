@@ -425,7 +425,8 @@ abstract class Sitengine_Permiso_Frontend_User_Controller extends Sitengine_Cont
     		}
     	}
     	if($action === null) {
-    		$exception = $this->getExceptionInstance(
+    		require_once 'Sitengine/Permiso/Frontend/User/Exception.php';
+    		$exception = new Sitengine_Permiso_Frontend_User_Exception(
     			'method not supported',
     			Sitengine_Env::ERROR_NOT_FOUND
     		);

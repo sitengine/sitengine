@@ -112,14 +112,6 @@ abstract class Sitengine_Error_Controller extends Sitengine_Controller_Action
     
     
     
-    
-    public function getExceptionInstance($message, $p2 = null, $p3 = null, $priority = null)
-    {
-    	require_once 'Sitengine/Error/Exception.php';
-        return new Sitengine_Error_Exception($message, $p2, $p3, $priority);
-    }
-    
-    
     protected function _getTranslateInstance()
     {
     	require_once 'Sitengine/Translate.php';
@@ -153,12 +145,19 @@ abstract class Sitengine_Error_Controller extends Sitengine_Controller_Action
 			{
 				$this->_started = true;
 				
-				$this->getLocale()->setLocale(Sitengine_Env::LANGUAGE_EN);
-				
-				if($this->getTranslate()->isAvailable($this->getPreferences()->getLanguage()))
+				/*
+				foreach($this->getRequest()->getParams() as $key => $val)
 				{
-					$this->getLocale()->setLocale($this->getPreferences()->getLanguage());
-					$this->getTranslate()->setLocale($this->getPreferences()->getLanguage());
+					print $key.'<br />';
+				}
+				*/
+				
+				$language = $this->getRequest()->getParam(Sitengine_Env::PARAM_LANGUAGE);
+				
+				if($this->getTranslate()->isAvailable($language))
+				{
+					$this->getLocale()->setLocale($language);
+					$this->getTranslate()->setLocale($language);
 				}
 				
 				require_once 'Zend/Registry.php';

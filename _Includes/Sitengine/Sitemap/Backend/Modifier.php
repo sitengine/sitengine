@@ -425,7 +425,6 @@ abstract class Sitengine_Sitemap_Backend_Modifier
             #exit;
             if(is_null($element)) {
             	return 0;
-            	#throw $this->_controller->getExceptionInstance('delete error');
             }
             $deleted += $this->_controller->getRecord()->deleteRowAndFiles($element);
             $deleted += $this->_controller->getRecord()->deleteRowsAndFilesRecursively('pid', $element['id']);
