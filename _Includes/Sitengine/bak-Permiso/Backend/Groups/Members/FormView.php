@@ -89,7 +89,7 @@ abstract class Sitengine_Permiso_Backend_Groups_Members_FormView extends Sitengi
 				#'ORGANIZATION' => $this->_controller->getPermiso()->getOrganization()->getData(),
 				#'USER' => $this->_controller->getPermiso()->getAuth()->getData(),
 				#'Auth' => $this->_controller->getPermiso()->getAuth(),
-				#'DICTIONARY' => $this->_controller->getTranslate()->translateGroup('data')
+				#'DICTIONARY' => $this->_controller->getTranslate()->translateGroup('data')->toArray()
 			);
        	}
         catch (Exception $exception) {
@@ -249,7 +249,7 @@ abstract class Sitengine_Permiso_Backend_Groups_Members_FormView extends Sitengi
 				$users = $this->_controller->getPermiso()->getDirectory()->getAllUsers();
 				unset($users[Sitengine_Permiso::UID_GUEST]); # remove guest
 				unset($users[Sitengine_Permiso::UID_LOSTFOUND]); # remove lostfound
-				$users = array_merge($this->_controller->getTranslate()->translateGroup('fieldValsSelect'), $users);
+				$users = array_merge($this->_controller->getTranslate()->translateGroup('fieldValsSelect')->toArray(), $users);
 				
 				$e = new Sitengine_Form_Element($n, $data[$n]);
 				$e->setClass('viewFormSelect');

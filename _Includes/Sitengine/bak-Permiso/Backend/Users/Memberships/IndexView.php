@@ -85,7 +85,7 @@ abstract class Sitengine_Permiso_Backend_Users_Memberships_IndexView extends Sit
 				#'ORGANIZATION' => $this->_controller->getPermiso()->getOrganization()->getData(),
 				#'USER' => $this->_controller->getPermiso()->getAuth()->getData(),
 				#'Auth' => $this->_controller->getPermiso()->getAuth(),
-				#'DICTIONARY' => $this->_controller->getTranslate()->translateGroup('data')
+				#'DICTIONARY' => $this->_controller->getTranslate()->translateGroup('data')->toArray()
 			);
 		}
         catch (Exception $exception) {
@@ -291,7 +291,7 @@ abstract class Sitengine_Permiso_Backend_Users_Memberships_IndexView extends Sit
                     $row['rowSelectCheckbox'] = $e->getCheckbox($s);
                 }
                 
-                $l = $this->_controller->getTranslate()->translateGroup('fieldValsLocked');
+                $l = $this->_controller->getTranslate()->translateGroup('fieldValsLocked')->toArray();
                 
                 if(
                     $row['id']==Sitengine_Permiso::ID_ROOT_MEMBERSHIP
@@ -321,7 +321,7 @@ abstract class Sitengine_Permiso_Backend_Users_Memberships_IndexView extends Sit
                 $uriUpdate = $this->_controller->getRequest()->getBasePath().'/'.$route->assemble($args, true);
                 
                 
-                $e = $this->_controller->getTranslate()->translateGroup('fieldValsEnabled');
+                $e = $this->_controller->getTranslate()->translateGroup('fieldValsEnabled')->toArray();
                 
                 $row['isMarked'] = (isset($markedRows[$row['id']])) ? $markedRows[$row['id']] : 0;
                 $row['uriUpdate'] = $uriUpdate;

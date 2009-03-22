@@ -85,7 +85,7 @@ abstract class Sitengine_Permiso_Backend_Users_IndexView extends Sitengine_View 
 				#'ORGANIZATION' => $this->_controller->getPermiso()->getOrganization()->getData(),
 				#'USER' => $this->_controller->getPermiso()->getAuth()->getData(),
 				#'Auth' => $this->_controller->getPermiso()->getAuth(),
-				#'DICTIONARY' => $this->_controller->getTranslate()->translateGroup('data')
+				#'DICTIONARY' => $this->_controller->getTranslate()->translateGroup('data')->toArray()
 			);
 		}
         catch (Exception $exception) {
@@ -296,8 +296,8 @@ abstract class Sitengine_Permiso_Backend_Users_IndexView extends Sitengine_View 
                     $row['rowSelectCheckbox'] = $e->getCheckbox($s);
                 }
                 
-                $e = $this->_controller->getTranslate()->translateGroup('fieldValsEnabled');
-                $l = $this->_controller->getTranslate()->translateGroup('fieldValsLocked');
+                $e = $this->_controller->getTranslate()->translateGroup('fieldValsEnabled')->toArray();
+                $l = $this->_controller->getTranslate()->translateGroup('fieldValsLocked')->toArray();
                 
                 if(
                     $row['id']==Sitengine_Permiso::UID_ROOT ||
@@ -360,7 +360,7 @@ abstract class Sitengine_Permiso_Backend_Users_IndexView extends Sitengine_View 
                 $row['uriChildIndex'] = $uriChildIndex;
                 $row['uriChildInsert'] = $uriChildInsert;
                 $row['uriUpdate'] = $uriUpdate;
-                $row['onlineNow'] = ($row['onlineNow']) ? $this->_controller->getTranslate()->translateGroup('fieldValsOnlineNow') : '';
+                $row['onlineNow'] = ($row['onlineNow']) ? $this->_controller->getTranslate()->translateGroup('fieldValsOnlineNow')->toArray() : '';
                 /*
                 $name = 'lastLogin';
                 $date = new Zend_Date($row[$name], Zend_Date::ISO_8601, $this->_controller->getLocale());

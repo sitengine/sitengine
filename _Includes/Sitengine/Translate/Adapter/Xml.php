@@ -229,10 +229,12 @@ class Sitengine_Translate_Adapter_Xml extends Zend_Translate_Adapter
 			# take first locale in translation table
 			foreach($this->_translate as $locale => $units)
 			{
-				return $this->_getGroup($prefix, $locale);
+				require_once 'Sitengine/DataObject.php';
+				return new Sitengine_DataObject($this->_getGroup($prefix, $locale));
 			}
 		}
-        return $group;
+		require_once 'Sitengine/DataObject.php';
+        return new Sitengine_DataObject($group);
 	}
 	
 	

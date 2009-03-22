@@ -70,7 +70,7 @@ abstract class Sitengine_Permiso_Backend_Groups_Members_IndexView extends Siteng
 			'QUERIES' => $this->_queries,
 			'SECTIONS' => $this->_sections,
 			'SETTINGS' => $this->_settings,
-			#'DICTIONARY' => $this->_controller->getTranslate()->translateGroup('data')
+			#'DICTIONARY' => $this->_controller->getTranslate()->translateGroup('data')->toArray()
 		);
     }
     

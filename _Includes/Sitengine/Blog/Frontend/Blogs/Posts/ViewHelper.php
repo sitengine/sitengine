@@ -101,7 +101,7 @@ abstract class Sitengine_Blog_Frontend_Blogs_Posts_ViewHelper extends Sitengine_
 					Sitengine_Env_Preferences_Sections::getLanguageForm(
 						$this->_controller->getPreferences()->getLanguage(),
 						$this->_controller->getTranslate()->getAvailableLanguages(),
-						$this->_controller->getTranslate()->translateGroup('loclangs'),
+						$this->_controller->getTranslate()->translateGroup('loclangs')->toArray(),
 						'language'
 					)
 				);

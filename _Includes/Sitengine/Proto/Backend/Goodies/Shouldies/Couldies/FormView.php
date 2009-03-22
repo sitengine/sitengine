@@ -75,7 +75,7 @@ abstract class Sitengine_Proto_Backend_Goodies_Shouldies_Couldies_FormView exten
 			'QUERIES' => $this->_queries,
 			'SECTIONS' => $this->_sections,
 			'SETTINGS' => $this->_settings,
-			#'DICTIONARY' => $this->_controller->getTranslate()->translateGroup('data')
+			#'DICTIONARY' => $this->_controller->getTranslate()->translateGroup('data')->toArray()
 		);
     }
     
@@ -242,7 +242,7 @@ abstract class Sitengine_Proto_Backend_Goodies_Shouldies_Couldies_FormView exten
             
             $data['uidOptions'] = $this->_controller->getPermiso()->getDirectory()->getAllUsers();
 			$data['gidOptions'] = array_merge(
-				$this->_controller->getTranslate()->translateGroup('fieldValsGid'),
+				$this->_controller->getTranslate()->translateGroup('fieldValsGid')->toArray(),
 				$this->_controller->getPermiso()->getDirectory()->getAllGroups()
 			);
             

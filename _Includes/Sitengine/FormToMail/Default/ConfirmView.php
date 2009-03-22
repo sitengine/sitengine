@@ -69,7 +69,7 @@ abstract class Sitengine_FormToMail_Default_ConfirmView extends Sitengine_View
 				#'ORGANIZATION' => $this->_controller->getPermiso()->getOrganization()->getData(),
 				#'USER' => $this->_controller->getPermiso()->getAuth()->getData(),
 				#'Auth' => $this->_controller->getPermiso()->getAuth(),
-				##'DICTIONARY' => $this->_controller->getTranslate()->translateGroup('data')
+				##'DICTIONARY' => $this->_controller->getTranslate()->translateGroup('data')->toArray()
 			);
 		}
         catch (Exception $exception) {

@@ -89,7 +89,7 @@ abstract class Sitengine_Permiso_Backend_Users_Memberships_FormView extends Site
 				#'ORGANIZATION' => $this->_controller->getPermiso()->getOrganization()->getData(),
 				#'USER' => $this->_controller->getPermiso()->getAuth()->getData(),
 				#'Auth' => $this->_controller->getPermiso()->getAuth(),
-				#'DICTIONARY' => $this->_controller->getTranslate()->translateGroup('data')
+				#'DICTIONARY' => $this->_controller->getTranslate()->translateGroup('data')->toArray()
 			);
        	}
         catch (Exception $exception) {
@@ -249,7 +249,7 @@ abstract class Sitengine_Permiso_Backend_Users_Memberships_FormView extends Site
 				$e->setId('viewForm'.$n);
 				$groups = $this->_controller->getPermiso()->getDirectory()->getAllGroups();
 				unset($groups[Sitengine_Permiso::GID_LOSTFOUND]); # remove lostfound
-				$groups = array_merge($this->_controller->getTranslate()->translateGroup('fieldValsSelect'), $groups);
+				$groups = array_merge($this->_controller->getTranslate()->translateGroup('fieldValsSelect')->toArray(), $groups);
 				$elements[$n] = $e->getSelect($groups);
 			}
 			

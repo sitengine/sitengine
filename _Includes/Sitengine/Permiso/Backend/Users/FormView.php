@@ -76,7 +76,7 @@ abstract class Sitengine_Permiso_Backend_Users_FormView extends Sitengine_View
 			'QUERIES' => $this->_queries,
 			'SECTIONS' => $this->_sections,
 			'SETTINGS' => $this->_settings,
-			#'DICTIONARY' => $this->_controller->getTranslate()->translateGroup('data')
+			#'DICTIONARY' => $this->_controller->getTranslate()->translateGroup('data')->toArray()
 		);
     }
     
@@ -197,8 +197,8 @@ abstract class Sitengine_Permiso_Backend_Users_FormView extends Sitengine_View
             #Sitengine_Debug::print_r($data);
             
             $data['countryOptions'] = array_merge(
-            	$this->_controller->getTranslate()->translateGroup('fieldValsCountry'),
-            	$this->_controller->getTranslate()->translateGroup('countries')
+            	$this->_controller->getTranslate()->translateGroup('fieldValsCountry')->toArray(),
+            	$this->_controller->getTranslate()->translateGroup('countries')->toArray()
             );
             
             

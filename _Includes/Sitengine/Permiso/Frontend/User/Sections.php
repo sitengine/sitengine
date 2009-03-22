@@ -149,7 +149,7 @@ abstract class Sitengine_Permiso_Frontend_User_Sections {
             
             $data['countryOptions'] = array_merge(
             	array('noneSelected' => '---'),
-            	$this->_controller->getTranslate()->translateGroup('countries')
+            	$this->_controller->getTranslate()->translateGroup('countries')->toArray()
             );
             
             return array(

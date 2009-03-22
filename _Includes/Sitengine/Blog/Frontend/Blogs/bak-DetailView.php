@@ -89,7 +89,7 @@ abstract class Sitengine_Blog_Frontend_Blogs_DetailView extends Sitengine_View
 				#'ORGANIZATION' => $this->_controller->getPermiso()->getOrganization()->getData(),
 				#'USER' => $this->_controller->getPermiso()->getAuth()->getData(),
 				#'Auth' => $this->_controller->getPermiso()->getAuth(),
-				#'DICTIONARY' => $this->_controller->getTranslate()->translateGroup('data')
+				#'DICTIONARY' => $this->_controller->getTranslate()->translateGroup('data')->toArray()
 			);
        	}
         catch (Exception $exception) {
@@ -275,7 +275,7 @@ abstract class Sitengine_Blog_Frontend_Blogs_DetailView extends Sitengine_View
 					$e->setClass('viewFormSelect');
 					$e->setId('viewForm'.$n);
 					$groups = $this->_controller->getPermiso()->getDirectory()->getAllGroups();
-					$groups = array_merge($this->_controller->getTranslate()->translateGroup('fieldValsGid'), $groups);
+					$groups = array_merge($this->_controller->getTranslate()->translateGroup('fieldValsGid')->toArray(), $groups);
 					$elements[$n] = $e->getSelect($groups);
 					
 					$n = Sitengine_Permiso::FIELD_RAG;

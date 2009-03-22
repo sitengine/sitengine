@@ -53,8 +53,10 @@ class Sitengine_DataObject implements Countable, Iterator
     	#Sitengine_Debug::print_r($array);
         $this->_index = 0;
         $this->_data = array();
-        foreach ($array as $key => $value) {
-            if (is_array($value)) {
+        foreach ($array as $key => $value)
+        {
+            if (is_array($value))
+            {
                 $this->_data[$key] = new Sitengine_DataObject($value);
             } else {
                 $this->_data[$key] = $value;

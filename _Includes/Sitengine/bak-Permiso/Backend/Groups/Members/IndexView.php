@@ -85,7 +85,7 @@ abstract class Sitengine_Permiso_Backend_Groups_Members_IndexView extends Siteng
 				#'ORGANIZATION' => $this->_controller->getPermiso()->getOrganization()->getData(),
 				#'USER' => $this->_controller->getPermiso()->getAuth()->getData(),
 				#'Auth' => $this->_controller->getPermiso()->getAuth(),
-				#'DICTIONARY' => $this->_controller->getTranslate()->translateGroup('data')
+				#'DICTIONARY' => $this->_controller->getTranslate()->translateGroup('data')->toArray()
 			);
 		}
         catch (Exception $exception) {
@@ -296,7 +296,7 @@ abstract class Sitengine_Permiso_Backend_Groups_Members_IndexView extends Siteng
                     $row['rowSelectCheckbox'] = $e->getCheckbox($s);
                 }
                 
-                $l = $this->_controller->getTranslate()->translateGroup('fieldValsLocked');
+                $l = $this->_controller->getTranslate()->translateGroup('fieldValsLocked')->toArray();
                 
                 if(
                     $row['id']==Sitengine_Permiso::ID_ROOT_MEMBERSHIP
@@ -325,7 +325,7 @@ abstract class Sitengine_Permiso_Backend_Groups_Members_IndexView extends Siteng
                 $route = $this->_controller->getFrontController()->getRouter()->getRoute(Sitengine_Permiso_Backend_Front::ROUTE_GROUPS_MEMBERS);
                 $uriUpdate = $this->_controller->getRequest()->getBasePath().'/'.$route->assemble($args, true);
                 
-                $d = $this->_controller->getTranslate()->translateGroup('fieldValsEnabled');
+                $d = $this->_controller->getTranslate()->translateGroup('fieldValsEnabled')->toArray();
                 $userEnabled = $d[$row['enabled']];
                 
                 $row['isMarked'] = (isset($markedRows[$row['id']])) ? $markedRows[$row['id']] : 0;

@@ -83,7 +83,7 @@ abstract class Sitengine_Proto_Backend_Goodies_Shouldies_AssignView extends Site
 			#'ORGANIZATION' => $this->_controller->getPermiso()->getOrganization()->getData(),
 			#'USER' => $this->_controller->getPermiso()->getAuth()->getData(),
 			#'Auth' => $this->_controller->getPermiso()->getAuth(),
-			#'DICTIONARY' => $this->_controller->getTranslate()->translateGroup('data')
+			#'DICTIONARY' => $this->_controller->getTranslate()->translateGroup('data')->toArray()
 		);
     }
     
@@ -141,7 +141,7 @@ abstract class Sitengine_Proto_Backend_Goodies_Shouldies_AssignView extends Site
 						$v = (sizeof($markedRows) && isset($markedRows[$id])) ? $this->_controller->getRequest()->getPost($p) : Sitengine_Proto_Backend_Goodies_Shouldies_Controller::VALUE_NONESELECTED;
 						$e = new Sitengine_Form_Element($p, $v);
 						$e->setClass('listformSelect');
-						$type  = $e->getSelect($this->_controller->getTranslate()->translateGroup('fieldValsType'));
+						$type  = $e->getSelect($this->_controller->getTranslate()->translateGroup('fieldValsType')->toArray());
 						$type .= Sitengine_Form_Element::getHidden($h, Sitengine_Proto_Backend_Goodies_Shouldies_Controller::VALUE_NONESELECTED);
 						
 						$args = array(

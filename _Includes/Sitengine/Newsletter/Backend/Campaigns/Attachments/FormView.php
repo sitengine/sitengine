@@ -87,7 +87,7 @@ abstract class Sitengine_Newsletter_Backend_Campaigns_Attachments_FormView exten
 			#'ORGANIZATION' => $this->_controller->getPermiso()->getOrganization()->getData(),
 			#'USER' => $this->_controller->getPermiso()->getAuth()->getData(),
 			#'Auth' => $this->_controller->getPermiso()->getAuth(),
-			#'DICTIONARY' => $this->_controller->getTranslate()->translateGroup('data')
+			#'DICTIONARY' => $this->_controller->getTranslate()->translateGroup('data')->toArray()
 		);
     }
     

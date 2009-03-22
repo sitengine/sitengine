@@ -86,7 +86,7 @@ abstract class Sitengine_Sitemap_Backend_SearchView extends Sitengine_View {
 				#'ORGANIZATION' => $this->_controller->getPermiso()->getOrganization()->getData(),
 				#'USER' => $this->_controller->getPermiso()->getAuth()->getData(),
 				#'Auth' => $this->_controller->getPermiso()->getAuth(),
-				#'DICTIONARY' => $this->_controller->getTranslate()->translateGroup('data')
+				#'DICTIONARY' => $this->_controller->getTranslate()->translateGroup('data')->toArray()
 			);
 		}
         catch (Exception $exception) {
@@ -181,7 +181,7 @@ abstract class Sitengine_Sitemap_Backend_SearchView extends Sitengine_View {
             $e = new Sitengine_Form_Element(Sitengine_Sitemap_Backend_Controller::PARAM_SEARCH_BY_TYPE, $filter->getVal(Sitengine_Sitemap_Backend_Controller::PARAM_SEARCH_BY_TYPE));
             $e->setId('filter'.Sitengine_Sitemap_Backend_Controller::PARAM_SEARCH_BY_TYPE);
             $e->setClass('filterSelect');
-            $filter->setElement(Sitengine_Sitemap_Backend_Controller::PARAM_SEARCH_BY_TYPE, $e->getSelect($this->_controller->getTranslate()->translateGroup('fieldValsSearchByType')));
+            $filter->setElement(Sitengine_Sitemap_Backend_Controller::PARAM_SEARCH_BY_TYPE, $e->getSelect($this->_controller->getTranslate()->translateGroup('fieldValsSearchByType')->toArray()));
             
             $e = new Sitengine_Form_Element(Sitengine_Sitemap_Backend_Controller::PARAM_SEARCH_BY_FIND, $filter->getVal(Sitengine_Sitemap_Backend_Controller::PARAM_SEARCH_BY_FIND));
             $e->setId('filter'.Sitengine_Sitemap_Backend_Controller::PARAM_SEARCH_BY_FIND);

@@ -75,7 +75,7 @@ abstract class Sitengine_Permiso_Backend_Users_Memberships_FormView extends Site
 			'QUERIES' => $this->_queries,
 			'SECTIONS' => $this->_sections,
 			'SETTINGS' => $this->_settings,
-			#'DICTIONARY' => $this->_controller->getTranslate()->translateGroup('data')
+			#'DICTIONARY' => $this->_controller->getTranslate()->translateGroup('data')->toArray()
 		);
     }
     
@@ -178,7 +178,7 @@ abstract class Sitengine_Permiso_Backend_Users_Memberships_FormView extends Site
             
             
 			$data['groupIdOptions'] = array_merge(
-				$this->_controller->getTranslate()->translateGroup('fieldValsGroupId'),
+				$this->_controller->getTranslate()->translateGroup('fieldValsGroupId')->toArray(),
 				$this->_controller->getPermiso()->getDirectory()->getAllGroups()
 			);
 			

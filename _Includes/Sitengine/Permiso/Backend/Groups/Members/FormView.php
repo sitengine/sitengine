@@ -75,7 +75,7 @@ abstract class Sitengine_Permiso_Backend_Groups_Members_FormView extends Sitengi
 			'QUERIES' => $this->_queries,
 			'SECTIONS' => $this->_sections,
 			'SETTINGS' => $this->_settings,
-			#'DICTIONARY' => $this->_controller->getTranslate()->translateGroup('data')
+			#'DICTIONARY' => $this->_controller->getTranslate()->translateGroup('data')->toArray()
 		);
     }
     
@@ -176,7 +176,7 @@ abstract class Sitengine_Permiso_Backend_Groups_Members_FormView extends Sitengi
             #Sitengine_Debug::print_r($data);
             
 			$data['userIdOptions'] = array_merge(
-				$this->_controller->getTranslate()->translateGroup('fieldValsUserId'),
+				$this->_controller->getTranslate()->translateGroup('fieldValsUserId')->toArray(),
 				$this->_controller->getPermiso()->getDirectory()->getAllUsers()
 			);
 			

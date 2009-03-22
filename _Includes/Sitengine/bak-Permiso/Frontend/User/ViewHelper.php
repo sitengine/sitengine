@@ -102,7 +102,7 @@ abstract class Sitengine_Permiso_Frontend_User_ViewHelper extends Sitengine_View
 					Sitengine_Env_Preferences_Sections::getLanguageForm(
 						$this->_controller->getPreferences()->getLanguage(),
 						$this->_controller->getTranslate()->getAvailableLanguages(),
-						$this->_controller->getTranslate()->translateGroup('loclangs')
+						$this->_controller->getTranslate()->translateGroup('loclangs')->toArray()
 					)
 				);
 			}

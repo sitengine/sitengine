@@ -84,7 +84,7 @@ abstract class Sitengine_Blog_Backend_Blogs_Posts_IndexView extends Sitengine_Vi
 				#'ORGANIZATION' => $this->_controller->getPermiso()->getOrganization()->getData(),
 				#'USER' => $this->_controller->getPermiso()->getAuth()->getData(),
 				#'Auth' => $this->_controller->getPermiso()->getAuth(),
-				#'DICTIONARY' => $this->_controller->getTranslate()->translateGroup('data')
+				#'DICTIONARY' => $this->_controller->getTranslate()->translateGroup('data')->toArray()
 			);
 		}
         catch (Exception $exception) {
@@ -193,17 +193,17 @@ abstract class Sitengine_Blog_Backend_Blogs_Posts_IndexView extends Sitengine_Vi
             $e = new Sitengine_Form_Element(Sitengine_Blog_Backend_Blogs_Posts_Controller::PARAM_FILTER_BY_TYPE, $filter->getVal(Sitengine_Blog_Backend_Blogs_Posts_Controller::PARAM_FILTER_BY_TYPE));
             $e->setId('filter'.Sitengine_Blog_Backend_Blogs_Posts_Controller::PARAM_FILTER_BY_TYPE);
             $e->setClass('filterSelect');
-            $filter->setElement(Sitengine_Blog_Backend_Blogs_Posts_Controller::PARAM_FILTER_BY_TYPE, $e->getSelect($this->_controller->getTranslate()->translateGroup('fieldValsFilterByType')));
+            $filter->setElement(Sitengine_Blog_Backend_Blogs_Posts_Controller::PARAM_FILTER_BY_TYPE, $e->getSelect($this->_controller->getTranslate()->translateGroup('fieldValsFilterByType')->toArray()));
             /*
             $users = $this->_controller->getPermiso()->getDirectory()->getAllUsers();
-            $values = array_merge($this->_controller->getTranslate()->translateGroup('fieldValsFilterByUid'), $users);
+            $values = array_merge($this->_controller->getTranslate()->translateGroup('fieldValsFilterByUid')->toArray(), $users);
             $e = new Sitengine_Form_Element(Sitengine_Blog_Backend_Blogs_Posts_Controller::PARAM_FILTER_BY_UID, $filter->getVal(Sitengine_Blog_Backend_Blogs_Posts_Controller::PARAM_FILTER_BY_UID));
             $e->setId('filter'.Sitengine_Blog_Backend_Blogs_Posts_Controller::PARAM_FILTER_BY_UID);
             $e->setClass('filterSelect');
             $filter->setElement(Sitengine_Blog_Backend_Blogs_Posts_Controller::PARAM_FILTER_BY_UID, $e->getSelect($values));
             
             $groups = $this->_controller->getPermiso()->getDirectory()->getAllGroups();
-            $values = array_merge($this->_controller->getTranslate()->translateGroup('fieldValsFilterByGid'), $groups);
+            $values = array_merge($this->_controller->getTranslate()->translateGroup('fieldValsFilterByGid')->toArray(), $groups);
             $e = new Sitengine_Form_Element(Sitengine_Blog_Backend_Blogs_Posts_Controller::PARAM_FILTER_BY_GID, $filter->getVal(Sitengine_Blog_Backend_Blogs_Posts_Controller::PARAM_FILTER_BY_GID));
             $e->setId('filter'.Sitengine_Blog_Backend_Blogs_Posts_Controller::PARAM_FILTER_BY_GID);
             $e->setClass('filterSelect');

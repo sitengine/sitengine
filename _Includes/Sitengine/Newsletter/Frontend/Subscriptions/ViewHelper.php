@@ -87,7 +87,7 @@ abstract class Sitengine_Newsletter_Frontend_Subscriptions_ViewHelper extends Si
 					Sitengine_Env_Preferences_Sections::getLanguageForm(
 						$this->_controller->getPreferences()->getLanguage(),
 						$this->_controller->getTranslate()->getAvailableLanguages(),
-						$this->_controller->getTranslate()->translateGroup('loclangs')
+						$this->_controller->getTranslate()->translateGroup('loclangs')->toArray()
 					)
 				);
 			}

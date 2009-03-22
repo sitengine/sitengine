@@ -1,0 +1,57 @@
+<?
+	$formName = (isset($this->formName)) ? $this->formName : 'pagerForm';
+	$textClass = (isset($this->textClass)) ? $this->textClass : 'pagerText';
+	$valClass = (isset($this->valClass)) ? $this->valClass : 'pagerVal';
+	$formClass = (isset($this->formClass)) ? $this->formClass : 'pagerForm';
+	$hrefPrevClass = (isset($this->hrefPrevClass)) ? $this->hrefPrevClass : 'pagerHrefPref';
+	$hrefNextClass = (isset($this->hrefNextClass)) ? $this->hrefNextClass : 'pagerHrefNext';
+	$pageInputClass = (isset($this->pageInputClass)) ? $this->pageInputClass : 'pagerPageInput';
+	
+	$labelOf = (isset($this->labels->of)) ? $this->labels->of : 'of';
+	$labelEntity = (isset($this->labels->entity)) ? $this->labels->entity : 'Records';
+	$labelPrevPage = (isset($this->labels->prevPage)) ? $this->labels->prevPage : 'Previous';
+	$labelNextPage = (isset($this->labels->nextPage)) ? $this->labels->nextPage : 'Next';
+	$labelPage = (isset($this->labels->page)) ? $this->labels->page : 'Page';
+	$labelPages = (isset($this->labels->pages)) ? $this->labels->pages : 'Pages';
+?>
+
+<form method="get" action="<?=$this->pager->getBaseUrl();?>" name="<?=$formName;?>" class="<?=$formClass;?>">
+	<?=$this->pager->getHiddenElements();?>
+	
+	<?if($this->pager->getCurrPage() > 1):?>
+		<a href="<?=$this->pager->getPrevPageUrl();?>" class="<?=$hrefPrevClass;?>"><?=$labelPrevPage;?></a>&nbsp;&nbsp;
+	<?endif;?>
+	
+	<span class="<?=$valClass;?>"><?=$this->pager->getFirstItem();?></span>
+	<span class="<?=$textClass;?>">&nbsp;-</span>
+	<span class="<?=$valClass;?>">&nbsp;<?=$this->pager->getLastItem();?></span>
+	<span class="<?=$textClass;?>">&nbsp;<?=$labelOf;?></span>
+	<span class="<?=$valClass;?>">&nbsp;<?=$this->pager->getNumItems();?></span>
+	<span class="<?=$textClass;?>">&nbsp;<?=$labelEntity;?></span>
+	
+	<?if($this->pager->getNumPages() == 1):?>
+		<?$singularPlural = $labelPage;?>
+	<?else:?>
+		<?$singularPlural = $labelPages;?>
+	<?endif;?>
+	
+	<?if($this->pager->getNumPages() > 1):?>
+		<span class="<?=$textClass;?>">,</span>
+		<span class="<?=$textClass;?>">&nbsp;<?=$labelPage;?></span>
+		&nbsp;
+		<?=
+			$this->formText(
+				Sitengine_Env::PARAM_PAGE,
+				$this->pager->getCurrPage(),
+				array('size' => 3, 'class' => $pageInputClass)
+			);
+		?>
+		<span class="<?=$textClass;?>">&nbsp;<?=$labelOf;?></span>
+		<span class="<?=$valClass;?>">&nbsp;<?=$this->pager->getNumPages();?></span>
+		<span class="<?=$textClass;?>">&nbsp;<?=$singularPlural;?></span>
+	<?endif;?>
+	
+	<?if($this->pager->getCurrPage() < $this->pager->getNumPages()):?>
+		&nbsp;&nbsp;<a href="<?=$this->pager->getNextPageUrl();?>" class="<?=$hrefNextClass;?>"><?=$labelNextPage;?></a>
+	<?endif;?>
+</form>

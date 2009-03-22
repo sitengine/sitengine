@@ -77,17 +77,6 @@ class Sitengine_Grid_Pager
     }
     
     
-    
-    public function calculateSimple($hasNextPage)
-	{
-		$this->_currPage = (is_numeric($this->_currPage)) ? $this->_currPage : 1;
-		$this->_currPage = ($this->_currPage >= 1) ? $this->_currPage : 1;
-		$this->_nextPage = ($hasNextPage) ? $this->_currPage+1 : 1;
-		$this->_prevPage = ($this->_currPage > 1) ? $this->_currPage-1 : 1;
-	}
-	
-    
-    
     public function getNumItems() { return $this->_numItems; }
     public function getOffset() { return $this->_offset; }
     public function getFirstItem() { return $this->_firstItem; }
@@ -100,23 +89,108 @@ class Sitengine_Grid_Pager
     public function getNextPage() { return $this->_nextPage; }
     
     
-    public function printSelf()
+    
+    protected $_params = array();
+    protected $_baseUrl = null;
+    protected $_amp = '&amp;';
+    protected $_paramName = null;
+    
+    
+    public function setParams(array $params)
     {
-        $s  = "<table width=600 border=1>";
-        $s .= "<tr><td colspan=2><h2>Pager</h2></td></tr>";
-        $s .= "<tr><td>numItems</td><td>".$this->_numItems."&nbsp;</td></tr>";
-        $s .= "<tr><td>offset</td><td>".$this->_offset."&nbsp;</td></tr>";
-        $s .= "<tr><td>itemsPerPage</td><td>".$this->_itemsPerPage."&nbsp;</td></tr>";
-        $s .= "<tr><td>itemsOnCurrentPage</td><td>".$this->_itemsOnCurrentPage."&nbsp;</td></tr>";
-        $s .= "<tr><td>prev page</td><td>".$this->_prevPage."&nbsp;</td></tr>";
-        $s .= "<tr><td>currPage</td><td>".$this->_currPage."&nbsp;</td></tr>";
-        $s .= "<tr><td>next page</td><td>".$this->_nextPage."&nbsp;</td></tr>";
-        $s .= "<tr><td>numPages</td><td>".$this->_numPages."&nbsp;</td></tr>";
-        $s .= "<tr><td>firstItem</td><td>".$this->_firstItem."&nbsp;</td></tr>";
-        $s .= "<tr><td>lastItem</td><td>".$this->_lastItem."&nbsp;</td></tr>";
-        $s .= "<tr><td>lastItem</td><td>".$this->_lastItem."&nbsp;</td></tr>";
-        $s .= "</table><br />";
-        print $s;
+    	$this->_params = $params;
+    }
+    
+    
+    public function setBaseUrl($baseUrl)
+    {
+    	$this->_baseUrl = $baseUrl;
+    }
+    
+    
+    public function setAmp($amp)
+    {
+    	$this->_amp = $amp;
+    }
+    
+    
+    public function setParamName($paramName)
+    {
+    	$this->_paramName = $paramName;
+    }
+    
+    
+    public function getBaseUrl()
+    {
+    	return $this->_baseUrl;
+    }
+    
+    
+    public function getHiddenElements()
+    {
+    	$hiddens = '';
+    	require_once 'Sitengine/Form/Element.php';
+    	
+    	foreach($this->_params as $k => $v)
+    	{
+			$hiddens .= Sitengine_Form_Element::getHidden($k, $v);
+		}
+		
+		return $hiddens;
+    }
+    
+    
+    public function getNextPageUrl()
+    {
+    	return $this->_makeUrl($this->getNextPage());
+    }
+    
+    
+    public function getPrevPageUrl()
+    {
+    	return $this->_makeUrl($this->getPrevPage());
+    }
+    
+    
+    public function getFirstPageUrl()
+    {
+    	return $this->_makeUrl(1);
+    }
+    
+    
+    public function getLastPageUrl()
+    {
+    	return $this->_makeUrl($this->getNumPages());
+    }
+    
+    
+    protected function _makeUrl($page)
+    {
+    	if($this->_baseUrl === null)
+    	{
+    		require_once 'Sitengine/Exception.php';
+    		throw new Sitengine_Exception('base url has not been set');
+    	}
+    	
+    	if($this->_paramName === null)
+    	{
+    		require_once 'Sitengine/Exception.php';
+    		throw new Sitengine_Exception('page param name has not been set');
+    	}
+    	
+    	$query = '';
+    	
+    	foreach($this->_params as $k => $v)
+    	{
+			$query .= ((!$query) ? '' : $this->_amp).$k.'='.$v;
+		}
+		
+		$concat = (preg_match('/\?/', $this->_baseUrl)) ? $this->_amp : '?';
+		
+    	return (!$query)
+    		? $this->_baseUrl.$concat.$this->_paramName.'='.$page
+    		: $this->_baseUrl.$concat.$query.$this->_amp.$this->_paramName.'='.$page
+    	;
     }
 }
 ?>

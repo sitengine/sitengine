@@ -90,7 +90,7 @@ abstract class Sitengine_Newsletter_Backend_Campaigns_FormView extends Sitengine
 			#'ORGANIZATION' => $this->_controller->getPermiso()->getOrganization()->getData(),
 			#'USER' => $this->_controller->getPermiso()->getAuth()->getData(),
 			#'Auth' => $this->_controller->getPermiso()->getAuth(),
-			#'DICTIONARY' => $this->_controller->getTranslate()->translateGroup('data')
+			#'DICTIONARY' => $this->_controller->getTranslate()->translateGroup('data')->toArray()
 		);
     }
     
@@ -258,7 +258,7 @@ abstract class Sitengine_Newsletter_Backend_Campaigns_FormView extends Sitengine
 			$e = new Sitengine_Form_Element($n, $data[$n]);
 			$e->setClass('viewFormSelect');
 			$e->setId('viewForm'.$n);
-			$elements[$n] = $e->getSelect($this->_controller->getTranslate()->translateGroup('fieldValsType'));
+			$elements[$n] = $e->getSelect($this->_controller->getTranslate()->translateGroup('fieldValsType')->toArray());
 			
 			$n = 'body';
 			$e = new Sitengine_Form_Element($n, $data[$n]);

@@ -70,7 +70,7 @@ abstract class Sitengine_Proto_Backend_Goodies_Shouldies_Couldies_IndexView exte
 			'QUERIES' => $this->_queries,
 			'SECTIONS' => $this->_sections,
 			'SETTINGS' => $this->_settings,
-			#'DICTIONARY' => $this->_controller->getTranslate()->translateGroup('data')
+			#'DICTIONARY' => $this->_controller->getTranslate()->translateGroup('data')->toArray()
 		);
     }
     
@@ -165,11 +165,11 @@ abstract class Sitengine_Proto_Backend_Goodies_Shouldies_Couldies_IndexView exte
 				$this->_controller->getNamespace()
             );
             
-            $types = $this->_controller->getTranslate()->translateGroup('fieldValsFilterByType');
+            $types = $this->_controller->getTranslate()->translateGroup('fieldValsFilterByType')->toArray();
             $users = $this->_controller->getPermiso()->getDirectory()->getAllUsers();
-            $users = array_merge($this->_controller->getTranslate()->translateGroup('fieldValsFilterByUid'), $users);
+            $users = array_merge($this->_controller->getTranslate()->translateGroup('fieldValsFilterByUid')->toArray(), $users);
             $groups = $this->_controller->getPermiso()->getDirectory()->getAllGroups();
-            $groups = array_merge($this->_controller->getTranslate()->translateGroup('fieldValsFilterByGid'), $groups);
+            $groups = array_merge($this->_controller->getTranslate()->translateGroup('fieldValsFilterByGid')->toArray(), $groups);
             
             $hiddens = array(
                 Sitengine_Env::PARAM_SORT => $sorting->getActiveRule(),
@@ -323,7 +323,7 @@ abstract class Sitengine_Proto_Backend_Goodies_Shouldies_Couldies_IndexView exte
 				$row['displayThisSelect'] = array(
 					'name' => $name,
 					'value' => (sizeof($markedRows) && isset($markedRows[$row['id']])) ? ($this->_controller->getRequest()->getPost($name)) : $row[$n],
-					'OPTIONS' => $this->_controller->getTranslate()->translateGroup('fieldValsDisplayThis'),
+					'OPTIONS' => $this->_controller->getTranslate()->translateGroup('fieldValsDisplayThis')->toArray(),
 					'current' => Sitengine_Form_Element::getHidden($current, $row[$n])
 				);
                 

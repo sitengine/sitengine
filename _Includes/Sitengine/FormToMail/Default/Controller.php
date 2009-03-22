@@ -399,7 +399,7 @@ abstract class Sitengine_FormToMail_Default_Controller extends Sitengine_Control
 				return $this->_forwardToLogin();
 			}
 			
-			$group = $this->getTranslate()->translateGroup('group');
+			$group = $this->getTranslate()->translateGroup('group')->toArray();
 			Sitengine_Debug::print_r($group);
 			
 			$view = $this->_getIndexViewInstance();

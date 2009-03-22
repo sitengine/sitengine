@@ -91,7 +91,7 @@ abstract class Sitengine_Permiso_Backend_Users_FormView extends Sitengine_View {
 				#'ORGANIZATION' => $this->_controller->getPermiso()->getOrganization()->getData(),
 				#'USER' => $this->_controller->getPermiso()->getAuth()->getData(),
 				#'Auth' => $this->_controller->getPermiso()->getAuth(),
-				#'DICTIONARY' => $this->_controller->getTranslate()->translateGroup('data')
+				#'DICTIONARY' => $this->_controller->getTranslate()->translateGroup('data')->toArray()
 			);
        	}
         catch (Exception $exception) {
@@ -341,13 +341,13 @@ abstract class Sitengine_Permiso_Backend_Users_FormView extends Sitengine_View {
 				) {
 					# users can choose language from available languages of organization
 					$n = 'language';
-					$nlanguages = $this->_controller->getTranslate()->translateGroup('languages');
+					$nlanguages = $this->_controller->getTranslate()->translateGroup('languages')->toArray();
 					foreach($this->_availableLanguages as $symbol) {
 						if(array_key_exists($symbol, $nlanguages)) {
 							$languages[$symbol] = $nlanguages[$symbol];
 						}
 					}
-					$languages = array_merge($this->_controller->getTranslate()->translateGroup('fieldValsLanguage'), $languages);
+					$languages = array_merge($this->_controller->getTranslate()->translateGroup('fieldValsLanguage')->toArray(), $languages);
 					$e = new Sitengine_Form_Element($n, $data[$n]);
 					$e->setClass('viewFormSelect');
 					$e->setId('viewForm'.$n);
