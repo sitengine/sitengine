@@ -141,6 +141,7 @@ class Sitengine_Env
 		if(isset($this->_customConfigs[$name])) {
 			return $this->_customConfigs[$name];
 		}
+		require_once 'Sitengine/Exception.php';
 		throw new Sitengine_Exception('custom config "'.$name.'" has not been set');
 	}
 	
@@ -173,6 +174,7 @@ class Sitengine_Env
 			return $this->_databaseConfigs[$name];
 		}
 		else {
+			require_once 'Sitengine/Exception.php';
 			throw new Sitengine_Exception('database config "'.$name.'" has not been set');
 		}
 	}
@@ -195,6 +197,7 @@ class Sitengine_Env
 			return $this->_ftpConfigs[$name];
 		}
 		else {
+			require_once 'Sitengine/Exception.php';
 			throw new Sitengine_Exception('ftp config "'.$name.'" has not been set');
 		}
 	}
@@ -231,6 +234,7 @@ class Sitengine_Env
 			return $this->_bootstraps[$name];
 		}
 		else {
+			require_once 'Sitengine/Exception.php';
 			throw new Sitengine_Exception('bootstrap "'.$name.'" has not been set');
 		}
 	}
@@ -259,6 +263,7 @@ class Sitengine_Env
 			return $this->_basepaths[$name];
 		}
 		else {
+			require_once 'Sitengine/Exception.php';
 			throw new Sitengine_Exception('basepath "'.$name.'" has not been set');
 		}
 	}
@@ -1348,6 +1353,7 @@ class Sitengine_Env
 			return $this->_administratorMails[$name];
 		}
 		else {
+			require_once 'Sitengine/Exception.php';
 			throw new Sitengine_Exception('administrator mail "'.$name.'" has not been set');
 		}
 	}
@@ -1379,6 +1385,7 @@ class Sitengine_Env
 			return $this->_contactMails[$name];
 		}
 		else {
+			require_once 'Sitengine/Exception.php';
 			throw new Sitengine_Exception('contact mail "'.$name.'" has not been set');
 		}
 	}
@@ -1411,6 +1418,7 @@ class Sitengine_Env
 			return $this->_moderatorMails[$name];
 		}
 		else {
+			require_once 'Sitengine/Exception.php';
 			throw new Sitengine_Exception('moderator mail "'.$name.'" has not been set');
 		}
 	}
