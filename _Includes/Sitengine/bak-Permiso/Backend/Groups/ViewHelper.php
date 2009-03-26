@@ -83,7 +83,7 @@ abstract class Sitengine_Permiso_Backend_Groups_ViewHelper extends Sitengine_Vie
 			);
 			
 			
-			
+			/*
 			if($this->_controller->getEnv()->getDebugControl()) {
 				require_once 'Sitengine/Debug/Sections.php';
 				$this->setSection(
@@ -119,7 +119,7 @@ abstract class Sitengine_Permiso_Backend_Groups_ViewHelper extends Sitengine_Vie
 					'timezone'
 				)
 			);
-			
+			*/
 			$this->setSection(
 				'ABSTRACT',
 				array(

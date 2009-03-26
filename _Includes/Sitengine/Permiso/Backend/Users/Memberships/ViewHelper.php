@@ -79,7 +79,7 @@ abstract class Sitengine_Permiso_Backend_Users_Memberships_ViewHelper extends Si
 			);
 			
 			
-			
+			/*
 			if($this->_controller->getEnv()->getDebugControl()) {
 				require_once 'Sitengine/Debug/Sections.php';
 				$this->setSection(
@@ -115,7 +115,7 @@ abstract class Sitengine_Permiso_Backend_Users_Memberships_ViewHelper extends Si
 					'timezone'
 				)
 			);
-			
+			*/
 			$breadcrumbs = $this->_makeBreadcrumbsData();
 			
 			$this->setSection(

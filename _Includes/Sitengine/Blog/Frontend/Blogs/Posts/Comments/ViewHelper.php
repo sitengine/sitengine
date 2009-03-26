@@ -81,7 +81,7 @@ abstract class Sitengine_Blog_Frontend_Blogs_Posts_Comments_ViewHelper extends S
 			);
 			*/
 			
-			
+			/*
 			if($this->_controller->getEnv()->getDebugControl()) {
 				require_once 'Sitengine/Debug/Sections.php';
 				$this->setSection(
@@ -117,7 +117,7 @@ abstract class Sitengine_Blog_Frontend_Blogs_Posts_Comments_ViewHelper extends S
 					'timezone'
 				)
 			);
-			
+			*/
 			$breadcrumbs = $this->_makeBreadcrumbsData();
 			
 			$this->setSection(

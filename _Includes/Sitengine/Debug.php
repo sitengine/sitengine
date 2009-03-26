@@ -15,14 +15,6 @@
  */
 
 
-
-require_once 'Sitengine/String.php';
-require_once 'Sitengine/Exception.php';
-
-
-#define('SITENGINE_DEBUG_STARTEXEC', microtime());
-
-
 class Sitengine_Debug
 {
     
@@ -61,6 +53,7 @@ class Sitengine_Debug
 			print '<hr><h1>EXECUTION TIME: '.$time.'</h1><hr>';
 		}
 		else {
+			require_once 'Sitengine/Exception.php';
 			throw new Sitengine_Exception('Constant SITENGINE_DEBUG_STARTEXEC must be set before using self::getExecTime()');
 		}
     }
@@ -183,6 +176,36 @@ class Sitengine_Debug
     	$out = ob_get_contents();
         ob_end_clean();
         return $out;
+    }
+    
+    
+    public static function getOptions(array $options = array())
+    {
+    	$default = array(
+            '' => 'Dbg (Off)',
+            'execTime' => 'Exec Time',
+            'phpInfo' => 'Phpinfo',
+            'globals' => 'Globals',
+            'constants' => 'Constants (All)',
+            'userConstants' => 'Constants (User)',
+            'includes' => 'Includes',
+            'classes' => 'Classes',
+            'input' => 'Input',
+            'session' => 'Session',
+            'server' => 'Server',
+            'env' => 'Env',
+            'noneSelected1' => '----------------',
+            'clearSession' => '> Clear session',
+            'destroySession' => '> Destroy session',
+            'deleteCookies' => '> Delete cookies'
+        );
+        
+        if(sizeof($options))
+        {
+        	$default['noneSelected2'] = '----------------';
+        }
+        
+        return array_merge($default, $options);
     }
 }
 

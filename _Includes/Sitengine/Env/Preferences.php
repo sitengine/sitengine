@@ -70,9 +70,8 @@ class Sitengine_Env_Preferences
     
     public function establishTimezone(Sitengine_Controller_Request_Http $request, $param)
     {
-        $value = $this->_establishValue($request, $param);
-        $this->_timezone = $value;
-        return $value;
+        $this->_timezone = $this->_establishValue($request, $param);
+        return $this->_timezone;
     }
     
     
@@ -96,9 +95,8 @@ class Sitengine_Env_Preferences
     
     public function establishLanguage(Sitengine_Controller_Request_Http $request, $param)
     {
-        $value = $this->_establishValue($request, $param);
-        $this->_language = $value;
-        return $value;
+        $this->_language = $this->_establishValue($request, $param);
+        return $this->_language;
     }
     
     
@@ -122,9 +120,8 @@ class Sitengine_Env_Preferences
     
     public function establishTranslation(Sitengine_Controller_Request_Http $request, $param)
     {
-        $value = $this->_establishValue($request, $param);
-        $this->_translation = $value;
-        return $value;
+        $this->_translation = $this->_establishValue($request, $param);
+        return $this->_translation;
     }
     
     
@@ -142,9 +139,8 @@ class Sitengine_Env_Preferences
     
     public function establishItemsPerPage(Sitengine_Controller_Request_Http $request, $param)
     {
-    	$value = $this->_establishValue($request, $param);
-        $this->_itemsPerPage = $value;
-        return $value;
+        $this->_itemsPerPage = $this->_establishValue($request, $param);
+        return $this->_itemsPerPage;
     }
     
     
@@ -162,9 +158,8 @@ class Sitengine_Env_Preferences
     
     public function establishDebugMode(Sitengine_Controller_Request_Http $request, $param)
     {
-        $value = $this->_establishValue($request, $param);
-        $this->_debugMode = $value;
-        return $value;
+        $this->_debugMode = $this->_establishValue($request, $param);
+        return $this->_debugMode;
     }
     
     

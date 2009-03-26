@@ -112,7 +112,7 @@ abstract class Sitengine_Proto_Backend_Goodies_Shouldies_Controller extends Site
         	parent::__construct($request, $response, $invokeArgs);
         	$this->_mapInvokeArgs($invokeArgs);
         	$this->_mapConfig($this->_config);
-        	$this->_setSelfSubmitUri();
+        	#$this->_setSelfSubmitUri();
         	
         	$this->_logger = $this->getEnv()->getLoggerInstance(
         		$this->getEnv()->getMyLogsDir(),
@@ -286,16 +286,16 @@ abstract class Sitengine_Proto_Backend_Goodies_Shouldies_Controller extends Site
 					Sitengine_Debug::action($this->getPreferences()->getDebugMode());
 				}
 				
-				$this->getLocale()->setLocale(Sitengine_Env::LANGUAGE_EN);
+				#$this->getLocale()->setLocale(Sitengine_Env::LANGUAGE_EN);
 				
 				if($this->getTranslate()->isAvailable($this->getPreferences()->getLanguage()))
 				{
-					$this->getLocale()->setLocale($this->getPreferences()->getLanguage());
+					#$this->getLocale()->setLocale($this->getPreferences()->getLanguage());
 					$this->getTranslate()->setLocale($this->getPreferences()->getLanguage());
 				}
 				
-				require_once 'Zend/Registry.php';
-				Zend_Registry::set('Zend_Translate', $this->getTranslate()->getAdapter());
+				#require_once 'Zend/Registry.php';
+				#Zend_Registry::set('Zend_Translate', $this->getTranslate()->getAdapter());
 				
 				$this->getStatus()->restore();
 			}
@@ -334,7 +334,7 @@ abstract class Sitengine_Proto_Backend_Goodies_Shouldies_Controller extends Site
     	$handler = $action.'Action';
     	if(is_callable(array($this, $handler))) {
     		$this->getRequest()->setActionName($action);
-    		$this->_setSelfSubmitUri();
+    		#$this->_setSelfSubmitUri();
     		call_user_func(array($this, $handler));
     	}
     	else {
@@ -950,9 +950,10 @@ abstract class Sitengine_Proto_Backend_Goodies_Shouldies_Controller extends Site
                 return $this->_forwardToLogin();
             }
 			$view = $this->_getIndexViewInstance();
+    		$view->translate()->setTranslator($this->getTranslate()->getAdapter());
     		$view->setHelperPath($this->getEnv()->getIncludesDir());
     		$view->setScriptPath(dirname($this->_templateIndexView));
-    		$view->doctype()->setDoctype('XHTML1_STRICT');
+    		$view->doctype()->setDoctype(Zend_View_Helper_Doctype::XHTML1_STRICT);
     		$view->build()->batchAssign($view->getData());
     		$body  = $view->render(basename($this->_templateIndexView));
     		$body .= $this->_getDebugDump($view->getData());
@@ -979,9 +980,10 @@ abstract class Sitengine_Proto_Backend_Goodies_Shouldies_Controller extends Site
 			}
 			$view = $this->_getFormViewInstance();
 			$view->setInputMode(Sitengine_Env::INPUTMODE_INSERT);
+    		$view->translate()->setTranslator($this->getTranslate()->getAdapter());
     		$view->setHelperPath($this->getEnv()->getIncludesDir());
     		$view->setScriptPath(dirname($this->_templateFormView));
-    		$view->doctype()->setDoctype('XHTML1_STRICT');
+    		$view->doctype()->setDoctype(Zend_View_Helper_Doctype::XHTML1_STRICT);
     		$view->build()->batchAssign($view->getData());
     		$body  = $view->render(basename($this->_templateFormView));
     		$body .= $this->_getDebugDump($view->getData());
@@ -1008,9 +1010,10 @@ abstract class Sitengine_Proto_Backend_Goodies_Shouldies_Controller extends Site
 			}
 			$view = $this->_getFormViewInstance();
 			$view->setInputMode(Sitengine_Env::INPUTMODE_UPDATE);
+    		$view->translate()->setTranslator($this->getTranslate()->getAdapter());
     		$view->setHelperPath($this->getEnv()->getIncludesDir());
     		$view->setScriptPath(dirname($this->_templateFormView));
-    		$view->doctype()->setDoctype('XHTML1_STRICT');
+    		$view->doctype()->setDoctype(Zend_View_Helper_Doctype::XHTML1_STRICT);
     		$view->build()->batchAssign($view->getData());
     		$body  = $view->render(basename($this->_templateFormView));
     		$body .= $this->_getDebugDump($view->getData());
@@ -1036,9 +1039,10 @@ abstract class Sitengine_Proto_Backend_Goodies_Shouldies_Controller extends Site
 				return $this->_forwardToLogin();
 			}
 			$view = $this->_getUploadViewInstance();
+    		$view->translate()->setTranslator($this->getTranslate()->getAdapter());
     		$view->setHelperPath($this->getEnv()->getIncludesDir());
     		$view->setScriptPath(dirname($this->_templateUploadView));
-    		$view->doctype()->setDoctype('XHTML1_STRICT');
+    		$view->doctype()->setDoctype(Zend_View_Helper_Doctype::XHTML1_STRICT);
     		$view->build()->batchAssign($view->getData());
     		$body  = $view->render(basename($this->_templateUploadView));
     		$body .= $this->_getDebugDump($view->getData());
@@ -1064,9 +1068,10 @@ abstract class Sitengine_Proto_Backend_Goodies_Shouldies_Controller extends Site
 				return $this->_forwardToLogin();
 			}
 			$view = $this->_getAssignViewInstance();
+    		$view->translate()->setTranslator($this->getTranslate()->getAdapter());
     		$view->setHelperPath($this->getEnv()->getIncludesDir());
     		$view->setScriptPath(dirname($this->_templateAssignView));
-    		$view->doctype()->setDoctype('XHTML1_STRICT');
+    		$view->doctype()->setDoctype(Zend_View_Helper_Doctype::XHTML1_STRICT);
     		$view->build()->batchAssign($view->getData());
     		$body  = $view->render(basename($this->_templateAssignView));
     		$body .= $this->_getDebugDump($view->getData());

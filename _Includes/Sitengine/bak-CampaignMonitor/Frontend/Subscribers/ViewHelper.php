@@ -67,6 +67,7 @@ abstract class Sitengine_CampaignMonitor_Frontend_Subscribers_ViewHelper extends
     public function build()
     {
     	try {
+    		/*
 			if($this->_controller->getEnv()->getDebugControl()) {
 				require_once 'Sitengine/Debug/Sections.php';
 				$this->setSection(
@@ -99,6 +100,7 @@ abstract class Sitengine_CampaignMonitor_Frontend_Subscribers_ViewHelper extends
 					$this->_controller->getEnv()->getTimezones()
 				)
 			);
+			*/
 			return $this;
 		}
 		catch (Exception $exception) {

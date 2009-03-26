@@ -84,7 +84,7 @@ abstract class Sitengine_Blog_Backend_Blogs_Posts_Files_ViewHelper extends Siten
 			);
 			
 			
-			
+			/*
 			if($this->_controller->getEnv()->getDebugControl()) {
 				require_once 'Sitengine/Debug/Sections.php';
 				$this->setSection(
@@ -120,7 +120,7 @@ abstract class Sitengine_Blog_Backend_Blogs_Posts_Files_ViewHelper extends Siten
 					'timezone'
 				)
 			);
-			
+			*/
 			$breadcrumbs = $this->_makeBreadcrumbsData();
 			
 			$this->setSection(

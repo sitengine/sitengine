@@ -80,7 +80,7 @@ abstract class Sitengine_Proto_Backend_Goodies_Shouldies_ViewHelper extends Site
 			);
 			
 			
-			
+			/*
 			if($this->_controller->getEnv()->getDebugControl()) {
 				require_once 'Sitengine/Debug/Sections.php';
 				$this->setSection(
@@ -116,7 +116,7 @@ abstract class Sitengine_Proto_Backend_Goodies_Shouldies_ViewHelper extends Site
 					'timezone'
 				)
 			);
-			
+			*/
 			$breadcrumbs = $this->_makeBreadcrumbsData();
 			
 			$this->setSection(

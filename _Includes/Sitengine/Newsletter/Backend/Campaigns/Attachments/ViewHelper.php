@@ -82,7 +82,7 @@ abstract class Sitengine_Newsletter_Backend_Campaigns_Attachments_ViewHelper ext
 			);
 			
 			
-			
+			/*
 			if($this->_controller->getEnv()->getDebugControl()) {
 				require_once 'Sitengine/Debug/Sections.php';
 				$this->setSection(
@@ -118,7 +118,7 @@ abstract class Sitengine_Newsletter_Backend_Campaigns_Attachments_ViewHelper ext
 					'timezone'
 				)
 			);
-			
+			*/
 			$breadcrumbs = $this->_makeBreadcrumbsData();
 			
 			$this->setSection(

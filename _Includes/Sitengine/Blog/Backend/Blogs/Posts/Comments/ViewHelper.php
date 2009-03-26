@@ -80,7 +80,7 @@ abstract class Sitengine_Blog_Backend_Blogs_Posts_Comments_ViewHelper extends Si
 			);
 			
 			
-			
+			/*
 			if($this->_controller->getEnv()->getDebugControl()) {
 				require_once 'Sitengine/Debug/Sections.php';
 				$this->setSection(
@@ -116,7 +116,7 @@ abstract class Sitengine_Blog_Backend_Blogs_Posts_Comments_ViewHelper extends Si
 					'timezone'
 				)
 			);
-			
+			*/
 			$breadcrumbs = $this->_makeBreadcrumbsData();
 			
 			$this->setSection(

@@ -68,7 +68,7 @@ abstract class Sitengine_Permiso_Frontend_User_ViewHelper extends Sitengine_View
     public function build()
     {
     	try {
-    	
+    		/*
 			if($this->_controller->getEnv()->getDebugControl()) {
 				require_once 'Sitengine/Debug/Sections.php';
 				$this->setSection(
@@ -101,7 +101,7 @@ abstract class Sitengine_Permiso_Frontend_User_ViewHelper extends Sitengine_View
 					$this->_controller->getEnv()->getTimezones()
 				)
 			);
-			
+			*/
 			return $this;
 		}
 		catch (Exception $exception) {

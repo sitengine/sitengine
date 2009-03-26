@@ -68,6 +68,7 @@ abstract class Sitengine_Newsletter_Frontend_Campaigns_ViewHelper extends Siteng
     public function build()
     {
     	try {
+    		/*
 			if($this->_controller->getEnv()->getDebugControl()) {
 				require_once 'Sitengine/Debug/Sections.php';
 				$this->setSection(
@@ -103,6 +104,7 @@ abstract class Sitengine_Newsletter_Frontend_Campaigns_ViewHelper extends Siteng
 					'timezone'
 				)
 			);
+			*/
 			return $this;
 		}
 		catch (Exception $exception) {

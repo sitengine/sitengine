@@ -184,7 +184,7 @@ abstract class Sitengine_Proto_Binaries_Goodies_Uploads_Controller extends Siten
 					Sitengine_Debug::action($this->getPreferences()->getDebugMode());
 				}
 				
-				$this->getLocale()->setLocale($this->getPreferences()->getLanguage());
+				#$this->getLocale()->setLocale($this->getPreferences()->getLanguage());
 			}
 		}
         catch (Exception $exception) {

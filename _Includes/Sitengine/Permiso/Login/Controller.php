@@ -251,16 +251,16 @@ abstract class Sitengine_Permiso_Login_Controller extends Sitengine_Controller_A
 					Sitengine_Debug::action($this->getPreferences()->getDebugMode());
 				}
 				
-				$this->getLocale()->setLocale(Sitengine_Env::LANGUAGE_EN);
+				#$this->getLocale()->setLocale(Sitengine_Env::LANGUAGE_EN);
 				
 				if($this->getTranslate()->isAvailable($this->getPreferences()->getLanguage()))
 				{
-					$this->getLocale()->setLocale($this->getPreferences()->getLanguage());
+					#$this->getLocale()->setLocale($this->getPreferences()->getLanguage());
 					$this->getTranslate()->setLocale($this->getPreferences()->getLanguage());
 				}
 				
-				require_once 'Zend/Registry.php';
-				Zend_Registry::set('Zend_Translate', $this->getTranslate()->getAdapter());
+				#require_once 'Zend/Registry.php';
+				#Zend_Registry::set('Zend_Translate', $this->getTranslate()->getAdapter());
 			}
 		}
         catch (Exception $exception) {
@@ -286,9 +286,10 @@ abstract class Sitengine_Permiso_Login_Controller extends Sitengine_Controller_A
     	try {
     		$this->_start();
     		$view = $this->_getIndexViewInstance();
+    		$view->translate()->setTranslator($this->getTranslate()->getAdapter());
     		$view->setHelperPath($this->getEnv()->getIncludesDir());
     		$view->setScriptPath(dirname($this->_templateIndexView));
-    		$view->doctype()->setDoctype('XHTML1_STRICT');
+    		$view->doctype()->setDoctype(Zend_View_Helper_Doctype::XHTML1_STRICT);
     		$view->build()->batchAssign($view->getData());
     		$body  = $view->render(basename($this->_templateIndexView));
     		$body .= $this->_getDebugDump($view->getData());

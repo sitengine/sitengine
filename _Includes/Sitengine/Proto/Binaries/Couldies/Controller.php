@@ -184,7 +184,7 @@ abstract class Sitengine_Proto_Binaries_Couldies_Controller extends Sitengine_Co
 					Sitengine_Debug::action($this->getPreferences()->getDebugMode());
 				}
 				
-				$this->getLocale()->setLocale($this->getPreferences()->getLanguage());
+				#$this->getLocale()->setLocale($this->getPreferences()->getLanguage());
 			}
 		}
         catch (Exception $exception) {

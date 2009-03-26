@@ -82,6 +82,8 @@ abstract class Sitengine_Permiso_Frontend_User_ViewHelper extends Sitengine_View
 				'userLogout' => "$projectDir/$path".Sitengine_Controller_Request_Http::makeNameValueQuery($args)
 			);
             */
+            
+            /*
 			if($this->_controller->getEnv()->getDebugControl()) {
 				require_once 'Sitengine/Debug/Sections.php';
 				$this->setSection(
@@ -114,7 +116,7 @@ abstract class Sitengine_Permiso_Frontend_User_ViewHelper extends Sitengine_View
 					$this->_controller->getEnv()->getTimezones()
 				)
 			);
-			
+			*/
 			#$this->_settings['isNewAccount'] = $this->_controller->getRequest()->get(Sitengine_Env::PARAM_TARGET);
 			return $this;
 		}

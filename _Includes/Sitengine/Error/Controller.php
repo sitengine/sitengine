@@ -156,12 +156,12 @@ abstract class Sitengine_Error_Controller extends Sitengine_Controller_Action
 				
 				if($this->getTranslate()->isAvailable($language))
 				{
-					$this->getLocale()->setLocale($language);
+					#$this->getLocale()->setLocale($language);
 					$this->getTranslate()->setLocale($language);
 				}
 				
-				require_once 'Zend/Registry.php';
-				Zend_Registry::set('Zend_Translate', $this->getTranslate()->getAdapter());
+				#require_once 'Zend/Registry.php';
+				#Zend_Registry::set('Zend_Translate', $this->getTranslate()->getAdapter());
 			}
 		}
         catch (Exception $exception) {
@@ -208,9 +208,10 @@ abstract class Sitengine_Error_Controller extends Sitengine_Controller_Action
 				true
 			);
 			$view = $this->_getIndexViewInstance();
+			$view->translate()->setTranslator($this->getTranslate()->getAdapter());
 			$view->setHelperPath($this->getEnv()->getIncludesDir());
     		$view->setScriptPath(dirname($this->_templateIndexView));
-    		$view->doctype()->setDoctype('XHTML1_STRICT');
+    		$view->doctype()->setDoctype(Zend_View_Helper_Doctype::XHTML1_STRICT);
     		$view->build()->batchAssign($view->getData());
     		$body  = $view->render(basename($this->_templateIndexView));
 			$this->getResponse()->setBody($body);
@@ -234,9 +235,10 @@ abstract class Sitengine_Error_Controller extends Sitengine_Controller_Action
 				true
 			);
 			$view = $this->_getIndexViewInstance();
+        	$view->translate()->setTranslator($this->getTranslate()->getAdapter());
         	$view->setHelperPath($this->getEnv()->getIncludesDir());
     		$view->setScriptPath(dirname($this->_templateIndexView));
-    		$view->doctype()->setDoctype('XHTML1_STRICT');
+    		$view->doctype()->setDoctype(Zend_View_Helper_Doctype::XHTML1_STRICT);
     		$view->build()->batchAssign($view->getData());
     		$body  = $view->render(basename($this->_templateIndexView));
 			$this->getResponse()->setBody($body);
@@ -260,9 +262,10 @@ abstract class Sitengine_Error_Controller extends Sitengine_Controller_Action
 				true
 			);
 			$view = $this->_getIndexViewInstance();
+        	$view->translate()->setTranslator($this->getTranslate()->getAdapter());
         	$view->setHelperPath($this->getEnv()->getIncludesDir());
     		$view->setScriptPath(dirname($this->_templateIndexView));
-    		$view->doctype()->setDoctype('XHTML1_STRICT');
+    		$view->doctype()->setDoctype(Zend_View_Helper_Doctype::XHTML1_STRICT);
     		$view->build()->batchAssign($view->getData());
     		$body  = $view->render(basename($this->_templateIndexView));
 			$this->getResponse()->setBody($body);
@@ -287,9 +290,10 @@ abstract class Sitengine_Error_Controller extends Sitengine_Controller_Action
 				true
 			);
 			$view = $this->_getIndexViewInstance();
+        	$view->translate()->setTranslator($this->getTranslate()->getAdapter());
         	$view->setHelperPath($this->getEnv()->getIncludesDir());
     		$view->setScriptPath(dirname($this->_templateIndexView));
-    		$view->doctype()->setDoctype('XHTML1_STRICT');
+    		$view->doctype()->setDoctype(Zend_View_Helper_Doctype::XHTML1_STRICT);
     		$view->build()->batchAssign($view->getData());
     		$body  = $view->render(basename($this->_templateIndexView));
 			$this->getResponse()->setBody($body);
@@ -313,9 +317,10 @@ abstract class Sitengine_Error_Controller extends Sitengine_Controller_Action
 				true
 			);
 			$view = $this->_getIndexViewInstance();
+        	$view->translate()->setTranslator($this->getTranslate()->getAdapter());
         	$view->setHelperPath($this->getEnv()->getIncludesDir());
     		$view->setScriptPath(dirname($this->_templateIndexView));
-    		$view->doctype()->setDoctype('XHTML1_STRICT');
+    		$view->doctype()->setDoctype(Zend_View_Helper_Doctype::XHTML1_STRICT);
     		$view->build()->batchAssign($view->getData());
     		$body  = $view->render(basename($this->_templateIndexView));
 			$this->getResponse()->setBody($body);

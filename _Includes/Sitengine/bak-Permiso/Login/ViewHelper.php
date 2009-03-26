@@ -46,6 +46,7 @@ abstract class Sitengine_Permiso_Login_ViewHelper extends Sitengine_View
     
     public function getDebugSection()
     {
+    	/*
     	if($this->_controller->getEnv()->getDebugControl())
     	{
 			require_once 'Sitengine/Debug/Sections.php';
@@ -55,12 +56,14 @@ abstract class Sitengine_Permiso_Login_ViewHelper extends Sitengine_View
 				array('queries' => 'Queries', 'templateData' => 'Template Data')
 			);
 		}
+		*/
 		return array();
     }
     
     
     public function getLanguageSection()
     {
+    	/*
         if(sizeof($this->_controller->getTranslate()->getAvailableLanguages()) > 1)
         {
         	require_once 'Sitengine/Env/Preferences/Sections.php';
@@ -70,17 +73,21 @@ abstract class Sitengine_Permiso_Login_ViewHelper extends Sitengine_View
 				$this->_controller->getTranslate()->translateGroup('loclangs')->toArray()
 			);
 		}
+		*/
 		return array();
     }
     
     
     public function getTimezoneSection()
     {
+    	/*
     	require_once 'Sitengine/Env/Preferences/Sections.php';
 		return Sitengine_Env_Preferences_Sections::getTimezoneForm(
 			$this->_controller->getPreferences()->getTimezone(),
 			$this->_controller->getEnv()->getTimezones()
 		);
+		*/
+		return array();
     }
 }
 

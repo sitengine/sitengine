@@ -303,7 +303,7 @@ class Sitengine_Env
     
     public function getUriSelfSubmit()
     {
-		return preg_replace('/\?.* /', '', $_SERVER['REQUEST_URI']);
+		return preg_replace('/\?.*/', '', $_SERVER['REQUEST_URI']);
     }
 	
 	

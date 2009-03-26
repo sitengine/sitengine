@@ -83,7 +83,7 @@ abstract class Sitengine_Newsletter_Backend_Campaigns_ViewHelper extends Sitengi
 			);
     		
 			
-			
+			/*
 			if($this->_controller->getEnv()->getDebugControl()) {
 				require_once 'Sitengine/Debug/Sections.php';
 				$this->setSection(
@@ -119,7 +119,7 @@ abstract class Sitengine_Newsletter_Backend_Campaigns_ViewHelper extends Sitengi
 					'timezone'
 				)
 			);
-			
+			*/
 			$this->setSection(
 				'ABSTRACT',
 				array(

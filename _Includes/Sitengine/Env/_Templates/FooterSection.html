@@ -1,104 +1,100 @@
-<table id="footer"><tr><td valign="top">
-
-
-
-
-
-<table cellpadding="0" cellspacing="0" border="0"><tr><td>
-
-<form method="get" action="<?=$this->_controller->getEnv()->getUriSelfSubmit();?>" name="timezone" class="timezone">
-<?=$this->SECTIONS->TIMEZONE->hiddens;?>
-
-<?=$this->SECTIONS->TIMEZONE->ELEMENTS->tz;?>
-</form>
-
-<script type="text/javascript" language="Javascript">
-//<![CDATA[
-//<!--
-document.timezone.tz.onchange = function() { document.timezone.submit(); }
-//-->
-//]]>
-</script>
-
-
-</td><td>
-
-<?if(isset($this->SECTIONS->LANGUAGE)):?>
-<form method="get" action="<?=$this->_controller->getEnv()->getUriSelfSubmit();?>" name="language" class="language">
-<?=$this->SECTIONS->LANGUAGE->hiddens;?>
-
-<?=$this->SECTIONS->LANGUAGE->ELEMENTS->l;?>
-</form>
-
-<script type="text/javascript" language="Javascript">
-//<![CDATA[
-//<!--
-document.language.l.onchange = function() { document.language.submit(); }
-//-->
-//]]>
-</script>
-
-<?endif;?>
-
-</td></tr></table>
-
-
-
-
-
-</td><td align="right" valign="top">
-
-
-
-
-
-<?if(isset($this->SECTIONS->DBG)):?>
-<form method="get" action="<?=$this->_controller->getEnv()->getUriSelfSubmit();?>" name="dbg" class="dbg">
-<?=$this->SECTIONS->DBG->hiddens;?>
-<?=$this->SECTIONS->DBG->ELEMENTS->dbg;?>
-</form>
-
-<script type="text/javascript" language="Javascript">
-//<![CDATA[
-//<!--
-document.dbg.dbg.onchange = function() { document.dbg.submit(); }
-//-->
-//]]>
-</script>
-<?endif;?>
-
-
-
-</td></tr></table>
+<table id="footer">
+	<tr>
+		<td valign="top">
+			<table cellpadding="0" cellspacing="0" border="0">
+				<tr>
+					<td>
+						<form method="get" action="<?=$this->_controller->getEnv()->getUriSelfSubmit();?>" name="timezone" class="timezone">
+						
+							<?
+								echo $this->formSelect(
+									Sitengine_Env::PARAM_TIMEZONE,
+									$this->_controller->getPreferences()->getTimezone(),
+									array('onchange' => 'document.timezone.submit();'),
+									$this->_controller->getEnv()->getTimezones()
+								);
+							?>
+						
+						</form>
+					</td><td>
+						
+						<?if(sizeof($this->_controller->getTranslate()->getAvailableLanguages()) > 1):?>
+							<form method="get" action="<?=$this->_controller->getEnv()->getUriSelfSubmit();?>" name="language" class="language">
+								
+								<?
+									$options = array();
+									$locLangs = $this->_controller->getTranslate()->translateGroup('loclangs');
+									
+									foreach($this->_controller->getTranslate()->getAvailableLanguages() as $symbol)
+									{
+										$options[$symbol] = $locLangs->$symbol;
+									}
+									
+									echo $this->formSelect(
+										Sitengine_Env::PARAM_LANGUAGE,
+										$this->_controller->getPreferences()->getLanguage(),
+										array('onchange' => 'document.language.submit();'),
+										$options
+									);
+								?>
+								
+							</form>
+						
+						<?endif;?>
+					</td>
+				</tr>
+			</table>
+		</td>
+		<td align="right" valign="top">
+			<?if($this->_controller->getEnv()->getDebugControl()):?>
+				<form method="get" action="<?=$this->_controller->getEnv()->getUriSelfSubmit();?>" name="debug" class="debug">
+				
+					<?
+						echo $this->formSelect(
+							Sitengine_Env::PARAM_DBG,
+							$this->_controller->getPreferences()->getDebugMode(),
+							array('onchange' => 'document.debug.submit();'),
+							Sitengine_Debug::getOptions(array('queries' => 'Queries'))
+						);
+					?>
+				
+				</form>
+			<?endif;?>
+		</td>
+	</tr>
+</table>
 
 
 
 
 <?
-$url = $this->_controller->getEnv()->getPoweredByUrl();
-$href = '';
-$hrefend = '';
-
-if($url !== null && !preg_match('/^http/i', $url)) { $url = 'http://'.$url; }
-if($url !== null) { $href = "<a href=\"$url\">"; $hrefend = '</a>'; }
+	$url = $this->_controller->getEnv()->getPoweredByUrl();
+	$href = '';
+	$hrefend = '';
+	
+	if($url !== null && !preg_match('/^http/i', $url)) { $url = 'http://'.$url; }
+	if($url !== null) { $href = "<a href=\"$url\">"; $hrefend = '</a>'; }
 ?>
 
 
-<div id="backdoor"><?=$href;?><img src="<?=$this->_controller->getEnv()->getMediaRequestDir();?>/Pics/Backdoor.gif" width="40" height="33" border="0" alt="Backdoor Freestyle Technologies" /><?=$hrefend;?></div>
+<div id="backdoor">
+	<?=$href;?><img src="<?=$this->_controller->getEnv()->getMediaRequestDir();?>/Pics/Backdoor.gif" width="40" height="33" border="0" alt="Backdoor Freestyle Technologies" /><?=$hrefend;?>
+</div>
 
-<div id="poweredBy"><?=$href;?><?=$this->html($this->_controller->getEnv()->getPoweredBy());?><?=$hrefend;?> &copy; <?=gmdate('Y');?>
+<div id="poweredBy">
+	<?=$href;?><?=$this->html($this->_controller->getEnv()->getPoweredBy());?><?=$hrefend;?> &copy; <?=gmdate('Y');?>
 </div>
 
 
 
 
 <?if($this->_controller->getEnv()->getGoogleAnalyticsTracker()):?>
-<script type="text/javascript">
-var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
-document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
-</script>
-<script type="text/javascript">
-var pageTracker = _gat._getTracker("<?=$this->_controller->getEnv()->getGoogleAnalyticsTracker();?>");
-pageTracker._trackPageview();
-</script>
+	<script type="text/javascript">
+		var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+		document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+		</script>
+		<script type="text/javascript">
+		var pageTracker = _gat._getTracker("<?=$this->_controller->getEnv()->getGoogleAnalyticsTracker();?>");
+		pageTracker._trackPageview();
+	</script>
 <?endif;?>

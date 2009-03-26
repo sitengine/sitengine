@@ -83,7 +83,7 @@ abstract class Sitengine_FormToMail_Default_Controller extends Sitengine_Control
         	parent::__construct($request, $response, $invokeArgs);
         	$this->_mapInvokeArgs($invokeArgs);
         	$this->_mapConfig($this->_config);
-        	$this->_setSelfSubmitUri();
+        	#$this->_setSelfSubmitUri();
         	
         	$this->_logger = $this->getEnv()->getLoggerInstance(
         		$this->getEnv()->getMyLogsDir(),
@@ -211,16 +211,16 @@ abstract class Sitengine_FormToMail_Default_Controller extends Sitengine_Control
 					Sitengine_Debug::action($this->getPreferences()->getDebugMode());
 				}
 				
-				$this->getLocale()->setLocale(Sitengine_Env::LANGUAGE_EN);
+				#$this->getLocale()->setLocale(Sitengine_Env::LANGUAGE_EN);
 				
 				if($this->getTranslate()->isAvailable($this->getPreferences()->getLanguage()))
 				{
-					$this->getLocale()->setLocale($this->getPreferences()->getLanguage());
+					#$this->getLocale()->setLocale($this->getPreferences()->getLanguage());
 					$this->getTranslate()->setLocale($this->getPreferences()->getLanguage());
 				}
 				
-				require_once 'Zend/Registry.php';
-				Zend_Registry::set('Zend_Translate', $this->getTranslate()->getAdapter());
+				#require_once 'Zend/Registry.php';
+				#Zend_Registry::set('Zend_Translate', $this->getTranslate()->getAdapter());
 				
 				$this->getStatus()->restore();
 			}
@@ -293,7 +293,7 @@ abstract class Sitengine_FormToMail_Default_Controller extends Sitengine_Control
     	$handler = $action.'Action';
     	if(is_callable(array($this, $handler))) {
     		$this->getRequest()->setActionName($action);
-    		$this->_setSelfSubmitUri();
+    		#$this->_setSelfSubmitUri();
     		call_user_func(array($this, $handler));
     	}
     	else {
@@ -403,9 +403,10 @@ abstract class Sitengine_FormToMail_Default_Controller extends Sitengine_Control
 			Sitengine_Debug::print_r($group);
 			
 			$view = $this->_getIndexViewInstance();
+    		$view->translate()->setTranslator($this->getTranslate()->getAdapter());
     		$view->setHelperPath($this->getEnv()->getIncludesDir());
     		$view->setScriptPath(dirname($this->_indexViewTemplate));
-    		$view->doctype()->setDoctype('XHTML1_STRICT');
+    		$view->doctype()->setDoctype(Zend_View_Helper_Doctype::XHTML1_STRICT);
     		$view->build()->batchAssign($view->getData());
     		$body  = $view->render(basename($this->_indexViewTemplate));
     		$body .= $this->_getDebugDump($view->getData());
@@ -427,9 +428,10 @@ abstract class Sitengine_FormToMail_Default_Controller extends Sitengine_Control
 				return $this->_forwardToLogin();
 			}
 			$view = $this->_getConfirmViewInstance();
+    		$view->translate()->setTranslator($this->getTranslate()->getAdapter());
     		$view->setHelperPath($this->getEnv()->getIncludesDir());
     		$view->setScriptPath(dirname($this->_confirmViewTemplate));
-    		$view->doctype()->setDoctype('XHTML1_STRICT');
+    		$view->doctype()->setDoctype(Zend_View_Helper_Doctype::XHTML1_STRICT);
     		$view->build()->batchAssign($view->getData());
     		$body  = $view->render(basename($this->_confirmViewTemplate));
     		$body .= $this->_getDebugDump($view->getData());

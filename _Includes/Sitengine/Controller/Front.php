@@ -82,8 +82,10 @@ abstract class Sitengine_Controller_Front extends Zend_Controller_Front
 				# required in action controller constructors
 				$this->setParam('frontController', $this);
 				$this->setParam('env', $this->_env);
-				#$this->setParam('package', $this->_getPackageInstance());
 				$this->setParam('config', $this->_config);
+				
+				# set the rewrite base
+				$this->setBaseUrl($this->_request->getBasePath());
 			}
 			return $this;
 		}

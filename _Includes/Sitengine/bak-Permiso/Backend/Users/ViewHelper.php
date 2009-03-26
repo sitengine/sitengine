@@ -82,7 +82,7 @@ abstract class Sitengine_Permiso_Backend_Users_ViewHelper extends Sitengine_View
 			);
 			
 			
-			
+			/*
 			if($this->_controller->getEnv()->getDebugControl()) {
 				require_once 'Sitengine/Debug/Sections.php';
 				$this->setSection(
@@ -118,7 +118,7 @@ abstract class Sitengine_Permiso_Backend_Users_ViewHelper extends Sitengine_View
 					'timezone'
 				)
 			);
-			
+			*/
 			if($this->_controller->getRequest()->getActionName()==Sitengine_Permiso_Backend_Users_Controller::ACTION_ME) {
 				$title = $this->_controller->getTranslate()->translate('labelsMeEntityTitle');
 			}

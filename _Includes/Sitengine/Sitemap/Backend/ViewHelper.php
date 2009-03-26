@@ -83,7 +83,7 @@ abstract class Sitengine_Sitemap_Backend_ViewHelper extends Sitengine_View {
 			);
 			
 			
-			
+			/*
 			if($this->_controller->getEnv()->getDebugControl()) {
 				require_once 'Sitengine/Debug/Sections.php';
 				$this->setSection(
@@ -119,7 +119,7 @@ abstract class Sitengine_Sitemap_Backend_ViewHelper extends Sitengine_View {
 					'timezone'
 				)
 			);
-            
+            */
             
             $subject = $this->_controller->getEntity()->getData();
             

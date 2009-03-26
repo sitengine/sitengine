@@ -15,33 +15,17 @@
  */
 
 
-
-require_once 'Sitengine/Env.php';
-require_once 'Sitengine/Form/Element.php';
-
-
 class Sitengine_Debug_Sections
 {
     
     
     public static function getForm(Sitengine_Controller_Request_Http $request, $mode, array $options=array(), $selector='')
     {
+    	return array();
+    	/*
         $html = array();
         $hiddens = array();
-        /*
-        $hiddens = $request->getParams();
-        unset($hiddens[Sitengine_Env::PARAM_MODULE]);
-		unset($hiddens[Sitengine_Env::PARAM_CONTROLLER]);
-		unset($hiddens[Sitengine_Env::PARAM_ACTION]);
-        #unset($hiddens[Sitengine_Env::PARAM_SUBMISSION]);
-        unset($hiddens[Sitengine_Env::PARAM_LOGINUSER]);
-        unset($hiddens[Sitengine_Env::PARAM_LOGINPASS]);
-        unset($hiddens[Sitengine_Env::PARAM_DBG]);
         
-        foreach($hiddens as $k => $v) {
-            $hiddens[$k] = Sitengine_Form_Element::getHidden($k, $v);
-        }
-        */
         $defaultOptions = array(
             '' => 'Dbg (Off)',
             'execTime' => 'Exec Time',
@@ -65,6 +49,7 @@ class Sitengine_Debug_Sections
         }
         $options = array_merge($defaultOptions, $options);
         
+        require_once 'Sitengine/Form/Element.php';
         $e = new Sitengine_Form_Element(Sitengine_Env::PARAM_DBG, $mode);
         $e->setId($selector.Sitengine_Env::PARAM_DBG);
         $e->setClass($selector.'Select');
@@ -74,6 +59,7 @@ class Sitengine_Debug_Sections
             'hiddens' => implode('', $hiddens),
             'ELEMENTS' => $html
         );
+        */
     }
 }
 

@@ -21,6 +21,8 @@ class Sitengine_Env_Preferences_Sections
     
     public static function getLanguageForm($language, array $languages, array $languageNames, $selector='')
     {
+    	return array();
+    	/*
     	#Sitengine_Debug::print_r($languages);
     	#Sitengine_Debug::print_r($languageNames);
         $html = array();
@@ -41,12 +43,15 @@ class Sitengine_Env_Preferences_Sections
             'hiddens' => implode('', $hiddens),
             'ELEMENTS' => $html
         );
+        */
     }
     
     
     
     public static function getTimezoneForm($timezone, array $timezones, $selector='')
     {
+    	return array();
+    	/*
         $html = array();
         $hiddens = array();
         
@@ -60,6 +65,7 @@ class Sitengine_Env_Preferences_Sections
             'hiddens' => implode('', $hiddens),
             'ELEMENTS' => $html
         );
+        */
     }
     
 }

@@ -80,7 +80,7 @@ abstract class Sitengine_Permiso_Backend_Users_ViewHelper extends Sitengine_View
 			);
     		
 			
-			
+			/*
 			if($this->_controller->getEnv()->getDebugControl()) {
 				require_once 'Sitengine/Debug/Sections.php';
 				$this->setSection(
@@ -116,7 +116,7 @@ abstract class Sitengine_Permiso_Backend_Users_ViewHelper extends Sitengine_View
 					'timezone'
 				)
 			);
-			
+			*/
 			$this->setSection(
 				'ABSTRACT',
 				array(

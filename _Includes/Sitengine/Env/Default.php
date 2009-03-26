@@ -69,8 +69,10 @@ class Sitengine_Env_Default extends Sitengine_Env
     
     public function getLocaleInstance()
     {
-    	if($this->_locale === null) {
+    	if($this->_locale === null)
+    	{
     		require_once 'Zend/Locale.php';
+    		Zend_Locale::setDefault(self::LANGUAGE_EN);
     		$this->_locale = new Zend_Locale();
     	}
     	return $this->_locale;
@@ -79,7 +81,8 @@ class Sitengine_Env_Default extends Sitengine_Env
     
     public function getNamespaceInstance($name)
     {
-    	if($this->_namespace === null) {
+    	if($this->_namespace === null)
+    	{
     		require_once 'Zend/Session/Namespace.php';
     		$this->_namespace = new Zend_Session_Namespace($name);
     	}
@@ -129,6 +132,7 @@ class Sitengine_Env_Default extends Sitengine_Env
 				$writer->setFormatter($formatter);
 				$this->_logger->setEventItem('source', $source);
 			}
+			require_once 'Sitengine/Exception.php';
 			Sitengine_Exception::addObserver(array($this, 'observeExceptions'));
 		}
 		return $this->_logger;
