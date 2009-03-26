@@ -16,7 +16,7 @@
  * @package    Zend_Config
  * @copyright  Copyright (c) 2005-2008 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: Xml.php 12221 2008-10-31 20:32:43Z dasprid $
+ * @version    $Id: Xml.php 14176 2009-02-26 22:21:26Z dasprid $
  */
 
 /**
@@ -40,6 +40,13 @@ class Zend_Config_Writer_Xml extends Zend_Config_Writer
     protected $_filename = null;
     
     /**
+     * Wether to exclusively lock the file or not
+     *
+     * @var boolean
+     */
+    protected $_exclusiveLock = false;
+    
+    /**
      * Set the target filename
      *
      * @param  string $filename
@@ -53,15 +60,29 @@ class Zend_Config_Writer_Xml extends Zend_Config_Writer
     }
     
     /**
+     * Set wether to exclusively lock the file or not
+     *
+     * @param  boolean     $exclusiveLock
+     * @return Zend_Config_Writer_Array
+     */
+    public function setExclusiveLock($exclusiveLock)
+    {
+        $this->_exclusiveLock = $exclusiveLock;
+        
+        return $this;
+    }
+    
+    /**
      * Defined by Zend_Config_Writer
      *
      * @param  string      $filename
      * @param  Zend_Config $config
+     * @param  boolean     $exclusiveLock
      * @throws Zend_Config_Exception When filename was not set
      * @throws Zend_Config_Exception When filename is not writable
      * @return void
      */
-    public function write($filename = null, Zend_Config $config = null)
+    public function write($filename = null, Zend_Config $config = null, $exclusiveLock = null)
     {
         if ($filename !== null) {
             $this->setFilename($filename);
@@ -69,6 +90,10 @@ class Zend_Config_Writer_Xml extends Zend_Config_Writer
         
         if ($config !== null) {
             $this->setConfig($config);
+        }
+        
+        if ($exclusiveLock !== null) {
+            $this->setExclusiveLock($exclusiveLock);
         }
         
         if ($this->_filename === null) {
@@ -92,16 +117,16 @@ class Zend_Config_Writer_Xml extends Zend_Config_Writer
         } else {
             foreach ($this->_config as $sectionName => $data) {
                 if (!($data instanceof Zend_Config)) {
-                    continue;
+                    $xml->addChild($sectionName, (string) $data);
+                } else {
+                    $child = $xml->addChild($sectionName);
+                    
+                    if (isset($extends[$sectionName])) {
+                        $child->addAttribute('extends', $extends[$sectionName]);
+                    }
+        
+                    $this->_addBranch($data, $child);
                 }
-            
-                $child = $xml->addChild($sectionName);
-                
-                if (isset($extends[$sectionName])) {
-                    $child->addAttribute('extends', $extends[$sectionName]);
-                }
-    
-                $this->_addBranch($data, $child);
             }
         }
                 
@@ -110,7 +135,13 @@ class Zend_Config_Writer_Xml extends Zend_Config_Writer
         
         $xmlString = $dom->saveXML();
        
-        $result = @file_put_contents($this->_filename, $xmlString);
+        $flags = 0;
+        
+        if ($this->_exclusiveLock) {
+            $flags |= LOCK_EX;
+        }
+        
+        $result = @file_put_contents($this->_filename, $xmlString, $flags);
         
         if ($result === false) {
             require_once 'Zend/Config/Exception.php';

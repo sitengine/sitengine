@@ -76,8 +76,6 @@ class Zend_Translate_Adapter_Xliff extends Zend_Translate_Adapter {
         if ($options['clear']) {
             $this->_translate = array();
         }
-        
-        Sitengine_Debug::print_r($this->_translate);
 
         if (!is_readable($filename)) {
             require_once 'Zend/Translate/Exception.php';

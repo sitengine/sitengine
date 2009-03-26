@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Zend Framework
  *
@@ -14,45 +13,37 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Service
- * @subpackage Amazon
+ * @package    Zend_Log
+ * @subpackage Formatter
  * @copyright  Copyright (c) 2005-2008 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: ListmaniaList.php 14126 2009-02-20 16:15:52Z sidhighwind $
  */
 
+/** Zend_Log_Formatter_Interface */
+require_once 'Zend/Log/Formatter/Interface.php';
 
 /**
  * @category   Zend
- * @package    Zend_Service
- * @subpackage Amazon
+ * @package    Zend_Log
+ * @subpackage Formatter
  * @copyright  Copyright (c) 2005-2008 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Service_Amazon_ListmaniaList
+class Zend_Log_Formatter_Firebug implements Zend_Log_Formatter_Interface
 {
     /**
-     * @var string
-     */
-    public $ListId;
-
-    /**
-     * @var string
-     */
-    public $ListName;
-
-    /**
-     * Assigns values to properties relevant to ListmaniaList
+     * This method formats the event for the firebug writer.
+     * 
+     * The default is to just send the message parameter, but through 
+     * extension of this class and calling the
+     * {@see Zend_Log_Writer_Firebug::setFormatter()} method you can
+     * pass as much of the event data as you are interested in.
      *
-     * @param  DOMElement $dom
-     * @return void
+     * @param  array    $event    event data
+     * @return mixed              event message
      */
-    public function __construct(DOMElement $dom)
+    public function format($event)
     {
-        $xpath = new DOMXPath($dom->ownerDocument);
-        $xpath->registerNamespace('az', 'http://webservices.amazon.com/AWSECommerceService/2005-10-05');
-        foreach (array('ListId', 'ListName') as $el) {
-            $this->$el = (string) $xpath->query("./az:$el/text()", $dom)->item(0)->data;
-        }
+        return $event['message'];
     }
 }

@@ -14,7 +14,7 @@
  * @package    Zend_ProgressBar
  * @copyright  Copyright (c) 2005-2008 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: ProgressBar.php 12296 2008-11-05 11:26:37Z dasprid $
+ * @version    $Id: ProgressBar.php 14176 2009-02-26 22:21:26Z dasprid $
  */
 
 /**
@@ -163,7 +163,7 @@ class Zend_ProgressBar
         }
 
         // Calculate percent
-        $percent  = (float) ($this->_current - $this->_min) / ($this->_max - $this->_min);
+        $percent = (float) ($this->_current - $this->_min) / ($this->_max - $this->_min);
 
         // Calculate ETA
         $timeTaken = time() - $this->_startTime;
