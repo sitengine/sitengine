@@ -172,7 +172,7 @@ class Sitengine_Controller_Request_Http extends Zend_Controller_Request_Http
     
     
     
-    public function getMethod()
+    public function getIntendedMethod()
     {
     	require_once 'Sitengine/Env.php';
     	

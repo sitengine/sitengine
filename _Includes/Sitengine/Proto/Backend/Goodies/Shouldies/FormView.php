@@ -99,8 +99,8 @@ abstract class Sitengine_Proto_Backend_Goodies_Shouldies_FormView extends Siteng
             #$valuePage = $this->_controller->getRequest()->get(Sitengine_Env::PARAM_PAGE);
             
             $table = $this->_controller->getFrontController()->getProtoPackage()->getShouldiesTable();
-            $table->setTranslation($this->_controller->getPreferences()->getTranslation());
-			$translations = $table->getTranslations();
+            $table->setTranscript($this->_controller->getPreferences()->getTranscript());
+			$transcripts = $table->getTranscripts();
             $displayPermissionSettings = false;
             
             
@@ -125,15 +125,15 @@ abstract class Sitengine_Proto_Backend_Goodies_Shouldies_FormView extends Siteng
                 'locked' => 0
             );
             
-            foreach($translations->get() as $index => $symbol) {
+            foreach($transcripts->get() as $index => $symbol) {
             	$fields['titleLang'.$index] = '';
             	$fields['textLang'.$index] = '';
             }
             
             if($this->_inputMode == Sitengine_Env::INPUTMODE_UPDATE)
             {
-            	require_once 'Sitengine/Form/TranslationPayloads.php';
-            	$payloads = new Sitengine_Form_TranslationPayloads($translations);
+            	require_once 'Sitengine/Form/TranscriptsPayloads.php';
+            	$payloads = new Sitengine_Form_TranscriptsPayloads($transcripts);
 				$payloads->start($this->_controller->getRequest()->get(Sitengine_Env::PARAM_PAYLOAD_NAME));
 				$stored = $this->_controller->getFrontController()->getProtoPackage()->getShouldiesTable()->complementRow($this->_controller->getEntity()->getRow());
                 
@@ -189,7 +189,7 @@ abstract class Sitengine_Proto_Backend_Goodies_Shouldies_FormView extends Siteng
                 $route = $this->_controller->getFrontController()->getRouter()->getRoute(Sitengine_Proto_Backend_Front::ROUTE_GOODIES_SHOULDIES_SHARP);
                 $submitUri = $this->_controller->getRequest()->getBasePath().'/'.$route->assemble($args, true);
                 
-                $title = $stored['titleLang'.$translations->getIndex()];
+                $title = $stored['titleLang'.$transcripts->getIndex()];
                 $title = ($title!='') ? $title : $stored['titleLang0'];
                 
                 if(
@@ -202,8 +202,8 @@ abstract class Sitengine_Proto_Backend_Goodies_Shouldies_FormView extends Siteng
             }
             else
             {
-            	require_once 'Sitengine/Form/TranslationPayloads.php';
-            	$payloads = new Sitengine_Form_TranslationPayloads($translations);
+            	require_once 'Sitengine/Form/TranscriptsPayloads.php';
+            	$payloads = new Sitengine_Form_TranscriptsPayloads($transcripts);
             	$payloads->start();
             	
                 $data = Sitengine_Controller_Request_Http::filterInsert(
@@ -268,10 +268,10 @@ abstract class Sitengine_Proto_Backend_Goodies_Shouldies_FormView extends Siteng
             ########################################################################
             $contentSectionTitle = $this->_controller->getTranslate()->translate('formViewContentSectionTitleDefault');
             
-            if(sizeof($translations->get()) > 1)
+            if(sizeof($transcripts->get()) > 1)
             {
-            	if(!$payloads->isMain()) { $symbol = $payloads->getTranslationSymbol(); }
-            	else { $symbol = $translations->getDefaultSymbol(); }
+            	if(!$payloads->isMain()) { $symbol = $payloads->getTranscriptSymbol(); }
+            	else { $symbol = $transcripts->getDefaultSymbol(); }
             	$contentSectionTitle .= ' ('.$this->_controller->getTranslate()->translate('languages'.ucfirst($symbol)).')';
             }
             
@@ -302,9 +302,9 @@ abstract class Sitengine_Proto_Backend_Goodies_Shouldies_FormView extends Siteng
 					'label' => $this->_controller->getTranslate()->translate('formViewPayloadNavTitleMain')
 				);
 				
-				foreach($translations->get() as $index => $symbol)
+				foreach($transcripts->get() as $index => $symbol)
 				{
-					$currentPayload = $payloads->getTranslationNamePrefix().'_'.$symbol;
+					$currentPayload = $payloads->getTranscriptNamePrefix().'_'.$symbol;
 					
 					$args = array(
 						Sitengine_Env::PARAM_ANCESTORID => $this->_controller->getEntity()->getAncestorId(),
@@ -319,7 +319,7 @@ abstract class Sitengine_Proto_Backend_Goodies_Shouldies_FormView extends Siteng
 					$uri  = $this->_controller->getRequest()->getBasePath().'/'.$route->assemble($args, true);
 					$uri .= Sitengine_Controller_Request_Http::makeNameValueQuery($query);
 					
-					if(sizeof($translations->get()) > 1) {
+					if(sizeof($transcripts->get()) > 1) {
 						$label = $this->_controller->getTranslate()->translate('languages'.ucfirst($symbol));
 					}
 					else {

@@ -102,7 +102,7 @@ abstract class Sitengine_Newsletter_Backend_Campaigns_Modifier
 			### statically set permissions ###
 			
             #Sitengine_Debug::print_r($data);
-            $insertId = $this->_controller->getFrontController()->getNewsletterPackage()->getCampaignsTable()->insert($data);
+            $insertId = $this->_controller->getFrontController()->getNewsletterPackage()->getCampaignsTable()->insertOrRollback($data);
             if(!$insertId)
             {
             	$error = $this->_controller->getFrontController()->getNewsletterPackage()->getCampaignsTable()->getError();
@@ -171,7 +171,7 @@ abstract class Sitengine_Newsletter_Backend_Campaigns_Modifier
 			
             #Sitengine_Debug::print_r($data);
     		$where = $this->_controller->getDatabase()->quoteInto('id = ?', $id);
-            $affectedRows = $this->_controller->getFrontController()->getNewsletterPackage()->getCampaignsTable()->update($data, $where);
+            $affectedRows = $this->_controller->getFrontController()->getNewsletterPackage()->getCampaignsTable()->updateOrRollback($data, $where);
             if(!$affectedRows)
             {
             	$error = $this->_controller->getFrontController()->getNewsletterPackage()->getCampaignsTable()->getError();
@@ -250,7 +250,7 @@ abstract class Sitengine_Newsletter_Backend_Campaigns_Modifier
             );
             require_once 'Sitengine/Sql.php';
     		$where = Sitengine_Sql::getWhereStatement($whereClauses, false);
-            return $this->_controller->getFrontController()->getNewsletterPackage()->getCampaignsTable()->update($data, $where);
+            return $this->_controller->getFrontController()->getNewsletterPackage()->getCampaignsTable()->updateOrRollback($data, $where);
         }
         catch (Exception $exception) {
             require_once 'Sitengine/Newsletter/Backend/Campaigns/Exception.php';

@@ -170,7 +170,7 @@ class Sitengine_Translate_Adapter_Xml extends Zend_Translate_Adapter
 	}
 	
 	
-	protected function _merge(Sitengine_Translate_Adapter_Xml $adapter)
+	public function merge(Sitengine_Translate_Adapter_Xml $adapter)
 	{
 		$tables = $adapter->getTranslationTable();
 		
@@ -203,7 +203,7 @@ class Sitengine_Translate_Adapter_Xml extends Zend_Translate_Adapter
 		foreach($files as $file)
 		{
 			$translate = new Sitengine_Translate(Sitengine_Translate::AN_XML, $file, $locale, $options);
-			$this->_merge($translate->getAdapter());
+			$this->merge($translate->getAdapter());
 		}
 	}
 	

@@ -130,7 +130,7 @@ abstract class Sitengine_Sitemap_Backend_MaskFormView extends Sitengine_View {
                 'description' => ''
             );
             
-            foreach($this->_controller->getTranslations()->get() as $index => $symbol) {
+            foreach($this->_controller->getTranscripts()->get() as $index => $symbol) {
             	$fieldsNormal['titleLang'.$index] = '';
             	$fieldsNormal['textLang'.$index] = '';
             }
@@ -147,8 +147,8 @@ abstract class Sitengine_Sitemap_Backend_MaskFormView extends Sitengine_View {
             
             if($this->_inputMode == Sitengine_Env::INPUTMODE_UPDATE)
             {
-            	require_once 'Sitengine/Form/TranslationPayloads.php';
-            	$payloads = new Sitengine_Form_TranslationPayloads($this->_controller->getTranslations());
+            	require_once 'Sitengine/Form/TranscriptsPayloads.php';
+            	$payloads = new Sitengine_Form_TranscriptsPayloads($this->_controller->getTranscripts());
 				$payloads->start($this->_controller->getRequest()->get(Sitengine_Env::PARAM_PAYLOAD_NAME));
                 $stored = $this->_controller->getEntity()->getData();
                 
@@ -200,8 +200,8 @@ abstract class Sitengine_Sitemap_Backend_MaskFormView extends Sitengine_View {
             }
             else
             {
-            	require_once 'Sitengine/Form/TranslationPayloads.php';
-            	$payloads = new Sitengine_Form_TranslationPayloads($this->_controller->getTranslations());
+            	require_once 'Sitengine/Form/TranscriptsPayloads.php';
+            	$payloads = new Sitengine_Form_TranscriptsPayloads($this->_controller->getTranscripts());
             	$payloads->start();
             	
                 $data = Sitengine_Controller_Request_Http::filterInsertDeprecated(
@@ -320,13 +320,13 @@ abstract class Sitengine_Sitemap_Backend_MaskFormView extends Sitengine_View {
 				$elements[$n] = $e->getTextarea(60, 10);
             }
             else {
-            	$n = 'titleLang'.$payloads->getTranslationIndex();
+            	$n = 'titleLang'.$payloads->getTranscriptIndex();
 				$e = new Sitengine_Form_Element($n, $data[$n]);
 				$e->setClass('viewFormInput');
 				$e->setId('viewForm'.$n);
 				$elements['title'] = $e->getText(40);
 				
-            	$n = 'htmlLang'.$payloads->getTranslationIndex();
+            	$n = 'htmlLang'.$payloads->getTranscriptIndex();
 				$e = new Sitengine_Form_Element($n, $data[$n]);
 				$e->setClass('viewFormTextarea');
 				$e->setId('viewForm'.$n);
@@ -341,10 +341,10 @@ abstract class Sitengine_Sitemap_Backend_MaskFormView extends Sitengine_View {
             ########################################################################
             $contentSectionTitle = $this->_controller->getTranslate()->translate('labelsViewformContentSectionTitleDefault');
             
-            if(sizeof($this->_controller->getTranslations()->get()) > 1)
+            if(sizeof($this->_controller->getTranscripts()->get()) > 1)
             {
-            	if(!$payloads->isMain()) { $symbol = $payloads->getTranslationSymbol(); }
-            	else { $symbol = $this->_controller->getTranslations()->getDefaultSymbol(); }
+            	if(!$payloads->isMain()) { $symbol = $payloads->getTranscriptSymbol(); }
+            	else { $symbol = $this->_controller->getTranscripts()->getDefaultSymbol(); }
             	$contentSectionTitle .= ' ('.$this->_controller->getTranslate()->translate('languages'.ucfirst($symbol)).')';
             }
             
@@ -372,9 +372,9 @@ abstract class Sitengine_Sitemap_Backend_MaskFormView extends Sitengine_View {
 					'label' => $this->_controller->getTranslate()->translate('labelsViewformPayloadNavTitleMain')
 				);
 				
-				foreach($this->_controller->getTranslations()->get() as $index => $symbol)
+				foreach($this->_controller->getTranscripts()->get() as $index => $symbol)
 				{
-					$currentPayload = $payloads->getTranslationNamePrefix().'_'.$symbol;
+					$currentPayload = $payloads->getTranscriptNamePrefix().'_'.$symbol;
 					
 					$args = array(
 						#Sitengine_Env::PARAM_ORG => $this->_controller->getPermiso()->getOrganization()->getNameNoDefault(),
@@ -385,7 +385,7 @@ abstract class Sitengine_Sitemap_Backend_MaskFormView extends Sitengine_View {
 					
 					$route = $this->_controller->getFrontController()->getRouter()->getRoute(Sitengine_Sitemap_Backend_Front::ROUTE_INDEX);
 					$uri = $this->_controller->getRequest()->getBasePath().'/'.$route->assemble($args, true);
-					if(sizeof($this->_controller->getTranslations()->get()) > 1) {
+					if(sizeof($this->_controller->getTranscripts()->get()) > 1) {
 						$label = $this->_controller->getTranslate()->translate('languages'.ucfirst($symbol));
 					}else {
 						$label = $this->_controller->getTranslate()->translate('labelsViewformContentSectionTitleDefault');
@@ -409,7 +409,7 @@ abstract class Sitengine_Sitemap_Backend_MaskFormView extends Sitengine_View {
             return array(
             	'payloadName' => $payloads->getName(),
             	'payloadIsMain' => $payloads->isMain(),
-            	'payloadIsDefaultTranslation' => $payloads->isDefaultTranslation(),
+            	'payloadIsDefaultTranscript' => $payloads->isDefaultTranscript(),
             	'queryUpdate' => ((isset($queryUpdate)) ? $queryUpdate : ''),
                 'title' => $title,
                 'contentSectionTitle' => $contentSectionTitle,

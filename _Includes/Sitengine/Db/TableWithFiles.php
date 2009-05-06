@@ -24,10 +24,10 @@
  */
 
 require_once 'Sitengine/Mime/Type.php';
-require_once 'Zend/Db/Table/Abstract.php';
+require_once 'Sitengine/Db/Table.php';
 
 
-class Sitengine_Db_TableWithFiles extends Zend_Db_Table_Abstract
+class Sitengine_Db_TableWithFiles extends Sitengine_Db_Table
 {
     
     const FIELD_ID = 'id';
@@ -545,7 +545,7 @@ class Sitengine_Db_TableWithFiles extends Zend_Db_Table_Abstract
         }
         catch (Exception $exception) {
 			$this->_rollbackFileImport();
-			if(!$this->_checkModifyException($exception)) { return 0; }
+			if(!$this->checkModifyException($exception)) { return 0; }
 			else {
 				require_once 'Sitengine/Exception.php';
 				throw new Sitengine_Exception('insert file import error', $exception);
@@ -603,7 +603,7 @@ class Sitengine_Db_TableWithFiles extends Zend_Db_Table_Abstract
      *
      */
     # void
-    protected function _checkModifyException(Zend_Exception $exception)
+    public function checkModifyException(Zend_Exception $exception)
     {
         return true;
     }
@@ -611,7 +611,7 @@ class Sitengine_Db_TableWithFiles extends Zend_Db_Table_Abstract
     
     
     # int
-    public function update(array $data, $where)
+    public function updateOrRollback(array $data, $where)
     {
         try {
         	$this->reset();
@@ -622,7 +622,7 @@ class Sitengine_Db_TableWithFiles extends Zend_Db_Table_Abstract
         }
         catch (Exception $exception) {
 			$this->_rollback();
-			if(!$this->_checkModifyException($exception)) { return 0; }
+			if(!$this->checkModifyException($exception)) { return 0; }
 			else {
 				require_once 'Sitengine/Exception.php';
 				throw new Sitengine_Exception('update error', $exception);
@@ -632,7 +632,7 @@ class Sitengine_Db_TableWithFiles extends Zend_Db_Table_Abstract
     
     
     # int
-    public function insert(array $data)
+    public function insertOrRollback(array $data)
     {
         try {
         	$this->reset();
@@ -643,7 +643,7 @@ class Sitengine_Db_TableWithFiles extends Zend_Db_Table_Abstract
         }
         catch (Exception $exception) {
 			$this->_rollback();
-			if(!$this->_checkModifyException($exception)) { return 0; }
+			if(!$this->checkModifyException($exception)) { return 0; }
 			else {
 				require_once 'Sitengine/Exception.php';
 				throw new Sitengine_Exception('insert error', $exception);

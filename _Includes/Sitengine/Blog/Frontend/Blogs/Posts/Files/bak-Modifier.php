@@ -37,8 +37,8 @@ abstract class Sitengine_Blog_Frontend_Blogs_Posts_Files_Modifier
     {
         $this->_controller = $controller;
         
-        require_once 'Sitengine/Form/TranslationPayloads.php';
-        $this->_payloads = new Sitengine_Form_TranslationPayloads($this->_controller->getRecord()->getTranslations());
+        require_once 'Sitengine/Form/TranscriptsPayloads.php';
+        $this->_payloads = new Sitengine_Form_TranscriptsPayloads($this->_controller->getRecord()->getTranscripts());
     }
     
     
@@ -49,8 +49,8 @@ abstract class Sitengine_Blog_Frontend_Blogs_Posts_Files_Modifier
             #Sitengine_Permiso::FIELD_UID => '',
             #Sitengine_Permiso::FIELD_GID => '',
             'sorting' => '',
-            'titleLang'.$this->_controller->getRecord()->getTranslations()->getDefaultIndex() => '',
-            'markupLang'.$this->_controller->getRecord()->getTranslations()->getDefaultIndex() => ''
+            'titleLang'.$this->_controller->getRecord()->getTranscripts()->getDefaultIndex() => '',
+            'markupLang'.$this->_controller->getRecord()->getTranscripts()->getDefaultIndex() => ''
         );
         
         $fieldsOnOff = array(
@@ -68,9 +68,9 @@ abstract class Sitengine_Blog_Frontend_Blogs_Posts_Files_Modifier
         	self::FIELDS_ONOFF => $fieldsOnOff
         );
         
-        foreach($this->_controller->getRecord()->getTranslations()->get() as $index => $symbol)
+        foreach($this->_controller->getRecord()->getTranscripts()->get() as $index => $symbol)
         {
-        	$payloadName = $this->_payloads->makeTranslationName($symbol);
+        	$payloadName = $this->_payloads->makeTranscriptName($symbol);
         	$fields[$payloadName] = array(
         		self::FIELDS_NORMAL => array(
         			'titleLang'.$index => '',
@@ -222,7 +222,7 @@ abstract class Sitengine_Blog_Frontend_Blogs_Posts_Files_Modifier
     {
         if($this->_payloads->isMain())
         {
-        	$name = 'titleLang'.$this->_controller->getRecord()->getTranslations()->getDefaultIndex();
+        	$name = 'titleLang'.$this->_controller->getRecord()->getTranscripts()->getDefaultIndex();
 			if(Sitengine_Validator::nada($this->_controller->getRequest()->getPost($name))) {
 				$message = $this->_controller->getTranslate()->translate('hintsTitleRequired');
 				$this->_controller->getStatus()->addHint($name, $message);

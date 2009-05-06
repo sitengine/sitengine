@@ -124,7 +124,7 @@ abstract class Sitengine_Newsletter_Backend_Campaigns_Controller extends Sitengi
 			require_once 'Sitengine/Env/Preferences.php';
 			$this->_preferences = Sitengine_Env_Preferences::getInstance();
 			$this->_locale = $this->getEnv()->getLocaleInstance();
-			$this->_permiso = $this->getFrontController()->getPermisoPackage()->start($this->getDatabase());
+			$this->_permiso = $this->getFrontController()->getPermiso()->start($this->getDatabase());
         	$this->_translate = $this->_getTranslateInstance();
         	$this->_entity = $this->_getEntityModelInstance();
 			require_once 'Zend/Session/Namespace.php';
@@ -246,9 +246,9 @@ abstract class Sitengine_Newsletter_Backend_Campaigns_Controller extends Sitengi
 					Sitengine_Env::PARAM_LANGUAGE
 				);
 				
-				$this->getPreferences()->establishTranslation(
+				$this->getPreferences()->establishTranscript(
 					$this->getRequest(),
-					Sitengine_Env::PARAM_TRANSLATION
+					Sitengine_Env::PARAM_TRANSCRIPT
 				);
 				
 				$this->getPreferences()->establishItemsPerPage(
@@ -334,7 +334,7 @@ abstract class Sitengine_Newsletter_Backend_Campaigns_Controller extends Sitengi
     
     
     
-    protected function _getResourceToActionMappings()
+    protected function _getRestMappings()
     {
     	return array(
     		'default' => array(
@@ -373,18 +373,18 @@ abstract class Sitengine_Newsletter_Backend_Campaigns_Controller extends Sitengi
     
     
     
-    public function factoryAction()
+    public function restMapperAction()
     {
-    	$mappings = $this->_getResourceToActionMappings();
+    	$mappings = $this->_getRestMappings();
     	$route = $this->getFrontController()->getRouter()->getCurrentRouteName();
-    	$method = $this->getRequest()->getMethod();
+    	$method = $this->getRequest()->getIntendedMethod();
     	
     	if(!isset($mappings[$route][$method]))
     	{
     		require_once 'Sitengine/Newsletter/Backend/Campaigns/Exception.php';
     		$exception = new Sitengine_Newsletter_Backend_Campaigns_Exception(
-    			'method not supported',
-    			Sitengine_Env::ERROR_NOT_SUPPORTED
+    			"'$method' not supported on route '$route'",
+    			Sitengine_Env::ERROR_NOT_IMPLEMENTED
     		);
     		throw $this->_prepareErrorHandler($exception);
     	}
@@ -413,21 +413,20 @@ abstract class Sitengine_Newsletter_Backend_Campaigns_Controller extends Sitengi
 			case Sitengine_Env::ERROR_BAD_REQUEST:
 				$handler = Sitengine_Error_Controller::ACTION_BAD_REQUEST;
 				break;
-			case Sitengine_Env::ERROR_UNAUTHORIZED:
-				$handler = Sitengine_Error_Controller::ACTION_UNAUTHORIZED;
+			case Sitengine_Env::ERROR_FORBIDDEN:
+				$handler = Sitengine_Error_Controller::ACTION_FORBIDDEN;
 				break;
-			case Sitengine_Env::ERROR_NOT_SUPPORTED:
-				$handler = Sitengine_Error_Controller::ACTION_NOT_SUPPORTED;
+			case Sitengine_Env::ERROR_NOT_IMPLEMENTED:
+				$handler = Sitengine_Error_Controller::ACTION_NOT_IMPLEMENTED;
 				break;
 			default:
-				$handler = Sitengine_Error_Controller::ACTION_INTERNAL;
+				$handler = Sitengine_Error_Controller::ACTION_INTERNAL_SERVER_ERROR;
 		}
 		
 		$pluginClass = 'Zend_Controller_Plugin_ErrorHandler';
 		if($this->getFrontController()->hasPlugin($pluginClass))
 		{
-			$plugin = $this->getFrontController()->getPlugin($pluginClass);
-			$plugin->setErrorHandlerAction($handler);
+			$this->getFrontController()->getPlugin($pluginClass)->setErrorHandlerAction($handler);
 		}
 		return $exception;
     }

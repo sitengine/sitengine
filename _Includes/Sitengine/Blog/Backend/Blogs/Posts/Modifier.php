@@ -36,9 +36,9 @@ abstract class Sitengine_Blog_Backend_Blogs_Posts_Modifier
         $this->_controller = $controller;
         
         $table = $this->_controller->getFrontController()->getBlogPackage()->getPostsTable();
-        $translations = $table->getTranslations();
-        require_once 'Sitengine/Form/TranslationPayloads.php';
-        $this->_payloads = new Sitengine_Form_TranslationPayloads($translations);
+        $transcripts = $table->getTranscripts();
+        require_once 'Sitengine/Form/TranscriptsPayloads.php';
+        $this->_payloads = new Sitengine_Form_TranscriptsPayloads($transcripts);
     }
     
     
@@ -119,14 +119,14 @@ abstract class Sitengine_Blog_Backend_Blogs_Posts_Modifier
     protected function _getTextPostFields()
     {
     	$table = $this->_controller->getFrontController()->getBlogPackage()->getPostsTable();
-        $translations = $table->getTranslations();
+        $transcripts = $table->getTranscripts();
         
     	$fieldsNormal = array(
             ##Sitengine_Permiso::FIELD_UID => '',
             ##Sitengine_Permiso::FIELD_GID => '',
-            'titleLang'.$translations->getDefaultIndex() => '',
-            'markupLang'.$translations->getDefaultIndex() => '',
-            'teaserLang'.$translations->getDefaultIndex() => ''
+            'titleLang'.$transcripts->getDefaultIndex() => '',
+            'markupLang'.$transcripts->getDefaultIndex() => '',
+            'teaserLang'.$transcripts->getDefaultIndex() => ''
         );
         
         $fieldsOnOff = array(
@@ -146,9 +146,9 @@ abstract class Sitengine_Blog_Backend_Blogs_Posts_Modifier
         	self::FIELDS_ONOFF => $fieldsOnOff
         );
         
-        foreach($translations->get() as $index => $symbol)
+        foreach($transcripts->get() as $index => $symbol)
         {
-        	$payloadName = $this->_payloads->makeTranslationName($symbol);
+        	$payloadName = $this->_payloads->makeTranscriptName($symbol);
         	$fields[$payloadName] = array(
         		self::FIELDS_NORMAL => array(
         			'titleLang'.$index => '',
@@ -167,19 +167,19 @@ abstract class Sitengine_Blog_Backend_Blogs_Posts_Modifier
     protected function _checkTextPostInput()
     {
     	$table = $this->_controller->getFrontController()->getBlogPackage()->getPostsTable();
-        $translations = $table->getTranslations();
+        $transcripts = $table->getTranscripts();
         
         if(
         	$this->_payloads->isMain() ||
-        	$this->_payloads->isDefaultTranslation()
+        	$this->_payloads->isDefaultTranscript()
         )
         {
-        	$name = 'titleLang'.$translations->getDefaultIndex();
+        	$name = 'titleLang'.$transcripts->getDefaultIndex();
 			if(Sitengine_Validator::nada($this->_controller->getRequest()->getPost($name))) {
 				$message = $this->_controller->getTranslate()->translate('textposthintsTitleRequired');
 				$this->_controller->getStatus()->addHint($name, $message);
 			}
-			$name = 'markupLang'.$translations->getDefaultIndex();
+			$name = 'markupLang'.$transcripts->getDefaultIndex();
 			if(Sitengine_Validator::nada($this->_controller->getRequest()->getPost($name))) {
 				$message = $this->_controller->getTranslate()->translate('textposthintsMarkupRequired');
 				$this->_controller->getStatus()->addHint($name, $message);
@@ -232,7 +232,7 @@ abstract class Sitengine_Blog_Backend_Blogs_Posts_Modifier
             $data['type'] = Sitengine_Blog_Posts_Table::TYPE_TEXT;
             ##$data[Sitengine_Permiso::FIELD_OID] = $this->_controller->getPermiso()->getOrganization()->getId();
             #Sitengine_Debug::print_r($data);
-            $affectedRows = $this->_controller->getFrontController()->getBlogPackage()->getPostsTable()->insert($data);
+            $affectedRows = $this->_controller->getFrontController()->getBlogPackage()->getPostsTable()->insertOrRollback($data);
             if(!$affectedRows)
             {
             	$error = $this->_controller->getFrontController()->getBlogPackage()->getPostsTable()->getError();
@@ -306,7 +306,7 @@ abstract class Sitengine_Blog_Backend_Blogs_Posts_Modifier
             );
             require_once 'Sitengine/Sql.php';
     		$where = Sitengine_Sql::getWhereStatement($whereClauses, false);
-            $affectedRows = $this->_controller->getFrontController()->getBlogPackage()->getPostsTable()->update($data, $where);
+            $affectedRows = $this->_controller->getFrontController()->getBlogPackage()->getPostsTable()->updateOrRollback($data, $where);
             if(!$affectedRows)
             {
             	$error = $this->_controller->getFrontController()->getBlogPackage()->getPostsTable()->getError();
@@ -347,13 +347,13 @@ abstract class Sitengine_Blog_Backend_Blogs_Posts_Modifier
     protected function _getPhotoPostFields()
     {
     	$table = $this->_controller->getFrontController()->getBlogPackage()->getPostsTable();
-        $translations = $table->getTranslations();
+        $transcripts = $table->getTranscripts();
         
     	$fieldsNormal = array(
             ##Sitengine_Permiso::FIELD_UID => '',
             ##Sitengine_Permiso::FIELD_GID => '',
-            'titleLang'.$translations->getDefaultIndex() => '',
-            'markupLang'.$translations->getDefaultIndex() => '',
+            'titleLang'.$transcripts->getDefaultIndex() => '',
+            'markupLang'.$transcripts->getDefaultIndex() => '',
             'url' => ''
         );
         
@@ -374,9 +374,9 @@ abstract class Sitengine_Blog_Backend_Blogs_Posts_Modifier
         	self::FIELDS_ONOFF => $fieldsOnOff
         );
         
-        foreach($translations->get() as $index => $symbol)
+        foreach($transcripts->get() as $index => $symbol)
         {
-        	$payloadName = $this->_payloads->makeTranslationName($symbol);
+        	$payloadName = $this->_payloads->makeTranscriptName($symbol);
         	$fields[$payloadName] = array(
         		self::FIELDS_NORMAL => array(
         			'titleLang'.$index => '',
@@ -396,7 +396,7 @@ abstract class Sitengine_Blog_Backend_Blogs_Posts_Modifier
     protected function _checkPhotoPostInput()
     {
     	$table = $this->_controller->getFrontController()->getBlogPackage()->getPostsTable();
-        $translations = $table->getTranslations();
+        $transcripts = $table->getTranscripts();
         
         if($this->_payloads->isMain())
         {
@@ -406,7 +406,7 @@ abstract class Sitengine_Blog_Backend_Blogs_Posts_Modifier
 				$this->_controller->getStatus()->addHint($name, $message);
 			}
 			
-			$name = 'titleLang'.$translations->getDefaultIndex();
+			$name = 'titleLang'.$transcripts->getDefaultIndex();
 			if(Sitengine_Validator::nada($this->_controller->getRequest()->getPost($name))) {
 				$message = $this->_controller->getTranslate()->translate('photoposthintsTitleRequired');
 				$this->_controller->getStatus()->addHint($name, $message);
@@ -482,7 +482,7 @@ abstract class Sitengine_Blog_Backend_Blogs_Posts_Modifier
             ##$data[Sitengine_Permiso::FIELD_OID] = $this->_controller->getPermiso()->getOrganization()->getId();
             $data = array_merge($data, $this->_controller->getFrontController()->getBlogPackage()->getPostsTable()->getFileData());
             #Sitengine_Debug::print_r($data);
-            $affectedRows = $this->_controller->getFrontController()->getBlogPackage()->getPostsTable()->insert($data);
+            $affectedRows = $this->_controller->getFrontController()->getBlogPackage()->getPostsTable()->insertOrRollback($data);
             if(!$affectedRows)
             {
             	$error = $this->_controller->getFrontController()->getBlogPackage()->getPostsTable()->getError();
@@ -558,7 +558,7 @@ abstract class Sitengine_Blog_Backend_Blogs_Posts_Modifier
             );
             require_once 'Sitengine/Sql.php';
     		$where = Sitengine_Sql::getWhereStatement($whereClauses, false);
-            $affectedRows = $this->_controller->getFrontController()->getBlogPackage()->getPostsTable()->update($data, $where);
+            $affectedRows = $this->_controller->getFrontController()->getBlogPackage()->getPostsTable()->updateOrRollback($data, $where);
             if(!$affectedRows)
             {
             	$error = $this->_controller->getFrontController()->getBlogPackage()->getPostsTable()->getError();
@@ -591,14 +591,14 @@ abstract class Sitengine_Blog_Backend_Blogs_Posts_Modifier
     protected function _getGalleryPostFields()
     {
     	$table = $this->_controller->getFrontController()->getBlogPackage()->getPostsTable();
-        $translations = $table->getTranslations();
+        $transcripts = $table->getTranscripts();
         
     	$fieldsNormal = array(
             ##Sitengine_Permiso::FIELD_UID => '',
             ##Sitengine_Permiso::FIELD_GID => '',
-            'titleLang'.$translations->getDefaultIndex() => '',
-            'markupLang'.$translations->getDefaultIndex() => '',
-            'teaserLang'.$translations->getDefaultIndex() => ''
+            'titleLang'.$transcripts->getDefaultIndex() => '',
+            'markupLang'.$transcripts->getDefaultIndex() => '',
+            'teaserLang'.$transcripts->getDefaultIndex() => ''
         );
         
         $fieldsOnOff = array(
@@ -618,9 +618,9 @@ abstract class Sitengine_Blog_Backend_Blogs_Posts_Modifier
         	self::FIELDS_ONOFF => $fieldsOnOff
         );
         
-        foreach($translations->get() as $index => $symbol)
+        foreach($transcripts->get() as $index => $symbol)
         {
-        	$payloadName = $this->_payloads->makeTranslationName($symbol);
+        	$payloadName = $this->_payloads->makeTranscriptName($symbol);
         	$fields[$payloadName] = array(
         		self::FIELDS_NORMAL => array(
         			'titleLang'.$index => '',
@@ -639,7 +639,7 @@ abstract class Sitengine_Blog_Backend_Blogs_Posts_Modifier
     protected function _checkGalleryPostInput()
     {
     	$table = $this->_controller->getFrontController()->getBlogPackage()->getPostsTable();
-        $translations = $table->getTranslations();
+        $transcripts = $table->getTranscripts();
         
         if($this->_payloads->isMain())
         {
@@ -670,10 +670,10 @@ abstract class Sitengine_Blog_Backend_Blogs_Posts_Modifier
         }
         if(
         	$this->_payloads->isMain() ||
-        	$this->_payloads->isDefaultTranslation()
+        	$this->_payloads->isDefaultTranscript()
         )
         {
-        	$name = 'titleLang'.$translations->getDefaultIndex();
+        	$name = 'titleLang'.$transcripts->getDefaultIndex();
 			if(Sitengine_Validator::nada($this->_controller->getRequest()->getPost($name))) {
 				$message = $this->_controller->getTranslate()->translate('galleryposthintsTitleRequired');
 				$this->_controller->getStatus()->addHint($name, $message);
@@ -731,7 +731,7 @@ abstract class Sitengine_Blog_Backend_Blogs_Posts_Modifier
             ##$data[Sitengine_Permiso::FIELD_OID] = $this->_controller->getPermiso()->getOrganization()->getId();
             $data = array_merge($data, $this->_controller->getFrontController()->getBlogPackage()->getPostsTable()->getFileData());
             #Sitengine_Debug::print_r($data);
-            $affectedRows = $this->_controller->getFrontController()->getBlogPackage()->getPostsTable()->insert($data);
+            $affectedRows = $this->_controller->getFrontController()->getBlogPackage()->getPostsTable()->insertOrRollback($data);
             if(!$affectedRows)
             {
             	$error = $this->_controller->getFrontController()->getBlogPackage()->getPostsTable()->getError();
@@ -807,7 +807,7 @@ abstract class Sitengine_Blog_Backend_Blogs_Posts_Modifier
             );
             require_once 'Sitengine/Sql.php';
     		$where = Sitengine_Sql::getWhereStatement($whereClauses, false);
-            $affectedRows = $this->_controller->getFrontController()->getBlogPackage()->getPostsTable()->update($data, $where);
+            $affectedRows = $this->_controller->getFrontController()->getBlogPackage()->getPostsTable()->updateOrRollback($data, $where);
             if(!$affectedRows)
             {
             	$error = $this->_controller->getFrontController()->getBlogPackage()->getPostsTable()->getError();
@@ -838,13 +838,13 @@ abstract class Sitengine_Blog_Backend_Blogs_Posts_Modifier
     protected function _getQuotePostFields()
     {
     	$table = $this->_controller->getFrontController()->getBlogPackage()->getPostsTable();
-        $translations = $table->getTranslations();
+        $transcripts = $table->getTranscripts();
         
     	$fieldsNormal = array(
             ##Sitengine_Permiso::FIELD_UID => '',
             ##Sitengine_Permiso::FIELD_GID => '',
-            'titleLang'.$translations->getDefaultIndex() => '',
-            'teaserLang'.$translations->getDefaultIndex() => ''
+            'titleLang'.$transcripts->getDefaultIndex() => '',
+            'teaserLang'.$transcripts->getDefaultIndex() => ''
         );
         
         $fieldsOnOff = array(
@@ -864,9 +864,9 @@ abstract class Sitengine_Blog_Backend_Blogs_Posts_Modifier
         	self::FIELDS_ONOFF => $fieldsOnOff
         );
         
-        foreach($translations->get() as $index => $symbol)
+        foreach($transcripts->get() as $index => $symbol)
         {
-        	$payloadName = $this->_payloads->makeTranslationName($symbol);
+        	$payloadName = $this->_payloads->makeTranscriptName($symbol);
         	$fields[$payloadName] = array(
         		self::FIELDS_NORMAL => array(
         			'titleLang'.$index => '',
@@ -884,7 +884,7 @@ abstract class Sitengine_Blog_Backend_Blogs_Posts_Modifier
     protected function _checkQuotePostInput()
     {
     	$table = $this->_controller->getFrontController()->getBlogPackage()->getPostsTable();
-        $translations = $table->getTranslations();
+        $transcripts = $table->getTranscripts();
         
         if($this->_payloads->isMain())
         {
@@ -896,10 +896,10 @@ abstract class Sitengine_Blog_Backend_Blogs_Posts_Modifier
         }
         if(
         	$this->_payloads->isMain() ||
-        	$this->_payloads->isDefaultTranslation()
+        	$this->_payloads->isDefaultTranscript()
         )
         {
-        	$name = 'teaserLang'.$translations->getDefaultIndex();
+        	$name = 'teaserLang'.$transcripts->getDefaultIndex();
 			if(Sitengine_Validator::nada($this->_controller->getRequest()->getPost($name))) {
 				$message = $this->_controller->getTranslate()->translate('quoteposthintsTeaserRequired');
 				$this->_controller->getStatus()->addHint($name, $message);
@@ -942,7 +942,7 @@ abstract class Sitengine_Blog_Backend_Blogs_Posts_Modifier
             $data['type'] = Sitengine_Blog_Posts_Table::TYPE_QUOTE;
             ##$data[Sitengine_Permiso::FIELD_OID] = $this->_controller->getPermiso()->getOrganization()->getId();
             #Sitengine_Debug::print_r($data);
-            $affectedRows = $this->_controller->getFrontController()->getBlogPackage()->getPostsTable()->insert($data);
+            $affectedRows = $this->_controller->getFrontController()->getBlogPackage()->getPostsTable()->insertOrRollback($data);
             if(!$affectedRows)
             {
             	$error = $this->_controller->getFrontController()->getBlogPackage()->getPostsTable()->getError();
@@ -1016,7 +1016,7 @@ abstract class Sitengine_Blog_Backend_Blogs_Posts_Modifier
             );
             require_once 'Sitengine/Sql.php';
     		$where = Sitengine_Sql::getWhereStatement($whereClauses, false);
-            $affectedRows = $this->_controller->getFrontController()->getBlogPackage()->getPostsTable()->update($data, $where);
+            $affectedRows = $this->_controller->getFrontController()->getBlogPackage()->getPostsTable()->updateOrRollback($data, $where);
             if(!$affectedRows)
             {
             	$error = $this->_controller->getFrontController()->getBlogPackage()->getPostsTable()->getError();
@@ -1050,13 +1050,13 @@ abstract class Sitengine_Blog_Backend_Blogs_Posts_Modifier
     protected function _getLinkPostFields()
     {
     	$table = $this->_controller->getFrontController()->getBlogPackage()->getPostsTable();
-        $translations = $table->getTranslations();
+        $transcripts = $table->getTranscripts();
         
     	$fieldsNormal = array(
             ##Sitengine_Permiso::FIELD_UID => '',
             ##Sitengine_Permiso::FIELD_GID => '',
-            'titleLang'.$translations->getDefaultIndex() => '',
-            'teaserLang'.$translations->getDefaultIndex() => '',
+            'titleLang'.$transcripts->getDefaultIndex() => '',
+            'teaserLang'.$transcripts->getDefaultIndex() => '',
             'url' => ''
         );
         
@@ -1077,9 +1077,9 @@ abstract class Sitengine_Blog_Backend_Blogs_Posts_Modifier
         	self::FIELDS_ONOFF => $fieldsOnOff
         );
         
-        foreach($translations->get() as $index => $symbol)
+        foreach($transcripts->get() as $index => $symbol)
         {
-        	$payloadName = $this->_payloads->makeTranslationName($symbol);
+        	$payloadName = $this->_payloads->makeTranscriptName($symbol);
         	$fields[$payloadName] = array(
         		self::FIELDS_NORMAL => array(
         			'titleLang'.$index => '',
@@ -1097,7 +1097,7 @@ abstract class Sitengine_Blog_Backend_Blogs_Posts_Modifier
     protected function _checkLinkPostInput()
     {
     	$table = $this->_controller->getFrontController()->getBlogPackage()->getPostsTable();
-        $translations = $table->getTranslations();
+        $transcripts = $table->getTranscripts();
         
         if($this->_payloads->isMain())
         {
@@ -1109,10 +1109,10 @@ abstract class Sitengine_Blog_Backend_Blogs_Posts_Modifier
         }
         if(
         	$this->_payloads->isMain() ||
-        	$this->_payloads->isDefaultTranslation()
+        	$this->_payloads->isDefaultTranscript()
         )
         {
-        	$name = 'titleLang'.$translations->getDefaultIndex();
+        	$name = 'titleLang'.$transcripts->getDefaultIndex();
 			if(Sitengine_Validator::nada($this->_controller->getRequest()->getPost($name))) {
 				$message = $this->_controller->getTranslate()->translate('linkposthintsTitleRequired');
 				$this->_controller->getStatus()->addHint($name, $message);
@@ -1161,7 +1161,7 @@ abstract class Sitengine_Blog_Backend_Blogs_Posts_Modifier
             $data['type'] = Sitengine_Blog_Posts_Table::TYPE_LINK;
             ##$data[Sitengine_Permiso::FIELD_OID] = $this->_controller->getPermiso()->getOrganization()->getId();
             #Sitengine_Debug::print_r($data);
-            $affectedRows = $this->_controller->getFrontController()->getBlogPackage()->getPostsTable()->insert($data);
+            $affectedRows = $this->_controller->getFrontController()->getBlogPackage()->getPostsTable()->insertOrRollback($data);
             if(!$affectedRows)
             {
             	$error = $this->_controller->getFrontController()->getBlogPackage()->getPostsTable()->getError();
@@ -1235,7 +1235,7 @@ abstract class Sitengine_Blog_Backend_Blogs_Posts_Modifier
             );
             require_once 'Sitengine/Sql.php';
     		$where = Sitengine_Sql::getWhereStatement($whereClauses, false);
-            $affectedRows = $this->_controller->getFrontController()->getBlogPackage()->getPostsTable()->update($data, $where);
+            $affectedRows = $this->_controller->getFrontController()->getBlogPackage()->getPostsTable()->updateOrRollback($data, $where);
             if(!$affectedRows)
             {
             	$error = $this->_controller->getFrontController()->getBlogPackage()->getPostsTable()->getError();
@@ -1277,13 +1277,13 @@ abstract class Sitengine_Blog_Backend_Blogs_Posts_Modifier
     protected function _getAudioPostFields()
     {
     	$table = $this->_controller->getFrontController()->getBlogPackage()->getPostsTable();
-        $translations = $table->getTranslations();
+        $transcripts = $table->getTranscripts();
         
     	$fieldsNormal = array(
             ##Sitengine_Permiso::FIELD_UID => '',
             ##Sitengine_Permiso::FIELD_GID => '',
-            'titleLang'.$translations->getDefaultIndex() => '',
-            'markupLang'.$translations->getDefaultIndex() => ''
+            'titleLang'.$transcripts->getDefaultIndex() => '',
+            'markupLang'.$transcripts->getDefaultIndex() => ''
         );
         
         $fieldsOnOff = array(
@@ -1303,9 +1303,9 @@ abstract class Sitengine_Blog_Backend_Blogs_Posts_Modifier
         	self::FIELDS_ONOFF => $fieldsOnOff
         );
         
-        foreach($translations->get() as $index => $symbol)
+        foreach($transcripts->get() as $index => $symbol)
         {
-        	$payloadName = $this->_payloads->makeTranslationName($symbol);
+        	$payloadName = $this->_payloads->makeTranscriptName($symbol);
         	$fields[$payloadName] = array(
         		self::FIELDS_NORMAL => array(
         			'titleLang'.$index => '',
@@ -1323,7 +1323,7 @@ abstract class Sitengine_Blog_Backend_Blogs_Posts_Modifier
     protected function _checkAudioPostInput()
     {
     	$table = $this->_controller->getFrontController()->getBlogPackage()->getPostsTable();
-        $translations = $table->getTranslations();
+        $transcripts = $table->getTranscripts();
         
         if($this->_payloads->isMain())
         {
@@ -1333,7 +1333,7 @@ abstract class Sitengine_Blog_Backend_Blogs_Posts_Modifier
 				$this->_controller->getStatus()->addHint($name, $message);
 			}
 			
-			$name = 'titleLang'.$translations->getDefaultIndex();
+			$name = 'titleLang'.$transcripts->getDefaultIndex();
 			if(Sitengine_Validator::nada($this->_controller->getRequest()->getPost($name))) {
 				$message = $this->_controller->getTranslate()->translate('audioposthintsTitleRequired');
 				$this->_controller->getStatus()->addHint($name, $message);
@@ -1383,7 +1383,7 @@ abstract class Sitengine_Blog_Backend_Blogs_Posts_Modifier
 				if(!preg_match('/(mp3|mpg|mpeg)/i', $upload->getMime())) {
 					$messages[] = $this->_controller->getTranslate()->translate('audioposthintsFile1OriginalFiletype');
 				}
-				if($upload->getSize() > 1024*1024*60) {
+				if($upload->getSize() > 1024*1024*100) {
 					$messages[] = $this->_controller->getTranslate()->translate('audioposthintsFile1OriginalFilesize');
 				}
 				if(sizeof($messages)) {
@@ -1440,7 +1440,7 @@ abstract class Sitengine_Blog_Backend_Blogs_Posts_Modifier
             ##$data[Sitengine_Permiso::FIELD_OID] = $this->_controller->getPermiso()->getOrganization()->getId();
             $data = array_merge($data, $this->_controller->getFrontController()->getBlogPackage()->getPostsTable()->getFileData());
             #Sitengine_Debug::print_r($data);
-            $affectedRows = $this->_controller->getFrontController()->getBlogPackage()->getPostsTable()->insert($data);
+            $affectedRows = $this->_controller->getFrontController()->getBlogPackage()->getPostsTable()->insertOrRollback($data);
             if(!$affectedRows)
             {
             	$error = $this->_controller->getFrontController()->getBlogPackage()->getPostsTable()->getError();
@@ -1516,7 +1516,7 @@ abstract class Sitengine_Blog_Backend_Blogs_Posts_Modifier
             );
             require_once 'Sitengine/Sql.php';
     		$where = Sitengine_Sql::getWhereStatement($whereClauses, false);
-            $affectedRows = $this->_controller->getFrontController()->getBlogPackage()->getPostsTable()->update($data, $where);
+            $affectedRows = $this->_controller->getFrontController()->getBlogPackage()->getPostsTable()->updateOrRollback($data, $where);
             if(!$affectedRows)
             {
             	$error = $this->_controller->getFrontController()->getBlogPackage()->getPostsTable()->getError();
@@ -1557,14 +1557,14 @@ abstract class Sitengine_Blog_Backend_Blogs_Posts_Modifier
     protected function _getVideoPostFields()
     {
     	$table = $this->_controller->getFrontController()->getBlogPackage()->getPostsTable();
-        $translations = $table->getTranslations();
+        $transcripts = $table->getTranscripts();
         
     	$fieldsNormal = array(
             ##Sitengine_Permiso::FIELD_UID => '',
             ##Sitengine_Permiso::FIELD_GID => '',
             'embedTag' => '',
-            'titleLang'.$translations->getDefaultIndex() => '',
-            'teaserLang'.$translations->getDefaultIndex() => ''
+            'titleLang'.$transcripts->getDefaultIndex() => '',
+            'teaserLang'.$transcripts->getDefaultIndex() => ''
         );
         
         $fieldsOnOff = array(
@@ -1584,9 +1584,9 @@ abstract class Sitengine_Blog_Backend_Blogs_Posts_Modifier
         	self::FIELDS_ONOFF => $fieldsOnOff
         );
         
-        foreach($translations->get() as $index => $symbol)
+        foreach($transcripts->get() as $index => $symbol)
         {
-        	$payloadName = $this->_payloads->makeTranslationName($symbol);
+        	$payloadName = $this->_payloads->makeTranscriptName($symbol);
         	$fields[$payloadName] = array(
         		self::FIELDS_NORMAL => array(
         			'titleLang'.$index => '',
@@ -1604,7 +1604,7 @@ abstract class Sitengine_Blog_Backend_Blogs_Posts_Modifier
     protected function _checkVideoPostInput()
     {
     	$table = $this->_controller->getFrontController()->getBlogPackage()->getPostsTable();
-        $translations = $table->getTranslations();
+        $transcripts = $table->getTranscripts();
         
         if($this->_payloads->isMain())
         {
@@ -1622,10 +1622,10 @@ abstract class Sitengine_Blog_Backend_Blogs_Posts_Modifier
         }
         if(
         	$this->_payloads->isMain() ||
-        	$this->_payloads->isDefaultTranslation()
+        	$this->_payloads->isDefaultTranscript()
         )
         {
-        	$name = 'titleLang'.$translations->getDefaultIndex();
+        	$name = 'titleLang'.$transcripts->getDefaultIndex();
 			if(Sitengine_Validator::nada($this->_controller->getRequest()->getPost($name))) {
 				$message = $this->_controller->getTranslate()->translate('videoposthintsTitleRequired');
 				$this->_controller->getStatus()->addHint($name, $message);
@@ -1668,7 +1668,7 @@ abstract class Sitengine_Blog_Backend_Blogs_Posts_Modifier
             $data['type'] = Sitengine_Blog_Posts_Table::TYPE_VIDEO;
             ##$data[Sitengine_Permiso::FIELD_OID] = $this->_controller->getPermiso()->getOrganization()->getId();
             #Sitengine_Debug::print_r($data);
-            $affectedRows = $this->_controller->getFrontController()->getBlogPackage()->getPostsTable()->insert($data);
+            $affectedRows = $this->_controller->getFrontController()->getBlogPackage()->getPostsTable()->insertOrRollback($data);
             if(!$affectedRows)
             {
             	$error = $this->_controller->getFrontController()->getBlogPackage()->getPostsTable()->getError();
@@ -1742,7 +1742,7 @@ abstract class Sitengine_Blog_Backend_Blogs_Posts_Modifier
             );
             require_once 'Sitengine/Sql.php';
     		$where = Sitengine_Sql::getWhereStatement($whereClauses, false);
-            $affectedRows = $this->_controller->getFrontController()->getBlogPackage()->getPostsTable()->update($data, $where);
+            $affectedRows = $this->_controller->getFrontController()->getBlogPackage()->getPostsTable()->updateOrRollback($data, $where);
             if(!$affectedRows)
             {
             	$error = $this->_controller->getFrontController()->getBlogPackage()->getPostsTable()->getError();
@@ -1804,7 +1804,7 @@ abstract class Sitengine_Blog_Backend_Blogs_Posts_Modifier
             );
             require_once 'Sitengine/Sql.php';
     		$where = Sitengine_Sql::getWhereStatement($whereClauses, false);
-            return $this->_controller->getFrontController()->getBlogPackage()->getPostsTable()->update($data, $where);
+            return $this->_controller->getFrontController()->getBlogPackage()->getPostsTable()->updateOrRollback($data, $where);
         }
         catch (Exception $exception) {
             require_once 'Sitengine/Blog/Backend/Blogs/Posts/Exception.php';

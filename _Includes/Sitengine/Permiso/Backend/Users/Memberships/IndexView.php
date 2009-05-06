@@ -91,7 +91,7 @@ abstract class Sitengine_Permiso_Backend_Users_Memberships_IndexView extends Sit
         try {
         	require_once 'Sitengine/Form/Element.php';
             $valuePage = $this->_controller->getRequest()->get(Sitengine_Env::PARAM_PAGE);
-        	$table = $this->_controller->getFrontController()->getPermisoPackage()->getMembershipsTable();
+        	$table = $this->_controller->getFrontController()->getPermiso()->getMembershipsTable();
             
             $sorting = $table->getGroupJoinSortingInstance(
             	$this->_controller->getRequest()->get(Sitengine_Env::PARAM_SORT),
@@ -212,8 +212,8 @@ abstract class Sitengine_Permiso_Backend_Users_Memberships_IndexView extends Sit
 			########################################################################
             #### LISTQUERY
             ########################################################################
-			$membershipsTableName = $this->_controller->getFrontController()->getPermisoPackage()->getMembershipsTableName();
-			$groupsTableName = $this->_controller->getFrontController()->getPermisoPackage()->getGroupsTableName();
+			$membershipsTableName = $this->_controller->getFrontController()->getPermiso()->getMembershipsTableName();
+			$groupsTableName = $this->_controller->getFrontController()->getPermiso()->getGroupsTableName();
 			
 			
 			$whereClauses = array(

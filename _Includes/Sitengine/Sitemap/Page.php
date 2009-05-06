@@ -68,17 +68,17 @@ class Sitengine_Sitemap_Page
     
     
     
-    public function fetch($path, $translationIndex = 0, $obfuscateEmail = true)
+    public function fetch($path, $transcriptIndex = 0, $obfuscateEmail = true)
     {
     	try {
     		$defaultIndex = 0;
-    		$this->_data = $this->_fetchPage($path, $translationIndex, $defaultIndex);
+    		$this->_data = $this->_fetchPage($path, $transcriptIndex, $defaultIndex);
     		$this->_title = (isset($this->_data['title'])) ? $this->_data['title'] : '';
     		$this->_metaKeywords = (isset($this->_data['metaKeywords'])) ? $this->_data['metaKeywords'] : '';
     		$this->_metaDescription = (isset($this->_data['metaDescription'])) ? $this->_data['metaDescription'] : '';
 			
     		if(isset($this->_data['id'])) {
-    			$this->_snippets = $this->_fetchSnippets($this->_data['id'], $translationIndex, $defaultIndex, $obfuscateEmail);
+    			$this->_snippets = $this->_fetchSnippets($this->_data['id'], $transcriptIndex, $defaultIndex, $obfuscateEmail);
     			$this->_files = $this->_fetchFiles($this->_data['id']);
     		}
 		}
@@ -90,7 +90,7 @@ class Sitengine_Sitemap_Page
     
     
     
-    protected function _fetchPage($path, $translationIndex, $defaultIndex)
+    protected function _fetchPage($path, $transcriptIndex, $defaultIndex)
     {
     	try {
     		if(array_key_exists($path, $this->_fetches)) {
@@ -105,9 +105,9 @@ class Sitengine_Sitemap_Page
 			{
 				$q  = 'SELECT';
 				$q .= ' id,';
-				$q .= ' IF(titleLang'.$translationIndex.'="", titleLang'.$defaultIndex.', titleLang'.$translationIndex.') AS title,';
-				$q .= ' IF(metaKeywordsLang'.$translationIndex.'="", metaKeywordsLang'.$defaultIndex.', metaKeywordsLang'.$translationIndex.') AS metaKeywords,';
-				$q .= ' IF(metaDescriptionLang'.$translationIndex.'="", metaDescriptionLang'.$defaultIndex.', metaDescriptionLang'.$translationIndex.') AS metaDescription';
+				$q .= ' IF(titleLang'.$transcriptIndex.'="", titleLang'.$defaultIndex.', titleLang'.$transcriptIndex.') AS title,';
+				$q .= ' IF(metaKeywordsLang'.$transcriptIndex.'="", metaKeywordsLang'.$defaultIndex.', metaKeywordsLang'.$transcriptIndex.') AS metaKeywords,';
+				$q .= ' IF(metaDescriptionLang'.$transcriptIndex.'="", metaDescriptionLang'.$defaultIndex.', metaDescriptionLang'.$transcriptIndex.') AS metaDescription';
 				$q .= ' FROM '.$this->_table;
 				$q .= ' WHERE keyword = "'.$keywords[$x].'"';
 				$q .= ' AND pid = "'.$itemId.'"';
@@ -135,7 +135,7 @@ class Sitengine_Sitemap_Page
     
     
     
-    protected function _fetchSnippets($pid, $translationIndex, $defaultIndex, $obfuscateEmail)
+    protected function _fetchSnippets($pid, $transcriptIndex, $defaultIndex, $obfuscateEmail)
     {
     	try {
     		require_once 'Sitengine/String.php';
@@ -146,7 +146,7 @@ class Sitengine_Sitemap_Page
 			$q  = 'SELECT';
 			$q .= ' id,';
 			$q .= ' keyword,';
-			$q .= ' IF(htmlLang'.$translationIndex.' = "", htmlLang'.$defaultIndex.', htmlLang'.$translationIndex.') AS html';
+			$q .= ' IF(htmlLang'.$transcriptIndex.' = "", htmlLang'.$defaultIndex.', htmlLang'.$transcriptIndex.') AS html';
 			$q .= ' FROM '.$this->_table;
 			$q .= ' WHERE pid = "'.$pid.'"';
 			$q .= ' AND type = "'.Sitengine_Sitemap::ITEMTYPE_SNIPPET.'"';

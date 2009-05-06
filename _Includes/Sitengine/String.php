@@ -334,5 +334,6 @@ abstract class Sitengine_String
 			return $string;
 		}
 	}
+	
 }
 ?>

@@ -358,7 +358,7 @@ abstract class Sitengine_Sitemap_Backend_ViewHelper extends Sitengine_View {
 			$clause  = '(';
 			$clause .= ' LOWER(keyword) LIKE LOWER("%'.$value.'%")';
 			$clause .= ' OR LOWER(file1OriginalSource) LIKE LOWER("%'.$value.'%")';
-			foreach($this->_controller->getTranslations()->get() as $index => $symbol) {
+			foreach($this->_controller->getTranscripts()->get() as $index => $symbol) {
 				#$clause .= ' OR LOWER(titleLang'.$index.') LIKE LOWER("%'.$value.'%")';
 				$clause .= ' OR LOWER(htmlLang'.$index.') LIKE LOWER("%'.$value.'%")';
 				$clause .= ' OR LOWER(metaKeywordsLang'.$index.') LIKE LOWER("%'.$value.'%")';
@@ -413,7 +413,7 @@ abstract class Sitengine_Sitemap_Backend_ViewHelper extends Sitengine_View {
 			$clause  = '(';
 			$clause .= ' LOWER(keyword) LIKE LOWER("%'.$value.'%")';
 			$clause .= ' OR LOWER(file1OriginalSource) LIKE LOWER("%'.$value.'%")';
-			foreach($this->_controller->getTranslations()->get() as $index => $symbol) {
+			foreach($this->_controller->getTranscripts()->get() as $index => $symbol) {
 				#$clause .= ' OR LOWER(titleLang'.$index.') LIKE LOWER("%'.$value.'%")';
 				$clause .= ' OR LOWER(htmlLang'.$index.') LIKE LOWER("%'.$value.'%")';
 				$clause .= ' OR LOWER(metaKeywordsLang'.$index.') LIKE LOWER("%'.$value.'%")';

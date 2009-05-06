@@ -21,11 +21,19 @@ require_once 'Sitengine/Controller/Action.php';
 abstract class Sitengine_Error_Controller extends Sitengine_Controller_Action
 {
     
-    const ACTION_NOT_FOUND = 'notFoundError';
-    const ACTION_BAD_REQUEST = 'badRequestError';
-    const ACTION_INTERNAL = 'internalError';
-    const ACTION_UNAUTHORIZED = 'unauthorizedError';
-    const ACTION_NOT_SUPPORTED = 'notSupportedError';
+    const ACTION_BAD_REQUEST = '_badRequest'; # 400
+    const ACTION_FORBIDDEN = '_forbidden'; # 401
+    const ACTION_NOT_FOUND = '_notFound'; # 404
+    const ACTION_METHOD_NOT_SUPPORTED = '_methodNotSupported'; # 405
+    const ACTION_INTERNAL_SERVER_ERROR = '_internalServerError'; # 500
+    const ACTION_NOT_IMPLEMENTED = '_notImplemented'; # 501
+    
+    const BAD_REQUEST = 400;
+    const NOT_FOUND = 404;
+    const FORBIDDEN = 401;
+    const METHOD_NOT_SUPPORTED = 405;
+    const INTERNAL_SERVER_ERROR = 500;
+    const NOT_IMPLEMENTED = 501;
 	
 	
 	protected $_started = false;
@@ -171,9 +179,57 @@ abstract class Sitengine_Error_Controller extends Sitengine_Controller_Action
     }
     
     
+    
     public function __call($handler, $args)
     {
-    	$errors = $this->_getParam('error_handler');
+		if($this->getResponse()->isException())
+		{
+			$exceptions = $this->getResponse()->getException();
+			
+			/*
+			if(count($exceptions))
+			{
+				print 'num exceptions: '.count($exceptions).'<br />';
+				print 'code: '.$exceptions[0]->getCode().'<br />';
+				print 'message: '.$exceptions[0]->getMessage().'<br />';
+			}
+			*/
+			
+			if($exceptions[0] instanceof Sitengine_Error_Exception_400)
+			{
+				return $this->_goToAction(self::ACTION_BAD_REQUEST);
+			}
+			
+			if($exceptions[0] instanceof Sitengine_Error_Exception_401)
+			{
+				return $this->_goToAction(self::ACTION_FORBIDDEN);
+			}
+			
+			if($exceptions[0] instanceof Sitengine_Error_Exception_404)
+			{
+				return $this->_goToAction(self::ACTION_NOT_FOUND);
+			}
+			
+			if($exceptions[0] instanceof Sitengine_Error_Exception_405)
+			{
+				return $this->_goToAction(self::ACTION_METHOD_NOT_SUPPORTED);
+			}
+			
+			if($exceptions[0] instanceof Sitengine_Error_Exception_500)
+			{
+				return $this->_goToAction(self::ACTION_INTERNAL_SERVER_ERROR);
+			}
+			
+			if($exceptions[0] instanceof Sitengine_Error_Exception_501)
+			{
+				return $this->_goToAction(self::ACTION_NOT_IMPLEMENTED);
+			}
+		}
+		
+		return $this->_goToAction(self::ACTION_INTERNAL_SERVER_ERROR);
+		
+		/*
+		$errors = $this->_getParam('error_handler');
 		require_once 'Zend/Controller/Plugin/ErrorHandler.php';
 		
     	if(
@@ -181,30 +237,34 @@ abstract class Sitengine_Error_Controller extends Sitengine_Controller_Action
     		(isset($errors->type) && $errors->type == Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_CONTROLLER) ||
     		(isset($errors->type) && $errors->type == Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_ACTION)
     	) {
-    		return $this->_notFoundErrorAction();
+    		return $this->_notFoundAction();
     	}
     	else if(preg_match('/^'.self::ACTION_BAD_REQUEST.'\w*$/i', $handler)) {
-    		return $this->_badRequestErrorAction();
+    		return $this->_badRequestAction();
     	}
-    	else if(preg_match('/^'.self::ACTION_UNAUTHORIZED.'\w*$/i', $handler)) {
-    		return $this->_unauthorizedErrorAction();
+    	else if(preg_match('/^'.self::ACTION_FORBIDDEN.'\w*$/i', $handler)) {
+    		return $this->_forbiddenAction();
     	}
-    	else if(preg_match('/^'.self::ACTION_NOT_SUPPORTED.'\w*$/i', $handler)) {
-    		return $this->_notSupportedErrorAction();
+    	else if(preg_match('/^'.self::ACTION_METHOD_NOT_SUPPORTED.'\w*$/i', $handler)) {
+    		return $this->_methodNotSupportedAction();
+    	}
+    	else if(preg_match('/^'.self::ACTION_NOT_IMPLEMENTED.'\w*$/i', $handler)) {
+    		return $this->_notImplementedAction();
     	}
     	else {
-    		return $this->_internalErrorAction();
+    		return $this->_internalServerErrorAction();
     	}
+    	*/
     }
     
     
-    protected function _badRequestErrorAction()
+    protected function _badRequestAction()
     {
     	try {
     		$this->_start();
     		$this->getStatus()->set(
-				Sitengine_Env::STATUS_BADREQUEST,
-				$this->getTranslate()->translate(Sitengine_Env::STATUS_BADREQUEST),
+				Sitengine_Env::STATUS_BAD_REQUEST,
+				$this->getTranslate()->translate(Sitengine_Env::STATUS_BAD_REQUEST),
 				true
 			);
 			$view = $this->_getIndexViewInstance();
@@ -215,7 +275,7 @@ abstract class Sitengine_Error_Controller extends Sitengine_Controller_Action
     		$view->build()->batchAssign($view->getData());
     		$body  = $view->render(basename($this->_templateIndexView));
 			$this->getResponse()->setBody($body);
-			$this->getResponse()->setHttpResponseCode(500);
+			$this->getResponse()->setHttpResponseCode(400);
 			$this->getResponse()->sendResponse();
 		}
 		catch (Exception $exception) {
@@ -225,13 +285,14 @@ abstract class Sitengine_Error_Controller extends Sitengine_Controller_Action
     }
     
     
-    protected function _internalErrorAction()
+    
+    protected function _forbiddenAction()
     {
     	try {
     		$this->_start();
     		$this->getStatus()->set(
-				Sitengine_Env::STATUS_ERROR,
-				$this->getTranslate()->translate(Sitengine_Env::STATUS_ERROR),
+				Sitengine_Env::STATUS_FORBIDDEN,
+				$this->getTranslate()->translate(Sitengine_Env::STATUS_FORBIDDEN),
 				true
 			);
 			$view = $this->_getIndexViewInstance();
@@ -242,23 +303,24 @@ abstract class Sitengine_Error_Controller extends Sitengine_Controller_Action
     		$view->build()->batchAssign($view->getData());
     		$body  = $view->render(basename($this->_templateIndexView));
 			$this->getResponse()->setBody($body);
-			$this->getResponse()->setHttpResponseCode(500);
+			$this->getResponse()->setHttpResponseCode(401);
 			$this->getResponse()->sendResponse();
 		}
 		catch (Exception $exception) {
             require_once 'Sitengine/Error/Exception.php';
-            throw new Sitengine_Error_Exception('internal action error', $exception);
+            throw new Sitengine_Error_Exception('not found action error', $exception);
         }
     }
     
     
-    protected function _notFoundErrorAction()
+    
+    protected function _notFoundAction()
     {
     	try {
     		$this->_start();
     		$this->getStatus()->set(
-				Sitengine_Env::STATUS_NOTFOUND,
-				$this->getTranslate()->translate(Sitengine_Env::STATUS_NOTFOUND),
+				Sitengine_Env::STATUS_NOT_FOUND,
+				$this->getTranslate()->translate(Sitengine_Env::STATUS_NOT_FOUND),
 				true
 			);
 			$view = $this->_getIndexViewInstance();
@@ -280,13 +342,14 @@ abstract class Sitengine_Error_Controller extends Sitengine_Controller_Action
     }
     
     
-    protected function _unauthorizedErrorAction()
+    
+    protected function _methodNotSupportedAction()
     {
     	try {
     		$this->_start();
     		$this->getStatus()->set(
-				Sitengine_Env::STATUS_UNAUTHORIZED,
-				$this->getTranslate()->translate(Sitengine_Env::STATUS_UNAUTHORIZED),
+				Sitengine_Env::STATUS_METHOD_NOT_SUPPORTED,
+				$this->getTranslate()->translate(Sitengine_Env::STATUS_METHOD_NOT_SUPPORTED),
 				true
 			);
 			$view = $this->_getIndexViewInstance();
@@ -297,7 +360,7 @@ abstract class Sitengine_Error_Controller extends Sitengine_Controller_Action
     		$view->build()->batchAssign($view->getData());
     		$body  = $view->render(basename($this->_templateIndexView));
 			$this->getResponse()->setBody($body);
-			$this->getResponse()->setHttpResponseCode(401);
+			$this->getResponse()->setHttpResponseCode(405);
 			$this->getResponse()->sendResponse();
 		}
 		catch (Exception $exception) {
@@ -307,13 +370,14 @@ abstract class Sitengine_Error_Controller extends Sitengine_Controller_Action
     }
     
     
-    protected function _notSupportedErrorAction()
+    
+    protected function _internalServerErrorAction()
     {
     	try {
     		$this->_start();
     		$this->getStatus()->set(
-				Sitengine_Env::STATUS_NOT_SUPPORTED,
-				$this->getTranslate()->translate(Sitengine_Env::STATUS_NOT_SUPPORTED),
+				Sitengine_Env::STATUS_INTERNAL_SERVER_ERROR,
+				$this->getTranslate()->translate(Sitengine_Env::STATUS_INTERNAL_SERVER_ERROR),
 				true
 			);
 			$view = $this->_getIndexViewInstance();
@@ -325,6 +389,34 @@ abstract class Sitengine_Error_Controller extends Sitengine_Controller_Action
     		$body  = $view->render(basename($this->_templateIndexView));
 			$this->getResponse()->setBody($body);
 			$this->getResponse()->setHttpResponseCode(500);
+			$this->getResponse()->sendResponse();
+		}
+		catch (Exception $exception) {
+            require_once 'Sitengine/Error/Exception.php';
+            throw new Sitengine_Error_Exception('internal action error', $exception);
+        }
+    }
+    
+    
+    
+    protected function _notImplementedAction()
+    {
+    	try {
+    		$this->_start();
+    		$this->getStatus()->set(
+				Sitengine_Env::STATUS_NOT_IMPLEMENTED,
+				$this->getTranslate()->translate(Sitengine_Env::STATUS_NOT_IMPLEMENTED),
+				true
+			);
+			$view = $this->_getIndexViewInstance();
+        	$view->translate()->setTranslator($this->getTranslate()->getAdapter());
+        	$view->setHelperPath($this->getEnv()->getIncludesDir());
+    		$view->setScriptPath(dirname($this->_templateIndexView));
+    		$view->doctype()->setDoctype(Zend_View_Helper_Doctype::XHTML1_STRICT);
+    		$view->build()->batchAssign($view->getData());
+    		$body  = $view->render(basename($this->_templateIndexView));
+			$this->getResponse()->setBody($body);
+			$this->getResponse()->setHttpResponseCode(501);
 			$this->getResponse()->sendResponse();
 		}
 		catch (Exception $exception) {

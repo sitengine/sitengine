@@ -60,10 +60,11 @@ abstract class Sitengine_Controller_Front extends Zend_Controller_Front
 				#print 'PathInfo: '.$this->_request->getPathInfo().'<br />';
 				
 				
-				require_once 'Zend/Controller/Response/Http.php';
-				$this->_response = new Zend_Controller_Response_Http();
+				require_once 'Sitengine/Controller/Response/Http.php';
+				$this->_response = new Sitengine_Controller_Response_Http();
 				
-				if($this->_env->getDebugControl()) {
+				if($this->_env->getDebugControl())
+				{
 					$this->throwExceptions(true);
 					$this->_response->renderExceptions(true);
 				}
@@ -219,7 +220,8 @@ abstract class Sitengine_Controller_Front extends Zend_Controller_Front
 	)
     {
     	try {
-    		if($this->_started) {
+    		if($this->_started)
+    		{
     			return parent::dispatch($request, $response);
     		}
     		else {

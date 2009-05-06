@@ -24,11 +24,12 @@
 	<item name="viewFormPermissionSectionUpdate">Aktualisieren</item>
 	<item name="viewFormPermissionSectionDelete">Löschen</item>
 	<item name="viewFormPermissionSectionWorld">Jedermann</item>
-	<item name="statusUnauthorized">Authorisierung erforderlich</item>
+	<item name="statusForbidden">Authorisierung erforderlich</item>
 	<item name="statusNotFound">Das verlangte Dokument konnte nicht gefunden werden</item>
 	<item name="statusBadRequest">Ungültige Anfrage</item>
-	<item name="statusError">Ein Systemfehler ist aufgetreten</item>
-	<item name="statusNotSupported">Diese Funktion ist nicht unterstützt</item>
+	<item name="statusInternalServerError">Ein Systemfehler ist aufgetreten</item>
+	<item name="statusMethodNotSupported">Diese Funktion ist nicht unterstützt</item>
+	<item name="statusNotImplemented">Diese Funktion ist nicht implementiert</item>
 	<item name="statusErrorInput">Eingabefehler</item>
 	<item name="statusOkInput">Eingaben Ok</item>
 	<item name="statusErrorImport">Datei konnte nicht importiert werden</item>

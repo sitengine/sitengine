@@ -175,7 +175,7 @@ abstract class Sitengine_Permiso_Backend_Users_Memberships_ViewHelper extends Si
     {
     	$data = array();
 		$breadcrumbs = $this->_controller->getEntity()->getBreadcrumbs();
-        $table = $this->_controller->getFrontController()->getPermisoPackage()->getUsersTable();
+        $table = $this->_controller->getFrontController()->getPermiso()->getUsersTable();
         $user = $table->complementRow($breadcrumbs['user']);
         
         
@@ -212,7 +212,7 @@ abstract class Sitengine_Permiso_Backend_Users_Memberships_ViewHelper extends Si
         if($breadcrumbs['membership'] !== null)
         {
         	#Sitengine_Debug::print_r($breadcrumbs['membership']);
-        	$table = $this->_controller->getFrontController()->getPermisoPackage()->getMembershipsTable();
+        	$table = $this->_controller->getFrontController()->getPermiso()->getMembershipsTable();
         	$membership = $table->complementRow($breadcrumbs['membership']);
         	
             $args = array(

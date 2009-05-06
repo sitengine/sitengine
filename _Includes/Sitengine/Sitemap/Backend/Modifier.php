@@ -39,8 +39,8 @@ abstract class Sitengine_Sitemap_Backend_Modifier
     {
         $this->_controller = $controller;
         
-        require_once 'Sitengine/Form/TranslationPayloads.php';
-        $this->_payloads = new Sitengine_Form_TranslationPayloads($this->_controller->getTranslations());
+        require_once 'Sitengine/Form/TranscriptsPayloads.php';
+        $this->_payloads = new Sitengine_Form_TranscriptsPayloads($this->_controller->getTranscripts());
     }
     
     
@@ -75,9 +75,9 @@ abstract class Sitengine_Sitemap_Backend_Modifier
 				self::FIELDS_ONOFF => $fieldsOnOffDefault
 			);
 			
-			foreach($this->_controller->getTranslations()->get() as $index => $symbol)
+			foreach($this->_controller->getTranscripts()->get() as $index => $symbol)
 			{
-				$payloadName = $this->_payloads->makeTranslationName($symbol);
+				$payloadName = $this->_payloads->makeTranscriptName($symbol);
 				$fields[$payloadName] = array(
 					self::FIELDS_NORMAL => array(
 						#'titleLang'.$index => '',
@@ -103,9 +103,9 @@ abstract class Sitengine_Sitemap_Backend_Modifier
 				self::FIELDS_ONOFF => $fieldsOnOffDefault
 			);
 			
-			foreach($this->_controller->getTranslations()->get() as $index => $symbol)
+			foreach($this->_controller->getTranscripts()->get() as $index => $symbol)
 			{
-				$payloadName = $this->_payloads->makeTranslationName($symbol);
+				$payloadName = $this->_payloads->makeTranscriptName($symbol);
 				$fields[$payloadName] = array(
 					self::FIELDS_NORMAL => array(
 						'titleLang'.$index => '',

@@ -162,7 +162,7 @@ abstract class Sitengine_Newsletter_Backend_Campaigns_Attachments_Modifier
 			
             $data = array_merge($data, $this->_controller->getFrontController()->getNewsletterPackage()->getAttachmentsTable()->getFileData());
             #Sitengine_Debug::print_r($data);
-            $insertId = $this->_controller->getFrontController()->getNewsletterPackage()->getAttachmentsTable()->insert($data);
+            $insertId = $this->_controller->getFrontController()->getNewsletterPackage()->getAttachmentsTable()->insertOrRollback($data);
             if(!$insertId)
             {
             	$error = $this->_controller->getFrontController()->getNewsletterPackage()->getAttachmentsTable()->getError();
@@ -231,7 +231,7 @@ abstract class Sitengine_Newsletter_Backend_Campaigns_Attachments_Modifier
 			### statically set permissions ###
             
             $where = $this->_controller->getDatabase()->quoteInto('id = ?', $id);
-            $affectedRows = $this->_controller->getFrontController()->getNewsletterPackage()->getAttachmentsTable()->update($data, $where);
+            $affectedRows = $this->_controller->getFrontController()->getNewsletterPackage()->getAttachmentsTable()->updateOrRollback($data, $where);
             if(!$affectedRows)
             {
             	$error = $this->_controller->getFrontController()->getNewsletterPackage()->getAttachmentsTable()->getError();
@@ -322,7 +322,7 @@ abstract class Sitengine_Newsletter_Backend_Campaigns_Attachments_Modifier
             );
             require_once 'Sitengine/Sql.php';
     		$where = Sitengine_Sql::getWhereStatement($whereClauses, false);
-            return $this->_controller->getFrontController()->getNewsletterPackage()->getAttachmentsTable()->update($data, $where);
+            return $this->_controller->getFrontController()->getNewsletterPackage()->getAttachmentsTable()->updateOrRollback($data, $where);
         }
         catch (Exception $exception) {
             require_once 'Sitengine/Newsletter/Backend/Campaigns/Attachments/Exception.php';

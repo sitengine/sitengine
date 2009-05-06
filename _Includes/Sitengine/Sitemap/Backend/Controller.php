@@ -68,7 +68,7 @@ abstract class Sitengine_Sitemap_Backend_Controller extends Sitengine_Controller
     protected $_permiso = null;
     protected $_namespace = null;
     protected $_translate = null;
-    protected $_translations = null;
+    protected $_transcripts = null;
     protected $_entity = null;
     protected $_markedRows = array();
     protected $_templateIndexView = null;
@@ -89,7 +89,7 @@ abstract class Sitengine_Sitemap_Backend_Controller extends Sitengine_Controller
     public function getPermiso() { return $this->_permiso; }
     public function getNamespace() { return $this->_namespace; }
     public function getTranslate() { return $this->_translate; }
-    public function getTranslations() { return $this->_translations; }
+    public function getTranscripts() { return $this->_transcripts; }
     public function getEntity() { return $this->_entity; }
     public function getMarkedRows() { return $this->_markedRows; }
     
@@ -165,9 +165,9 @@ abstract class Sitengine_Sitemap_Backend_Controller extends Sitengine_Controller
 			require_once 'Sitengine/Env/Preferences.php';
 			$this->_preferences = Sitengine_Env_Preferences::getInstance();
 			$this->_locale = $this->getEnv()->getLocaleInstance();
-			$this->_permiso = $this->getFrontController()->getPermisoPackage()->start($this->getDatabase());
+			$this->_permiso = $this->getFrontController()->getPermiso()->start($this->getDatabase());
         	$this->_translate = $this->_getTranslateInstance();
-        	$this->_translations = $this->_getTranslationsInstance();
+        	$this->_transcripts = $this->_getTranscriptsInstance();
         	$this->_entity = $this->_getEntityModelInstance();
 			require_once 'Zend/Session/Namespace.php';
     		$this->_namespace = new Zend_Session_Namespace(get_class($this));
@@ -255,10 +255,10 @@ abstract class Sitengine_Sitemap_Backend_Controller extends Sitengine_Controller
     
     
     
-    protected function _getTranslationsInstance()
+    protected function _getTranscriptsInstance()
     {
-    	require_once 'Sitengine/Translations.php';
-    	return new Sitengine_Translations(
+    	require_once 'Sitengine/Transcripts.php';
+    	return new Sitengine_Transcripts(
     		array(
     			Sitengine_Env::LANGUAGE_EN,
     			#Sitengine_Env::LANGUAGE_DE,
@@ -315,9 +315,9 @@ abstract class Sitengine_Sitemap_Backend_Controller extends Sitengine_Controller
 					Sitengine_Env::PARAM_LANGUAGE
 				);
 				
-				$this->getPreferences()->establishTranslation(
+				$this->getPreferences()->establishTranscript(
 					$this->getRequest(),
-					Sitengine_Env::PARAM_TRANSLATION
+					Sitengine_Env::PARAM_TRANSCRIPT
 				);
 				
 				$this->getPreferences()->establishItemsPerPage(
@@ -432,21 +432,20 @@ abstract class Sitengine_Sitemap_Backend_Controller extends Sitengine_Controller
 			case Sitengine_Env::ERROR_BAD_REQUEST:
 				$handler = Sitengine_Error_Controller::ACTION_BAD_REQUEST;
 				break;
-			case Sitengine_Env::ERROR_UNAUTHORIZED:
-				$handler = Sitengine_Error_Controller::ACTION_UNAUTHORIZED;
+			case Sitengine_Env::ERROR_FORBIDDEN:
+				$handler = Sitengine_Error_Controller::ACTION_FORBIDDEN;
 				break;
-			case Sitengine_Env::ERROR_NOT_SUPPORTED:
-				$handler = Sitengine_Error_Controller::ACTION_NOT_SUPPORTED;
+			case Sitengine_Env::ERROR_NOT_IMPLEMENTED:
+				$handler = Sitengine_Error_Controller::ACTION_NOT_IMPLEMENTED;
 				break;
 			default:
-				$handler = Sitengine_Error_Controller::ACTION_INTERNAL;
+				$handler = Sitengine_Error_Controller::ACTION_INTERNAL_SERVER_ERROR;
 		}
 		
 		$pluginClass = 'Zend_Controller_Plugin_ErrorHandler';
 		if($this->getFrontController()->hasPlugin($pluginClass))
 		{
-			$plugin = $this->getFrontController()->getPlugin($pluginClass);
-			$plugin->setErrorHandlerAction($handler);
+			$this->getFrontController()->getPlugin($pluginClass)->setErrorHandlerAction($handler);
 		}
 		return $exception;
     }

@@ -18,7 +18,7 @@
 require_once 'Zend/View.php';
 
 
-abstract class Sitengine_View extends Zend_View
+class Sitengine_View extends Zend_View
 {
     
     /*
@@ -30,6 +30,21 @@ abstract class Sitengine_View extends Zend_View
         $this->_sections[$name] = $data;
     }
    	*/
+   	
+   	
+   	protected $_controller = null;
+   	
+   	
+   	public function setController(Sitengine_Controller_Action $controller)
+   	{
+   		$this->_controller = $controller;
+   	}
+   	
+   	
+   	public function getController()
+   	{
+   		return $this->_controller;
+   	}
     
     
     

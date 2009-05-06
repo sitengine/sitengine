@@ -73,14 +73,14 @@ abstract class Sitengine_Permiso_Binaries_Users_Controller extends Sitengine_Con
 			);
 			
 			$this->getEnv()->startSession($this->getDatabase());
-			$this->getFrontController()->getPermisoPackage()->start($this->getDatabase());
+			$this->getFrontController()->getPermiso()->start($this->getDatabase());
 			
 			require_once 'Sitengine/Status.php';
 			$this->_status = Sitengine_Status::getInstance();
 			require_once 'Sitengine/Env/Preferences.php';
 			$this->_preferences = Sitengine_Env_Preferences::getInstance();
 			$this->_locale = $this->getEnv()->getLocaleInstance();
-			$this->_permiso = $this->getFrontController()->getPermisoPackage()->start($this->getDatabase());
+			$this->_permiso = $this->getFrontController()->getPermiso()->start($this->getDatabase());
 			require_once 'Zend/Session/Namespace.php';
     		$this->_namespace = new Zend_Session_Namespace(get_class($this));
         }
@@ -159,9 +159,9 @@ abstract class Sitengine_Permiso_Binaries_Users_Controller extends Sitengine_Con
 					Sitengine_Env::PARAM_LANGUAGE
 				);
 				
-				$this->getPreferences()->establishTranslation(
+				$this->getPreferences()->establishTranscript(
 					$this->getRequest(),
-					Sitengine_Env::PARAM_TRANSLATION
+					Sitengine_Env::PARAM_TRANSCRIPT
 				);
 				
 				$this->getPreferences()->establishItemsPerPage(
@@ -213,7 +213,7 @@ abstract class Sitengine_Permiso_Binaries_Users_Controller extends Sitengine_Con
     public function __call($a, $b)
     {
     	$routeName = $this->getFrontController()->getRouter()->getCurrentRouteName();
-    	$method = $this->getRequest()->getMethod();
+    	$method = $this->getRequest()->getIntendedMethod();
     	$action = null;
     	
     	switch($method) {
@@ -222,8 +222,8 @@ abstract class Sitengine_Permiso_Binaries_Users_Controller extends Sitengine_Con
     	if($action === null) {
     		require_once 'Sitengine/Permiso/Binaries/Users/Exception.php';
     		$exception = new Sitengine_Permiso_Binaries_Users_Exception(
-    			'method not supported',
-    			Sitengine_Env::ERROR_NOT_SUPPORTED
+    			"'$method' not supported on route '$route'",
+    			Sitengine_Env::ERROR_NOT_IMPLEMENTED
     		);
     		throw $this->_prepareErrorHandler($exception);
     	}
@@ -250,21 +250,20 @@ abstract class Sitengine_Permiso_Binaries_Users_Controller extends Sitengine_Con
 			case Sitengine_Env::ERROR_BAD_REQUEST:
 				$handler = Sitengine_Error_Controller::ACTION_BAD_REQUEST;
 				break;
-			case Sitengine_Env::ERROR_UNAUTHORIZED:
-				$handler = Sitengine_Error_Controller::ACTION_UNAUTHORIZED;
+			case Sitengine_Env::ERROR_FORBIDDEN:
+				$handler = Sitengine_Error_Controller::ACTION_FORBIDDEN;
 				break;
-			case Sitengine_Env::ERROR_NOT_SUPPORTED:
-				$handler = Sitengine_Error_Controller::ACTION_NOT_SUPPORTED;
+			case Sitengine_Env::ERROR_NOT_IMPLEMENTED:
+				$handler = Sitengine_Error_Controller::ACTION_NOT_IMPLEMENTED;
 				break;
 			default:
-				$handler = Sitengine_Error_Controller::ACTION_INTERNAL;
+				$handler = Sitengine_Error_Controller::ACTION_INTERNAL_SERVER_ERROR;
 		}
 			
 		$pluginClass = 'Zend_Controller_Plugin_ErrorHandler';
 		if($this->getFrontController()->hasPlugin($pluginClass))
 		{
-			$plugin = $this->getFrontController()->getPlugin($pluginClass);
-			$plugin->setErrorHandlerAction($handler);
+			$this->getFrontController()->getPlugin($pluginClass)->setErrorHandlerAction($handler);
 		}
 		return $exception;
     }
@@ -275,18 +274,18 @@ abstract class Sitengine_Permiso_Binaries_Users_Controller extends Sitengine_Con
     {
     	try {
     		$this->_start();
-    		if(!$this->getPermiso()->getAcl()->privateAccessGranted($this->getFrontController()->getPermisoPackage()->getAuthorizedGroups())) {
+    		if(!$this->getPermiso()->getAcl()->privateAccessGranted($this->getFrontController()->getPermiso()->getAuthorizedGroups())) {
 				require_once 'Sitengine/Permiso/Binaries/Users/Exception.php';
 				throw new Sitengine_Permiso_Binaries_Users_Exception(
 					'unauthorized',
-					Sitengine_Env::ERROR_UNAUTHORIZED
+					Sitengine_Env::ERROR_FORBIDDEN
 				);
 			}
 			
     		$id = $this->getRequest()->get(Sitengine_Env::PARAM_ID);
     		$fileId = $this->getRequest()->get(Sitengine_Env::PARAM_FILE);
     		
-            $table = $this->getFrontController()->getPermisoPackage()->getUsersTable();
+            $table = $this->getFrontController()->getPermiso()->getUsersTable();
             $select = $table->select()->where('id = ?', $id);
         	$row = $table->fetchRow($select);
         	if($row === null)

@@ -41,11 +41,11 @@ class Sitengine_Sitemap_Accessor
     
     
     /*
-    public function getSnippet($path, $translationIndex = 0)
+    public function getSnippet($path, $transcriptIndex = 0)
     {
     	try {
     		$defaultIndex = 0;
-    		return $this->_fetchSnippet($path, $translationIndex, $defaultIndex);
+    		return $this->_fetchSnippet($path, $transcriptIndex, $defaultIndex);
 		}
 		catch(Exception $exception) {
 			require_once 'Sitengine/Sitemap/Exception.php';
@@ -55,11 +55,11 @@ class Sitengine_Sitemap_Accessor
     */
     
     
-    public function getPage($path, $translationIndex = 0)
+    public function getPage($path, $transcriptIndex = 0)
     {
     	try {
     		$defaultIndex = 0;
-    		$page = $this->_fetchPage($path, $translationIndex, $defaultIndex);
+    		$page = $this->_fetchPage($path, $transcriptIndex, $defaultIndex);
     		$page['title'] = (isset($page['title'])) ? $page['title'] : null;
     		$page['metaKeywords'] = (isset($page['metaKeywords'])) ? $page['metaKeywords'] : null;
     		$page['metaDescription'] = (isset($page['metaDescription'])) ? $page['metaDescription'] : null;
@@ -67,7 +67,7 @@ class Sitengine_Sitemap_Accessor
 			$page['FILES'] = array();
 			
     		if(isset($page['id'])) {
-    			$page['SNIPPETS'] = $this->_fetchSnippets($page['id'], $translationIndex, $defaultIndex);
+    			$page['SNIPPETS'] = $this->_fetchSnippets($page['id'], $transcriptIndex, $defaultIndex);
     			$page['FILES'] = $this->_fetchFiles($page['id']);
     		}
     		unset($page['id']);
@@ -82,7 +82,7 @@ class Sitengine_Sitemap_Accessor
     
     
     
-    protected function _fetchPage($path, $translationIndex, $defaultIndex)
+    protected function _fetchPage($path, $transcriptIndex, $defaultIndex)
     {
     	try {
     		if(array_key_exists($path, $this->_fetches)) {
@@ -98,9 +98,9 @@ class Sitengine_Sitemap_Accessor
 				$q  = 'SELECT';
 				$q .= ' id,';
 				#$q .= ' type,';
-				$q .= ' IF(titleLang'.$translationIndex.'="", titleLang'.$defaultIndex.', titleLang'.$translationIndex.') AS title,';
-				$q .= ' IF(metaKeywordsLang'.$translationIndex.'="", metaKeywordsLang'.$defaultIndex.', metaKeywordsLang'.$translationIndex.') AS metaKeywords,';
-				$q .= ' IF(metaDescriptionLang'.$translationIndex.'="", metaDescriptionLang'.$defaultIndex.', metaDescriptionLang'.$translationIndex.') AS metaDescription';
+				$q .= ' IF(titleLang'.$transcriptIndex.'="", titleLang'.$defaultIndex.', titleLang'.$transcriptIndex.') AS title,';
+				$q .= ' IF(metaKeywordsLang'.$transcriptIndex.'="", metaKeywordsLang'.$defaultIndex.', metaKeywordsLang'.$transcriptIndex.') AS metaKeywords,';
+				$q .= ' IF(metaDescriptionLang'.$transcriptIndex.'="", metaDescriptionLang'.$defaultIndex.', metaDescriptionLang'.$transcriptIndex.') AS metaDescription';
 				$q .= ' FROM '.$this->_table;
 				$q .= ' WHERE keyword = "'.$keywords[$x].'"';
 				$q .= ' AND pid = "'.$itemId.'"';
@@ -129,7 +129,7 @@ class Sitengine_Sitemap_Accessor
     
     
     /*
-    protected function _fetchSnippet($path, $translationIndex, $defaultIndex)
+    protected function _fetchSnippet($path, $transcriptIndex, $defaultIndex)
     {
     	try {
     		if(array_key_exists($path, $this->_fetches)) {
@@ -145,7 +145,7 @@ class Sitengine_Sitemap_Accessor
 				$q  = 'SELECT';
 				$q .= ' id,';
 				#$q .= ' type,';
-				$q .= ' IF(htmlLang'.$translationIndex.'="", htmlLang'.$defaultIndex.', htmlLang'.$translationIndex.') AS html';
+				$q .= ' IF(htmlLang'.$transcriptIndex.'="", htmlLang'.$defaultIndex.', htmlLang'.$transcriptIndex.') AS html';
 				$q .= ' FROM '.$this->_table;
 				$q .= ' WHERE keyword = "'.$keywords[$x].'"';
 				$q .= ' AND pid = "'.$itemId.'"';
@@ -160,7 +160,7 @@ class Sitengine_Sitemap_Accessor
 					if($x == sizeof($keywords)-1) {
 						#Sitengine_Debug::print_r($item['html']);
 						$this->_fetches[$path] = $item['html'];
-						return $this->_parseSnippet($item['html'], $translationIndex, $defaultIndex);
+						return $this->_parseSnippet($item['html'], $transcriptIndex, $defaultIndex);
 					}
 					else { $itemId = $item['id']; }
 				}
@@ -175,7 +175,7 @@ class Sitengine_Sitemap_Accessor
     */
     
     
-    protected function _fetchSnippets($pid, $translationIndex, $defaultIndex)
+    protected function _fetchSnippets($pid, $transcriptIndex, $defaultIndex)
     {
     	try {
     		require_once 'Sitengine/Sitemap.php';
@@ -185,7 +185,7 @@ class Sitengine_Sitemap_Accessor
 			$q .= ' id,';
 			#$q .= ' type,';
 			$q .= ' keyword,';
-			$q .= ' IF(htmlLang'.$translationIndex.'="", htmlLang'.$defaultIndex.', htmlLang'.$translationIndex.') AS html';
+			$q .= ' IF(htmlLang'.$transcriptIndex.'="", htmlLang'.$defaultIndex.', htmlLang'.$transcriptIndex.') AS html';
 			$q .= ' FROM '.$this->_table;
 			$q .= ' WHERE pid = "'.$pid.'"';
 			$q .= ' AND type = "'.Sitengine_Sitemap::ITEMTYPE_SNIPPET.'"';
@@ -196,7 +196,7 @@ class Sitengine_Sitemap_Accessor
 			$result = $statement->fetchAll(Zend_Db::FETCH_ASSOC);
 			
 			foreach($result as $snippet) {
-				$snippets[$snippet['keyword']] = $this->_parseSnippet($snippet['html'], $translationIndex, $defaultIndex);
+				$snippets[$snippet['keyword']] = $this->_parseSnippet($snippet['html'], $transcriptIndex, $defaultIndex);
 			}
 			#Sitengine_Debug::print_r($snippets);
 			return $snippets;
@@ -209,7 +209,7 @@ class Sitengine_Sitemap_Accessor
     
     
     
-    protected function _parseSnippet($s, $translationIndex, $defaultIndex)
+    protected function _parseSnippet($s, $transcriptIndex, $defaultIndex)
     {
     	$find = array();
     	$replace = array();
@@ -225,7 +225,7 @@ class Sitengine_Sitemap_Accessor
     				if(!array_search('/%'.$path.'%/', $find))
     				{
     					$find[] = '/%'.preg_replace('/\//', '\/', $path).'%/';
-						$replace[] = $this->_fetchSnippet($path, $translationIndex, $defaultIndex);
+						$replace[] = $this->_fetchSnippet($path, $transcriptIndex, $defaultIndex);
     				}
     			}
     		}

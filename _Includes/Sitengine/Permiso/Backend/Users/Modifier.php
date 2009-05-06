@@ -89,7 +89,7 @@ abstract class Sitengine_Permiso_Backend_Users_Modifier
             	return null;
             }
             
-            $this->_controller->getFrontController()->getPermisoPackage()->getUsersTable()->handleInsertUploads($id);
+            $this->_controller->getFrontController()->getPermiso()->getUsersTable()->handleInsertUploads($id);
             
             foreach($fields as $k => $v)
             {
@@ -108,12 +108,12 @@ abstract class Sitengine_Permiso_Backend_Users_Modifier
             # encrypt password
             $data['password'] = md5($password);
             
-            $data = array_merge($data, $this->_controller->getFrontController()->getPermisoPackage()->getUsersTable()->getFileData());
+            $data = array_merge($data, $this->_controller->getFrontController()->getPermiso()->getUsersTable()->getFileData());
             #Sitengine_Debug::print_r($data);
-            $insertId = $this->_controller->getFrontController()->getPermisoPackage()->getUsersTable()->insert($data);
+            $insertId = $this->_controller->getFrontController()->getPermiso()->getUsersTable()->insertOrRollback($data);
             if(!$insertId)
             {
-            	$error = $this->_controller->getFrontController()->getPermisoPackage()->getUsersTable()->getError();
+            	$error = $this->_controller->getFrontController()->getPermiso()->getUsersTable()->getError();
             	if($error === null) { return null; }
             	$message = $this->_controller->getTranslate()->translate('hints'.ucfirst($error));
     			$this->_controller->getStatus()->addHint('record', $message);
@@ -223,7 +223,7 @@ abstract class Sitengine_Permiso_Backend_Users_Modifier
             	return null;
             }
             
-            $this->_controller->getFrontController()->getPermisoPackage()->getUsersTable()->handleUpdateUploads($id, $stored);
+            $this->_controller->getFrontController()->getPermiso()->getUsersTable()->handleUpdateUploads($id, $stored);
             
             foreach($fields as $k => $v)
             {
@@ -234,7 +234,7 @@ abstract class Sitengine_Permiso_Backend_Users_Modifier
             $date = new Zend_Date();
             $date->setTimezone('UTC');
             $data['mdate'] = $date->get('YYYY-MM-dd HH:mm:ss', Sitengine_Env::LANGUAGE_EN);
-            $data = array_merge($data, $this->_controller->getFrontController()->getPermisoPackage()->getUsersTable()->getFileData());
+            $data = array_merge($data, $this->_controller->getFrontController()->getPermiso()->getUsersTable()->getFileData());
             unset($data['id']);
             
             $data['name'] = mb_strtolower($data['name']);
@@ -257,10 +257,10 @@ abstract class Sitengine_Permiso_Backend_Users_Modifier
         	
             #Sitengine_Debug::print_r($data);
     		$where = $this->_controller->getDatabase()->quoteInto('id = ?', $id);
-            $affectedRows = $this->_controller->getFrontController()->getPermisoPackage()->getUsersTable()->update($data, $where);
+            $affectedRows = $this->_controller->getFrontController()->getPermiso()->getUsersTable()->updateOrRollback($data, $where);
             if(!$affectedRows)
             {
-            	$error = $this->_controller->getFrontController()->getPermisoPackage()->getUsersTable()->getError();
+            	$error = $this->_controller->getFrontController()->getPermiso()->getUsersTable()->getError();
             	if($error === null) { return null; }
             	$message = $this->_controller->getTranslate()->translate('hints'.ucfirst($error));
     			$this->_controller->getStatus()->addHint('record', $message);
@@ -407,7 +407,7 @@ abstract class Sitengine_Permiso_Backend_Users_Modifier
             );
             require_once 'Sitengine/Sql.php';
 			$where = Sitengine_Sql::getWhereStatement($whereClauses, false);
-            return $this->_controller->getFrontController()->getPermisoPackage()->getUsersTable()->delete($where);
+            return $this->_controller->getFrontController()->getPermiso()->getUsersTable()->delete($where);
         }
         catch (Exception $exception) {
             require_once 'Sitengine/Permiso/Backend/Users/Exception.php';
@@ -454,7 +454,7 @@ abstract class Sitengine_Permiso_Backend_Users_Modifier
             );
             require_once 'Sitengine/Sql.php';
     		$where = Sitengine_Sql::getWhereStatement($whereClauses, false);
-            return $this->_controller->getFrontController()->getPermisoPackage()->getUsersTable()->update($data, $where);
+            return $this->_controller->getFrontController()->getPermiso()->getUsersTable()->updateOrRollback($data, $where);
         }
         catch (Exception $exception) {
             require_once 'Sitengine/Permiso/Backend/Users/Exception.php';

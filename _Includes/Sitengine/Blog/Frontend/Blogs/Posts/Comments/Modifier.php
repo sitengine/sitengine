@@ -100,7 +100,7 @@ abstract class Sitengine_Blog_Frontend_Blogs_Posts_Comments_Modifier
             #Sitengine_Debug::print_r($data);
             
 			$data['approve'] = 1;
-            $insertId = $this->_controller->getFrontController()->getBlogPackage()->getCommentsTable()->insert($data);
+            $insertId = $this->_controller->getFrontController()->getBlogPackage()->getCommentsTable()->insertOrRollback($data);
             if(!$insertId)
             {
             	$error = $this->_controller->getFrontController()->getBlogPackage()->getCommentsTable()->getError();
@@ -186,7 +186,7 @@ abstract class Sitengine_Blog_Frontend_Blogs_Posts_Comments_Modifier
             );
             require_once 'Sitengine/Sql.php';
     		$where = Sitengine_Sql::getWhereStatement($whereClauses, false);
-            $affectedRows = $this->_controller->getFrontController()->getBlogPackage()->getCommentsTable()->update($data, $where);
+            $affectedRows = $this->_controller->getFrontController()->getBlogPackage()->getCommentsTable()->updateOrRollback($data, $where);
             if(!$affectedRows)
             {
             	$error = $this->_controller->getFrontController()->getBlogPackage()->getCommentsTable()->getError();
@@ -276,7 +276,7 @@ abstract class Sitengine_Blog_Frontend_Blogs_Posts_Comments_Modifier
             );
             require_once 'Sitengine/Sql.php';
     		$where = Sitengine_Sql::getWhereStatement($whereClauses, false);
-            return $this->_controller->getFrontController()->getBlogPackage()->getCommentsTable()->update($data, $where);
+            return $this->_controller->getFrontController()->getBlogPackage()->getCommentsTable()->updateOrRollback($data, $where);
         }
         catch (Exception $exception) {
             require_once 'Sitengine/Blog/Frontend/Blogs/Posts/Comments/Exception.php';

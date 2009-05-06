@@ -28,7 +28,7 @@ class Sitengine_Blog_Files_Table extends Sitengine_Db_TableWithS3Files
     
     
     protected $_blogPackage = null;
-	protected $_translation = null;
+	protected $_transcript = null;
     
     
     
@@ -95,25 +95,25 @@ class Sitengine_Blog_Files_Table extends Sitengine_Db_TableWithS3Files
     
     
     
-    public function getTranslations()
+    public function getTranscripts()
     {
     	require_once 'Sitengine/Env.php';
-        require_once 'Sitengine/Translations.php';
-    	$translations = new Sitengine_Translations(
+        require_once 'Sitengine/Transcripts.php';
+    	$transcripts = new Sitengine_Transcripts(
     		array(
     			Sitengine_Env::LANGUAGE_EN,
     			#Sitengine_Env::LANGUAGE_DE
     		)
     	);
-    	return $translations;
+    	return $transcripts;
     }
     
     
     
     
-    public function setTranslation($language)
+    public function setTranscript($language)
     {
-    	$this->_translation = $language;
+    	$this->_transcript = $language;
     }
     
     
@@ -142,14 +142,14 @@ class Sitengine_Blog_Files_Table extends Sitengine_Db_TableWithS3Files
     public function complementRow(Sitengine_Blog_Files_Row $row)
     {
 		$data = $row->toArray();
-		$translations = $this->getTranslations();
-		$translations->setLanguage($this->_translation);
-		$index = $translations->getIndex();
-		$default = $translations->getDefaultIndex();
+		$transcripts = $this->getTranscripts();
+		$transcripts->setLanguage($this->_transcript);
+		$index = $transcripts->getIndex();
+		$default = $transcripts->getDefaultIndex();
 		
 		$data['title'] = ($data['titleLang'.$index]) ? $data['titleLang'.$index] : $data['titleLang'.$default];
 		$data['markup'] = ($data['markupLang'.$index]) ? $data['markupLang'.$index] : $data['markupLang'.$default];
-		$data['translationMissing'] = (!$data['titleLang'.$index]);
+		$data['transcriptMissing'] = (!$data['titleLang'.$index]);
 		
     	require_once 'Sitengine/Amazon/S3.php';
     	
@@ -445,9 +445,9 @@ class Sitengine_Blog_Files_Table extends Sitengine_Db_TableWithS3Files
     
     public function getSortingInstance($currentRule, $currentOrder)
     {
-    	$translations = $this->getTranslations();
-		$translations->setLanguage($this->_translation);
-		$index = $translations->getIndex();
+    	$transcripts = $this->getTranscripts();
+		$transcripts->setLanguage($this->_transcript);
+		$index = $transcripts->getIndex();
 		
     	require_once 'Sitengine/Grid/Sorting.php';
     	$sorting = new Sitengine_Grid_Sorting($currentRule, $currentOrder);

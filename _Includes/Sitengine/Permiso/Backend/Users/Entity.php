@@ -62,7 +62,7 @@ abstract class Sitengine_Permiso_Backend_Users_Entity
             else { $this->_started = true; }
             
             $id = $this->_controller->getRequest()->get(Sitengine_Env::PARAM_ID);
-            $table = $this->_controller->getFrontController()->getPermisoPackage()->getUsersTable();
+            $table = $this->_controller->getFrontController()->getPermiso()->getUsersTable();
             $select = $table->select()->where('id = ?', $id);
         	$row = $table->fetchRow($select);
         	if($row !== null) { $this->_row = $row; }

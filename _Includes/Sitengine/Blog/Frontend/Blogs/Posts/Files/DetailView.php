@@ -177,7 +177,7 @@ abstract class Sitengine_Blog_Frontend_Blogs_Posts_Files_DetailView extends Site
         		$this->_controller->getDatabase(),
         		$this->_controller->getFrontController()->getBlogPackage()
         	);
-        	$filesObj->setTranslation($this->_controller->getPreferences()->getLanguage());
+        	$filesObj->setTranscript($this->_controller->getPreferences()->getLanguage());
             $table = $this->_controller->getFrontController()->getBlogPackage()->getFilesTableName();
             
         	$whereClauses = array(

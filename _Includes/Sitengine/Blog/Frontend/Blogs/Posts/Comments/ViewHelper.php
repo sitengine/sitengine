@@ -183,7 +183,7 @@ abstract class Sitengine_Blog_Frontend_Blogs_Posts_Comments_ViewHelper extends S
     	$data = array();
         $breadcrumbs = $this->_controller->getEntity()->getBreadcrumbs();
         $table = $this->_controller->getFrontController()->getBlogPackage()->getBlogsTable();
-        $table->setTranslation($this->_controller->getPreferences()->getTranslation());
+        $table->setTranscript($this->_controller->getPreferences()->getTranscript());
         $blog = $table->complementRow($breadcrumbs['blog']);
         /*
         $args = array(
@@ -204,7 +204,7 @@ abstract class Sitengine_Blog_Frontend_Blogs_Posts_Comments_ViewHelper extends S
         
         
         $table = $this->_controller->getFrontController()->getBlogPackage()->getPostsTable();
-        $table->setTranslation($this->_controller->getPreferences()->getTranslation());
+        $table->setTranscript($this->_controller->getPreferences()->getTranscript());
     	$post = $table->complementRow($breadcrumbs['post']);
         
         $args = array(
@@ -287,8 +287,8 @@ abstract class Sitengine_Blog_Frontend_Blogs_Posts_Comments_ViewHelper extends S
         	$this->_controller->getDatabase(),
         	$this->_controller->getFrontController()->getBlogPackage()
         );
-    	$translations = $blog->getTranslations();
-    	$translations->setLanguage($this->_controller->getPreferences()->getLanguage());
+    	$transcripts = $blog->getTranscripts();
+    	$transcripts->setLanguage($this->_controller->getPreferences()->getLanguage());
         /*
         $args = array(
             Sitengine_Env::PARAM_ID => $this->_controller->getEntity()->getGreatAncestorSlug()
@@ -299,8 +299,8 @@ abstract class Sitengine_Blog_Frontend_Blogs_Posts_Comments_ViewHelper extends S
         $args = array();
         $route = $this->_controller->getFrontController()->getRouter()->getRoute(Sitengine_Blog_Frontend_Front::ROUTE_BLOGS);
         $uriIndex = $this->_controller->getRequest()->getBasePath().'/'.$route->assemble($args, true);
-        $title = $breadcrumbs['blog']['titleLang'.$translations->getIndex()];
-        $title = ($title) ? $title : $breadcrumbs['blog']['titleLang'.$translations->getDefaultIndex()];
+        $title = $breadcrumbs['blog']['titleLang'.$transcripts->getIndex()];
+        $title = ($title) ? $title : $breadcrumbs['blog']['titleLang'.$transcripts->getDefaultIndex()];
         $data['blog'] = array(
             'name' => $this->_controller->getTranslate()->translate('breadcrumbsBlogEntity'),
             'uriIndex' => $uriIndex,
@@ -314,8 +314,8 @@ abstract class Sitengine_Blog_Frontend_Blogs_Posts_Comments_ViewHelper extends S
         	$this->_controller->getDatabase(),
         	$this->_controller->getFrontController()->getBlogPackage()
         );
-    	$translations = $post->getTranslations();
-    	$translations->setLanguage($this->_controller->getPreferences()->getLanguage());
+    	$transcripts = $post->getTranscripts();
+    	$transcripts->setLanguage($this->_controller->getPreferences()->getLanguage());
     	
         $args = array(
             Sitengine_Env::PARAM_ANCESTORID => $this->_controller->getEntity()->getGreatAncestorSlug(),
@@ -330,23 +330,23 @@ abstract class Sitengine_Blog_Frontend_Blogs_Posts_Comments_ViewHelper extends S
         $route = $this->_controller->getFrontController()->getRouter()->getRoute(Sitengine_Blog_Frontend_Front::ROUTE_BLOGS_POSTS);
         $uriIndex = $this->_controller->getRequest()->getBasePath().'/'.$route->assemble($args, true);
         
-        #$title = $breadcrumbs['post']['titleLang'.$translations->getIndex()];
-        #$title = ($title) ? $title : $breadcrumbs['post']['titleLang'.$translations->getDefaultIndex()];
+        #$title = $breadcrumbs['post']['titleLang'.$transcripts->getIndex()];
+        #$title = ($title) ? $title : $breadcrumbs['post']['titleLang'.$transcripts->getDefaultIndex()];
         
         if($breadcrumbs['post']['type'] == Sitengine_Blog_Posts_Table::TYPE_PHOTO) {
 			$title = $breadcrumbs['post']['file1OriginalSource'];
 		}
 		else if($breadcrumbs['post']['type'] == Sitengine_Blog_Posts_Table::TYPE_QUOTE) {
-			$title = $breadcrumbs['post']['markupLang'.$translations->getDefaultIndex()];
+			$title = $breadcrumbs['post']['markupLang'.$transcripts->getDefaultIndex()];
 		}
 		else if($breadcrumbs['post']['type'] == Sitengine_Blog_Posts_Table::TYPE_AUDIO) {
 			$title = $breadcrumbs['post']['file1OriginalSource'];
 		}
 		else if($breadcrumbs['post']['type'] == Sitengine_Blog_Posts_Table::TYPE_VIDEO) {
-			$title = $breadcrumbs['post']['titleLang'.$translations->getDefaultIndex()];
+			$title = $breadcrumbs['post']['titleLang'.$transcripts->getDefaultIndex()];
 		}
 		else {
-			$title = $breadcrumbs['post']['titleLang'.$translations->getDefaultIndex()];
+			$title = $breadcrumbs['post']['titleLang'.$transcripts->getDefaultIndex()];
 		}
 		
         $data['post'] = array(

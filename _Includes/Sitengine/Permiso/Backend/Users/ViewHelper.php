@@ -163,7 +163,7 @@ abstract class Sitengine_Permiso_Backend_Users_ViewHelper extends Sitengine_View
     public function countMemberships($id)
     {
     	try {
-    		$table = $this->_controller->getFrontController()->getPermisoPackage()->getMembershipsTable();
+    		$table = $this->_controller->getFrontController()->getPermiso()->getMembershipsTable();
 			$where = $this->_controller->getDatabase()->quoteInto('userId = ?', $id);
 			$select = $table->select()->from($table, array('COUNT(*) AS count'))->where($where);
 			$count = $table->fetchRow($select);

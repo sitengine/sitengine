@@ -115,7 +115,7 @@ abstract class Sitengine_Blog_Frontend_Blogs_Posts_LinkView extends Sitengine_Vi
     {
         try {
         	$table = $this->_controller->getFrontController()->getBlogPackage()->getPostsTable();
-			$table->setTranslation($this->_controller->getPreferences()->getTranslation());
+			$table->setTranscript($this->_controller->getPreferences()->getTranscript());
         	$data = $table->complementRow($this->_controller->getEntity()->getRow());
         	#$data['cdate'] = $this->_controller->getViewHelper()->formatDate($data['cdate']);
             #$data['mdate'] = $this->_controller->getViewHelper()->formatDate($data['mdate']);

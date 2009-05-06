@@ -69,7 +69,7 @@ class Sitengine_Env
     const PARAM_MDATE = 'mdate';
     const PARAM_SESSIONID = 'ses';
     const PARAM_REMEMBERME = 'rememberMe';
-    const PARAM_TRANSLATION = 't';
+    const PARAM_TRANSCRIPT = 't';
     const PARAM_PAYLOAD_NAME = 'pn';
     const PARAM_IPP = 'ipp';
     
@@ -82,11 +82,13 @@ class Sitengine_Env
     const INPUTMODE_INSERT = 'insert';
     const INPUTMODE_UPDATE = 'update';
     
-    const STATUS_UNAUTHORIZED = 'statusUnauthorized';
-    const STATUS_NOT_SUPPORTED = 'statusNotSupported';
-    const STATUS_NOTFOUND = 'statusNotFound';
-    const STATUS_BADREQUEST = 'statusBadRequest';
-    const STATUS_ERROR = 'statusError';
+    const STATUS_BAD_REQUEST = 'statusBadRequest';
+    const STATUS_NOT_FOUND = 'statusNotFound';
+    const STATUS_FORBIDDEN = 'statusForbidden';
+    const STATUS_METHOD_NOT_SUPPORTED = 'statusMethodNotSupported';
+    const STATUS_INTERNAL_SERVER_ERROR = 'statusInternalServerError';
+    const STATUS_NOT_IMPLEMENTED = 'statusNotImplemented';
+    
     const STATUS_ERRORINPUT = 'statusErrorInput';
     const STATUS_OKINPUT = 'statusOkInput';
     const STATUS_ERRORIMPORT = 'statusErrorImport';
@@ -118,14 +120,13 @@ class Sitengine_Env
     const HINT_INVALID_ACTION = 'hintsInvalidAction';
     const HINT_DATA_EXPIRED = 'hintsDataExpired';
     
-    const ERROR_BAD_REQUEST = -1;
-    const ERROR_NOT_FOUND = -2;
-    const ERROR_INTERNAL = -3;
-    const ERROR_UNAUTHORIZED = -4;
-    const ERROR_NOT_SUPPORTED = -5;
     
-    
-    
+    const ERROR_BAD_REQUEST = 400;
+    const ERROR_NOT_FOUND = 404;
+    const ERROR_FORBIDDEN = 401;
+    const ERROR_METHOD_NOT_SUPPORTED = 405;
+    const ERROR_INTERNAL_SERVER_ERROR = 500;
+    const ERROR_NOT_IMPLEMENTED = 501;
     
 	protected $_customConfigs = array();
 	
@@ -285,6 +286,51 @@ class Sitengine_Env
     public function getDebugControl()
     {
     	return $this->_debugControl;
+    }
+    
+    
+    
+    
+    protected $_enableCache = true;
+    
+    public function enableCache($enableCache)
+    {
+    	$this->_enableCache = $enableCache;
+    	return $this;
+    }
+    
+    
+    public function isCacheEnabled()
+    {
+    	return $this->_enableCache;
+    }
+    
+    
+    
+    
+    protected $_cache = null;
+    
+    public function startCache($cache)
+    {
+    	$this->_cache = $cache;
+    	return $this;
+    }
+    
+    
+    public function getCache()
+    {
+    	if($this->_cache === null)
+		{
+			require_once 'Sitengine/Env/Exception.php';
+			throw new Sitengine_Env_Exception('startCache() must be called before using '.__METHOD__);
+		}
+    	return $this->_cache;
+    }
+    
+    
+    public function hasCache()
+    {
+    	return ($this->_cache !== null && $this->_cache instanceof Zend_Cache_Core);
     }
 	
     

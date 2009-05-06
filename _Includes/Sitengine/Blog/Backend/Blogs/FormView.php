@@ -115,8 +115,8 @@ abstract class Sitengine_Blog_Backend_Blogs_FormView extends Sitengine_View
             #$valuePage = $this->_controller->getRequest()->get(Sitengine_Env::PARAM_PAGE);
             
             $table = $this->_controller->getFrontController()->getBlogPackage()->getBlogsTable();
-            $table->setTranslation($this->_controller->getPreferences()->getTranslation());
-            $translations = $table->getTranslations();
+            $table->setTranscript($this->_controller->getPreferences()->getTranscript());
+            $transcripts = $table->getTranscripts();
             
             ########################################################################
             #### FILTER INPUT
@@ -129,7 +129,7 @@ abstract class Sitengine_Blog_Backend_Blogs_FormView extends Sitengine_View
                 'slug' => ''
             );
             
-            foreach($translations->get() as $index => $symbol) {
+            foreach($transcripts->get() as $index => $symbol) {
             	$fieldsNormal['titleLang'.$index] = '';
             	$fieldsNormal['markupLang'.$index] = '';
             }
@@ -146,8 +146,8 @@ abstract class Sitengine_Blog_Backend_Blogs_FormView extends Sitengine_View
             
             if($this->_inputMode == Sitengine_Env::INPUTMODE_UPDATE)
             {
-            	require_once 'Sitengine/Form/TranslationPayloads.php';
-            	$payloads = new Sitengine_Form_TranslationPayloads($translations);
+            	require_once 'Sitengine/Form/TranscriptsPayloads.php';
+            	$payloads = new Sitengine_Form_TranscriptsPayloads($transcripts);
 				$payloads->start($this->_controller->getRequest()->get(Sitengine_Env::PARAM_PAYLOAD_NAME));
 				$stored = $this->_controller->getFrontController()->getBlogPackage()->getBlogsTable()->complementRow($this->_controller->getEntity()->getRow());
                 
@@ -215,13 +215,13 @@ abstract class Sitengine_Blog_Backend_Blogs_FormView extends Sitengine_View
                 $route = $this->_controller->getFrontController()->getRouter()->getRoute(Sitengine_Blog_Backend_Front::ROUTE_BLOGS_SHARP);
                 $submitUri = $this->_controller->getRequest()->getBasePath().'/'.$route->assemble($args, true);
                 
-                $title = $stored['titleLang'.$translations->getIndex()];
-                $title = ($title!='') ? $title : $stored['titleLang'.$translations->getDefaultIndex()];
+                $title = $stored['titleLang'.$transcripts->getIndex()];
+                $title = ($title!='') ? $title : $stored['titleLang'.$transcripts->getDefaultIndex()];
             }
             else
             {
-            	require_once 'Sitengine/Form/TranslationPayloads.php';
-            	$payloads = new Sitengine_Form_TranslationPayloads($translations);
+            	require_once 'Sitengine/Form/TranscriptsPayloads.php';
+            	$payloads = new Sitengine_Form_TranscriptsPayloads($transcripts);
             	$payloads->start();
             	
                 $data = Sitengine_Controller_Request_Http::filterInsertDeprecated(
@@ -318,13 +318,13 @@ abstract class Sitengine_Blog_Backend_Blogs_FormView extends Sitengine_View
 					$elements[$n] = $e->getCheckbox($data[$n]);
 				}
 				*/
-				$n = 'titleLang'.$translations->getDefaultIndex();
+				$n = 'titleLang'.$transcripts->getDefaultIndex();
 				$e = new Sitengine_Form_Element($n, $data[$n]);
 				$e->setClass('viewFormInput');
 				$e->setId('viewForm'.$n);
 				$elements['title'] = $e->getText(40);
 				
-				$n = 'markupLang'.$payloads->getTranslationIndex();
+				$n = 'markupLang'.$payloads->getTranscriptIndex();
 				$e = new Sitengine_Form_Element($n, $data[$n]);
 				$e->setClass('viewFormTextarea');
 				$e->setId('viewForm'.$n);
@@ -351,10 +351,10 @@ abstract class Sitengine_Blog_Backend_Blogs_FormView extends Sitengine_View
             ########################################################################
             $contentSectionTitle = $this->_controller->getTranslate()->translate('labelsViewformContentSectionTitleDefault');
             
-            if(sizeof($translations->get()) > 1)
+            if(sizeof($transcripts->get()) > 1)
             {
-            	if(!$payloads->isMain()) { $symbol = $payloads->getTranslationSymbol(); }
-            	else { $symbol = $translations->getDefaultSymbol(); }
+            	if(!$payloads->isMain()) { $symbol = $payloads->getTranscriptSymbol(); }
+            	else { $symbol = $transcripts->getDefaultSymbol(); }
             	$contentSectionTitle .= ' ('.$this->_controller->getTranslate()->translate('languages'.ucfirst($symbol)).')';
             }
             
@@ -376,7 +376,7 @@ abstract class Sitengine_Blog_Backend_Blogs_FormView extends Sitengine_View
             return array(
             	'payloadName' => $payloads->getName(),
             	'payloadIsMain' => $payloads->isMain(),
-            	'payloadIsDefaultTranslation' => $payloads->isDefaultTranslation(),
+            	'payloadIsDefaultTranscript' => $payloads->isDefaultTranscript(),
             	'queryUpdate' => ((isset($queryUpdate)) ? $queryUpdate : ''),
                 'title' => $title,
                 'contentSectionTitle' => $contentSectionTitle,

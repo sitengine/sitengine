@@ -118,7 +118,7 @@ abstract class Sitengine_Blog_Frontend_Blogs_Posts_Entity
 					$this->_controller->getDatabase(),
 					$this->_controller->getFrontController()->getBlogPackage()
 				);
-				$postsObj->setTranslation($this->_controller->getPreferences()->getLanguage());
+				$postsObj->setTranscript($this->_controller->getPreferences()->getLanguage());
 				$posts = $this->_controller->getFrontController()->getBlogPackage()->getPostsTableName();
 				$whereClauses = array(
 					"$posts.publish = '1'",
@@ -152,7 +152,7 @@ abstract class Sitengine_Blog_Frontend_Blogs_Posts_Entity
         		$this->_controller->getDatabase(),
         		$this->_controller->getFrontController()->getBlogPackage()
         	);
-        	$blogsObj->setTranslation($this->_controller->getPreferences()->getLanguage());
+        	$blogsObj->setTranscript($this->_controller->getPreferences()->getLanguage());
         	$blogs = $this->_controller->getFrontController()->getBlogPackage()->getBlogsTableName();
         	$whereClauses = array(
         		"$blogs.publish = '1'",

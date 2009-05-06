@@ -180,8 +180,8 @@
 <?$isMarked = $row->isMarked;?>
 <?$uriPostIndex = $row->uriPostIndex;?>
 <?$uriPostInsert = $row->uriPostInsert;?>
-<?$translationMissing = $row->translationMissing;?>
-<?$translationsIncomplete = $row->translationsIncomplete;?>
+<?$transcriptMissing = $row->transcriptMissing;?>
+<?$transcriptsIncomplete = $row->transcriptsIncomplete;?>
 
 
 
@@ -191,7 +191,7 @@
     <?$rowClass = "listformDataRow";?>
 <?endif;?>
 
-<?if($translationMissing):?>
+<?if($transcriptMissing):?>
     <?$titleClass = "listformDataTitleError";?>
 <?else:?>
     <?$titleClass = "listformDataTitle";?>

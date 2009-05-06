@@ -176,7 +176,7 @@
 <?$uriChildIndex = $row->uriChildIndex;?>
 <?$isMarked = $row->isMarked;?>
 <?$childCount = $row->childCount;?>
-<?$translationMissing = $row->translationMissing;?>
+<?$transcriptMissing = $row->transcriptMissing;?>
 
 
 <?if($isMarked):?>
@@ -186,7 +186,7 @@
 <?endif;?>
 
 <?if(
-	$translationMissing &&
+	$transcriptMissing &&
 	$type == Sitengine_Sitemap::ITEMTYPE_SNIPPET
 ):?>
     <?$titleClass = "listformDataTitleError";?>

@@ -92,7 +92,7 @@ abstract class Sitengine_Proto_Backend_Goodies_IndexView extends Sitengine_View
         	require_once 'Sitengine/Form/Element.php';
             $valuePage = $this->_controller->getRequest()->get(Sitengine_Env::PARAM_PAGE);
         	$table = $this->_controller->getFrontController()->getProtoPackage()->getGoodiesTable();
-			$table->setTranslation($this->_controller->getPreferences()->getTranslation());
+			$table->setTranscript($this->_controller->getPreferences()->getTranscript());
             
             $sorting = $table->getSortingInstance(
             	$this->_controller->getRequest()->get(Sitengine_Env::PARAM_SORT),
@@ -107,13 +107,13 @@ abstract class Sitengine_Proto_Backend_Goodies_IndexView extends Sitengine_View
             $settingsIsActive = false;
             
             
-            ### translation ###
-            $translations = $table->getTranslations();
-            $translations->setLanguage($this->_controller->getPreferences()->getTranslation());
-            if(!$translations->isDefault()) { $settingsIsActive = true; }
+            ### transcript ###
+            $transcripts = $table->getTranscripts();
+            $transcripts->setLanguage($this->_controller->getPreferences()->getTranscript());
+            if(!$transcripts->isDefault()) { $settingsIsActive = true; }
             
             $languages = array();
-            foreach($translations->get() as $symbol)
+            foreach($transcripts->get() as $symbol)
             {
             	$languages[$symbol] = $this->_controller->getTranslate()->translate('languages'.ucfirst($symbol));
             }
@@ -145,9 +145,9 @@ abstract class Sitengine_Proto_Backend_Goodies_IndexView extends Sitengine_View
                 'isActive' => $settingsIsActive,
                 'hiddens' => implode('', $hiddens),
                 #'ELEMENTS' => $settingsElements,
-                'TRANSLATIONS' => $languages,
+                'TRANSCRIPTS' => $languages,
                 'IPPS' => $ippValues,
-                Sitengine_Env::PARAM_TRANSLATION => $translations->getSymbol(),
+                Sitengine_Env::PARAM_TRANSCRIPT => $transcripts->getSymbol(),
                 Sitengine_Env::PARAM_IPP => $valueIpp,
             );
             

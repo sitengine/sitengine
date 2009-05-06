@@ -43,6 +43,25 @@ class Sitengine_Env_Default extends Sitengine_Env
     }
     
     
+    public function getDatabase()
+    {
+    	if($this->_database === null)
+		{
+			require_once 'Sitengine/Env/Exception.php';
+			throw new Sitengine_Env_Exception('startDatabase() must be called before using '.__METHOD__);
+		}
+		return $this->_database;
+    }
+    
+    
+    
+    public function startDatabase($adapterName, array $config=array(), $debugControl=false)
+    {
+    	$this->getDatabaseInstance($adapterName, $config, $debugControl);
+    }
+    
+    
+    # deprecated
     public function getDatabaseInstance($adapterName, array $config=array(), $debugControl=false)
 	{
 		try {
@@ -108,7 +127,28 @@ class Sitengine_Env_Default extends Sitengine_Env
 		}
     }
     
+    
+    
+    public function getLogger()
+    {
+    	if($this->_logger === null)
+		{
+			require_once 'Sitengine/Env/Exception.php';
+			throw new Sitengine_Env_Exception('startLogger() must be called before using '.__METHOD__);
+		}
+		return $this->_logger;
+    }
+    
+    
+    
+    public function startLogger($logsDir, $filename = null, $logFilterPriority = null, $source = null)
+    {
+    	$this->getLoggerInstance($logsDir, $filename, $logFilterPriority, $source);
+    }
+    
+    
 	
+	# deprecated
 	public function getLoggerInstance($logsDir, $filename = null, $logFilterPriority = null, $source = null)
 	{
 		if($this->_logger === null)

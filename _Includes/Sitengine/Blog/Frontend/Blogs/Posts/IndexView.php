@@ -423,7 +423,7 @@ abstract class Sitengine_Blog_Frontend_Blogs_Posts_IndexView extends Sitengine_V
         try {
             $valuePage = $this->_controller->getRequest()->get(Sitengine_Env::PARAM_PAGE);
             $table = $this->_controller->getFrontController()->getBlogPackage()->getPostsTable();
-			$table->setTranslation($this->_controller->getPreferences()->getTranslation());
+			$table->setTranscript($this->_controller->getPreferences()->getTranscript());
         	
             $filter = $table->getFilterInstance(
             	$this->_controller->getRequest(),
@@ -447,19 +447,19 @@ abstract class Sitengine_Blog_Frontend_Blogs_Posts_IndexView extends Sitengine_V
             $settingsElements = array();
             
             /*
-            ### translation element ###
-            $translations = $table->getTranslations();
-            $translations->setLanguage($this->_controller->getPreferences()->getLanguage());
-            if(!$translations->isDefault()) { $settingsIsActive = true; }
+            ### transcript element ###
+            $transcripts = $table->getTranscripts();
+            $transcripts->setLanguage($this->_controller->getPreferences()->getLanguage());
+            if(!$transcripts->isDefault()) { $settingsIsActive = true; }
             # set html input element
             $languages = array();
-            foreach($translations->get() as $symbol) {
+            foreach($transcripts->get() as $symbol) {
             	$languages[$symbol] = $this->_controller->getTranslate()->translate('languages'.ucfirst($symbol));
             }
-            $e = new Sitengine_Form_Element(Sitengine_Env::PARAM_TRANSLATION, $translations->getSymbol());
-            $e->setId('settings'.Sitengine_Env::PARAM_TRANSLATION);
+            $e = new Sitengine_Form_Element(Sitengine_Env::PARAM_TRANSCRIPT, $transcripts->getSymbol());
+            $e->setId('settings'.Sitengine_Env::PARAM_TRANSCRIPT);
             $e->setClass('settingsSelect');
-            $settingsElements[Sitengine_Env::PARAM_TRANSLATION] = $e->getSelect($languages);
+            $settingsElements[Sitengine_Env::PARAM_TRANSCRIPT] = $e->getSelect($languages);
             */
             
             

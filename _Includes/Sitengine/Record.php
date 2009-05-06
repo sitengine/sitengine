@@ -476,7 +476,7 @@ class Sitengine_Record
         }
         catch (Exception $exception) {
 			$this->_rollbackFileImport();
-			if(!$this->_checkModifyException($exception)) { return 0; }
+			if(!$this->checkModifyException($exception)) { return 0; }
 			else { throw new Sitengine_Exception('insert file import error', $exception); }
 		}
     }
@@ -530,7 +530,7 @@ class Sitengine_Record
      *
      */
     # void
-    protected function _checkModifyException(Zend_Exception $exception)
+    public function checkModifyException(Zend_Exception $exception)
     {
         return true;
     }
@@ -548,7 +548,7 @@ class Sitengine_Record
         }
         catch (Exception $exception) {
 			$this->_rollback();
-			if(!$this->_checkModifyException($exception)) { return 0; }
+			if(!$this->checkModifyException($exception)) { return 0; }
 			else { throw new Sitengine_Exception('update error', $exception); }
 		}
     }
@@ -565,7 +565,7 @@ class Sitengine_Record
         }
         catch (Exception $exception) {
 			$this->_rollback();
-			if(!$this->_checkModifyException($exception)) { return 0; }
+			if(!$this->checkModifyException($exception)) { return 0; }
 			else { throw new Sitengine_Exception('insert error', $exception); }
 		}
     }

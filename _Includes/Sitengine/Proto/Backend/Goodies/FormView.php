@@ -98,8 +98,8 @@ abstract class Sitengine_Proto_Backend_Goodies_FormView extends Sitengine_View
             #$valuePage = $this->_controller->getRequest()->get(Sitengine_Env::PARAM_PAGE);
             
             $table = $this->_controller->getFrontController()->getProtoPackage()->getGoodiesTable();
-            $table->setTranslation($this->_controller->getPreferences()->getTranslation());
-            $translations = $table->getTranslations();
+            $table->setTranscript($this->_controller->getPreferences()->getTranscript());
+            $transcripts = $table->getTranscripts();
             $displayPermissionSettings = false;
             
             
@@ -124,15 +124,15 @@ abstract class Sitengine_Proto_Backend_Goodies_FormView extends Sitengine_View
                 'locked' => 0
             );
             
-            foreach($translations->get() as $index => $symbol) {
+            foreach($transcripts->get() as $index => $symbol) {
             	$fields['titleLang'.$index] = '';
             	$fields['textLang'.$index] = '';
             }
             
             if($this->_inputMode == Sitengine_Env::INPUTMODE_UPDATE)
             {
-            	require_once 'Sitengine/Form/TranslationPayloads.php';
-            	$payloads = new Sitengine_Form_TranslationPayloads($translations);
+            	require_once 'Sitengine/Form/TranscriptsPayloads.php';
+            	$payloads = new Sitengine_Form_TranscriptsPayloads($transcripts);
 				$payloads->start($this->_controller->getRequest()->get(Sitengine_Env::PARAM_PAYLOAD_NAME));
 				$stored = $this->_controller->getFrontController()->getProtoPackage()->getGoodiesTable()->complementRow($this->_controller->getEntity()->getRow());
                 
@@ -185,8 +185,8 @@ abstract class Sitengine_Proto_Backend_Goodies_FormView extends Sitengine_View
                 $route = $this->_controller->getFrontController()->getRouter()->getRoute(Sitengine_Proto_Backend_Front::ROUTE_GOODIES_SHARP);
                 $submitUri = $this->_controller->getRequest()->getBasePath().'/'.$route->assemble($args, true);
                 
-                $title = $stored['titleLang'.$translations->getIndex()];
-                $title = ($title!='') ? $title : $stored['titleLang'.$translations->getDefaultIndex()];
+                $title = $stored['titleLang'.$transcripts->getIndex()];
+                $title = ($title!='') ? $title : $stored['titleLang'.$transcripts->getDefaultIndex()];
                 
                 if(
 					$data[Sitengine_Permiso::FIELD_UID] == $this->_controller->getPermiso()->getAuth()->getId() || # owners ok
@@ -198,8 +198,8 @@ abstract class Sitengine_Proto_Backend_Goodies_FormView extends Sitengine_View
             }
             else
             {
-            	require_once 'Sitengine/Form/TranslationPayloads.php';
-            	$payloads = new Sitengine_Form_TranslationPayloads($translations);
+            	require_once 'Sitengine/Form/TranscriptsPayloads.php';
+            	$payloads = new Sitengine_Form_TranscriptsPayloads($transcripts);
             	$payloads->start();
             	
                 $data = Sitengine_Controller_Request_Http::filterInsert(
@@ -224,9 +224,9 @@ abstract class Sitengine_Proto_Backend_Goodies_FormView extends Sitengine_View
 					$data[$n] = $result[0]['maxSorting']+10;
                 }
 				
-				$n = 'titleLang'.$translations->getDefaultIndex();
+				$n = 'titleLang'.$transcripts->getDefaultIndex();
 				if(array_key_exists($n, $input)) { $data[$n] = $input[$n]; }
-				else { $data[$n] = 'Goody Record (Language '.$translations->getDefaultIndex().')'; }
+				else { $data[$n] = 'Goody Record (Language '.$transcripts->getDefaultIndex().')'; }
                 
                 $hiddens = array(
                     Sitengine_Env::PARAM_PAYLOAD_NAME => $payloads->getName(),
@@ -255,10 +255,10 @@ abstract class Sitengine_Proto_Backend_Goodies_FormView extends Sitengine_View
             ########################################################################
             $contentSectionTitle = $this->_controller->getTranslate()->translate('formViewContentSectionTitleDefault');
             
-            if(sizeof($translations->get()) > 1)
+            if(sizeof($transcripts->get()) > 1)
             {
-            	if(!$payloads->isMain()) { $symbol = $payloads->getTranslationSymbol(); }
-            	else { $symbol = $translations->getDefaultSymbol(); }
+            	if(!$payloads->isMain()) { $symbol = $payloads->getTranscriptSymbol(); }
+            	else { $symbol = $transcripts->getDefaultSymbol(); }
             	$contentSectionTitle .= ' ('.$this->_controller->getTranslate()->translate('languages'.ucfirst($symbol)).')';
             }
             
@@ -288,9 +288,9 @@ abstract class Sitengine_Proto_Backend_Goodies_FormView extends Sitengine_View
 					'label' => $this->_controller->getTranslate()->translate('formViewPayloadNavTitleMain')
 				);
 				
-				foreach($translations->get() as $index => $symbol)
+				foreach($transcripts->get() as $index => $symbol)
 				{
-					$currentPayload = $payloads->getTranslationNamePrefix().'_'.$symbol;
+					$currentPayload = $payloads->getTranscriptNamePrefix().'_'.$symbol;
 					
 					$args = array(
 						Sitengine_Env::PARAM_ID => $stored['id']
@@ -304,7 +304,7 @@ abstract class Sitengine_Proto_Backend_Goodies_FormView extends Sitengine_View
 					$uri  = $this->_controller->getRequest()->getBasePath().'/'.$route->assemble($args, true);
 					$uri .= Sitengine_Controller_Request_Http::makeNameValueQuery($query);
 					
-					if(sizeof($translations->get()) > 1) {
+					if(sizeof($transcripts->get()) > 1) {
 						$label = $this->_controller->getTranslate()->translate('languages'.ucfirst($symbol));
 					}
 					else {

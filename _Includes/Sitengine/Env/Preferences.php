@@ -116,18 +116,18 @@ class Sitengine_Env_Preferences
     
     
     
-    protected $_translation = null;
+    protected $_transcript = null;
     
-    public function establishTranslation(Sitengine_Controller_Request_Http $request, $param)
+    public function establishTranscript(Sitengine_Controller_Request_Http $request, $param)
     {
-        $this->_translation = $this->_establishValue($request, $param);
-        return $this->_translation;
+        $this->_transcript = $this->_establishValue($request, $param);
+        return $this->_transcript;
     }
     
     
-    public function getTranslation()
+    public function getTranscript()
     {
-        return $this->_translation;
+        return $this->_transcript;
     }
     
     

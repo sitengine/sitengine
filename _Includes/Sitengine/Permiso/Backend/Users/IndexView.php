@@ -91,8 +91,8 @@ abstract class Sitengine_Permiso_Backend_Users_IndexView extends Sitengine_View
         try {
         	require_once 'Sitengine/Form/Element.php';
             $valuePage = $this->_controller->getRequest()->get(Sitengine_Env::PARAM_PAGE);
-        	$table = $this->_controller->getFrontController()->getPermisoPackage()->getUsersTable();
-			#$table->setTranslation($this->_controller->getPreferences()->getTranslation());
+        	$table = $this->_controller->getFrontController()->getPermiso()->getUsersTable();
+			#$table->setTranscript($this->_controller->getPreferences()->getTranscript());
             
             $sorting = $table->getSortingInstance(
             	$this->_controller->getRequest()->get(Sitengine_Env::PARAM_SORT),
@@ -133,9 +133,9 @@ abstract class Sitengine_Permiso_Backend_Users_IndexView extends Sitengine_View
                 'isActive' => $settingsIsActive,
                 'hiddens' => implode('', $hiddens),
                 #'ELEMENTS' => $settingsElements,
-                #'TRANSLATIONS' => $languages,
+                #'TRANSCRIPTS' => $languages,
                 'IPPS' => $ippValues,
-                #Sitengine_Env::PARAM_TRANSLATION => $translations->getSymbol(),
+                #Sitengine_Env::PARAM_TRANSCRIPT => $transcripts->getSymbol(),
                 Sitengine_Env::PARAM_IPP => $valueIpp,
             );
             
@@ -223,7 +223,7 @@ abstract class Sitengine_Permiso_Backend_Users_IndexView extends Sitengine_View
             ########################################################################
             #### LISTQUERY
             ########################################################################
-			$name = $this->_controller->getFrontController()->getPermisoPackage()->getUsersTableName();
+			$name = $this->_controller->getFrontController()->getPermiso()->getUsersTableName();
 			
 			$whereClauses = array(
         		$filter->getSql('')

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+
+<dictionary name="dictionary">
+	
+	<!-- account -->
+	<item name="accountStatusCreateError">Your account could not be created</item>
+	<item name="accountStatusCreateOk">Your account has been successfully created</item>
+	<item name="accountStatusUpdateError">Your account could not be updated</item>
+	<item name="accountStatusUpdateOk">Your account has been successfully updated</item>
+	<item name="accountHintNameExists">There is already an account with this email address</item>
+	<item name="accountHintNicknameExists">This nickname has already been taken</item>
+	<item name="accountHintUnknownError">An unknown error has occured</item>
+	
+	<!-- accountForm -->
+	<item name="accountFormHintNameEmailAddressInvalid">Valid email address required</item>
+	<item name="accountFormHintPasswordNotEmpty">A password is required</item>
+	<item name="accountFormHintPasswordStringLengthTooShort">Password is too short. A minimum of %1$d characters is required</item>
+	<item name="accountFormHintPasswordVerifyNotEmpty">Please retype your password for verification</item>
+	<item name="accountFormHintPasswordVerifyIdentical">Provided passwords don't match</item>
+	<item name="accountFormHintNameNotEmpty">Email address can not be empty</item>
+	<item name="accountFormHintNicknameNotEmpty">Nickname can not be empty</item>
+	<item name="accountFormHintFirstnameNotEmpty">First name can not be empty</item>
+	<item name="accountFormHintLastnameNotEmpty">Last name can not be empty</item>
+	<item name="accountFormHintCountryNotEmpty">Please select your country</item>
+	<item name="accountFormFieldvalCountry">Select country</item>
+	<item name="accountFormHintTimezoneNotEmpty">Please select your timezone</item>
+	<item name="accountFormFieldvalSubmitButton">Create account</item>
+	
+	<!-- accountLoginForm -->
+	<item name="accountLoginFormSubmitButton">Sign in</item>
+	
+</dictionary>

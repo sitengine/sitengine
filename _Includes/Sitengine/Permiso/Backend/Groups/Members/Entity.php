@@ -91,7 +91,7 @@ abstract class Sitengine_Permiso_Backend_Groups_Members_Entity
             
             if(!$id) { $this->_row = null; }
             else {
-            	$table = $this->_controller->getFrontController()->getPermisoPackage()->getMembershipsTable();
+            	$table = $this->_controller->getFrontController()->getPermiso()->getMembershipsTable();
 				$select = $table->select()->where('id = ?', $id);
 				$row = $table->fetchRow($select);
 				if($row !== null) { $this->_row = $row; }
@@ -109,7 +109,7 @@ abstract class Sitengine_Permiso_Backend_Groups_Members_Entity
             }
             
             
-            $table = $this->_controller->getFrontController()->getPermisoPackage()->getGroupsTable();
+            $table = $this->_controller->getFrontController()->getPermiso()->getGroupsTable();
             $select = $table->select()->where('id = ?', $aid);
         	$row = $table->fetchRow($select);
         	if($row !== null) { $this->_groupRow = $row; }

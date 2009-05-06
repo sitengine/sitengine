@@ -36,8 +36,8 @@ abstract class Sitengine_Blog_Frontend_Blogs_Posts_Modifier
     {
         $this->_controller = $controller;
         
-        require_once 'Sitengine/Form/TranslationPayloads.php';
-        $this->_payloads = new Sitengine_Form_TranslationPayloads($this->_controller->getRecord()->getTranslations());
+        require_once 'Sitengine/Form/TranscriptsPayloads.php';
+        $this->_payloads = new Sitengine_Form_TranscriptsPayloads($this->_controller->getRecord()->getTranscripts());
     }
     
     
@@ -115,8 +115,8 @@ abstract class Sitengine_Blog_Frontend_Blogs_Posts_Modifier
     	$fieldsNormal = array(
             #Sitengine_Permiso::FIELD_UID => '',
             #Sitengine_Permiso::FIELD_GID => '',
-            'titleLang'.$this->_controller->getRecord()->getTranslations()->getDefaultIndex() => '',
-            'markupLang'.$this->_controller->getRecord()->getTranslations()->getDefaultIndex() => ''
+            'titleLang'.$this->_controller->getRecord()->getTranscripts()->getDefaultIndex() => '',
+            'markupLang'.$this->_controller->getRecord()->getTranscripts()->getDefaultIndex() => ''
         );
         
         $fieldsOnOff = array(
@@ -134,9 +134,9 @@ abstract class Sitengine_Blog_Frontend_Blogs_Posts_Modifier
         	self::FIELDS_ONOFF => $fieldsOnOff
         );
         
-        foreach($this->_controller->getRecord()->getTranslations()->get() as $index => $symbol)
+        foreach($this->_controller->getRecord()->getTranscripts()->get() as $index => $symbol)
         {
-        	$payloadName = $this->_payloads->makeTranslationName($symbol);
+        	$payloadName = $this->_payloads->makeTranscriptName($symbol);
         	$fields[$payloadName] = array(
         		self::FIELDS_NORMAL => array(
         			'titleLang'.$index => '',
@@ -155,15 +155,15 @@ abstract class Sitengine_Blog_Frontend_Blogs_Posts_Modifier
     {
         if(
         	$this->_payloads->isMain() ||
-        	$this->_payloads->isDefaultTranslation()
+        	$this->_payloads->isDefaultTranscript()
         )
         {
-        	$name = 'titleLang'.$this->_controller->getRecord()->getTranslations()->getDefaultIndex();
+        	$name = 'titleLang'.$this->_controller->getRecord()->getTranscripts()->getDefaultIndex();
 			if(Sitengine_Validator::nada($this->_controller->getRequest()->getPost($name))) {
 				$message = $this->_controller->getTranslate()->translate('textposthintsTitleRequired');
 				$this->_controller->getStatus()->addHint($name, $message);
 			}
-			$name = 'markupLang'.$this->_controller->getRecord()->getTranslations()->getDefaultIndex();
+			$name = 'markupLang'.$this->_controller->getRecord()->getTranscripts()->getDefaultIndex();
 			if(Sitengine_Validator::nada($this->_controller->getRequest()->getPost($name))) {
 				$message = $this->_controller->getTranslate()->translate('textposthintsMarkupRequired');
 				$this->_controller->getStatus()->addHint($name, $message);
@@ -327,7 +327,7 @@ abstract class Sitengine_Blog_Frontend_Blogs_Posts_Modifier
     	$fieldsNormal = array(
             #Sitengine_Permiso::FIELD_UID => '',
             #Sitengine_Permiso::FIELD_GID => '',
-            'markupLang'.$this->_controller->getRecord()->getTranslations()->getDefaultIndex() => '',
+            'markupLang'.$this->_controller->getRecord()->getTranscripts()->getDefaultIndex() => '',
             'url' => ''
         );
         
@@ -346,9 +346,9 @@ abstract class Sitengine_Blog_Frontend_Blogs_Posts_Modifier
         	self::FIELDS_ONOFF => $fieldsOnOff
         );
         
-        foreach($this->_controller->getRecord()->getTranslations()->get() as $index => $symbol)
+        foreach($this->_controller->getRecord()->getTranscripts()->get() as $index => $symbol)
         {
-        	$payloadName = $this->_payloads->makeTranslationName($symbol);
+        	$payloadName = $this->_payloads->makeTranscriptName($symbol);
         	$fields[$payloadName] = array(
         		self::FIELDS_NORMAL => array(
         			'markupLang'.$index => ''
@@ -547,8 +547,8 @@ abstract class Sitengine_Blog_Frontend_Blogs_Posts_Modifier
     	$fieldsNormal = array(
             #Sitengine_Permiso::FIELD_UID => '',
             #Sitengine_Permiso::FIELD_GID => '',
-            'titleLang'.$this->_controller->getRecord()->getTranslations()->getDefaultIndex() => '',
-            'markupLang'.$this->_controller->getRecord()->getTranslations()->getDefaultIndex() => ''
+            'titleLang'.$this->_controller->getRecord()->getTranscripts()->getDefaultIndex() => '',
+            'markupLang'.$this->_controller->getRecord()->getTranscripts()->getDefaultIndex() => ''
         );
         
         $fieldsOnOff = array(
@@ -566,9 +566,9 @@ abstract class Sitengine_Blog_Frontend_Blogs_Posts_Modifier
         	self::FIELDS_ONOFF => $fieldsOnOff
         );
         
-        foreach($this->_controller->getRecord()->getTranslations()->get() as $index => $symbol)
+        foreach($this->_controller->getRecord()->getTranscripts()->get() as $index => $symbol)
         {
-        	$payloadName = $this->_payloads->makeTranslationName($symbol);
+        	$payloadName = $this->_payloads->makeTranscriptName($symbol);
         	$fields[$payloadName] = array(
         		self::FIELDS_NORMAL => array(
         			'titleLang'.$index => '',
@@ -614,10 +614,10 @@ abstract class Sitengine_Blog_Frontend_Blogs_Posts_Modifier
         }
         if(
         	$this->_payloads->isMain() ||
-        	$this->_payloads->isDefaultTranslation()
+        	$this->_payloads->isDefaultTranscript()
         )
         {
-        	$name = 'titleLang'.$this->_controller->getRecord()->getTranslations()->getDefaultIndex();
+        	$name = 'titleLang'.$this->_controller->getRecord()->getTranscripts()->getDefaultIndex();
 			if(Sitengine_Validator::nada($this->_controller->getRequest()->getPost($name))) {
 				$message = $this->_controller->getTranslate()->translate('galleryposthintsTitleRequired');
 				$this->_controller->getStatus()->addHint($name, $message);
@@ -778,8 +778,8 @@ abstract class Sitengine_Blog_Frontend_Blogs_Posts_Modifier
     	$fieldsNormal = array(
             #Sitengine_Permiso::FIELD_UID => '',
             #Sitengine_Permiso::FIELD_GID => '',
-            'titleLang'.$this->_controller->getRecord()->getTranslations()->getDefaultIndex() => '',
-            'markupLang'.$this->_controller->getRecord()->getTranslations()->getDefaultIndex() => ''
+            'titleLang'.$this->_controller->getRecord()->getTranscripts()->getDefaultIndex() => '',
+            'markupLang'.$this->_controller->getRecord()->getTranscripts()->getDefaultIndex() => ''
         );
         
         $fieldsOnOff = array(
@@ -797,9 +797,9 @@ abstract class Sitengine_Blog_Frontend_Blogs_Posts_Modifier
         	self::FIELDS_ONOFF => $fieldsOnOff
         );
         
-        foreach($this->_controller->getRecord()->getTranslations()->get() as $index => $symbol)
+        foreach($this->_controller->getRecord()->getTranscripts()->get() as $index => $symbol)
         {
-        	$payloadName = $this->_payloads->makeTranslationName($symbol);
+        	$payloadName = $this->_payloads->makeTranscriptName($symbol);
         	$fields[$payloadName] = array(
         		self::FIELDS_NORMAL => array(
         			'titleLang'.$index => '',
@@ -826,10 +826,10 @@ abstract class Sitengine_Blog_Frontend_Blogs_Posts_Modifier
         }
         if(
         	$this->_payloads->isMain() ||
-        	$this->_payloads->isDefaultTranslation()
+        	$this->_payloads->isDefaultTranscript()
         )
         {
-        	$name = 'markupLang'.$this->_controller->getRecord()->getTranslations()->getDefaultIndex();
+        	$name = 'markupLang'.$this->_controller->getRecord()->getTranscripts()->getDefaultIndex();
 			if(Sitengine_Validator::nada($this->_controller->getRequest()->getPost($name))) {
 				$message = $this->_controller->getTranslate()->translate('quoteposthintsMarkupRequired');
 				$this->_controller->getStatus()->addHint($name, $message);
@@ -976,8 +976,8 @@ abstract class Sitengine_Blog_Frontend_Blogs_Posts_Modifier
     	$fieldsNormal = array(
             #Sitengine_Permiso::FIELD_UID => '',
             #Sitengine_Permiso::FIELD_GID => '',
-            'titleLang'.$this->_controller->getRecord()->getTranslations()->getDefaultIndex() => '',
-            'markupLang'.$this->_controller->getRecord()->getTranslations()->getDefaultIndex() => '',
+            'titleLang'.$this->_controller->getRecord()->getTranscripts()->getDefaultIndex() => '',
+            'markupLang'.$this->_controller->getRecord()->getTranscripts()->getDefaultIndex() => '',
             'url' => ''
         );
         
@@ -996,9 +996,9 @@ abstract class Sitengine_Blog_Frontend_Blogs_Posts_Modifier
         	self::FIELDS_ONOFF => $fieldsOnOff
         );
         
-        foreach($this->_controller->getRecord()->getTranslations()->get() as $index => $symbol)
+        foreach($this->_controller->getRecord()->getTranscripts()->get() as $index => $symbol)
         {
-        	$payloadName = $this->_payloads->makeTranslationName($symbol);
+        	$payloadName = $this->_payloads->makeTranscriptName($symbol);
         	$fields[$payloadName] = array(
         		self::FIELDS_NORMAL => array(
         			'titleLang'.$index => '',
@@ -1025,10 +1025,10 @@ abstract class Sitengine_Blog_Frontend_Blogs_Posts_Modifier
         }
         if(
         	$this->_payloads->isMain() ||
-        	$this->_payloads->isDefaultTranslation()
+        	$this->_payloads->isDefaultTranscript()
         )
         {
-        	$name = 'titleLang'.$this->_controller->getRecord()->getTranslations()->getDefaultIndex();
+        	$name = 'titleLang'.$this->_controller->getRecord()->getTranscripts()->getDefaultIndex();
 			if(Sitengine_Validator::nada($this->_controller->getRequest()->getPost($name))) {
 				$message = $this->_controller->getTranslate()->translate('linkposthintsTitleRequired');
 				$this->_controller->getStatus()->addHint($name, $message);
@@ -1189,7 +1189,7 @@ abstract class Sitengine_Blog_Frontend_Blogs_Posts_Modifier
     	$fieldsNormal = array(
             #Sitengine_Permiso::FIELD_UID => '',
             #Sitengine_Permiso::FIELD_GID => '',
-            'markupLang'.$this->_controller->getRecord()->getTranslations()->getDefaultIndex() => ''
+            'markupLang'.$this->_controller->getRecord()->getTranscripts()->getDefaultIndex() => ''
         );
         
         $fieldsOnOff = array(
@@ -1207,9 +1207,9 @@ abstract class Sitengine_Blog_Frontend_Blogs_Posts_Modifier
         	self::FIELDS_ONOFF => $fieldsOnOff
         );
         
-        foreach($this->_controller->getRecord()->getTranslations()->get() as $index => $symbol)
+        foreach($this->_controller->getRecord()->getTranscripts()->get() as $index => $symbol)
         {
-        	$payloadName = $this->_payloads->makeTranslationName($symbol);
+        	$payloadName = $this->_payloads->makeTranscriptName($symbol);
         	$fields[$payloadName] = array(
         		self::FIELDS_NORMAL => array(
         			'markupLang'.$index => ''
@@ -1414,8 +1414,8 @@ abstract class Sitengine_Blog_Frontend_Blogs_Posts_Modifier
             #Sitengine_Permiso::FIELD_UID => '',
             #Sitengine_Permiso::FIELD_GID => '',
             'embedTag' => '',
-            'titleLang'.$this->_controller->getRecord()->getTranslations()->getDefaultIndex() => '',
-            'markupLang'.$this->_controller->getRecord()->getTranslations()->getDefaultIndex() => ''
+            'titleLang'.$this->_controller->getRecord()->getTranscripts()->getDefaultIndex() => '',
+            'markupLang'.$this->_controller->getRecord()->getTranscripts()->getDefaultIndex() => ''
         );
         
         $fieldsOnOff = array(
@@ -1433,9 +1433,9 @@ abstract class Sitengine_Blog_Frontend_Blogs_Posts_Modifier
         	self::FIELDS_ONOFF => $fieldsOnOff
         );
         
-        foreach($this->_controller->getRecord()->getTranslations()->get() as $index => $symbol)
+        foreach($this->_controller->getRecord()->getTranscripts()->get() as $index => $symbol)
         {
-        	$payloadName = $this->_payloads->makeTranslationName($symbol);
+        	$payloadName = $this->_payloads->makeTranscriptName($symbol);
         	$fields[$payloadName] = array(
         		self::FIELDS_NORMAL => array(
         			'titleLang'.$index => '',
@@ -1468,10 +1468,10 @@ abstract class Sitengine_Blog_Frontend_Blogs_Posts_Modifier
         }
         if(
         	$this->_payloads->isMain() ||
-        	$this->_payloads->isDefaultTranslation()
+        	$this->_payloads->isDefaultTranscript()
         )
         {
-        	$name = 'titleLang'.$this->_controller->getRecord()->getTranslations()->getDefaultIndex();
+        	$name = 'titleLang'.$this->_controller->getRecord()->getTranscripts()->getDefaultIndex();
 			if(Sitengine_Validator::nada($this->_controller->getRequest()->getPost($name))) {
 				$message = $this->_controller->getTranslate()->translate('videoposthintsTitleRequired');
 				$this->_controller->getStatus()->addHint($name, $message);

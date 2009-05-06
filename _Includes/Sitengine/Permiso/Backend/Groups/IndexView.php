@@ -91,7 +91,7 @@ abstract class Sitengine_Permiso_Backend_Groups_IndexView extends Sitengine_View
         try {
         	require_once 'Sitengine/Form/Element.php';
             $valuePage = $this->_controller->getRequest()->get(Sitengine_Env::PARAM_PAGE);
-        	$table = $this->_controller->getFrontController()->getPermisoPackage()->getGroupsTable();
+        	$table = $this->_controller->getFrontController()->getPermiso()->getGroupsTable();
             
             $sorting = $table->getSortingInstance(
             	$this->_controller->getRequest()->get(Sitengine_Env::PARAM_SORT),
@@ -208,7 +208,7 @@ abstract class Sitengine_Permiso_Backend_Groups_IndexView extends Sitengine_View
             ########################################################################
             #### LISTQUERY
             ########################################################################
-			$name = $this->_controller->getFrontController()->getPermisoPackage()->getGroupsTableName();
+			$name = $this->_controller->getFrontController()->getPermiso()->getGroupsTableName();
 			
 			$whereClauses = array(
         		$filter->getSql('')

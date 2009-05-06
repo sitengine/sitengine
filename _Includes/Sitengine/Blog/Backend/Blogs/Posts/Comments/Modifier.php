@@ -99,7 +99,7 @@ abstract class Sitengine_Blog_Backend_Blogs_Posts_Comments_Modifier
 			$data['mdate'] = $data['cdate'];
 			$data['origin'] = $this->_controller->getFrontController()->getBlogPackage()->getName();
             #Sitengine_Debug::print_r($data);
-            $affectedRows = $this->_controller->getFrontController()->getBlogPackage()->getCommentsTable()->insert($data);
+            $affectedRows = $this->_controller->getFrontController()->getBlogPackage()->getCommentsTable()->insertOrRollback($data);
             if(!$affectedRows)
             {
             	$error = $this->_controller->getFrontController()->getBlogPackage()->getCommentsTable()->getError();
@@ -175,7 +175,7 @@ abstract class Sitengine_Blog_Backend_Blogs_Posts_Comments_Modifier
             );
             require_once 'Sitengine/Sql.php';
     		$where = Sitengine_Sql::getWhereStatement($whereClauses, false);
-            $affectedRows = $this->_controller->getFrontController()->getBlogPackage()->getCommentsTable()->update($data, $where);
+            $affectedRows = $this->_controller->getFrontController()->getBlogPackage()->getCommentsTable()->updateOrRollback($data, $where);
             if(!$affectedRows)
             {
             	$error = $this->_controller->getFrontController()->getBlogPackage()->getCommentsTable()->getError();
@@ -252,7 +252,7 @@ abstract class Sitengine_Blog_Backend_Blogs_Posts_Comments_Modifier
             );
             require_once 'Sitengine/Sql.php';
     		$where = Sitengine_Sql::getWhereStatement($whereClauses, false);
-            return $this->_controller->getFrontController()->getBlogPackage()->getCommentsTable()->update($data, $where);
+            return $this->_controller->getFrontController()->getBlogPackage()->getCommentsTable()->updateOrRollback($data, $where);
         }
         catch (Exception $exception) {
             require_once 'Sitengine/Blog/Backend/Blogs/Posts/Comments/Exception.php';

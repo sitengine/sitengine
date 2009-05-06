@@ -186,7 +186,7 @@ abstract class Sitengine_Blog_Frontend_Front extends Sitengine_Controller_Front
 			'*',
 			array(
 				Sitengine_Env::PARAM_CONTROLLER => $this->getController(self::CONTROLLER_BLOGS_POSTS),
-				Sitengine_Env::PARAM_ACTION => 'factory',
+				Sitengine_Env::PARAM_ACTION => 'restMapper',
 				Sitengine_Env::PARAM_ANCESTORID => $blogSlug
 			)
 		);
@@ -222,7 +222,7 @@ abstract class Sitengine_Blog_Frontend_Front extends Sitengine_Controller_Front
     {
     	$defaults = array(
 			Sitengine_Env::PARAM_CONTROLLER => $this->getController($controller),
-			Sitengine_Env::PARAM_ACTION => 'factory'
+			Sitengine_Env::PARAM_ACTION => 'restMapper'
 		);
 		require_once 'Sitengine/Controller/Router/Route.php';
     	$route = new Sitengine_Controller_Router_Route($uri, $defaults);
@@ -232,17 +232,17 @@ abstract class Sitengine_Blog_Frontend_Front extends Sitengine_Controller_Front
     
     
     
-    protected $_permisoPackage = null;
+    protected $_permiso = null;
     
-    public function getPermisoPackage()
+    public function getPermiso()
     {
-    	if($this->_permisoPackage === null) {
-    		$this->_permisoPackage = $this->_getPermisoPackageInstance();
+    	if($this->_permiso === null) {
+    		$this->_permiso = $this->_getPermisoInstance();
     	}
-    	return $this->_permisoPackage;
+    	return $this->_permiso;
     }
     
-    abstract protected function _getPermisoPackageInstance();
+    abstract protected function _getPermisoInstance();
     
     
     

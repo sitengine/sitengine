@@ -114,7 +114,7 @@ abstract class Sitengine_Proto_Binaries_Front extends Sitengine_Controller_Front
 				'*',
 				array(
 					Sitengine_Env::PARAM_CONTROLLER => $this->getController(self::CONTROLLER_GOODIES),
-					Sitengine_Env::PARAM_ACTION => 'factory'
+					Sitengine_Env::PARAM_ACTION => 'restMapper'
 				)
 			)
 		);
@@ -128,17 +128,17 @@ abstract class Sitengine_Proto_Binaries_Front extends Sitengine_Controller_Front
     
     
     
-    protected $_permisoPackage = null;
+    protected $_permiso = null;
     
-    public function getPermisoPackage()
+    public function getPermiso()
     {
-    	if($this->_permisoPackage === null) {
-    		$this->_permisoPackage = $this->_getPermisoPackageInstance();
+    	if($this->_permiso === null) {
+    		$this->_permiso = $this->_getPermisoInstance();
     	}
-    	return $this->_permisoPackage;
+    	return $this->_permiso;
     }
     
-    abstract protected function _getPermisoPackageInstance();
+    abstract protected function _getPermisoInstance();
     
     
     

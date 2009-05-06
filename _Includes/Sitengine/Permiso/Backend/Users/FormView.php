@@ -97,7 +97,7 @@ abstract class Sitengine_Permiso_Backend_Users_FormView extends Sitengine_View
             #$valueOrder = $this->_controller->getRequest()->get(Sitengine_Env::PARAM_ORDER);
             #$valuePage = $this->_controller->getRequest()->get(Sitengine_Env::PARAM_PAGE);
             
-            $table = $this->_controller->getFrontController()->getPermisoPackage()->getUsersTable();
+            $table = $this->_controller->getFrontController()->getPermiso()->getUsersTable();
             
             
             ########################################################################
@@ -122,7 +122,7 @@ abstract class Sitengine_Permiso_Backend_Users_FormView extends Sitengine_View
             
             if($this->_inputMode == Sitengine_Env::INPUTMODE_UPDATE)
             {
-				$stored = $this->_controller->getFrontController()->getPermisoPackage()->getUsersTable()->complementRow($this->_controller->getEntity()->getRow());
+				$stored = $this->_controller->getFrontController()->getPermiso()->getUsersTable()->complementRow($this->_controller->getEntity()->getRow());
                 
                 $data = Sitengine_Controller_Request_Http::filterUpdate(
                     sizeof($input),

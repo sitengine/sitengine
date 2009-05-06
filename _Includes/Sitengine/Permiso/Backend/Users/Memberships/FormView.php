@@ -97,7 +97,7 @@ abstract class Sitengine_Permiso_Backend_Users_Memberships_FormView extends Site
             #$valueOrder = $this->_controller->getRequest()->get(Sitengine_Env::PARAM_ORDER);
             #$valuePage = $this->_controller->getRequest()->get(Sitengine_Env::PARAM_PAGE);
             
-            $table = $this->_controller->getFrontController()->getPermisoPackage()->getMembershipsTable();
+            $table = $this->_controller->getFrontController()->getPermiso()->getMembershipsTable();
             
             
             ########################################################################
@@ -112,7 +112,7 @@ abstract class Sitengine_Permiso_Backend_Users_Memberships_FormView extends Site
             
             if($this->_inputMode == Sitengine_Env::INPUTMODE_UPDATE)
             {
-				$stored = $this->_controller->getFrontController()->getPermisoPackage()->getMembershipsTable()->complementRow($this->_controller->getEntity()->getRow());
+				$stored = $this->_controller->getFrontController()->getPermiso()->getMembershipsTable()->complementRow($this->_controller->getEntity()->getRow());
                 
                 $data = Sitengine_Controller_Request_Http::filterUpdate(
                     sizeof($input),

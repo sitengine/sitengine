@@ -163,7 +163,7 @@ abstract class Sitengine_Permiso_Backend_Groups_ViewHelper extends Sitengine_Vie
     public function countMembers($id)
     {
     	try {
-    		$table = $this->_controller->getFrontController()->getPermisoPackage()->getMembershipsTable();
+    		$table = $this->_controller->getFrontController()->getPermiso()->getMembershipsTable();
 			$where = $this->_controller->getDatabase()->quoteInto('groupId = ?', $id);
 			$select = $table->select()->from($table, array('COUNT(*) AS count'))->where($where);
 			$count = $table->fetchRow($select);

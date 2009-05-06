@@ -239,8 +239,8 @@
 									<?$file1ThumbnailTag = $row->file1ThumbnailTag;?>
 									<?$uriUpdate = $row->uriUpdate;?>
 									<?$isMarked = $row->isMarked;?>
-									<?$translationMissing = $row->translationMissing;?>
-									<?$translationsIncomplete = $row->translationsIncomplete;?>
+									<?$transcriptMissing = $row->transcriptMissing;?>
+									<?$transcriptsIncomplete = $row->transcriptsIncomplete;?>
 									
 									<?if($isMarked):?>
 										<?$rowClass = "listformMarkedRow";?>
@@ -248,7 +248,7 @@
 										<?$rowClass = "listformDataRow";?>
 									<?endif;?>
 									
-									<?if($translationMissing):?>
+									<?if($transcriptMissing):?>
 										<?$titleClass = "listformDataTitleError";?>
 									<?else:?>
 										<?$titleClass = "listformDataTitle";?>
@@ -470,12 +470,12 @@
 								<?=$this->SECTIONS->COULDIES->SETTINGS->hiddens;?>
 								
 								<?
-									$name = Sitengine_Env::PARAM_TRANSLATION;
+									$name = Sitengine_Env::PARAM_TRANSCRIPT;
 									print $this->formSelect(
 										$name,
 										$this->SECTIONS->COULDIES->SETTINGS->$name,
 										array('onchange' => 'document.settingsForm.submit();'),
-										$this->SECTIONS->COULDIES->SETTINGS->TRANSLATIONS->toArray()
+										$this->SECTIONS->COULDIES->SETTINGS->TRANSCRIPTS->toArray()
 									);
 								?>
 								

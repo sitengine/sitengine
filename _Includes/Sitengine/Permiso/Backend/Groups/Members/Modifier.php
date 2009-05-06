@@ -65,10 +65,10 @@ abstract class Sitengine_Permiso_Backend_Groups_Members_Modifier
             $data['groupId']= $groupId;
             
             #Sitengine_Debug::print_r($data);
-            $insertId = $this->_controller->getFrontController()->getPermisoPackage()->getMembershipsTable()->insert($data);
+            $insertId = $this->_controller->getFrontController()->getPermiso()->getMembershipsTable()->insertOrRollback($data);
             if(!$insertId)
             {
-            	$error = $this->_controller->getFrontController()->getPermisoPackage()->getMembershipsTable()->getError();
+            	$error = $this->_controller->getFrontController()->getPermiso()->getMembershipsTable()->getError();
             	if($error === null) { return null; }
             	$message = $this->_controller->getTranslate()->translate('hints'.ucfirst($error));
     			$this->_controller->getStatus()->addHint('record', $message);
@@ -121,10 +121,10 @@ abstract class Sitengine_Permiso_Backend_Groups_Members_Modifier
             #Sitengine_Debug::print_r($data);
             
             $where = $this->_controller->getDatabase()->quoteInto('id = ?', $id);
-            $affectedRows = $this->_controller->getFrontController()->getPermisoPackage()->getMembershipsTable()->update($data, $where);
+            $affectedRows = $this->_controller->getFrontController()->getPermiso()->getMembershipsTable()->updateOrRollback($data, $where);
             if(!$affectedRows)
             {
-            	$error = $this->_controller->getFrontController()->getPermisoPackage()->getMembershipsTable()->getError();
+            	$error = $this->_controller->getFrontController()->getPermiso()->getMembershipsTable()->getError();
             	if($error === null) { return null; }
             	$message = $this->_controller->getTranslate()->translate('hints'.ucfirst($error));
     			$this->_controller->getStatus()->addHint('record', $message);
@@ -225,7 +225,7 @@ abstract class Sitengine_Permiso_Backend_Groups_Members_Modifier
             );
             require_once 'Sitengine/Sql.php';
 			$where = Sitengine_Sql::getWhereStatement($whereClauses, false);
-            return $this->_controller->getFrontController()->getPermisoPackage()->getMembershipsTable()->delete($where);
+            return $this->_controller->getFrontController()->getPermiso()->getMembershipsTable()->delete($where);
         }
         catch (Exception $exception) {
             require_once 'Sitengine/Permiso/Backend/Groups/Members/Exception.php';
@@ -259,7 +259,7 @@ abstract class Sitengine_Permiso_Backend_Groups_Members_Modifier
             );
             require_once 'Sitengine/Sql.php';
     		$where = Sitengine_Sql::getWhereStatement($whereClauses, false);
-            return $this->_controller->getFrontController()->getPermisoPackage()->getMembershipsTable()->update($data, $where);
+            return $this->_controller->getFrontController()->getPermiso()->getMembershipsTable()->updateOrRollback($data, $where);
         }
         catch (Exception $exception) {
             require_once 'Sitengine/Permiso/Backend/Groups/Members/Exception.php';

@@ -182,7 +182,7 @@ abstract class Sitengine_Blog_Backend_Blogs_Posts_Comments_ViewHelper extends Si
         if($blogSlug === null)
         {
 			$table = $this->_controller->getFrontController()->getBlogPackage()->getBlogsTable();
-			$table->setTranslation($this->_controller->getPreferences()->getTranslation());
+			$table->setTranscript($this->_controller->getPreferences()->getTranscript());
 			$blog = $table->complementRow($breadcrumbs['blog']);
 			
 			$args = array(
@@ -205,7 +205,7 @@ abstract class Sitengine_Blog_Backend_Blogs_Posts_Comments_ViewHelper extends Si
         
         
         $table = $this->_controller->getFrontController()->getBlogPackage()->getPostsTable();
-        $table->setTranslation($this->_controller->getPreferences()->getTranslation());
+        $table->setTranscript($this->_controller->getPreferences()->getTranscript());
     	$post = $table->complementRow($breadcrumbs['post']);
         
         $args = array(

@@ -352,8 +352,8 @@ abstract class Sitengine_Blog_Backend_Blogs_Posts_ViewHelper extends Sitengine_V
         $data = array();
         
         $blog = $this->_controller->getFrontController()->getBlogPackage()->getBlogsTable()->complementRow($breadcrumbs['blog']);
-    	$translations = $this->_controller->getFrontController()->getBlogPackage()->getBlogsTable()->getTranslations();
-    	$translations->setLanguage($this->_controller->getPreferences()->getTranslation());
+    	$transcripts = $this->_controller->getFrontController()->getBlogPackage()->getBlogsTable()->getTranscripts();
+    	$transcripts->setLanguage($this->_controller->getPreferences()->getTranscript());
     	
         $args = array(
             Sitengine_Env::PARAM_ID => $this->_controller->getEntity()->getAncestorSlug()
@@ -364,8 +364,8 @@ abstract class Sitengine_Blog_Backend_Blogs_Posts_ViewHelper extends Sitengine_V
         $args = array();
         $route = $this->_controller->getFrontController()->getRouter()->getRoute(Sitengine_Blog_Backend_Front::ROUTE_BLOGS);
         $uriIndex = $this->_controller->getRequest()->getBasePath().'/'.$route->assemble($args, true);
-        $title = $blog['titleLang'.$translations->getIndex()];
-        $title = ($title) ? $title : $blog['titleLang'.$translations->getDefaultIndex()];
+        $title = $blog['titleLang'.$transcripts->getIndex()];
+        $title = ($title) ? $title : $blog['titleLang'.$transcripts->getDefaultIndex()];
         $data['blog'] = array(
             'name' => $this->_controller->getTranslate()->translate('breadcrumbsBlogEntity'),
             'uriIndex' => $uriIndex,
@@ -374,8 +374,8 @@ abstract class Sitengine_Blog_Backend_Blogs_Posts_ViewHelper extends Sitengine_V
         );
         
         
-    	$translations = $this->_controller->getFrontController()->getBlogPackage()->getPostsTable()->getTranslations();
-    	$translations->setLanguage($this->_controller->getPreferences()->getTranslation());
+    	$transcripts = $this->_controller->getFrontController()->getBlogPackage()->getPostsTable()->getTranscripts();
+    	$transcripts->setLanguage($this->_controller->getPreferences()->getTranscript());
         
         
         $args = array(
@@ -402,17 +402,17 @@ abstract class Sitengine_Blog_Backend_Blogs_Posts_ViewHelper extends Sitengine_V
             	$title = $post['file1OriginalSource'];
             }
             else if($post['type'] == Sitengine_Blog_Posts_Table::TYPE_QUOTE) {
-            	$title = $post['teaserLang'.$translations->getDefaultIndex()];
+            	$title = $post['teaserLang'.$transcripts->getDefaultIndex()];
             }
             else if($post['type'] == Sitengine_Blog_Posts_Table::TYPE_AUDIO) {
             	$title = $post['file1OriginalSource'];
             }
             else if($post['type'] == Sitengine_Blog_Posts_Table::TYPE_VIDEO) {
-            	$title = $post['titleLang'.$translations->getDefaultIndex()];
+            	$title = $post['titleLang'.$transcripts->getDefaultIndex()];
             }
             else {
-				$title = $post['titleLang'.$translations->getIndex()];
-				$title = ($title) ? $title : $post['titleLang'.$translations->getDefaultIndex()];
+				$title = $post['titleLang'.$transcripts->getIndex()];
+				$title = ($title) ? $title : $post['titleLang'.$transcripts->getDefaultIndex()];
 			}
             $level['title'] = $title;
             $level['uriUpdate'] = $uriUpdate;

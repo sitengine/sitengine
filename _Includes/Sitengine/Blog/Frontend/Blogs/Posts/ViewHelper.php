@@ -448,16 +448,16 @@ abstract class Sitengine_Blog_Frontend_Blogs_Posts_ViewHelper extends Sitengine_
         $data = array();
         
         $blog = $this->_controller->getFrontController()->getBlogPackage()->getBlogsTable()->complementRow($breadcrumbs['blog']);
-    	$translations = $this->_controller->getFrontController()->getBlogPackage()->getBlogsTable()->getTranslations();
-    	$translations->setLanguage($this->_controller->getPreferences()->getTranslation());
+    	$transcripts = $this->_controller->getFrontController()->getBlogPackage()->getBlogsTable()->getTranscripts();
+    	$transcripts->setLanguage($this->_controller->getPreferences()->getTranscript());
         /*
     	require_once 'Sitengine/Blog/Blog.php';
         $blog = new Sitengine_Blog_Blog(
         	$this->_controller->getDatabase(),
         	$this->_controller->getFrontController()->getBlogPackage()
         );
-    	$translations = $blog->getTranslations();
-    	$translations->setLanguage($this->_controller->getPreferences()->getLanguage());
+    	$transcripts = $blog->getTranscripts();
+    	$transcripts->setLanguage($this->_controller->getPreferences()->getLanguage());
     	
         /*
         $args = array(
@@ -477,8 +477,8 @@ abstract class Sitengine_Blog_Frontend_Blogs_Posts_ViewHelper extends Sitengine_
         );
         
         
-    	$translations = $this->_controller->getFrontController()->getBlogPackage()->getPostsTable()->getTranslations();
-    	$translations->setLanguage($this->_controller->getPreferences()->getTranslation());
+    	$transcripts = $this->_controller->getFrontController()->getBlogPackage()->getPostsTable()->getTranscripts();
+    	$transcripts->setLanguage($this->_controller->getPreferences()->getTranscript());
         
         
         $args = array(
@@ -505,17 +505,17 @@ abstract class Sitengine_Blog_Frontend_Blogs_Posts_ViewHelper extends Sitengine_
             	$title = $post['file1OriginalSource'];
             }
             else if($post['type'] == Sitengine_Blog_Posts_Table::TYPE_QUOTE) {
-            	$title = $post['markupLang'.$translations->getDefaultIndex()];
+            	$title = $post['markupLang'.$transcripts->getDefaultIndex()];
             }
             else if($post['type'] == Sitengine_Blog_Posts_Table::TYPE_AUDIO) {
             	$title = $post['file1OriginalSource'];
             }
             else if($post['type'] == Sitengine_Blog_Posts_Table::TYPE_VIDEO) {
-            	$title = $post['titleLang'.$translations->getDefaultIndex()];
+            	$title = $post['titleLang'.$transcripts->getDefaultIndex()];
             }
             else {
-				$title = $post['titleLang'.$translations->getIndex()];
-				$title = ($title) ? $title : $post['titleLang'.$translations->getDefaultIndex()];
+				$title = $post['titleLang'.$transcripts->getIndex()];
+				$title = ($title) ? $title : $post['titleLang'.$transcripts->getDefaultIndex()];
 			}
             $level['title'] = $title;
             $level['uriView'] = $uriView;

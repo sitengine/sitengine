@@ -111,6 +111,13 @@ abstract class Zend_Form_Element_Multi extends Zend_Form_Element_Xhtml
 
         return $this;
     }
+    
+    
+    public function directlySetMultiOptions(array $options)
+    {
+    	$this->options = $options;
+    	return $this;
+    }
 
     /**
      * Add many options at once

@@ -132,7 +132,7 @@ abstract class Sitengine_Permiso_Frontend_User_Controller extends Sitengine_Cont
 			require_once 'Sitengine/Env/Preferences.php';
 			$this->_preferences = Sitengine_Env_Preferences::getInstance();
 			$this->_locale = $this->getEnv()->getLocaleInstance();
-			$this->_permiso = $this->getFrontController()->getPermisoPackage()->start($this->getDatabase());
+			$this->_permiso = $this->getFrontController()->getPermiso()->start($this->getDatabase());
         	$this->_translate = $this->_getTranslateInstance();
 			require_once 'Zend/Session/Namespace.php';
     		$this->_namespace = new Zend_Session_Namespace(get_class($this));
@@ -236,9 +236,9 @@ abstract class Sitengine_Permiso_Frontend_User_Controller extends Sitengine_Cont
 					Sitengine_Env::PARAM_LANGUAGE
 				);
 				
-				$this->getPreferences()->establishTranslation(
+				$this->getPreferences()->establishTranscript(
 					$this->getRequest(),
-					Sitengine_Env::PARAM_TRANSLATION
+					Sitengine_Env::PARAM_TRANSCRIPT
 				);
 				
 				$this->getPreferences()->establishItemsPerPage(
@@ -343,21 +343,20 @@ abstract class Sitengine_Permiso_Frontend_User_Controller extends Sitengine_Cont
 			case Sitengine_Env::ERROR_BAD_REQUEST:
 				$handler = Sitengine_Error_Controller::ACTION_BAD_REQUEST;
 				break;
-			case Sitengine_Env::ERROR_UNAUTHORIZED:
-				$handler = Sitengine_Error_Controller::ACTION_UNAUTHORIZED;
+			case Sitengine_Env::ERROR_FORBIDDEN:
+				$handler = Sitengine_Error_Controller::ACTION_FORBIDDEN;
 				break;
-			case Sitengine_Env::ERROR_NOT_SUPPORTED:
-				$handler = Sitengine_Error_Controller::ACTION_NOT_SUPPORTED;
+			case Sitengine_Env::ERROR_NOT_IMPLEMENTED:
+				$handler = Sitengine_Error_Controller::ACTION_NOT_IMPLEMENTED;
 				break;
 			default:
-				$handler = Sitengine_Error_Controller::ACTION_INTERNAL;
+				$handler = Sitengine_Error_Controller::ACTION_INTERNAL_SERVER_ERROR;
 		}
 		
 		$pluginClass = 'Zend_Controller_Plugin_ErrorHandler';
 		if($this->getFrontController()->hasPlugin($pluginClass))
 		{
-			$plugin = $this->getFrontController()->getPlugin($pluginClass);
-			$plugin->setErrorHandlerAction($handler);
+			$this->getFrontController()->getPlugin($pluginClass)->setErrorHandlerAction($handler);
 		}
 		return $exception;
     }
@@ -392,10 +391,10 @@ abstract class Sitengine_Permiso_Frontend_User_Controller extends Sitengine_Cont
     
     
     
-    public function factoryAction()
+    public function restMapperAction()
     {
     	$routeName = $this->getFrontController()->getRouter()->getCurrentRouteName();
-    	$method = $this->getRequest()->getMethod();
+    	$method = $this->getRequest()->getIntendedMethod();
     	$action = null;
     	
     	switch($routeName)
@@ -427,7 +426,7 @@ abstract class Sitengine_Permiso_Frontend_User_Controller extends Sitengine_Cont
     	if($action === null) {
     		require_once 'Sitengine/Permiso/Frontend/User/Exception.php';
     		$exception = new Sitengine_Permiso_Frontend_User_Exception(
-    			'method not supported',
+    			"'$method' not supported on route '$route'",
     			Sitengine_Env::ERROR_NOT_FOUND
     		);
     		throw $this->_prepareErrorHandler($exception);

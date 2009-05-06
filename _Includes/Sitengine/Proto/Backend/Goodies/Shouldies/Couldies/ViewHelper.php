@@ -202,7 +202,7 @@ abstract class Sitengine_Proto_Backend_Goodies_Shouldies_Couldies_ViewHelper ext
     	$data = array();
 		$breadcrumbs = $this->_controller->getEntity()->getBreadcrumbs();
         $table = $this->_controller->getFrontController()->getProtoPackage()->getGoodiesTable();
-        $table->setTranslation($this->_controller->getPreferences()->getTranslation());
+        $table->setTranscript($this->_controller->getPreferences()->getTranscript());
         $goody = $table->complementRow($breadcrumbs['goody']);
         
         $args = array(
@@ -226,7 +226,7 @@ abstract class Sitengine_Proto_Backend_Goodies_Shouldies_Couldies_ViewHelper ext
         
         
         $table = $this->_controller->getFrontController()->getProtoPackage()->getShouldiesTable();
-        $table->setTranslation($this->_controller->getPreferences()->getTranslation());
+        $table->setTranscript($this->_controller->getPreferences()->getTranscript());
         $shouldy = $table->complementRow($breadcrumbs['shouldy']);
         
         $args = array(
@@ -269,7 +269,7 @@ abstract class Sitengine_Proto_Backend_Goodies_Shouldies_Couldies_ViewHelper ext
         if($breadcrumbs['couldy'] !== null)
         {
         	$table = $this->_controller->getFrontController()->getProtoPackage()->getCouldiesTable();
-        	$table->setTranslation($this->_controller->getPreferences()->getTranslation());
+        	$table->setTranscript($this->_controller->getPreferences()->getTranscript());
         	$couldy = $table->complementRow($breadcrumbs['couldy']);
         	
             $args = array(

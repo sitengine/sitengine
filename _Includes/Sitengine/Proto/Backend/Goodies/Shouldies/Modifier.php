@@ -33,9 +33,9 @@ abstract class Sitengine_Proto_Backend_Goodies_Shouldies_Modifier
         $this->_controller = $controller;
         
 		$table = $this->_controller->getFrontController()->getProtoPackage()->getShouldiesTable();
-        $translations = $table->getTranslations();
-        require_once 'Sitengine/Form/TranslationPayloads.php';
-        $this->_payloads = new Sitengine_Form_TranslationPayloads($translations);
+        $transcripts = $table->getTranscripts();
+        require_once 'Sitengine/Form/TranscriptsPayloads.php';
+        $this->_payloads = new Sitengine_Form_TranscriptsPayloads($transcripts);
     }
     
     
@@ -43,7 +43,7 @@ abstract class Sitengine_Proto_Backend_Goodies_Shouldies_Modifier
     protected function _getFields()
     {
 		$table = $this->_controller->getFrontController()->getProtoPackage()->getShouldiesTable();
-        $translations = $table->getTranslations();
+        $transcripts = $table->getTranscripts();
 		
         $fields[$this->_payloads->getMainName()] = array(
             Sitengine_Permiso::FIELD_UID => '',
@@ -55,16 +55,16 @@ abstract class Sitengine_Proto_Backend_Goodies_Shouldies_Modifier
             Sitengine_Permiso::FIELD_DAG => 0,
             Sitengine_Permiso::FIELD_DAW => 0,
             'type' => '',
-            'titleLang'.$translations->getDefaultIndex() => '',
+            'titleLang'.$transcripts->getDefaultIndex() => '',
             'sorting' => '',
             'publish' => 0,
             'locked' => 0,
             'displayThis' => 0
         );
         
-        foreach($translations->get() as $index => $symbol)
+        foreach($transcripts->get() as $index => $symbol)
         {
-        	$payloadName = $this->_payloads->makeTranslationName($symbol);
+        	$payloadName = $this->_payloads->makeTranscriptName($symbol);
         	$fields[$payloadName] = array(
 				'titleLang'.$index => '',
 				'textLang'.$index => ''
@@ -183,7 +183,7 @@ abstract class Sitengine_Proto_Backend_Goodies_Shouldies_Modifier
             #$data[Sitengine_Permiso::FIELD_OID] = $this->_controller->getPermiso()->getOrganization()->getId();
             $data = array_merge($data, $this->_controller->getFrontController()->getProtoPackage()->getShouldiesTable()->getFileData());
             #Sitengine_Debug::print_r($data);
-            $insertId = $this->_controller->getFrontController()->getProtoPackage()->getShouldiesTable()->insert($data);
+            $insertId = $this->_controller->getFrontController()->getProtoPackage()->getShouldiesTable()->insertOrRollback($data);
             if(!$insertId)
             {
             	$error = $this->_controller->getFrontController()->getProtoPackage()->getShouldiesTable()->getError();
@@ -256,7 +256,7 @@ abstract class Sitengine_Proto_Backend_Goodies_Shouldies_Modifier
             #Sitengine_Debug::print_r($data);
             
             $where = $this->_controller->getDatabase()->quoteInto('id = ?', $id);
-            $affectedRows = $this->_controller->getFrontController()->getProtoPackage()->getShouldiesTable()->update($data, $where);
+            $affectedRows = $this->_controller->getFrontController()->getProtoPackage()->getShouldiesTable()->updateOrRollback($data, $where);
             if(!$affectedRows)
             {
             	$error = $this->_controller->getFrontController()->getProtoPackage()->getShouldiesTable()->getError();
@@ -280,14 +280,14 @@ abstract class Sitengine_Proto_Backend_Goodies_Shouldies_Modifier
     protected function _checkInput()
     {
 		$table = $this->_controller->getFrontController()->getProtoPackage()->getShouldiesTable();
-        $translations = $table->getTranslations();
+        $transcripts = $table->getTranscripts();
 		
         if(
         	$this->_payloads->isMain() ||
-        	$this->_payloads->isDefaultTranslation()
+        	$this->_payloads->isDefaultTranscript()
         )
         {
-        	$name = 'titleLang'.$translations->getDefaultIndex();
+        	$name = 'titleLang'.$transcripts->getDefaultIndex();
 			if(Sitengine_Validator::nada($this->_controller->getRequest()->getPost($name))) {
 				$message = $this->_controller->getTranslate()->translate('hintsTitleRequired');
 				$this->_controller->getStatus()->addHint($name, $message);
@@ -380,7 +380,7 @@ abstract class Sitengine_Proto_Backend_Goodies_Shouldies_Modifier
             );
             require_once 'Sitengine/Sql.php';
     		$where = Sitengine_Sql::getWhereStatement($whereClauses, false);
-            return $this->_controller->getFrontController()->getProtoPackage()->getShouldiesTable()->update($data, $where);
+            return $this->_controller->getFrontController()->getProtoPackage()->getShouldiesTable()->updateOrRollback($data, $where);
         }
         catch (Exception $exception) {
             require_once 'Sitengine/Proto/Backend/Goodies/Shouldies/Exception.php';

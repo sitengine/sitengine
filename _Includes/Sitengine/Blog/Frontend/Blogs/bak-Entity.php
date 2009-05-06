@@ -87,7 +87,7 @@ abstract class Sitengine_Blog_Frontend_Blogs_Entity
         		$this->_controller->getDatabase(),
         		$this->_controller->getFrontController()->getBlogPackage()
         	);
-        	$blogsObj->setTranslation($this->_controller->getPreferences()->getLanguage());
+        	$blogsObj->setTranscript($this->_controller->getPreferences()->getLanguage());
         	$blogs = $this->_controller->getFrontController()->getBlogPackage()->getBlogsTableName();
         	$whereClauses = array(
         		"$blogs.id = ".$this->_controller->getDatabase()->quote($id)." OR $blogs.slug = ".$this->_controller->getDatabase()->quote($id)

@@ -123,7 +123,7 @@ abstract class Sitengine_Blog_Frontend_Blogs_Posts_Files_IndexView extends Siten
         		$this->_controller->getFrontController()->getBlogPackage(),
         		$this->_controller->getPermiso()
         	);
-        	$filesObj->setTranslation($this->_controller->getPreferences()->getLanguage());
+        	$filesObj->setTranscript($this->_controller->getPreferences()->getLanguage());
         	
             $filter = $filesObj->getFilterInstance(
             	$this->_controller->getRequest(),
@@ -148,19 +148,19 @@ abstract class Sitengine_Blog_Frontend_Blogs_Posts_Files_IndexView extends Siten
             $settingsElements = array();
             
             
-            ### translation element ###
-            $translations = $fileObj->getTranslations();
-            $translations->setLanguage($this->_controller->getPreferences()->getLanguage());
-            if(!$translations->isDefault()) { $settingsIsActive = true; }
+            ### transcript element ###
+            $transcripts = $fileObj->getTranscripts();
+            $transcripts->setLanguage($this->_controller->getPreferences()->getLanguage());
+            if(!$transcripts->isDefault()) { $settingsIsActive = true; }
             # set html input element
             $languages = array();
-            foreach($translations->get() as $symbol) {
+            foreach($transcripts->get() as $symbol) {
             	$languages[$symbol] = $this->_controller->getTranslate()->translate('languages'.ucfirst($symbol));
             }
-            $e = new Sitengine_Form_Element(Sitengine_Env::PARAM_TRANSLATION, $translations->getSymbol());
-            $e->setId('settings'.Sitengine_Env::PARAM_TRANSLATION);
+            $e = new Sitengine_Form_Element(Sitengine_Env::PARAM_TRANSCRIPT, $transcripts->getSymbol());
+            $e->setId('settings'.Sitengine_Env::PARAM_TRANSCRIPT);
             $e->setClass('settingsSelect');
-            $settingsElements[Sitengine_Env::PARAM_TRANSLATION] = $e->getSelect($languages);
+            $settingsElements[Sitengine_Env::PARAM_TRANSCRIPT] = $e->getSelect($languages);
             
             
             ### ipp element ###

@@ -78,7 +78,7 @@ abstract class Sitengine_Sitemap_Backend_Record extends Sitengine_Record {
     
     
     
-    protected function _checkModifyException(Zend_Exception $exception)
+    public function checkModifyException(Zend_Exception $exception)
     {
     	if(preg_match('/Duplicate entry.*for key (2|\'keyword\')/i', $exception->getMessage())) {
     		$this->_setError('keywordExists');

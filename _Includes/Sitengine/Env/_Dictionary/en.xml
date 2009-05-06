@@ -24,11 +24,12 @@
 	<item name="viewFormPermissionSectionUpdate">Update</item>
 	<item name="viewFormPermissionSectionDelete">Delete</item>
 	<item name="viewFormPermissionSectionWorld">World</item>
-	<item name="statusUnauthorized">Authentication required</item>
+	<item name="statusForbidden">Authentication required</item>
 	<item name="statusNotFound">The requested Document could not be found</item>
 	<item name="statusBadRequest">Bad request</item>
-	<item name="statusError">A system error has occured</item>
-	<item name="statusNotSupported">Unsupported function call</item>
+	<item name="statusInternalServerError">A system error has occured</item>
+	<item name="statusMethodNotSupported">Unsupported function call</item>
+	<item name="statusNotImplemented">Not implemented</item>
 	<item name="statusErrorInput">Input error</item>
 	<item name="statusOkInput">Input Ok</item>
 	<item name="statusErrorImport">File could not be imported</item>
@@ -82,6 +83,7 @@
 	<item name="monthsOct">October</item>
 	<item name="monthsNov">November</item>
 	<item name="monthsDec">December</item>
+	
 	<item name="countriesDz">Algeria</item>
 	<item name="countriesAr">Argentina</item>
 	<item name="countriesAu">Australia</item>

@@ -117,8 +117,8 @@ abstract class Sitengine_Blog_Backend_Blogs_Posts_FormAudioView extends Sitengin
             #$valuePage = $this->_controller->getRequest()->get(Sitengine_Env::PARAM_PAGE);
             
             $table = $this->_controller->getFrontController()->getBlogPackage()->getPostsTable();
-            $table->setTranslation($this->_controller->getPreferences()->getTranslation());
-            $translations = $table->getTranslations();
+            $table->setTranscript($this->_controller->getPreferences()->getTranscript());
+            $transcripts = $table->getTranscripts();
             
             
             ########################################################################
@@ -130,7 +130,7 @@ abstract class Sitengine_Blog_Backend_Blogs_Posts_FormAudioView extends Sitengin
                 #Sitengine_Permiso::FIELD_GID => ''
             );
             
-            foreach($translations->get() as $index => $symbol) {
+            foreach($transcripts->get() as $index => $symbol) {
             	$fieldsNormal['titleLang'.$index] = '';
             	$fieldsNormal['markupLang'.$index] = '';
             }
@@ -147,8 +147,8 @@ abstract class Sitengine_Blog_Backend_Blogs_Posts_FormAudioView extends Sitengin
             
             if($this->_inputMode == Sitengine_Env::INPUTMODE_UPDATE)
             {
-            	require_once 'Sitengine/Form/TranslationPayloads.php';
-            	$payloads = new Sitengine_Form_TranslationPayloads($translations);
+            	require_once 'Sitengine/Form/TranscriptsPayloads.php';
+            	$payloads = new Sitengine_Form_TranscriptsPayloads($transcripts);
 				$payloads->start($this->_controller->getRequest()->get(Sitengine_Env::PARAM_PAYLOAD_NAME));
                 $stored = $this->_controller->getFrontController()->getBlogPackage()->getPostsTable()->complementRow($this->_controller->getEntity()->getRow());
                 
@@ -217,8 +217,8 @@ abstract class Sitengine_Blog_Backend_Blogs_Posts_FormAudioView extends Sitengin
             }
             else
             {
-            	require_once 'Sitengine/Form/TranslationPayloads.php';
-            	$payloads = new Sitengine_Form_TranslationPayloads($translations);
+            	require_once 'Sitengine/Form/TranscriptsPayloads.php';
+            	$payloads = new Sitengine_Form_TranscriptsPayloads($transcripts);
             	$payloads->start();
             	
                 $data = Sitengine_Controller_Request_Http::filterInsertDeprecated(
@@ -317,7 +317,7 @@ abstract class Sitengine_Blog_Backend_Blogs_Posts_FormAudioView extends Sitengin
 					$elements[$n] = $e->getCheckbox($data[$n]);
 				}
 				*/
-				$n = 'titleLang'.$payloads->getTranslationIndex();
+				$n = 'titleLang'.$payloads->getTranscriptIndex();
 				$e = new Sitengine_Form_Element($n, $data[$n]);
 				$e->setClass('viewFormInput');
 				$e->setId('viewForm'.$n);
@@ -336,10 +336,10 @@ abstract class Sitengine_Blog_Backend_Blogs_Posts_FormAudioView extends Sitengin
 				$elements[$n] = $e->getFile(40);
             }
             /*
-			$n = 'markupLang'.$payloads->getTranslationIndex();
+			$n = 'markupLang'.$payloads->getTranscriptIndex();
 			$elements['markup'] = $this->_makeTextarea($n, $data[$n]);
             */
-            $n = 'markupLang'.$payloads->getTranslationIndex();
+            $n = 'markupLang'.$payloads->getTranscriptIndex();
 			$e = new Sitengine_Form_Element($n, $data[$n]);
 			$e->setClass('viewFormTextarea');
 			$e->setId('markupTextarea');
@@ -350,10 +350,10 @@ abstract class Sitengine_Blog_Backend_Blogs_Posts_FormAudioView extends Sitengin
             ########################################################################
             $contentSectionTitle = $this->_controller->getTranslate()->translate('formaudioviewContentSectionTitleDefault');
             
-            if(sizeof($translations->get()) > 1)
+            if(sizeof($transcripts->get()) > 1)
             {
-            	if(!$payloads->isMain()) { $symbol = $payloads->getTranslationSymbol(); }
-            	else { $symbol = $translations->getDefaultSymbol(); }
+            	if(!$payloads->isMain()) { $symbol = $payloads->getTranscriptSymbol(); }
+            	else { $symbol = $transcripts->getDefaultSymbol(); }
             	$contentSectionTitle .= ' ('.$this->_controller->getTranslate()->translate('languages'.ucfirst($symbol)).')';
             }
             
@@ -385,12 +385,12 @@ abstract class Sitengine_Blog_Backend_Blogs_Posts_FormAudioView extends Sitengin
 				
 				$count = 0;
 				
-				foreach($translations->get() as $index => $symbol)
+				foreach($transcripts->get() as $index => $symbol)
 				{
-					# skip default translation because all fields are available in the overview
+					# skip default transcript because all fields are available in the overview
 					if($count)
 					{
-						$currentPayload = $payloads->getTranslationNamePrefix().'_'.$symbol;
+						$currentPayload = $payloads->getTranscriptNamePrefix().'_'.$symbol;
 						
 						$args = array(
 							Sitengine_Env::PARAM_ANCESTORID => $this->_controller->getEntity()->getAncestorSlug(),
@@ -403,7 +403,7 @@ abstract class Sitengine_Blog_Backend_Blogs_Posts_FormAudioView extends Sitengin
 						$uri  = $this->_controller->getRequest()->getBasePath().'/'.$route->assemble($args, true);
 						$uri .= Sitengine_Controller_Request_Http::makeNameValueQuery($query);
 						
-						if(sizeof($translations->get()) > 1) {
+						if(sizeof($transcripts->get()) > 1) {
 							$label = $this->_controller->getTranslate()->translate('languages'.ucfirst($symbol));
 						}else {
 							$label = $this->_controller->getTranslate()->translate('formaudioviewContentSectionTitleDefault');
@@ -429,7 +429,7 @@ abstract class Sitengine_Blog_Backend_Blogs_Posts_FormAudioView extends Sitengin
             return array(
             	'payloadName' => $payloads->getName(),
             	'payloadIsMain' => $payloads->isMain(),
-            	'payloadIsDefaultTranslation' => $payloads->isDefaultTranslation(),
+            	'payloadIsDefaultTranscript' => $payloads->isDefaultTranscript(),
             	'queryUpdate' => ((isset($queryUpdate)) ? $queryUpdate : ''),
                 'title' => $title,
                 'contentSectionTitle' => $contentSectionTitle,

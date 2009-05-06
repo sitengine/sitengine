@@ -214,7 +214,7 @@ abstract class Sitengine_Proto_Backend_Goodies_Shouldies_ViewHelper extends Site
     	$data = array();
 		$breadcrumbs = $this->_controller->getEntity()->getBreadcrumbs();
         $table = $this->_controller->getFrontController()->getProtoPackage()->getGoodiesTable();
-        $table->setTranslation($this->_controller->getPreferences()->getTranslation());
+        $table->setTranscript($this->_controller->getPreferences()->getTranscript());
         $goody = $table->complementRow($breadcrumbs['goody']);
         
         
@@ -250,7 +250,7 @@ abstract class Sitengine_Proto_Backend_Goodies_Shouldies_ViewHelper extends Site
         if($breadcrumbs['shouldy'] !== null)
         {
         	$table = $this->_controller->getFrontController()->getProtoPackage()->getShouldiesTable();
-        	$table->setTranslation($this->_controller->getPreferences()->getTranslation());
+        	$table->setTranscript($this->_controller->getPreferences()->getTranscript());
         	$shouldy = $table->complementRow($breadcrumbs['shouldy']);
         	
             $args = array(

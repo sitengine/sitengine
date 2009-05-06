@@ -1,15 +1,20 @@
-<?if($this->_controller->getStatus()->getCode() && $this->_controller->getStatus()->isError()):?>
+<?
+	require_once 'Sitengine/Status.php';
+	Sitengine_Status::getInstance()->restore();
+?>
+
+<?if(Sitengine_Status::getInstance()->getCode() && Sitengine_Status::getInstance()->isError()):?>
 	<div id="errorStatus">
 		<h2>
-			<?if($this->_controller->getStatus()->getMessage()):?>
-				<?=$this->html($this->_controller->getStatus()->getMessage());?>
+			<?if(Sitengine_Status::getInstance()->getMessage()):?>
+				<?=$this->html(Sitengine_Status::getInstance()->getMessage());?>
 			<?else:?>
 				An Error has occured. Please check back later
 			<?endif;?>
 		</h2>
-		<?if(sizeof($this->_controller->getStatus()->getHints())):?>
+		<?if(sizeof(Sitengine_Status::getInstance()->getHints())):?>
 			<ul>
-				<?foreach($this->_controller->getStatus()->getHints() as $hint):?>
+				<?foreach(Sitengine_Status::getInstance()->getHints() as $hint):?>
 					<?foreach($hint['messages'] as $message):?>
 						<li><?=$this->html($message);?></li>
 					<?endforeach;?>
@@ -17,18 +22,18 @@
 			</ul>
 		<?endif;?>
 	</div>
-<?elseif($this->_controller->getStatus()->getCode()):?>
+<?elseif(Sitengine_Status::getInstance()->getCode()):?>
 	<div id="successStatus">
 		<h2>
-			<?if($this->_controller->getStatus()->getMessage()):?>
-				<?=$this->html($this->_controller->getStatus()->getMessage());?>
+			<?if(Sitengine_Status::getInstance()->getMessage()):?>
+				<?=$this->html(Sitengine_Status::getInstance()->getMessage());?>
 			<?else:?>
 				An Error has occured. Please check back later
 			<?endif;?>
 		</h2>
-		<?if(sizeof($this->_controller->getStatus()->getHints())):?>
+		<?if(sizeof(Sitengine_Status::getInstance()->getHints())):?>
 			<ul>
-				<?foreach($this->_controller->getStatus()->getHints() as $hint):?>
+				<?foreach(Sitengine_Status::getInstance()->getHints() as $hint):?>
 					<?foreach($hint['messages'] as $message):?>
 						<li><?=$this->html($message);?></li>
 					<?endforeach;?>

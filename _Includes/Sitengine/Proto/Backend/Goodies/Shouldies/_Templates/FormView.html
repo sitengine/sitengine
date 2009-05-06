@@ -93,7 +93,7 @@
 							<div class="viewFormMain">
 								<div class="viewFormSectionTitle"><?=$this->html($this->SECTIONS->VIEWFORM->contentSectionTitle);?></div>
 								
-								<?$fieldName = 'titleLang'.$this->SECTIONS->VIEWFORM->Payloads->getTranslationIndex();?>
+								<?$fieldName = 'titleLang'.$this->SECTIONS->VIEWFORM->Payloads->getTranscriptIndex();?>
 								<div class="viewFormContainer">
 									<div class="viewFormLabelContainer">
 										<label for="<?=$fieldName;?>" class="viewFormRequiredLabel">
@@ -343,14 +343,14 @@
 								
 								<?
 									$labelClass
-										= ($this->SECTIONS->VIEWFORM->Payloads->isDefaultTranslation())
+										= ($this->SECTIONS->VIEWFORM->Payloads->isDefaultTranscript())
 										? 'viewFormRequiredLabel'
 										: 'viewFormDefaultLabel'
 									;
 								?>
 									
 								
-								<?$fieldName = 'titleLang'.$this->SECTIONS->VIEWFORM->Payloads->getTranslationIndex();?>
+								<?$fieldName = 'titleLang'.$this->SECTIONS->VIEWFORM->Payloads->getTranscriptIndex();?>
 								<div class="viewFormContainer">
 									<div class="viewFormLabelContainer">
 										<label for="title" class="<?=$labelClass?>">
@@ -363,7 +363,7 @@
 								</div>
 								
 								
-								<?$fieldName = 'textLang'.$this->SECTIONS->VIEWFORM->Payloads->getTranslationIndex();?>
+								<?$fieldName = 'textLang'.$this->SECTIONS->VIEWFORM->Payloads->getTranscriptIndex();?>
 								<div class="viewFormContainer">
 									<div class="viewFormLabelContainer">
 										<label for="text" class="viewFormDefaultLabel">

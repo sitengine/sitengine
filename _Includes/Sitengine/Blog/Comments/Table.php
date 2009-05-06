@@ -25,7 +25,7 @@ class Sitengine_Blog_Comments_Table extends Sitengine_Db_TableWithFiles
     const VALUE_NONESELECTED = 'noneSelected';
     
     protected $_blogPackage = null;
-	#protected $_translation = null;
+	#protected $_transcript = null;
     
     
     

@@ -35,9 +35,9 @@ abstract class Sitengine_Blog_Backend_Blogs_Modifier
         $this->_controller = $controller;
         
         $table = $this->_controller->getFrontController()->getBlogPackage()->getBlogsTable();
-        $translations = $table->getTranslations();
-        require_once 'Sitengine/Form/TranslationPayloads.php';
-        $this->_payloads = new Sitengine_Form_TranslationPayloads($translations);
+        $transcripts = $table->getTranscripts();
+        require_once 'Sitengine/Form/TranscriptsPayloads.php';
+        $this->_payloads = new Sitengine_Form_TranscriptsPayloads($transcripts);
     }
     
     
@@ -45,13 +45,13 @@ abstract class Sitengine_Blog_Backend_Blogs_Modifier
     protected function _getFields()
     {
     	$table = $this->_controller->getFrontController()->getBlogPackage()->getBlogsTable();
-        $translations = $table->getTranslations();
+        $transcripts = $table->getTranscripts();
         
     	$fieldsNormal = array(
             ##Sitengine_Permiso::FIELD_UID => '',
             ##Sitengine_Permiso::FIELD_GID => '',
             'slug' => '',
-            'titleLang'.$translations->getDefaultIndex() => ''
+            'titleLang'.$transcripts->getDefaultIndex() => ''
         );
         
         $fieldsOnOff = array(
@@ -71,9 +71,9 @@ abstract class Sitengine_Blog_Backend_Blogs_Modifier
         	self::FIELDS_ONOFF => $fieldsOnOff
         );
         
-        foreach($translations->get() as $index => $symbol)
+        foreach($transcripts->get() as $index => $symbol)
         {
-        	$payloadName = $this->_payloads->makeTranslationName($symbol);
+        	$payloadName = $this->_payloads->makeTranscriptName($symbol);
         	$fields[$payloadName] = array(
         		self::FIELDS_NORMAL => array(
         			'titleLang'.$index => '',
@@ -118,7 +118,7 @@ abstract class Sitengine_Blog_Backend_Blogs_Modifier
             $data['id'] = $id;
             ##$data[Sitengine_Permiso::FIELD_OID] = $this->_controller->getPermiso()->getOrganization()->getId();
             #Sitengine_Debug::print_r($data);
-            $insertId = $this->_controller->getFrontController()->getBlogPackage()->getBlogsTable()->insert($data);
+            $insertId = $this->_controller->getFrontController()->getBlogPackage()->getBlogsTable()->insertOrRollback($data);
             if(!$insertId)
             {
             	$error = $this->_controller->getFrontController()->getBlogPackage()->getBlogsTable()->getError();
@@ -192,7 +192,7 @@ abstract class Sitengine_Blog_Backend_Blogs_Modifier
             unset($data['id']);
             
             $where = $this->_controller->getDatabase()->quoteInto('id = ?', $stored['id']);
-            $affectedRows = $this->_controller->getFrontController()->getBlogPackage()->getBlogsTable()->update($data, $where);
+            $affectedRows = $this->_controller->getFrontController()->getBlogPackage()->getBlogsTable()->updateOrRollback($data, $where);
             if(!$affectedRows)
             {
             	$error = $this->_controller->getFrontController()->getBlogPackage()->getBlogsTable()->getError();
@@ -216,9 +216,9 @@ abstract class Sitengine_Blog_Backend_Blogs_Modifier
     protected function _checkInput()
     {
     	$table = $this->_controller->getFrontController()->getBlogPackage()->getBlogsTable();
-        $translations = $table->getTranslations();
+        $transcripts = $table->getTranscripts();
         
-		$name = 'titleLang'.$translations->getDefaultIndex();
+		$name = 'titleLang'.$transcripts->getDefaultIndex();
 		if(Sitengine_Validator::nada($this->_controller->getRequest()->getPost($name))) {
 			$message = $this->_controller->getTranslate()->translate('hintsTitleRequired');
 			$this->_controller->getStatus()->addHint($name, $message);
@@ -287,7 +287,7 @@ abstract class Sitengine_Blog_Backend_Blogs_Modifier
             );
             require_once 'Sitengine/Sql.php';
     		$where = Sitengine_Sql::getWhereStatement($whereClauses, false);
-            return $this->_controller->getFrontController()->getBlogPackage()->getBlogsTable()->update($data, $where);
+            return $this->_controller->getFrontController()->getBlogPackage()->getBlogsTable()->updateOrRollback($data, $where);
         }
         catch (Exception $exception) {
             require_once 'Sitengine/Blog/Backend/Blogs/Exception.php';

@@ -103,11 +103,11 @@ class Sitengine_Permiso_Frontend_User_Modifier
             $data['password'] = md5($data['password']);
             #Sitengine_Debug::print_r($data);
             
-            $insertId = $this->_controller->getFrontController()->getPermisoPackage()->getUsersTable()->insert($data);
+            $insertId = $this->_controller->getFrontController()->getPermiso()->getUsersTable()->insertOrRollback($data);
             
             if(!$insertId)
             {
-            	$error = $this->_controller->getFrontController()->getPermisoPackage()->getUsersTable()->getError();
+            	$error = $this->_controller->getFrontController()->getPermiso()->getUsersTable()->getError();
             	if($error === null) { return null; }
             	$message = $this->_controller->getTranslate()->translate('hints'.ucfirst($error));
     			$this->_controller->getStatus()->addHint('record', $message);
@@ -172,10 +172,10 @@ class Sitengine_Permiso_Frontend_User_Modifier
             
             
             $where = $this->_controller->getDatabase()->quoteInto('id = ?', $id);
-            $affectedRows = $this->_controller->getFrontController()->getPermisoPackage()->getUsersTable()->update($data, $where);
+            $affectedRows = $this->_controller->getFrontController()->getPermiso()->getUsersTable()->updateOrRollback($data, $where);
             if(!$affectedRows)
             {
-            	$error = $this->_controller->getFrontController()->getPermisoPackage()->getUsersTable()->getError();
+            	$error = $this->_controller->getFrontController()->getPermiso()->getUsersTable()->getError();
             	if($error === null) { return null; }
             	$message = $this->_controller->getTranslate()->translate('hints'.ucfirst($error));
     			$this->_controller->getStatus()->addHint('record', $message);

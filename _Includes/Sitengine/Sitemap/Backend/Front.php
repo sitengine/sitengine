@@ -116,17 +116,17 @@ abstract class Sitengine_Sitemap_Backend_Front extends Sitengine_Controller_Fron
     
     
     
-    protected $_permisoPackage = null;
+    protected $_permiso = null;
     
-    public function getPermisoPackage()
+    public function getPermiso()
     {
-    	if($this->_permisoPackage === null) {
-    		$this->_permisoPackage = $this->_getPermisoPackageInstance();
+    	if($this->_permiso === null) {
+    		$this->_permiso = $this->_getPermisoInstance();
     	}
-    	return $this->_permisoPackage;
+    	return $this->_permiso;
     }
     
-    abstract protected function _getPermisoPackageInstance();
+    abstract protected function _getPermisoInstance();
     
     
     

@@ -21,7 +21,7 @@ require_once 'Zend/Translate/Adapter/Xliff.php';
 class Sitengine_Translate_Adapter_Xliff extends Zend_Translate_Adapter_Xliff
 {
     
-	public function getTranslationTable()
+	public function getTranscriptTable()
 	{
 		return $this->_translate;
 	}
@@ -29,7 +29,7 @@ class Sitengine_Translate_Adapter_Xliff extends Zend_Translate_Adapter_Xliff
 	
 	protected function _merge(Sitengine_Translate_Adapter_Xliff $adapter)
 	{
-		$tables = $adapter->getTranslationTable();
+		$tables = $adapter->getTranscriptTable();
 		
 		foreach($this->_translate as $lang => $units)
 		{

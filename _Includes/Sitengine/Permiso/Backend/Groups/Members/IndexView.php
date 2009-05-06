@@ -91,7 +91,7 @@ abstract class Sitengine_Permiso_Backend_Groups_Members_IndexView extends Siteng
         try {
         	require_once 'Sitengine/Form/Element.php';
             $valuePage = $this->_controller->getRequest()->get(Sitengine_Env::PARAM_PAGE);
-        	$table = $this->_controller->getFrontController()->getPermisoPackage()->getMembershipsTable();
+        	$table = $this->_controller->getFrontController()->getPermiso()->getMembershipsTable();
             
             $sorting = $table->getUserJoinSortingInstance(
             	$this->_controller->getRequest()->get(Sitengine_Env::PARAM_SORT),
@@ -212,8 +212,8 @@ abstract class Sitengine_Permiso_Backend_Groups_Members_IndexView extends Siteng
 			########################################################################
             #### LISTQUERY
             ########################################################################
-            $membershipsTableName = $this->_controller->getFrontController()->getPermisoPackage()->getMembershipsTableName();
-			$usersTableName = $this->_controller->getFrontController()->getPermisoPackage()->getUsersTableName();
+            $membershipsTableName = $this->_controller->getFrontController()->getPermiso()->getMembershipsTableName();
+			$usersTableName = $this->_controller->getFrontController()->getPermiso()->getUsersTableName();
 			
 			
 			$whereClauses = array(

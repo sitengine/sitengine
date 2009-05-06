@@ -148,6 +148,7 @@ class Sitengine_Status
     {
     	require_once 'Zend/Session/Namespace.php';
     	$namespace = new Zend_Session_Namespace(get_class($this));
+    	
     	if(isset($namespace->{'code'})) {
     		$this->_code = $namespace->{'code'};
     		unset($namespace->{'code'});

@@ -107,14 +107,14 @@ abstract class Sitengine_Permiso_Backend_Groups_Controller extends Sitengine_Con
 			
 			$options = array();
 			$this->getEnv()->startSession($this->getDatabase(), $options);
-			$this->getFrontController()->getPermisoPackage()->start($this->getDatabase());
+			$this->getFrontController()->getPermiso()->start($this->getDatabase());
 			
 			require_once 'Sitengine/Status.php';
 			$this->_status = Sitengine_Status::getInstance();
 			require_once 'Sitengine/Env/Preferences.php';
 			$this->_preferences = Sitengine_Env_Preferences::getInstance();
 			$this->_locale = $this->getEnv()->getLocaleInstance();
-			$this->_permiso = $this->getFrontController()->getPermisoPackage()->start($this->getDatabase());
+			$this->_permiso = $this->getFrontController()->getPermiso()->start($this->getDatabase());
         	$this->_translate = $this->_getTranslateInstance();
         	$this->_entity = $this->_getEntityModelInstance();
 			require_once 'Zend/Session/Namespace.php';
@@ -230,9 +230,9 @@ abstract class Sitengine_Permiso_Backend_Groups_Controller extends Sitengine_Con
 					Sitengine_Env::PARAM_LANGUAGE
 				);
 				
-				$this->getPreferences()->establishTranslation(
+				$this->getPreferences()->establishTranscript(
 					$this->getRequest(),
-					Sitengine_Env::PARAM_TRANSLATION
+					Sitengine_Env::PARAM_TRANSCRIPT
 				);
 				
 				$this->getPreferences()->establishItemsPerPage(
@@ -314,7 +314,7 @@ abstract class Sitengine_Permiso_Backend_Groups_Controller extends Sitengine_Con
     
     
     
-    protected function _getResourceToActionMappings()
+    protected function _getRestMappings()
     {
     	return array(
     		'default' => array(
@@ -342,18 +342,18 @@ abstract class Sitengine_Permiso_Backend_Groups_Controller extends Sitengine_Con
     
     
     
-    public function factoryAction()
+    public function restMapperAction()
     {
-    	$mappings = $this->_getResourceToActionMappings();
+    	$mappings = $this->_getRestMappings();
     	$route = $this->getFrontController()->getRouter()->getCurrentRouteName();
-    	$method = $this->getRequest()->getMethod();
+    	$method = $this->getRequest()->getIntendedMethod();
     	
     	if(!isset($mappings[$route][$method]))
     	{
     		require_once 'Sitengine/Permiso/Backend/Groups/Exception.php';
     		$exception = new Sitengine_Permiso_Backend_Groups_Exception(
-    			'method not supported',
-    			Sitengine_Env::ERROR_NOT_SUPPORTED
+    			"'$method' not supported on route '$route'",
+    			Sitengine_Env::ERROR_NOT_IMPLEMENTED
     		);
     		throw $this->_prepareErrorHandler($exception);
     	}
@@ -382,21 +382,20 @@ abstract class Sitengine_Permiso_Backend_Groups_Controller extends Sitengine_Con
 			case Sitengine_Env::ERROR_BAD_REQUEST:
 				$handler = Sitengine_Error_Controller::ACTION_BAD_REQUEST;
 				break;
-			case Sitengine_Env::ERROR_UNAUTHORIZED:
-				$handler = Sitengine_Error_Controller::ACTION_UNAUTHORIZED;
+			case Sitengine_Env::ERROR_FORBIDDEN:
+				$handler = Sitengine_Error_Controller::ACTION_FORBIDDEN;
 				break;
-			case Sitengine_Env::ERROR_NOT_SUPPORTED:
-				$handler = Sitengine_Error_Controller::ACTION_NOT_SUPPORTED;
+			case Sitengine_Env::ERROR_NOT_IMPLEMENTED:
+				$handler = Sitengine_Error_Controller::ACTION_NOT_IMPLEMENTED;
 				break;
 			default:
-				$handler = Sitengine_Error_Controller::ACTION_INTERNAL;
+				$handler = Sitengine_Error_Controller::ACTION_INTERNAL_SERVER_ERROR;
 		}
 		
 		$pluginClass = 'Zend_Controller_Plugin_ErrorHandler';
 		if($this->getFrontController()->hasPlugin($pluginClass))
 		{
-			$plugin = $this->getFrontController()->getPlugin($pluginClass);
-			$plugin->setErrorHandlerAction($handler);
+			$this->getFrontController()->getPlugin($pluginClass)->setErrorHandlerAction($handler);
 		}
 		return $exception;
     }
@@ -408,7 +407,7 @@ abstract class Sitengine_Permiso_Backend_Groups_Controller extends Sitengine_Con
     {
         try {
         	$this->_start();
-        	if(!$this->getPermiso()->getAcl()->privateAccessGranted($this->getFrontController()->getPermisoPackage()->getAuthorizedGroups())) {
+        	if(!$this->getPermiso()->getAcl()->privateAccessGranted($this->getFrontController()->getPermiso()->getAuthorizedGroups())) {
                 return $this->_forwardToLogin();
             }
             
@@ -419,7 +418,7 @@ abstract class Sitengine_Permiso_Backend_Groups_Controller extends Sitengine_Con
             }
             /*
             $tables = array(
-                $this->getFrontController()->getPermisoPackage()->getGroupsTableName() => 'WRITE'
+                $this->getFrontController()->getPermiso()->getGroupsTableName() => 'WRITE'
             );
             # lock tables
             require_once 'Sitengine/Sql.php';
@@ -480,7 +479,7 @@ abstract class Sitengine_Permiso_Backend_Groups_Controller extends Sitengine_Con
     {
         try {
         	$this->_start();
-        	if(!$this->getPermiso()->getAcl()->privateAccessGranted($this->getFrontController()->getPermisoPackage()->getAuthorizedGroups())) {
+        	if(!$this->getPermiso()->getAcl()->privateAccessGranted($this->getFrontController()->getPermiso()->getAuthorizedGroups())) {
                 return $this->_forwardToLogin();
             }
             
@@ -534,7 +533,7 @@ abstract class Sitengine_Permiso_Backend_Groups_Controller extends Sitengine_Con
     {
         try {
         	$this->_start();
-        	if(!$this->getPermiso()->getAcl()->privateAccessGranted($this->getFrontController()->getPermisoPackage()->getAuthorizedGroups())) {
+        	if(!$this->getPermiso()->getAcl()->privateAccessGranted($this->getFrontController()->getPermiso()->getAuthorizedGroups())) {
                 return $this->_forwardToLogin();
             }
             
@@ -549,9 +548,9 @@ abstract class Sitengine_Permiso_Backend_Groups_Controller extends Sitengine_Con
             $rows = Sitengine_Controller_Request_Http::getSelectedRows($_POST);
             /*
             $tables = array(
-                $this->getFrontController()->getPermisoPackage()->getGroupsTableName() => 'WRITE',
-                $this->getFrontController()->getPermisoPackage()->getMembershipsTableName() => 'WRITE',
-                $this->getFrontController()->getPermisoPackage()->getCouldiesTableName() => 'WRITE'
+                $this->getFrontController()->getPermiso()->getGroupsTableName() => 'WRITE',
+                $this->getFrontController()->getPermiso()->getMembershipsTableName() => 'WRITE',
+                $this->getFrontController()->getPermiso()->getCouldiesTableName() => 'WRITE'
             );
             */
             if(sizeof($rows) > 0) {
@@ -612,7 +611,7 @@ abstract class Sitengine_Permiso_Backend_Groups_Controller extends Sitengine_Con
     {
         try {
         	$this->_start();
-        	if(!$this->getPermiso()->getAcl()->privateAccessGranted($this->getFrontController()->getPermisoPackage()->getAuthorizedGroups())) {
+        	if(!$this->getPermiso()->getAcl()->privateAccessGranted($this->getFrontController()->getPermiso()->getAuthorizedGroups())) {
                 return $this->_forwardToLogin();
             }
             
@@ -626,7 +625,7 @@ abstract class Sitengine_Permiso_Backend_Groups_Controller extends Sitengine_Con
             $rows = Sitengine_Controller_Request_Http::getModifiedRows($_POST);
             /*
             $tables = array(
-                $this->getFrontController()->getPermisoPackage()->getGroupsTableName() => 'WRITE'
+                $this->getFrontController()->getPermiso()->getGroupsTableName() => 'WRITE'
             );
             */
             if(sizeof($rows) > 0) {
@@ -638,7 +637,7 @@ abstract class Sitengine_Permiso_Backend_Groups_Controller extends Sitengine_Con
                 */
                 foreach($rows as $id => $data)
                 {
-                    $affectedRows = $modifier->updateFromList($id, $data, $this->getFrontController()->getPermisoPackage()->getAuthorizedGroups());
+                    $affectedRows = $modifier->updateFromList($id, $data, $this->getFrontController()->getPermiso()->getAuthorizedGroups());
                     if($affectedRows > 0) { $updated++; }
                     else { $this->_markedRows[$id] = 1; }
                 }
@@ -689,7 +688,7 @@ abstract class Sitengine_Permiso_Backend_Groups_Controller extends Sitengine_Con
     {
     	try {
     		$this->_start();
-			if(!$this->getPermiso()->getAcl()->privateAccessGranted($this->getFrontController()->getPermisoPackage()->getAuthorizedGroups())) {
+			if(!$this->getPermiso()->getAcl()->privateAccessGranted($this->getFrontController()->getPermiso()->getAuthorizedGroups())) {
 				return $this->_forwardToLogin();
 			}
 			$view = $this->_getIndexViewInstance();
@@ -715,7 +714,7 @@ abstract class Sitengine_Permiso_Backend_Groups_Controller extends Sitengine_Con
     {
     	try {
     		$this->_start();
-    		if(!$this->getPermiso()->getAcl()->privateAccessGranted($this->getFrontController()->getPermisoPackage()->getAuthorizedGroups())) {
+    		if(!$this->getPermiso()->getAcl()->privateAccessGranted($this->getFrontController()->getPermiso()->getAuthorizedGroups())) {
                 return $this->_forwardToLogin();
             }
             $view = $this->_getFormViewInstance();
@@ -742,7 +741,7 @@ abstract class Sitengine_Permiso_Backend_Groups_Controller extends Sitengine_Con
     {
     	try {
     		$this->_start();
-    		if(!$this->getPermiso()->getAcl()->privateAccessGranted($this->getFrontController()->getPermisoPackage()->getAuthorizedGroups())) {
+    		if(!$this->getPermiso()->getAcl()->privateAccessGranted($this->getFrontController()->getPermiso()->getAuthorizedGroups())) {
                 return $this->_forwardToLogin();
             }
 			if(!$this->getEntity()->start()) {

@@ -50,6 +50,7 @@ abstract class Sitengine_Permiso
     protected $_directory = null;
     protected $_acl = null;
     protected $_dac = null;
+    protected $_account = null;
     
     
     # properties loaded from config
@@ -100,6 +101,8 @@ abstract class Sitengine_Permiso
 		$this->_acl = new Sitengine_Permiso_Acl($this);
 		require_once 'Sitengine/Permiso/Dac.php';
 		$this->_dac = new Sitengine_Permiso_Dac($this);
+		require_once 'Sitengine/Permiso/Model/Account.php';
+		$this->_account = Sitengine_Permiso_Model_Account::getInstance($this);
 		
 		require_once 'Sitengine/Auth.php';
 		$this->_auth = Sitengine_Auth::getInstance();
@@ -152,7 +155,44 @@ abstract class Sitengine_Permiso
     
     
     
+    public function getDatabase()
+    {
+    	if($this->_database === null)
+		{
+			$message = 'start() must be called before calling getDatabase()';
+			require_once 'Kompakt/Shop/Exception.php';
+			throw new Kompakt_Shop_Exception($message);
+		}
+		return $this->_database;
+    }
     
+    
+    
+    protected $_language = 'en';
+    
+    
+    public function setLanguage($language)
+    {
+    	$this->_language = $language;
+    }
+    
+    
+    public function getLanguage()
+    {
+    	return $this->_language;
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    public function getEnv()
+    {
+    	return $this->_env;
+    }
     
     
     public function getRequest()
@@ -199,6 +239,12 @@ abstract class Sitengine_Permiso
     public function getDac()
     {
     	return $this->_dac;
+    }
+    
+    
+    public function getAccount()
+    {
+    	return $this->_account;
     }
     
     
@@ -303,6 +349,36 @@ abstract class Sitengine_Permiso
     
     
     
+    protected $_modelTranslator = null;
+    
+    
+    public function getModelTranslator()
+	{
+		if($this->_modelTranslator === null)
+		{
+			require_once 'Sitengine/Translate.php';
+			$this->_modelTranslator = new Sitengine_Translate(
+				Sitengine_Translate::AN_XML,
+				dirname(__FILE__).'/Permiso/Model/_Dictionary',
+				Sitengine_Env::LANGUAGE_EN,
+				array('scan' => Zend_Translate::LOCALE_FILENAME)
+			);
+		}
+		
+		if($this->_modelTranslator->isAvailable($this->getLanguage()))
+		{
+			$this->_modelTranslator->setLocale($this->getLanguage());
+		}
+		
+		return $this->_modelTranslator;
+	}
+    
+    
+    
+    
+    
+    
+    
     
     
     
@@ -313,30 +389,17 @@ abstract class Sitengine_Permiso
     {
     	if($this->_usersTable === null)
     	{
-    		if($this->_database === null)
-    		{
-    			$message = 'table init error - start() must be called first';
-    			require_once 'Sitengine/Permiso/Exception.php';
-    			throw new Sitengine_Permiso_Exception($message);
-    		}
-    		$this->_usersTable = $this->_getUsersTableInstance();
+    		require_once 'Sitengine/Permiso/Db/Users/Table.php';
+			$this->_usersTable = new Sitengine_Permiso_Db_Users_Table(
+				array(
+					'db' => $this->getDatabase(),
+					'rowClass' => 'Sitengine_Permiso_Db_Users_Row',
+					'rowsetClass' => 'Sitengine_Permiso_Db_Users_Rowset',
+					'permiso' => $this
+				)
+			);
     	}
     	return $this->_usersTable;
-    }
-    
-    
-    
-    protected function _getUsersTableInstance()
-    {
-    	require_once 'Sitengine/Permiso/Users/Table.php';
-		return new Sitengine_Permiso_Users_Table(
-			array(
-				'db' => $this->_database,
-				'rowClass' => 'Sitengine_Permiso_Users_Row',
-				'rowsetClass' => 'Sitengine_Permiso_Users_Rowset',
-				'permisoPackage' => $this
-			)
-		);
     }
     
     
@@ -349,30 +412,17 @@ abstract class Sitengine_Permiso
     {
     	if($this->_groupsTable === null)
     	{
-    		if($this->_database === null)
-    		{
-    			$message = 'table init error - start() must be called first';
-    			require_once 'Sitengine/Permiso/Exception.php';
-    			throw new Sitengine_Permiso_Exception($message);
-    		}
-    		$this->_groupsTable = $this->_getGroupsTableInstance();
+    		require_once 'Sitengine/Permiso/Db/Groups/Table.php';
+			$this->_groupsTable = new Sitengine_Permiso_Db_Groups_Table(
+				array(
+					'db' => $this->getDatabase(),
+					'rowClass' => 'Sitengine_Permiso_Db_Groups_Row',
+					'rowsetClass' => 'Sitengine_Permiso_Db_Groups_Rowset',
+					'permiso' => $this
+				)
+			);
     	}
     	return $this->_groupsTable;
-    }
-    
-    
-    
-    protected function _getGroupsTableInstance()
-    {
-    	require_once 'Sitengine/Permiso/Groups/Table.php';
-		return new Sitengine_Permiso_Groups_Table(
-			array(
-				'db' => $this->_database,
-				'rowClass' => 'Sitengine_Permiso_Groups_Row',
-				'rowsetClass' => 'Sitengine_Permiso_Groups_Rowset',
-				'permisoPackage' => $this
-			)
-		);
     }
     
     
@@ -386,30 +436,17 @@ abstract class Sitengine_Permiso
     {
     	if($this->_membershipsTable === null)
     	{
-    		if($this->_database === null)
-    		{
-    			$message = 'table init error - start() must be called first';
-    			require_once 'Sitengine/Permiso/Exception.php';
-    			throw new Sitengine_Permiso_Exception($message);
-    		}
-    		$this->_membershipsTable = $this->_getMembershipsTableInstance();
+    		require_once 'Sitengine/Permiso/Db/Memberships/Table.php';
+			$this->_membershipsTable = new Sitengine_Permiso_Db_Memberships_Table(
+				array(
+					'db' => $this->getDatabase(),
+					'rowClass' => 'Sitengine_Permiso_Db_Memberships_Row',
+					'rowsetClass' => 'Sitengine_Permiso_Db_Memberships_Rowset',
+					'permiso' => $this
+				)
+			);
     	}
     	return $this->_membershipsTable;
-    }
-    
-    
-    
-    protected function _getMembershipsTableInstance()
-    {
-    	require_once 'Sitengine/Permiso/Memberships/Table.php';
-		return new Sitengine_Permiso_Memberships_Table(
-			array(
-				'db' => $this->_database,
-				'rowClass' => 'Sitengine_Permiso_Memberships_Row',
-				'rowsetClass' => 'Sitengine_Permiso_Memberships_Rowset',
-				'permisoPackage' => $this
-			)
-		);
     }
     
 }

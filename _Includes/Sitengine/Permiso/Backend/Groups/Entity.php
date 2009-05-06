@@ -62,7 +62,7 @@ abstract class Sitengine_Permiso_Backend_Groups_Entity
             else { $this->_started = true; }
             
             $id = $this->_controller->getRequest()->get(Sitengine_Env::PARAM_ID);
-            $table = $this->_controller->getFrontController()->getPermisoPackage()->getGroupsTable();
+            $table = $this->_controller->getFrontController()->getPermiso()->getGroupsTable();
             $select = $table->select()->where('id = ?', $id);
         	$row = $table->fetchRow($select);
         	if($row !== null) { $this->_row = $row; }

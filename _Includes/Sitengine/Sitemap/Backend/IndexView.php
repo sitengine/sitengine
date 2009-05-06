@@ -121,19 +121,19 @@ abstract class Sitengine_Sitemap_Backend_IndexView extends Sitengine_View {
             $settingsElements = array();
             
             
-            ### translation element ###
-            $translations = $this->_controller->getTranslations();
-            $translations->setLanguage($this->_controller->getPreferences()->getTranslation());
-            if(!$translations->isDefault()) { $settingsIsActive = true; }
+            ### transcript element ###
+            $transcripts = $this->_controller->getTranscripts();
+            $transcripts->setLanguage($this->_controller->getPreferences()->getTranscript());
+            if(!$transcripts->isDefault()) { $settingsIsActive = true; }
             # set html input element
             $languages = array();
-            foreach($this->_controller->getTranslations()->get() as $symbol) {
+            foreach($this->_controller->getTranscripts()->get() as $symbol) {
             	$languages[$symbol] = $this->_controller->getTranslate()->translate('languages'.ucfirst($symbol));
             }
-            $e = new Sitengine_Form_Element(Sitengine_Env::PARAM_TRANSLATION, $this->_controller->getTranslations()->getSymbol());
-            $e->setId('settings'.Sitengine_Env::PARAM_TRANSLATION);
+            $e = new Sitengine_Form_Element(Sitengine_Env::PARAM_TRANSCRIPT, $this->_controller->getTranscripts()->getSymbol());
+            $e->setId('settings'.Sitengine_Env::PARAM_TRANSCRIPT);
             $e->setClass('settingsSelect');
-            $settingsElements[Sitengine_Env::PARAM_TRANSLATION] = $e->getSelect($languages);
+            $settingsElements[Sitengine_Env::PARAM_TRANSCRIPT] = $e->getSelect($languages);
             
             
             ### ipp element ###
@@ -266,8 +266,8 @@ abstract class Sitengine_Sitemap_Backend_IndexView extends Sitengine_View {
             $q .= ' file1ThumbnailHeight,';
             $q .= ' file1ThumbnailMime,';
             $q .= ' file1ThumbnailSize,';
-            $q .= ' IF(htmlLang'.$this->_controller->getTranslations()->getIndex().'="", htmlLang'.$this->_controller->getTranslations()->getDefaultIndex().', htmlLang'.$this->_controller->getTranslations()->getIndex().') AS html,';
-            $q .= ' IF(htmlLang'.$this->_controller->getTranslations()->getIndex().'="", 1, 0) AS translationMissing';
+            $q .= ' IF(htmlLang'.$this->_controller->getTranscripts()->getIndex().'="", htmlLang'.$this->_controller->getTranscripts()->getDefaultIndex().', htmlLang'.$this->_controller->getTranscripts()->getIndex().') AS html,';
+            $q .= ' IF(htmlLang'.$this->_controller->getTranscripts()->getIndex().'="", 1, 0) AS transcriptMissing';
             
             $q .= ' FROM';
             $q .= ' '.$this->_controller->getFrontController()->getSitemapPackage()->getTableSitemap();
