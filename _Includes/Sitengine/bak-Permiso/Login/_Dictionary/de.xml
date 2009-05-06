@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<dictionary name="dictionary">
-	<item name="labelsPageTitle">Gesperrter Bereich</item>
-	<item name="labelsInfo">Geben Sie einen für dieses System gültigen Benutzernamen und Passwort ein. Auf Gross- und Kleinschreibung muss geachtet werden.</item>
-	<item name="labelsOrgField">Organisation</item>
-	<item name="labelsLoginuField">Benutzer</item>
-	<item name="labelsLoginpField">Passwort</item>
-	<item name="labelsSubmit">Anmelden</item>
-</dictionary>

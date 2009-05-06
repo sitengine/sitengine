@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<dictionary name="dictionary">
-	<item name="statusErrorInsert">You could not be subscribed to our Newsletter</item>
-	<item name="statusOkInsert">You have successfully subscribed to our Newsletter</item>
-	<item name="labelsPageTitle"/>
-</dictionary>

@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<dictionary name="dictionary">
-	<item name="labelsPageTitle">Authorization required</item>
-	<item name="labelsInfo">Enter a user name and password that is valid for this system. Letters in passwords must be typed using the correct case. Make sure that caps lock is not accidently on.</item>
-	<item name="labelsOrgField">Organization</item>
-	<item name="labelsLoginuField">User</item>
-	<item name="labelsLoginpField">Password</item>
-	<item name="labelsSubmit">Sign In</item>
-</dictionary>
