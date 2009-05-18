@@ -356,6 +356,36 @@ abstract class Sitengine_Blog_Frontend_Blogs_Posts_ViewHelper extends Sitengine_
     public function getComments($parentId)
     {
     	try {
+    		require_once 'HTMLPurifier/Bootstrap.php';
+			
+			if(function_exists('spl_autoload_register') && function_exists('spl_autoload_unregister'))
+			{
+				// We need unregister for our pre-registering functionality
+				HTMLPurifier_Bootstrap::registerAutoload();
+				
+				if(function_exists('__autoload'))
+				{
+					// Be polite and ensure that userland autoload gets retained
+					spl_autoload_register('__autoload');
+				}
+			}
+			elseif(!function_exists('__autoload'))
+			{
+				function __autoload($class)
+				{
+					return HTMLPurifier_Bootstrap::autoload($class);
+				}
+			}
+			
+			$config = HTMLPurifier_Config::createDefault();
+			$config->set('Core', 'Encoding', 'UTF-8');
+			$config->set('HTML', 'Doctype', 'XHTML 1.0 Strict');
+			$config->set('AutoFormat', 'RemoveEmpty', true);
+			$config->set('AutoFormat', 'Linkify', false);
+			$config->set('HTML', 'AllowedElements', array('a', 'ul', 'li', 'img'));
+			$config->set('Cache', 'SerializerPath', $this->_controller->getEnv()->getMyTempDir().'/HTMLPurifier');
+			
+			
     		$table = $this->_controller->getFrontController()->getBlogPackage()->getCommentsTable();
     		$tableName = $this->_controller->getFrontController()->getBlogPackage()->getCommentsTableName();
     		$usersTableName = $this->_controller->getPermiso()->getUsersTableName();
@@ -386,6 +416,9 @@ abstract class Sitengine_Blog_Frontend_Blogs_Posts_ViewHelper extends Sitengine_
                 $route = $this->_controller->getFrontController()->getRouter()->getRoute(Sitengine_Blog_Frontend_Front::ROUTE_BLOGS_POSTS_COMMENTS_SHARP);
                 $row['uriDelete'] = $this->_controller->getRequest()->getBasePath().'/'.$route->assemble($args, true);
                 
+                $purifier = new HTMLPurifier($config);
+				$row['comment'] = $purifier->purify($item->comment);
+				
 				$list[] = $row;
             }
             return $list;

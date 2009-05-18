@@ -225,7 +225,7 @@ abstract class Sitengine_Blog_Frontend_Blogs_Posts_Comments_Modifier
 		if(strip_tags($val) != $val)
 		{
 			$message = $this->_controller->getTranslate()->translate('hintsCommentContainsHtml');
-			$this->_controller->getStatus()->addHint($name, $message);
+			#$this->_controller->getStatus()->addHint($name, $message);
 		}
         return (!$this->_controller->getStatus()->hasHints());
     }
