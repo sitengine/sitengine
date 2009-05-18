@@ -131,7 +131,7 @@ class Sitengine_DataObject implements Countable, Iterator
      * @param string $name
      * @return boolean
      */
-    protected function __isset($name)
+    public function __isset($name)
     {
         return isset($this->_data[$name]);
     }

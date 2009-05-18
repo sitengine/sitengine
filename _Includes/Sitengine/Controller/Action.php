@@ -20,7 +20,32 @@ require_once 'Zend/Controller/Action.php';
 
 abstract class Sitengine_Controller_Action extends Zend_Controller_Action
 {
-
+	
+	
+	public function __construct(
+		Zend_Controller_Request_Abstract $request,
+    	Zend_Controller_Response_Abstract $response,
+    	array $invokeArgs = array()
+	)
+	{
+		
+		if(!$request instanceof Sitengine_Controller_Request_Http)
+		{
+			require_once 'Sitengine/Controller/Exception.php';
+			throw new Sitengine_Controller_Exception('request must be an instance of Sitengine_Controller_Request_Http');
+		}
+		
+		if(!$response instanceof Zend_Controller_Response_Abstract)
+		{
+			require_once 'Sitengine/Controller/Exception.php';
+			throw new Sitengine_Controller_Exception('response must be an instance of Zend_Controller_Response_Abstract');
+		}
+		
+		parent::__construct($request, $response, $invokeArgs);
+	}
+	
+	
+	
 
 	protected function _goToAction($action)
     {

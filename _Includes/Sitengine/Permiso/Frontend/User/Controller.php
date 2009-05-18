@@ -102,9 +102,9 @@ abstract class Sitengine_Permiso_Frontend_User_Controller extends Sitengine_Cont
     
     
     public function __construct(
-    	Sitengine_Controller_Request_Http $request,
-    	Zend_Controller_Response_Http $response,
-    	array $invokeArgs
+    	Zend_Controller_Request_Abstract $request,
+    	Zend_Controller_Response_Abstract $response,
+    	array $invokeArgs = array()
     )
     {
         try {

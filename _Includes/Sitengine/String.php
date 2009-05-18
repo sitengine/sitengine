@@ -335,5 +335,20 @@ abstract class Sitengine_String
 		}
 	}
 	
+	
+	
+	
+	public static function lcFirst($s)
+	{
+		return preg_replace_callback(
+			'/^(\w)/',
+			create_function(
+				'$matches',
+				'return mb_convert_case($matches[1], MB_CASE_LOWER);'
+			),
+			$s
+		);
+	}
+	
 }
 ?>

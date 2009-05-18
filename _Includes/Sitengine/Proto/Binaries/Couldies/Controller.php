@@ -49,9 +49,9 @@ abstract class Sitengine_Proto_Binaries_Couldies_Controller extends Sitengine_Co
 			
 			
     public function __construct(
-    	Sitengine_Controller_Request_Http $request,
-    	Zend_Controller_Response_Http $response,
-    	array $invokeArgs
+    	Zend_Controller_Request_Abstract $request,
+    	Zend_Controller_Response_Abstract $response,
+    	array $invokeArgs = array()
     )
     {
         try {
