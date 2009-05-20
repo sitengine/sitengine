@@ -205,6 +205,42 @@ class Sitengine_Env
 	
 	
 	
+	protected $_urls = array();
+	
+	
+	public function addUrl($name, $url)
+	{
+		$this->_urls[$name] = $url;
+		return $this;
+	}
+	
+	
+	public function setUrls(array $urls)
+	{
+		$this->_urls = $urls;
+		return $this;
+	}
+	
+	
+	public function addUrls(array $urls)
+	{
+		$this->_urls = array_merge($this->_urls, $urls);
+		return $this;
+	}
+	
+	
+	public function getUrl($name)
+	{
+		return (isset($this->_urls[$name])) ? $this->_urls[$name] : null;
+	}
+	
+	
+	public function getUrls()
+	{
+		return $this->_urls;
+	}
+	
+	
 	
 	
 	
@@ -242,7 +278,7 @@ class Sitengine_Env
 	*/
 	
 	
-	
+	/*
 	protected $_basepaths = array();
 	
 	public function setBasepaths($basepaths)
@@ -268,7 +304,7 @@ class Sitengine_Env
 			throw new Sitengine_Exception('basepath "'.$name.'" has not been set');
 		}
 	}
-    
+    */
     
     
     
@@ -336,7 +372,7 @@ class Sitengine_Env
     
     
     
-    
+    /*
     protected $_uriSelfSubmit = '';
     
     public function setUriSelfSubmit($uriSelfSubmit)
@@ -345,7 +381,7 @@ class Sitengine_Env
     	return $this;
     }
     
-    /*
+    
     public function getUriSelfSubmit()
     {
     	return $this->_uriSelfSubmit;

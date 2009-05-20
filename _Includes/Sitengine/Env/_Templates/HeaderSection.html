@@ -54,7 +54,8 @@ if($url !== null) { $href = "<a href=\"$url\">"; $hrefend = '</a>'; }
 
 <?=$this->html($this->translate('labelsLastLogin'));?>: <?=$lastLogin;?> 
 //
-<a href="<?=$this->QUERIES->signOut;?>"><?=$this->html($this->translate('labelsSignOut'));?></a>
+<?$url = (isset($this->QUERIES->signOut)) ? $this->QUERIES->signOut : $this->env->getUrl('signOut');?>
+<a href="<?=$url;?>"><?=$this->html($this->translate('labelsSignOut'));?></a>
 </div>
 
 
