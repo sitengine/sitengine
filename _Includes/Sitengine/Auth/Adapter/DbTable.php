@@ -41,6 +41,13 @@ class Sitengine_Auth_Adapter_DbTable extends Zend_Auth_Adapter_DbTable
     }
     
     
+    public function setIdentity($value)
+    {
+        $this->_identity = mb_strtolower($value);
+        return $this;
+    }
+    
+    
 	
 	public function update($id, array $data)
     {
