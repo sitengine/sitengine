@@ -270,7 +270,7 @@ abstract class Sitengine_FormToMail_Default_Controller extends Sitengine_Control
     protected function _setSelfSubmitUri()
     {
 		$uriSelfSubmit = preg_replace('/\?.*/', '', $_SERVER['REQUEST_URI']);
-		$this->getEnv()->setUriSelfSubmit($uriSelfSubmit);
+		#$this->getEnv()->setUriSelfSubmit($uriSelfSubmit);
     }
     
     
@@ -402,6 +402,12 @@ abstract class Sitengine_FormToMail_Default_Controller extends Sitengine_Control
 			Sitengine_Debug::print_r($group);
 			
 			$view = $this->_getIndexViewInstance();
+			
+			$view->controller = $this;
+			
+			$view->env = $this->getEnv();
+			
+			$view->frontController = $this->getFrontController();
     		$view->translate()->setTranslator($this->getTranslate()->getAdapter());
     		$view->setHelperPath($this->getEnv()->getIncludesDir());
     		$view->setScriptPath(dirname($this->_indexViewTemplate));
@@ -427,6 +433,9 @@ abstract class Sitengine_FormToMail_Default_Controller extends Sitengine_Control
 				return $this->_forwardToLogin();
 			}
 			$view = $this->_getConfirmViewInstance();
+			$view->controller = $this;
+			$view->env = $this->getEnv();
+			$view->frontController = $this->getFrontController();
     		$view->translate()->setTranslator($this->getTranslate()->getAdapter());
     		$view->setHelperPath($this->getEnv()->getIncludesDir());
     		$view->setScriptPath(dirname($this->_confirmViewTemplate));

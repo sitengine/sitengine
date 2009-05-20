@@ -319,7 +319,7 @@ abstract class Sitengine_Blog_Backend_Blogs_Posts_Controller extends Sitengine_C
     protected function _setSelfSubmitUri()
     {
     	$uriSelfSubmit = preg_replace('/\?.*/', '', $_SERVER['REQUEST_URI']);
-		$this->getEnv()->setUriSelfSubmit($uriSelfSubmit);
+		#$this->getEnv()->setUriSelfSubmit($uriSelfSubmit);
     }
     
     
@@ -720,6 +720,9 @@ abstract class Sitengine_Blog_Backend_Blogs_Posts_Controller extends Sitengine_C
                 return $this->_forwardToLogin();
             }
 			$view = $this->_getIndexViewInstance();
+			$view->controller = $this;
+			$view->env = $this->getEnv();
+			$view->frontController = $this->getFrontController();
     		$view->translate()->setTranslator($this->getTranslate()->getAdapter());
     		$view->setHelperPath($this->getEnv()->getIncludesDir());
     		$view->setScriptPath(dirname($this->_templateIndexView));
@@ -778,6 +781,10 @@ abstract class Sitengine_Blog_Backend_Blogs_Posts_Controller extends Sitengine_C
 				$view = $this->_getFormTextViewInstance();
 				$template = $this->_templateFormTextView;
 			}
+			
+			$view->controller = $this;
+			$view->env = $this->getEnv();
+			$view->frontController = $this->getFrontController();
 			$view->translate()->setTranslator($this->getTranslate()->getAdapter());
 			$view->setHelperPath($this->getEnv()->getIncludesDir());
     		$view->setScriptPath(dirname($template));
@@ -836,6 +843,9 @@ abstract class Sitengine_Blog_Backend_Blogs_Posts_Controller extends Sitengine_C
 				$view = $this->_getFormTextViewInstance();
 				$template = $this->_templateFormTextView;
 			}
+			$view->controller = $this;
+			$view->env = $this->getEnv();
+			$view->frontController = $this->getFrontController();
 			#Sitengine_Debug::print_r($stored);
 			$view->setInputMode(Sitengine_Env::INPUTMODE_UPDATE);
 			$view->translate()->setTranslator($this->getTranslate()->getAdapter());

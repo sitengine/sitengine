@@ -61,6 +61,9 @@ abstract class Sitengine_FormToMail_Default_Mailer
     public function send()
     {
     	$view = $this->_controller->getMessageInstance();
+    	$view->controller = $this;
+    	$view->env = $this->getEnv();
+    	$view->frontController = $this->getFrontController();
 		$view->setHelperPath($this->_controller->getEnv()->getIncludesDir());
 		$view->setScriptPath(dirname($this->_controller->getMessageTemplate()));
 		$view->doctype()->setDoctype(Zend_View_Helper_Doctype::XHTML1_STRICT);

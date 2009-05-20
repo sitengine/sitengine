@@ -304,7 +304,7 @@ abstract class Sitengine_Blog_Frontend_Blogs_Posts_Controller extends Sitengine_
     protected function _setSelfSubmitUri()
     {
     	$uriSelfSubmit = preg_replace('/\?.*/', '', $_SERVER['REQUEST_URI']);
-		$this->getEnv()->setUriSelfSubmit($uriSelfSubmit);
+		#$this->getEnv()->setUriSelfSubmit($uriSelfSubmit);
     }
     
     
@@ -479,6 +479,9 @@ abstract class Sitengine_Blog_Frontend_Blogs_Posts_Controller extends Sitengine_
 					#return $this->_forwardToLogin();
 				}
 				$view = $this->_getIndexViewInstance();
+				$view->controller = $this;
+				$view->env = $this->getEnv();
+				$view->frontController = $this->getFrontController();
 				$view->translate()->setTranslator($this->getTranslate()->getAdapter());
 				$view->setHelperPath($this->getEnv()->getIncludesDir());
 				$view->setScriptPath(dirname($this->_templateIndexView));
@@ -512,30 +515,51 @@ abstract class Sitengine_Blog_Frontend_Blogs_Posts_Controller extends Sitengine_
 			
 			if($stored['type'] == Sitengine_Blog_Posts_Table::TYPE_PHOTO) {
 				$view = $this->_getPhotoViewInstance();
+				$view->controller = $this;
+				$view->env = $this->getEnv();
+				$view->frontController = $this->getFrontController();
 				$template = $this->_templatePhotoView;
 			}
 			else if($stored['type'] == Sitengine_Blog_Posts_Table::TYPE_GALLERY) {
 				$view = $this->_getGalleryViewInstance();
+				$view->controller = $this;
+				$view->env = $this->getEnv();
+				$view->frontController = $this->getFrontController();
 				$template = $this->_templateGalleryView;
 			}
 			else if($stored['type'] == Sitengine_Blog_Posts_Table::TYPE_QUOTE) {
 				$view = $this->_getQuoteViewInstance();
+				$view->controller = $this;
+				$view->env = $this->getEnv();
+				$view->frontController = $this->getFrontController();
 				$template = $this->_templateQuoteView;
 			}
 			else if($stored['type'] == Sitengine_Blog_Posts_Table::TYPE_LINK) {
 				$view = $this->_getLinkViewInstance();
+				$view->controller = $this;
+				$view->env = $this->getEnv();
+				$view->frontController = $this->getFrontController();
 				$template = $this->_templateLinkView;
 			}
 			else if($stored['type'] == Sitengine_Blog_Posts_Table::TYPE_AUDIO) {
 				$view = $this->_getAudioViewInstance();
+				$view->controller = $this;
+				$view->env = $this->getEnv();
+				$view->frontController = $this->getFrontController();
 				$template = $this->_templateAudioView;
 			}
 			else if($stored['type'] == Sitengine_Blog_Posts_Table::TYPE_VIDEO) {
 				$view = $this->_getVideoViewInstance();
+				$view->controller = $this;
+				$view->env = $this->getEnv();
+				$view->frontController = $this->getFrontController();
 				$template = $this->_templateVideoView;
 			}
 			else {
 				$view = $this->_getTextViewInstance();
+				$view->controller = $this;
+				$view->env = $this->getEnv();
+				$view->frontController = $this->getFrontController();
 				$template = $this->_templateTextView;
 			}
 			#Sitengine_Debug::print_r($stored);

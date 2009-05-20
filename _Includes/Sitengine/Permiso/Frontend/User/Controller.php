@@ -290,7 +290,7 @@ abstract class Sitengine_Permiso_Frontend_User_Controller extends Sitengine_Cont
     protected function _setSelfSubmitUri()
     {
 		$uriSelfSubmit = preg_replace('/\?.*/', '', $_SERVER['REQUEST_URI']);
-		$this->getEnv()->setUriSelfSubmit($uriSelfSubmit);
+		#$this->getEnv()->setUriSelfSubmit($uriSelfSubmit);
     }
     
     
@@ -444,6 +444,12 @@ abstract class Sitengine_Permiso_Frontend_User_Controller extends Sitengine_Cont
     		$this->getPermiso()->getAuth()->clearIdentity();
     		
     		$view = $this->_getFormViewInstance();
+    		
+    		$view->controller = $this;
+    		
+    		$view->env = $this->getEnv();
+    		
+    		$view->frontController = $this->getFrontController();
     		$view->translate()->setTranslator($this->getTranslate()->getAdapter());
     		$view->setHelperPath($this->getEnv()->getIncludesDir());
     		$view->setScriptPath(dirname($this->_templateJoinView));
@@ -516,6 +522,9 @@ abstract class Sitengine_Permiso_Frontend_User_Controller extends Sitengine_Cont
 				return $this->_forwardToLogin();
 			}
     		$view = $this->_getFormViewInstance();
+    		$view->controller = $this;
+    		$view->env = $this->getEnv();
+    		$view->frontController = $this->getFrontController();
     		$view->translate()->setTranslator($this->getTranslate()->getAdapter());
     		$view->setHelperPath($this->getEnv()->getIncludesDir());
     		$view->setScriptPath(dirname($this->_templateFormView));

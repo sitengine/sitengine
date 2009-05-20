@@ -366,6 +366,9 @@ abstract class Sitengine_ScaffoldSimple_Frontend_Homies_Controller extends Siten
 				return $this->_forwardToLogin();
 			}
 			$view = $this->_getIndexViewInstance();
+			$view->controller = $this;
+			$view->env = $this->getEnv();
+			$view->frontController = $this->getFrontController();
     		$view->translate()->setTranslator($this->getTranslate()->getAdapter());
     		$view->setHelperPath($this->getEnv()->getIncludesDir());
     		$view->setScriptPath(dirname($this->_templateIndexView));

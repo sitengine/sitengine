@@ -377,10 +377,10 @@ abstract class Sitengine_Sitemap_Backend_Controller extends Sitengine_Controller
 		);
 		$route = $this->getFrontController()->getRouter()->getRoute(Sitengine_Sitemap_Backend_Front::ROUTE_INDEX);
 		$uriSelfSubmit = $this->getRequest()->getBasePath().'/'.$route->assemble($args, true);
-		$this->getEnv()->setUriSelfSubmit($uriSelfSubmit);
+		#$this->getEnv()->setUriSelfSubmit($uriSelfSubmit);
 		*/
 		$uriSelfSubmit = preg_replace('/\?.*/', '', $_SERVER['REQUEST_URI']);
-		$this->getEnv()->setUriSelfSubmit($uriSelfSubmit);
+		#$this->getEnv()->setUriSelfSubmit($uriSelfSubmit);
     }
     
     
@@ -1339,6 +1339,9 @@ abstract class Sitengine_Sitemap_Backend_Controller extends Sitengine_Controller
 				return $this->_forwardToLogin();
 			}
 			$view = $this->_getIndexViewInstance();
+			$view->controller = $this;
+			$view->env = $this->getEnv();
+			$view->frontController = $this->getFrontController();
     		$view->translate()->setTranslator($this->getTranslate()->getAdapter());
     		$view->setHelperPath($this->getEnv()->getIncludesDir());
     		$view->setScriptPath(dirname($this->_templateIndexView));
@@ -1365,6 +1368,9 @@ abstract class Sitengine_Sitemap_Backend_Controller extends Sitengine_Controller
 				return $this->_forwardToLogin();
 			}
 			$view = $this->_getSearchViewInstance();
+			$view->controller = $this;
+			$view->env = $this->getEnv();
+			$view->frontController = $this->getFrontController();
     		$view->translate()->setTranslator($this->getTranslate()->getAdapter());
     		$view->setHelperPath($this->getEnv()->getIncludesDir());
     		$view->setScriptPath(dirname($this->_templateSearchView));
@@ -1394,6 +1400,9 @@ abstract class Sitengine_Sitemap_Backend_Controller extends Sitengine_Controller
 				return $this->_forwardToLogin();
 			}
 			$view = $this->_getFileFormViewInstance();
+			$view->controller = $this;
+			$view->env = $this->getEnv();
+			$view->frontController = $this->getFrontController();
     		$view->translate()->setTranslator($this->getTranslate()->getAdapter());
     		$view->setHelperPath($this->getEnv()->getIncludesDir());
     		$view->setScriptPath(dirname($this->_templateFileFormView));
@@ -1423,6 +1432,9 @@ abstract class Sitengine_Sitemap_Backend_Controller extends Sitengine_Controller
 				return $this->_forwardToLogin();
 			}
 			$view = $this->_getFileFormViewInstance();
+			$view->controller = $this;
+			$view->env = $this->getEnv();
+			$view->frontController = $this->getFrontController();
 			$view->setInputMode(Sitengine_Env::INPUTMODE_UPDATE);
     		$view->translate()->setTranslator($this->getTranslate()->getAdapter());
     		$view->setHelperPath($this->getEnv()->getIncludesDir());
@@ -1452,6 +1464,9 @@ abstract class Sitengine_Sitemap_Backend_Controller extends Sitengine_Controller
 				return $this->_forwardToLogin();
 			}
 			$view = $this->_getPageFormViewInstance();
+			$view->controller = $this;
+			$view->env = $this->getEnv();
+			$view->frontController = $this->getFrontController();
     		$view->translate()->setTranslator($this->getTranslate()->getAdapter());
     		$view->setHelperPath($this->getEnv()->getIncludesDir());
     		$view->setScriptPath(dirname($this->_templatePageFormView));
@@ -1481,6 +1496,9 @@ abstract class Sitengine_Sitemap_Backend_Controller extends Sitengine_Controller
 				return $this->_forwardToLogin();
 			}
 			$view = $this->_getPageFormViewInstance();
+			$view->controller = $this;
+			$view->env = $this->getEnv();
+			$view->frontController = $this->getFrontController();
 			$view->setInputMode(Sitengine_Env::INPUTMODE_UPDATE);
     		$view->translate()->setTranslator($this->getTranslate()->getAdapter());
     		$view->setHelperPath($this->getEnv()->getIncludesDir());
@@ -1511,6 +1529,9 @@ abstract class Sitengine_Sitemap_Backend_Controller extends Sitengine_Controller
 				return $this->_forwardToLogin();
 			}
 			$view = $this->_getMaskFormViewInstance();
+			$view->controller = $this;
+			$view->env = $this->getEnv();
+			$view->frontController = $this->getFrontController();
     		$view->translate()->setTranslator($this->getTranslate()->getAdapter());
     		$view->setHelperPath($this->getEnv()->getIncludesDir());
     		$view->setScriptPath(dirname($this->_templateMaskFormView));
@@ -1540,6 +1561,9 @@ abstract class Sitengine_Sitemap_Backend_Controller extends Sitengine_Controller
 				return $this->_forwardToLogin();
 			}
 			$view = $this->_getMaskFormViewInstance();
+			$view->controller = $this;
+			$view->env = $this->getEnv();
+			$view->frontController = $this->getFrontController();
 			$view->setInputMode(Sitengine_Env::INPUTMODE_UPDATE);
     		$view->translate()->setTranslator($this->getTranslate()->getAdapter());
     		$view->setHelperPath($this->getEnv()->getIncludesDir());
@@ -1570,6 +1594,9 @@ abstract class Sitengine_Sitemap_Backend_Controller extends Sitengine_Controller
 				return $this->_forwardToLogin();
 			}
 			$view = $this->_getLayerFormViewInstance();
+			$view->controller = $this;
+			$view->env = $this->getEnv();
+			$view->frontController = $this->getFrontController();
     		$view->translate()->setTranslator($this->getTranslate()->getAdapter());
     		$view->setHelperPath($this->getEnv()->getIncludesDir());
     		$view->setScriptPath(dirname($this->_templateLayerFormView));
@@ -1599,6 +1626,9 @@ abstract class Sitengine_Sitemap_Backend_Controller extends Sitengine_Controller
 				return $this->_forwardToLogin();
 			}
 			$view = $this->_getLayerFormViewInstance();
+			$view->controller = $this;
+			$view->env = $this->getEnv();
+			$view->frontController = $this->getFrontController();
 			$view->setInputMode(Sitengine_Env::INPUTMODE_UPDATE);
     		$view->translate()->setTranslator($this->getTranslate()->getAdapter());
     		$view->setHelperPath($this->getEnv()->getIncludesDir());
@@ -1629,6 +1659,9 @@ abstract class Sitengine_Sitemap_Backend_Controller extends Sitengine_Controller
 				return $this->_forwardToLogin();
 			}
 			$view = $this->_getSnippetFormViewInstance();
+			$view->controller = $this;
+			$view->env = $this->getEnv();
+			$view->frontController = $this->getFrontController();
     		$view->translate()->setTranslator($this->getTranslate()->getAdapter());
     		$view->setHelperPath($this->getEnv()->getIncludesDir());
     		$view->setScriptPath(dirname($this->_templateSnippetFormView));
@@ -1658,6 +1691,9 @@ abstract class Sitengine_Sitemap_Backend_Controller extends Sitengine_Controller
 				return $this->_forwardToLogin();
 			}
 			$view = $this->_getSnippetFormViewInstance();
+			$view->controller = $this;
+			$view->env = $this->getEnv();
+			$view->frontController = $this->getFrontController();
 			$view->setInputMode(Sitengine_Env::INPUTMODE_UPDATE);
     		$view->translate()->setTranslator($this->getTranslate()->getAdapter());
     		$view->setHelperPath($this->getEnv()->getIncludesDir());

@@ -268,6 +268,9 @@ abstract class Sitengine_Error_Controller extends Sitengine_Controller_Action
 				true
 			);
 			$view = $this->_getIndexViewInstance();
+			$view->controller = $this;
+			$view->env = $this->getEnv();
+			$view->frontController = $this->getFrontController();
 			$view->translate()->setTranslator($this->getTranslate()->getAdapter());
 			$view->setHelperPath($this->getEnv()->getIncludesDir());
     		$view->setScriptPath(dirname($this->_templateIndexView));
@@ -296,6 +299,9 @@ abstract class Sitengine_Error_Controller extends Sitengine_Controller_Action
 				true
 			);
 			$view = $this->_getIndexViewInstance();
+			$view->controller = $this;
+			$view->env = $this->getEnv();
+			$view->frontController = $this->getFrontController();
         	$view->translate()->setTranslator($this->getTranslate()->getAdapter());
         	$view->setHelperPath($this->getEnv()->getIncludesDir());
     		$view->setScriptPath(dirname($this->_templateIndexView));
@@ -324,6 +330,9 @@ abstract class Sitengine_Error_Controller extends Sitengine_Controller_Action
 				true
 			);
 			$view = $this->_getIndexViewInstance();
+			$view->controller = $this;
+			$view->env = $this->getEnv();
+			$view->frontController = $this->getFrontController();
         	$view->translate()->setTranslator($this->getTranslate()->getAdapter());
         	$view->setHelperPath($this->getEnv()->getIncludesDir());
     		$view->setScriptPath(dirname($this->_templateIndexView));
@@ -353,6 +362,9 @@ abstract class Sitengine_Error_Controller extends Sitengine_Controller_Action
 				true
 			);
 			$view = $this->_getIndexViewInstance();
+			$view->controller = $this;
+			$view->env = $this->getEnv();
+			$view->frontController = $this->getFrontController();
         	$view->translate()->setTranslator($this->getTranslate()->getAdapter());
         	$view->setHelperPath($this->getEnv()->getIncludesDir());
     		$view->setScriptPath(dirname($this->_templateIndexView));
@@ -381,6 +393,9 @@ abstract class Sitengine_Error_Controller extends Sitengine_Controller_Action
 				true
 			);
 			$view = $this->_getIndexViewInstance();
+			$view->controller = $this;
+			$view->env = $this->getEnv();
+			$view->frontController = $this->getFrontController();
         	$view->translate()->setTranslator($this->getTranslate()->getAdapter());
         	$view->setHelperPath($this->getEnv()->getIncludesDir());
     		$view->setScriptPath(dirname($this->_templateIndexView));
@@ -409,6 +424,9 @@ abstract class Sitengine_Error_Controller extends Sitengine_Controller_Action
 				true
 			);
 			$view = $this->_getIndexViewInstance();
+			$view->controller = $this;
+			$view->env = $this->getEnv();
+			$view->frontController = $this->getFrontController();
         	$view->translate()->setTranslator($this->getTranslate()->getAdapter());
         	$view->setHelperPath($this->getEnv()->getIncludesDir());
     		$view->setScriptPath(dirname($this->_templateIndexView));

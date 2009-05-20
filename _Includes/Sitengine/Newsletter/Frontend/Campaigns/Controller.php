@@ -279,7 +279,7 @@ abstract class Sitengine_Newsletter_Frontend_Campaigns_Controller extends Siteng
     protected function _setSelfSubmitUri()
     {
 		$uriSelfSubmit = preg_replace('/\?.*/', '', $_SERVER['REQUEST_URI']);
-		$this->getEnv()->setUriSelfSubmit($uriSelfSubmit);
+		#$this->getEnv()->setUriSelfSubmit($uriSelfSubmit);
     }
     
     
@@ -385,6 +385,9 @@ abstract class Sitengine_Newsletter_Frontend_Campaigns_Controller extends Siteng
     	try {
     		$this->_start();
 			$view = $this->_getIndexViewInstance();
+			$view->controller = $this;
+			$view->env = $this->getEnv();
+			$view->frontController = $this->getFrontController();
     		$view->translate()->setTranslator($this->getTranslate()->getAdapter());
     		$view->setHelperPath($this->getEnv()->getIncludesDir());
     		$view->setScriptPath(dirname($this->_templateIndexView));
@@ -410,6 +413,9 @@ abstract class Sitengine_Newsletter_Frontend_Campaigns_Controller extends Siteng
     		$this->_start();
     		$this->getEntity()->start();
 			$view = $this->_getDetailViewInstance();
+			$view->controller = $this;
+			$view->env = $this->getEnv();
+			$view->frontController = $this->getFrontController();
 			$view->setInputMode(Sitengine_Env::INPUTMODE_UPDATE);
     		$view->translate()->setTranslator($this->getTranslate()->getAdapter());
     		$view->setHelperPath($this->getEnv()->getIncludesDir());

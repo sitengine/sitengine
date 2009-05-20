@@ -273,7 +273,7 @@ abstract class Sitengine_Newsletter_Frontend_Subscriptions_Controller extends Si
     protected function _setSelfSubmitUri()
     {
 		$uriSelfSubmit = preg_replace('/\?.*/', '', $_SERVER['REQUEST_URI']);
-		$this->getEnv()->setUriSelfSubmit($uriSelfSubmit);
+		#$this->getEnv()->setUriSelfSubmit($uriSelfSubmit);
     }
     
     
@@ -430,6 +430,15 @@ abstract class Sitengine_Newsletter_Frontend_Subscriptions_Controller extends Si
     		
     		
     		$view = $this->_getSubscribeViewInstance();
+    		
+    		
+    		$view->controller = $this;
+    		
+    		
+    		$view->env = $this->getEnv();
+    		
+    		
+    		$view->frontController = $this->getFrontController();
 			$view->translate()->setTranslator($this->getTranslate()->getAdapter());
 			$view->setHelperPath($this->getEnv()->getIncludesDir());
     		$view->setScriptPath(dirname($this->_templateSubscribeView));
@@ -454,6 +463,15 @@ abstract class Sitengine_Newsletter_Frontend_Subscriptions_Controller extends Si
     		
     		
     		$view = $this->_getUnsubscribeViewInstance();
+    		
+    		
+    		$view->controller = $this;
+    		
+    		
+    		$view->env = $this->getEnv();
+    		
+    		
+    		$view->frontController = $this->getFrontController();
 			$view->translate()->setTranslator($this->getTranslate()->getAdapter());
 			$view->setHelperPath($this->getEnv()->getIncludesDir());
     		$view->setScriptPath(dirname($this->_templateUnsubscribeView));
@@ -478,6 +496,15 @@ abstract class Sitengine_Newsletter_Frontend_Subscriptions_Controller extends Si
     		
     		
     		$view = $this->_getConfirmOptinViewInstance();
+    		
+    		
+    		$view->controller = $this;
+    		
+    		
+    		$view->env = $this->getEnv();
+    		
+    		
+    		$view->frontController = $this->getFrontController();
 			$view->translate()->setTranslator($this->getTranslate()->getAdapter());
 			$view->setHelperPath($this->getEnv()->getIncludesDir());
     		$view->setScriptPath(dirname($this->_templateConfirmOptinView));
@@ -502,6 +529,15 @@ abstract class Sitengine_Newsletter_Frontend_Subscriptions_Controller extends Si
     		
     		
     		$view = $this->_getConfirmFinalViewInstance();
+    		
+    		
+    		$view->controller = $this;
+    		
+    		
+    		$view->env = $this->getEnv();
+    		
+    		
+    		$view->frontController = $this->getFrontController();
 			$view->translate()->setTranslator($this->getTranslate()->getAdapter());
 			$view->setHelperPath($this->getEnv()->getIncludesDir());
     		$view->setScriptPath(dirname($this->_templateConfirmFinalView));
@@ -526,6 +562,15 @@ abstract class Sitengine_Newsletter_Frontend_Subscriptions_Controller extends Si
     		
     		
     		$view = $this->_getConfirmUnsubscribeViewInstance();
+    		
+    		
+    		$view->controller = $this;
+    		
+    		
+    		$view->env = $this->getEnv();
+    		
+    		
+    		$view->frontController = $this->getFrontController();
 			$view->translate()->setTranslator($this->getTranslate()->getAdapter());
 			$view->setHelperPath($this->getEnv()->getIncludesDir());
     		$view->setScriptPath(dirname($this->_templateConfirmUnsubscribeView));

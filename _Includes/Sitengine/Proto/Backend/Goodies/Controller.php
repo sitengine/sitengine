@@ -314,7 +314,7 @@ abstract class Sitengine_Proto_Backend_Goodies_Controller extends Sitengine_Cont
     protected function _setSelfSubmitUri()
     {
 		$uriSelfSubmit = preg_replace('/\?.*/', '', $_SERVER['REQUEST_URI']);
-		$this->getEnv()->setUriSelfSubmit($uriSelfSubmit);
+		#$this->getEnv()->setUriSelfSubmit($uriSelfSubmit);
     }
     
     
@@ -897,6 +897,9 @@ abstract class Sitengine_Proto_Backend_Goodies_Controller extends Sitengine_Cont
 				return $this->_forwardToLogin();
 			}
 			$view = $this->_getIndexViewInstance();
+			$view->controller = $this;
+			$view->env = $this->getEnv();
+			$view->frontController = $this->getFrontController();
     		$view->translate()->setTranslator($this->getTranslate()->getAdapter());
     		$view->setHelperPath($this->getEnv()->getIncludesDir());
     		$view->setScriptPath(dirname($this->_templateIndexView));
@@ -923,6 +926,9 @@ abstract class Sitengine_Proto_Backend_Goodies_Controller extends Sitengine_Cont
                 return $this->_forwardToLogin();
             }
             $view = $this->_getFormViewInstance();
+            $view->controller = $this;
+            $view->env = $this->getEnv();
+            $view->frontController = $this->getFrontController();
 			$view->setInputMode(Sitengine_Env::INPUTMODE_INSERT);
     		$view->translate()->setTranslator($this->getTranslate()->getAdapter());
     		$view->setHelperPath($this->getEnv()->getIncludesDir());
@@ -953,6 +959,9 @@ abstract class Sitengine_Proto_Backend_Goodies_Controller extends Sitengine_Cont
 				return $this->_forwardToLogin();
 			}
 			$view = $this->_getFormViewInstance();
+			$view->controller = $this;
+			$view->env = $this->getEnv();
+			$view->frontController = $this->getFrontController();
 			$view->setInputMode(Sitengine_Env::INPUTMODE_UPDATE);
     		$view->translate()->setTranslator($this->getTranslate()->getAdapter());
     		$view->setHelperPath($this->getEnv()->getIncludesDir());
@@ -980,6 +989,9 @@ abstract class Sitengine_Proto_Backend_Goodies_Controller extends Sitengine_Cont
                 return $this->_forwardToLogin();
             }
 			$view = $this->_getUploadViewInstance();
+			$view->controller = $this;
+			$view->env = $this->getEnv();
+			$view->frontController = $this->getFrontController();
     		$view->translate()->setTranslator($this->getTranslate()->getAdapter());
     		$view->setHelperPath($this->getEnv()->getIncludesDir());
     		$view->setScriptPath(dirname($this->_templateUploadView));
@@ -1006,6 +1018,9 @@ abstract class Sitengine_Proto_Backend_Goodies_Controller extends Sitengine_Cont
                 return $this->_forwardToLogin();
             }
 			$view = $this->_getAssignViewInstance();
+			$view->controller = $this;
+			$view->env = $this->getEnv();
+			$view->frontController = $this->getFrontController();
     		$view->translate()->setTranslator($this->getTranslate()->getAdapter());
     		$view->setHelperPath($this->getEnv()->getIncludesDir());
     		$view->setScriptPath(dirname($this->_templateAssignView));

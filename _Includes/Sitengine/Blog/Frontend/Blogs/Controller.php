@@ -287,7 +287,7 @@ abstract class Sitengine_Blog_Frontend_Blogs_Controller extends Sitengine_Contro
     protected function _setSelfSubmitUri()
     {
     	$uriSelfSubmit = preg_replace('/\?.*/', '', $_SERVER['REQUEST_URI']);
-		$this->getEnv()->setUriSelfSubmit($uriSelfSubmit);
+		#$this->getEnv()->setUriSelfSubmit($uriSelfSubmit);
     }
     
     
@@ -431,6 +431,9 @@ abstract class Sitengine_Blog_Frontend_Blogs_Controller extends Sitengine_Contro
 			}
 			*/
 			$view = $this->_getIndexViewInstance();
+			$view->controller = $this;
+			$view->env = $this->getEnv();
+			$view->frontController = $this->getFrontController();
     		$view->translate()->setTranslator($this->getTranslate()->getAdapter());
     		$view->setHelperPath($this->getEnv()->getIncludesDir());
     		$view->setScriptPath(dirname($this->_templateIndexView));

@@ -286,6 +286,9 @@ abstract class Sitengine_Permiso_Login_Controller extends Sitengine_Controller_A
     	try {
     		$this->_start();
     		$view = $this->_getIndexViewInstance();
+    		$view->controller = $this;
+    		$view->env = $this->getEnv();
+    		$view->frontController = $this->getFrontController();
     		$view->translate()->setTranslator($this->getTranslate()->getAdapter());
     		$view->setHelperPath($this->getEnv()->getIncludesDir());
     		$view->setScriptPath(dirname($this->_templateIndexView));
