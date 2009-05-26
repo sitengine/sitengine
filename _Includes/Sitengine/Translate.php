@@ -40,6 +40,7 @@ class Sitengine_Translate extends Zend_Translate
 			}
 			$this->_adapter = new $adapter($data, $locale, $options);
 		}
+		/*
 		else if($adapter == self::AN_XLIFF)
     	{
     		require_once 'Sitengine/Translate/Adapter/Xliff.php';
@@ -51,6 +52,7 @@ class Sitengine_Translate extends Zend_Translate
 			}
 			$this->_adapter = new $adapter($data, $locale, $options);
 		}
+		*/
 		else {
     		parent::setAdapter($adapter, $data, $locale, $options);
     	}
