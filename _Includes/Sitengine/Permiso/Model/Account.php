@@ -82,8 +82,6 @@ class Sitengine_Permiso_Model_Account
     	{
     		$this->_started = true;
     		$this->_load();
-    		$this->getForm()->start($this);
-    		$this->getLoginForm()->start();
     	}
     	return $this;
     }
@@ -113,6 +111,21 @@ class Sitengine_Permiso_Model_Account
     {
     	return $this->_permiso;
     }
+    
+    
+    
+    public function setTranslator(Zend_Translate $translator)
+    {
+    	$this->_translator = $translator;
+    	return $this;
+    }
+    
+    
+	
+	protected function _getTranslator()
+	{
+		return $this->_translator;
+	}
     
     
     
@@ -157,10 +170,12 @@ class Sitengine_Permiso_Model_Account
     
     
     
-    public function login()
+    public function login(Sitengine_Permiso_Model_Account_LoginForm $loginForm)
     {
-    	$name = $this->getPermiso()->getRequest()->getPost($this->getLoginForm()->getNameParam());
-    	$password = md5($this->getPermiso()->getRequest()->getPost($this->getLoginForm()->getPasswordParam()));
+    	$loginForm->start();
+    	$loginForm->isValid($_POST);
+    	$name = $loginForm->getNameVal();
+    	$password = $this->_makePasswordHash($loginForm->getPasswordVal());
     	
     	if($name && $password)
     	{
@@ -175,18 +190,19 @@ class Sitengine_Permiso_Model_Account
     
     
     
-    public function create()
+    public function create(Sitengine_Permiso_Model_Account_Form $form)
     {
     	require_once 'Sitengine/Status.php';
 		$status = Sitengine_Status::getInstance();
 		
-    	if(!$this->_save())
+    	if(!$this->_save($form))
     	{
     		$status->set(
         		self::STATUS_CREATE_ERROR,
-        		$this->getPermiso()->getModelTranslator()->translate(self::STATUS_CREATE_ERROR),
+        		$this->_getTranslator()->translate(self::STATUS_CREATE_ERROR),
         		true
         	);
+        	$status->save();
 			return false;
     	}
     	
@@ -197,7 +213,7 @@ class Sitengine_Permiso_Model_Account
     	
     	$status->set(
 			self::STATUS_CREATE_OK,
-			$this->getPermiso()->getModelTranslator()->translate(self::STATUS_CREATE_OK),
+			$this->_getTranslator()->translate(self::STATUS_CREATE_OK),
 			false
 		);
 		
@@ -208,24 +224,25 @@ class Sitengine_Permiso_Model_Account
     
     
     
-    public function update()
+    public function update(Sitengine_Permiso_Model_Account_Form $form)
     {
     	require_once 'Sitengine/Status.php';
 		$status = Sitengine_Status::getInstance();
 		
-    	if(!$this->_save())
+    	if(!$this->_save($form))
     	{
     		$status->set(
         		self::STATUS_UPDATE_ERROR,
-        		$this->getPermiso()->getModelTranslator()->translate(self::STATUS_UPDATE_ERROR),
+        		$this->_getTranslator()->translate(self::STATUS_UPDATE_ERROR),
         		true
         	);
+        	$status->save();
 			return false;
     	}
     	
     	$status->set(
 			self::STATUS_UPDATE_OK,
-			$this->getPermiso()->getModelTranslator()->translate(self::STATUS_UPDATE_OK),
+			$this->_getTranslator()->translate(self::STATUS_UPDATE_OK),
 			false
 		);
 		
@@ -236,14 +253,14 @@ class Sitengine_Permiso_Model_Account
     
     
     
-    protected function _save()
+    protected function _save(Sitengine_Permiso_Model_Account_Form $form)
     {
     	require_once 'Sitengine/Status.php';
 		$status = Sitengine_Status::getInstance();
 		
-    	if(!$this->getForm()->isValid($_POST))
+    	if(!$form->isValid($_POST))
     	{
-    		foreach($this->getForm()->getMessages() as $key => $messages)
+    		foreach($form->getMessages() as $key => $messages)
 			{
 				$status->addHint($key, $messages);
 			}
@@ -252,19 +269,19 @@ class Sitengine_Permiso_Model_Account
     	
     	if($this->_getUserRow() === null)
     	{
-    		$this->_userRow = $this->getPermiso()->getUsersTable()->createRow($this->getForm()->getValues());
+    		$this->_userRow = $this->getPermiso()->getUsersTable()->createRow($form->getValues());
     		$this->_getUserRow()->setId(Sitengine_String::createId());
     		$this->_getUserRow()->setCdate($this->getPermiso()->getUsersTable()->getNow());
-    		$this->_getUserRow()->setPassword($this->_makePasswordHash($this->getForm()->getPasswordVal()));
+    		$this->_getUserRow()->setPassword($this->_makePasswordHash($form->getPasswordVal()));
     	}
     	else {
     		$password
-    			= ($this->getForm()->getPasswordVal())
-    			? $this->_makePasswordHash($this->getForm()->getPasswordVal())
+    			= ($form->getPasswordVal())
+    			? $this->_makePasswordHash($form->getPasswordVal())
     			: $this->_getUserRow()->getPassword()
     		;
     		
-    		$this->_getUserRow()->setFromArray($this->getForm()->getValues());
+    		$this->_getUserRow()->setFromArray($form->getValues());
     		$this->_getUserRow()->setPassword($password);
     	}
     	
@@ -287,7 +304,7 @@ class Sitengine_Permiso_Model_Account
     			default: $hint = self::HINT_UNKNOWN_ERROR; break;
     		}
     		
-            $message = $this->getPermiso()->getModelTranslator()->translate($hint);
+            $message = $this->_getTranslator()->translate($hint);
     		$status->addHint($hint, $message);
     		return false;
     	}
@@ -306,7 +323,11 @@ class Sitengine_Permiso_Model_Account
 	
 	public function __call($method, array $args)
     {
-    	$this->isLoaded();
+    	if(!$this->isLoaded())
+    	{
+    		require_once 'Kompakt/Shop/Exception.php';
+    		throw new Kompakt_Shop_Exception("account must load successfully before __call() can handle $method()");
+    	}
     	
         if(preg_match('/^get(\w*)/', $method, $matches))
         {

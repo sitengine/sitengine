@@ -1,0 +1,1 @@
+ALTER TABLE `permiso_users` CHANGE `timezone` `timezone` VARCHAR( 100 ) CHARACTER SET latin1 COLLATE latin1_bin NULL;

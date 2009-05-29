@@ -100,6 +100,7 @@ class Sitengine_Permiso_Model_Account_Form extends Zend_Form
 		}
 		
 		$this->getIntendedMethodElement()->setValue($method);
+		return $this;
     }
     
     
@@ -682,10 +683,10 @@ class Sitengine_Permiso_Model_Account_Form extends Zend_Form
      	$element
      		->clearDecorators()
 			->addDecorator('viewHelper')
-			->addValidator($notEmpty)
+			#->addValidator($notEmpty)
         	->setValue($default)
         	->setDisableTranslator(true) # increases performance
-        	->setRequired(true)
+        	#->setRequired(true)
         ;
         
         // set options directly for massively enhanced performance

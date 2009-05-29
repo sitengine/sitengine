@@ -103,6 +103,7 @@ abstract class Sitengine_Permiso
 		$this->_dac = new Sitengine_Permiso_Dac($this);
 		require_once 'Sitengine/Permiso/Model/Account.php';
 		$this->_account = Sitengine_Permiso_Model_Account::getInstance($this);
+		$this->_account->setTranslator($this->getModelTranslator());
 		
 		require_once 'Sitengine/Auth.php';
 		$this->_auth = Sitengine_Auth::getInstance();
