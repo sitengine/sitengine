@@ -14,14 +14,13 @@
  * @license    http://sitengine.org/license/new-bsd     New BSD License
  */
 
-
 require_once 'Sitengine/Amazon/S3/Response.php';
 
 
-class Sitengine_Amazon_S3_Object_Response_Acl extends Sitengine_Amazon_S3_Response
+class Sitengine_Amazon_S3_Bucket_Response_Acl extends Sitengine_Amazon_S3_Response
 {
     
-    public function getOwnerId()
+   public function getOwnerId()
     {
     	if(isset($this->_xml->Owner->ID))
 		{

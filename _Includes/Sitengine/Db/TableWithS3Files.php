@@ -236,7 +236,7 @@ class Sitengine_Db_TableWithS3Files extends Sitengine_Db_TableWithFiles
 			require_once 'Sitengine/Mime/Type.php';
 			$mime = Sitengine_Mime_Type::get($name);
 			$response = $rollbackObject->copy($object->getBucketName(), $key, $mime, array(), $this->_configs[$fileId]['amzHeaders']);
-			#print $response->getAmzErrorMessage();
+			#print $response->getErrorMessage();
 			if($response->isError())
 			{
 				require_once 'Sitengine/Exception.php';

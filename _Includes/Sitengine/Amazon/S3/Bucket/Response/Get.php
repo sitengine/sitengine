@@ -19,23 +19,8 @@ require_once 'Sitengine/Amazon/S3/Response.php';
 
 class Sitengine_Amazon_S3_Bucket_Response_Get extends Sitengine_Amazon_S3_Response
 {
-    
-    protected $_xml = null;
-    
-    
-    public function __construct(Zend_Http_Client $client)
-    {
-    	parent::__construct($client);
-    	
-    	if(!$client->getLastResponse()->isError())
-    	{
-    		$this->_xml = simplexml_load_string($client->getLastResponse()->getBody());
-    		#print_r($this->_xml);
-		}
-    }
-    
-    
-    
+	
+	
     public function isTruncated()
     {
     	if(isset($this->_xml->IsTruncated))

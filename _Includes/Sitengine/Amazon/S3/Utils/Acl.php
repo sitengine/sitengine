@@ -92,15 +92,6 @@ class Sitengine_Amazon_S3_Utils_Acl
 	
 	protected function _copyKeys(array $keys, $xml)
 	{
-		/*
-		foreach($keys as $key)
-		{
-			print $key."\n";
-		}
-		
-		return;
-		*/
-		
 		foreach($keys as $key)
 		{
 			$this->_countKeys++;
@@ -135,7 +126,7 @@ class Sitengine_Amazon_S3_Utils_Acl
 					
 					if($response->isError())
 					{
-						#print $response->getAmzErrorMessage()."\n";
+						#print $response->getErrorMessage()."\n";
 						require_once 'Sitengine/Amazon/S3/Utils/Exception.php';
 						throw new Sitengine_Amazon_S3_Utils_Exception('Set Acl Error');
 					}

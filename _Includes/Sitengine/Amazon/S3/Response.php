@@ -17,29 +17,14 @@
 class Sitengine_Amazon_S3_Response
 {
     
+    protected $_xml = null;
     protected $_client = null;
-    protected $_amzErrorCode = null;
-    protected $_amzErrorMessage = null;
     
     
     public function __construct(Zend_Http_Client $client)
     {
-    	if($client->getLastResponse()->isError())
-    	{
-    		$xml = simplexml_load_string($client->getLastResponse()->getBody());
-    		
-    		if(isset($xml->Code))
-			{
-				$this->_amzErrorCode = $xml->Code;
-			}
-			
-			if(isset($xml->Message))
-			{
-				$this->_amzErrorMessage = $xml->Message;
-			}
-    	}
-    	
     	$this->_client = $client;
+		$this->_xml = simplexml_load_string($client->getLastResponse()->getBody());
     }
     
     
@@ -47,6 +32,13 @@ class Sitengine_Amazon_S3_Response
     public function getClient()
     {
     	return $this->_client;
+    }
+    
+    
+    
+    public function getXml()
+    {
+    	return $this->_xml;
     }
     
     
@@ -67,19 +59,33 @@ class Sitengine_Amazon_S3_Response
     
     public function isError()
     {
-    	return $this->_client->getLastResponse()->isError();
+    	return (
+    		$this->_client->getLastResponse()->isError() ||
+    		$this->getErrorCode() !== null ||
+    		$this->getErrorMessage() !== null
+    	);
     }
     
     
-    public function getAmzErrorCode()
+    
+    public function getErrorCode()
     {
-    	return $this->_amzErrorCode;
+    	if(isset($this->_xml->Code))
+		{
+			return $this->_xml->Code;
+		}
+		return null;
     }
     
     
-    public function getAmzErrorMessage()
+    
+    public function getErrorMessage()
     {
-    	return $this->_amzErrorMessage;
+    	if(isset($this->_xml->Message))
+		{
+			return $this->_xml->Message;
+		}
+		return null;
     }
     
     

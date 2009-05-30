@@ -223,7 +223,7 @@ class Sitengine_Amazon_S3_Utils_Mirror
 					
 					if($response->isError())
 					{
-						#print $response->getAmzErrorMessage()."\n";
+						#print $response->getErrorMessage()."\n";
 						require_once 'Sitengine/Amazon/S3/Utils/Exception.php';
 						throw new Sitengine_Amazon_S3_Utils_Exception('Copy Error');
 					}

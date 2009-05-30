@@ -106,7 +106,101 @@ class Sitengine_Amazon_S3_Bucket
         	throw new Sitengine_Amazon_S3_Exception('head object error', $exception);
 		}
     }
-     
+    
+    
+    
+    
+    public function acl($acl = '')
+    {
+    	try {
+			require_once 'Sitengine/Amazon/S3/Header.php';
+			$header = new Sitengine_Amazon_S3_Header();
+			require_once 'Sitengine/Amazon/S3/Authentication.php';
+			$authentication = new Sitengine_Amazon_S3_Authentication($this->_connection);
+			
+			$verb = ($acl) ? 'PUT' : 'GET';
+			$date = gmdate(Sitengine_Amazon_S3::DATE_FORMAT);
+			$md5 = '';
+			$mime = '';
+			$key = '';
+			$query = 'acl';
+			
+			$authHeader = $authentication->generateSignature(
+				$verb,
+				$md5,
+				$mime,
+				$date,
+				'',
+				'/'.$this->_name.'/?acl'
+			);
+			
+			$header
+				->setType($verb)
+				->setUrl(Sitengine_Amazon_S3::getUrl($this->_name, $key, $query, $this->_cname, $this->_ssl))
+				->add('Authorization: '.$authHeader)
+				->add('Date: '.$date)
+			;
+			
+			$client = Sitengine_Amazon_S3::getClient($header, $acl);
+			$response = $client->request($verb);
+			#Sitengine_Debug::print_r($client->getLastRequest());
+			require_once 'Sitengine/Amazon/S3/Bucket/Response/Acl.php';
+			return new Sitengine_Amazon_S3_Bucket_Response_Acl($client);
+		}
+		catch (Exception $exception) {
+			require_once 'Sitengine/Amazon/S3/Exception.php';
+        	throw new Sitengine_Amazon_S3_Exception('head object error', $exception);
+		}
+    }
+    
+    
+    
+    
+    public function logging($logging = '')
+    {
+    	try {
+			require_once 'Sitengine/Amazon/S3/Header.php';
+			$header = new Sitengine_Amazon_S3_Header();
+			require_once 'Sitengine/Amazon/S3/Authentication.php';
+			$authentication = new Sitengine_Amazon_S3_Authentication($this->_connection);
+			
+			$verb = ($logging) ? 'PUT' : 'GET';
+			$date = gmdate(Sitengine_Amazon_S3::DATE_FORMAT);
+			$md5 = '';
+			$mime = '';
+			$key = '';
+			$query = 'logging';
+			
+			$authHeader = $authentication->generateSignature(
+				$verb,
+				$md5,
+				$mime,
+				$date,
+				'',
+				'/'.$this->_name.'/?logging'
+			);
+			
+			$header
+				->setType($verb)
+				->setUrl(Sitengine_Amazon_S3::getUrl($this->_name, $key, $query, $this->_cname, $this->_ssl))
+				->add('Authorization: '.$authHeader)
+				->add('Date: '.$date)
+			;
+			
+			$client = Sitengine_Amazon_S3::getClient($header, $logging);
+			$response = $client->request($verb);
+			#Sitengine_Debug::print_r($client->getLastRequest());
+			require_once 'Sitengine/Amazon/S3/Bucket/Response/Logging.php';
+			return new Sitengine_Amazon_S3_Bucket_Response_Logging($client);
+		}
+		catch (Exception $exception) {
+			require_once 'Sitengine/Amazon/S3/Exception.php';
+        	throw new Sitengine_Amazon_S3_Exception('head object error', $exception);
+		}
+    }
+    
+    
+    
     
     public function delete()
     {

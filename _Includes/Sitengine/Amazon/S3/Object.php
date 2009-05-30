@@ -107,9 +107,8 @@ class Sitengine_Amazon_S3_Object
 			return new Sitengine_Amazon_S3_Response($client);
 		}
 		catch (Exception $exception) {
-			throw $exception;
-			#require_once 'Sitengine/Amazon/S3/Exception.php';
-        	#throw new Sitengine_Amazon_S3_Exception('put object error', $exception);
+			require_once 'Sitengine/Amazon/S3/Exception.php';
+        	throw new Sitengine_Amazon_S3_Exception('put object error', $exception);
 		}
     }
     
@@ -167,9 +166,8 @@ class Sitengine_Amazon_S3_Object
 			return new Sitengine_Amazon_S3_Response($client);
 		}
 		catch (Exception $exception) {
-			throw $exception;
-			#require_once 'Sitengine/Amazon/S3/Exception.php';
-        	#throw new Sitengine_Amazon_S3_Exception('copy object error', $exception);
+			require_once 'Sitengine/Amazon/S3/Exception.php';
+        	throw new Sitengine_Amazon_S3_Exception('copy object error', $exception);
 		}
     }
     
@@ -212,9 +210,8 @@ class Sitengine_Amazon_S3_Object
 			return new Sitengine_Amazon_S3_Response($client);
 		}
 		catch (Exception $exception) {
-			throw $exception;
-			#require_once 'Sitengine/Amazon/S3/Exception.php';
-        	#throw new Sitengine_Amazon_S3_Exception('head object error', $exception);
+			require_once 'Sitengine/Amazon/S3/Exception.php';
+        	throw new Sitengine_Amazon_S3_Exception('head object error', $exception);
 		}
     }
     
@@ -256,9 +253,8 @@ class Sitengine_Amazon_S3_Object
 			return new Sitengine_Amazon_S3_Response($client);
 		}
 		catch (Exception $exception) {
-			throw $exception;
-			#require_once 'Sitengine/Amazon/S3/Exception.php';
-        	#throw new Sitengine_Amazon_S3_Exception('delete object error', $exception);
+			require_once 'Sitengine/Amazon/S3/Exception.php';
+        	throw new Sitengine_Amazon_S3_Exception('delete object error', $exception);
 		}
     }
     
@@ -266,7 +262,7 @@ class Sitengine_Amazon_S3_Object
     
     
     
-    public function acl($xml = '')
+    public function acl($acl = '')
     {
     	try {
 			require_once 'Sitengine/Amazon/S3/Header.php';
@@ -274,7 +270,7 @@ class Sitengine_Amazon_S3_Object
 			require_once 'Sitengine/Amazon/S3/Authentication.php';
 			$authentication = new Sitengine_Amazon_S3_Authentication($this->_connection);
 			
-			$verb = ($xml) ? 'PUT' : 'GET';
+			$verb = ($acl) ? 'PUT' : 'GET';
 			$date = gmdate(Sitengine_Amazon_S3::DATE_FORMAT);
 			$md5 = '';
 			$mime = '';
@@ -296,15 +292,14 @@ class Sitengine_Amazon_S3_Object
 				->add('Date: '.$date)
 			;
 			
-			$client = Sitengine_Amazon_S3::getClient($header, $xml);
+			$client = Sitengine_Amazon_S3::getClient($header, $acl);
 			$response = $client->request($verb);
 			require_once 'Sitengine/Amazon/S3/Object/Response/Acl.php';
 			return new Sitengine_Amazon_S3_Object_Response_Acl($client);
 		}
 		catch (Exception $exception) {
-			throw $exception;
-			#require_once 'Sitengine/Amazon/S3/Exception.php';
-        	#throw new Sitengine_Amazon_S3_Exception('head object error', $exception);
+			require_once 'Sitengine/Amazon/S3/Exception.php';
+        	throw new Sitengine_Amazon_S3_Exception('head object error', $exception);
 		}
     }
     
