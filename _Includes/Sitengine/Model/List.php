@@ -46,7 +46,7 @@ class Sitengine_Model_List implements Iterator, Countable
     
     
     
-    protected function _applyOptions(
+    protected function _applySelectOptions(
     	Zend_Db_Table_Select $select,
     	array $options = array()
     )

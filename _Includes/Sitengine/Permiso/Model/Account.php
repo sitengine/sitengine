@@ -33,67 +33,65 @@ class Sitengine_Permiso_Model_Account
     protected $_started = false;
     protected $_form = null;
     protected $_loginForm = null;
-	protected static $_instance = null;
     
-
-    /**
-     * Singleton pattern implementation makes "new" unavailable
-     *
-     * @return void
-     */
-    private function __construct()
-    {}
-
-    /**
-     * Singleton pattern implementation makes "clone" unavailable
-     *
-     * @return void
-     */
-    private function __clone()
-    {}
-
-    /**
-     * Singleton pattern implementation
-     *
-     * @return Sitengine_Permiso_Model_Account
-     */
+    
+    # singleton implementation that allows parent class to not be a singleton
+	protected static $_instance = null;
+	protected static $_singletoned = false;
+	
+	
+	
+	public function __construct(Sitengine_Permiso $permiso)
+    {
+    	if(!self::$_singletoned)
+    	{
+    		require_once 'Kompakt/Shop/Exception.php';
+			throw new Kompakt_Shop_Exception('singleton - no direct instantiation');
+    	}
+    	
+    	$this->_permiso = $permiso;
+    }
+    
+    
+    
+    public function __clone()
+    {
+    	require_once 'Kompakt/Shop/Exception.php';
+		throw new Kompakt_Shop_Exception('singleton - no cloning');
+    }
+    
+    
+    
     public static function getInstance(Sitengine_Permiso $permiso)
     {
         if(self::$_instance === null)
         {
-            self::$_instance = new self();
-            self::$_instance->_init($permiso);
+        	self::$_singletoned = true;
+            self::$_instance = new self($permiso);
         }
         return self::$_instance;
     }
     
     
     
-    protected function _init(Sitengine_Permiso $permiso)
-    {
-    	$this->_permiso = $permiso;
-    }
-    
-    
-    
-    public function start()
+    public function startById($id)
     {
     	if(!$this->_started)
     	{
     		$this->_started = true;
-    		$this->_load();
+    		$this->_loadById($id);
     	}
     	return $this;
     }
     
     
     
-    protected function _load()
+    protected function _loadById($id)
     {
-    	if($this->_userRow === null && $this->getPermiso()->getAuth()->hasIdentity())
+    	if(!$this->isLoaded() && $id)
 		{
 			$usersTable = $this->getPermiso()->getUsersTable();
-			$this->_userRow = $usersTable->fetchRow($usersTable->select()->where("name = ?", $this->getPermiso()->getAuth()->getIdentity()));
+			$this->_userRow = $usersTable->fetchRow($usersTable->select()->where("id = ?", $id));
 		}
 		return $this->isLoaded();
     }
@@ -144,7 +142,6 @@ class Sitengine_Permiso_Model_Account
 			$options = array(
 				'permiso' => $this->getPermiso()
 			);
-			
 			require_once 'Sitengine/Permiso/Model/Account/Form.php';
 			$this->_form = new Sitengine_Permiso_Model_Account_Form($options);
 		}
@@ -205,11 +202,6 @@ class Sitengine_Permiso_Model_Account
         	$status->save();
 			return false;
     	}
-    	
-    	$this->getPermiso()->getAuth()->reauthenticate(
-			$this->getPermiso()->getAuthAdapter(),
-			$this->_getUserRow()->getId()
-		);
     	
     	$status->set(
 			self::STATUS_CREATE_OK,
@@ -331,7 +323,7 @@ class Sitengine_Permiso_Model_Account
     	
         if(preg_match('/^get(\w*)/', $method, $matches))
         {
-        	// forward simple getters to address row
+        	// forward simple getters to user row
 			return $this->_getUserRow()->__call($method, $args);
         }
         require_once 'Kompakt/Shop/Exception.php';
