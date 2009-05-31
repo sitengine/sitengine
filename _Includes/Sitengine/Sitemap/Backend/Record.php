@@ -56,7 +56,7 @@ abstract class Sitengine_Sitemap_Backend_Record extends Sitengine_Record {
             'length' => 100,
             'method' => 'width',
             'jpgQuality' => 50,
-            'transColor' => $transColor
+            'transColor' => null, #'transColor' => $transColor
         );
     }
     

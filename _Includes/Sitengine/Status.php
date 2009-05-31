@@ -68,6 +68,7 @@ class Sitengine_Status
         $this->_code = $code;
         $this->_message = $message;
         $this->_isError = $isError;
+        return $this;
     }
     
     
@@ -95,6 +96,7 @@ class Sitengine_Status
         	'messages' => (is_array($messages)) ? $messages : array($messages),
         	'errors' => (is_array($errors)) ? $errors : array($errors)
         );
+        return $this;
     }
     
     
@@ -119,6 +121,7 @@ class Sitengine_Status
     public function clearHints()
     {
         $this->_hints = array();
+        return $this;
     }
     
     
@@ -141,6 +144,7 @@ class Sitengine_Status
         $namespace->{'message'} = $this->_message;
         $namespace->{'isError'} = $this->_isError;
         $namespace->{'hints'} = $this->_hints;
+        return $this;
     }
     
     
@@ -165,6 +169,7 @@ class Sitengine_Status
     		$this->_hints = $namespace->{'hints'};
     		unset($namespace->{'hints'});
     	}
+    	return $this;
     }
     
     
@@ -174,6 +179,7 @@ class Sitengine_Status
     	$this->_message = null;
     	$this->_isError = false;
     	$this->_hints = array();
+    	return $this;
     }
     
     

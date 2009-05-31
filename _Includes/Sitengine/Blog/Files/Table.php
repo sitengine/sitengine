@@ -77,7 +77,7 @@ class Sitengine_Blog_Files_Table extends Sitengine_Db_TableWithS3Files
 				'length' => $this->_blogPackage->getFileFile1ThumbnailResizeLength(),
 				'method' => $this->_blogPackage->getFileFile1ThumbnailResizeMethod(),
 				'jpgQuality' => $this->_blogPackage->getFileFile1ThumbnailResizeJpgQuality(),
-				'transColor' => $this->_blogPackage->getRequest()->getPost('transColor')
+				'transColor' => null, #'transColor' => $this->_blogPackage->getRequest()->getPost('transColor')
 			);
     	}
     	else {

@@ -1561,6 +1561,28 @@ class Sitengine_Env
     	return $this->_moderatorSenderMail;
     }
     
+    
+    
+    public function __call($method, array $args)
+    {
+        require_once 'Kompakt/Shop/Exception.php';
+    	throw new Kompakt_Shop_Exception("Unrecognized method: ".__METHOD__);
+    }
+    
+    /*
+    protected $_config = null;
+
+    public function setConfig($config)
+    {
+    	$this->_config = $config;
+    	return $this;
+    }
+    
+    public function getConfig()
+    {
+    	return $this->_config;
+    }
+    */
 }
 
 ?>

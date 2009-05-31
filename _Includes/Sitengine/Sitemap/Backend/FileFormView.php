@@ -129,7 +129,7 @@ abstract class Sitengine_Sitemap_Backend_FileFormView extends Sitengine_View {
                 #'titleLang0' => '',
                 #'titleLang1' => '',
                 #'titleLang2' => '',
-                #'transColor' => '51/255/0'
+                #'transColor' => null, #'transColor' => '51/255/0'
             );
             
             $fieldsOnOff = array(

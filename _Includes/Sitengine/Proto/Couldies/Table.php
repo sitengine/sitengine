@@ -70,7 +70,7 @@ class Sitengine_Proto_Couldies_Table extends Sitengine_Db_TableWithFiles
 				'length' => 100,
 				'method' => 'width',
 				'jpgQuality' => 100,
-				'transColor' => $transColor
+				'transColor' => null, #'transColor' => $transColor
 			);
 			$this->_configs[self::FILE1FITTED_ID] = array(
 				'dir' => $this->_protoPackage->getCouldyFile1FittedDir(),
@@ -78,7 +78,7 @@ class Sitengine_Proto_Couldies_Table extends Sitengine_Db_TableWithFiles
 				'length' => 400,
 				'method' => 'width',
 				'jpgQuality' => 100,
-				'transColor' => $transColor
+				'transColor' => null, #'transColor' => $transColor
 			);
 			
 			# upload 2
@@ -92,7 +92,7 @@ class Sitengine_Proto_Couldies_Table extends Sitengine_Db_TableWithFiles
 				'length' => 100,
 				'method' => 'width',
 				'jpgQuality' => 100,
-				'transColor' => $transColor
+				'transColor' => null, #'transColor' => $transColor
 			);
 			$this->_configs[self::FILE2FITTED_ID] = array(
 				'dir' => $this->_protoPackage->getCouldyFile2FittedDir(),
@@ -100,7 +100,7 @@ class Sitengine_Proto_Couldies_Table extends Sitengine_Db_TableWithFiles
 				'length' => 400,
 				'method' => 'width',
 				'jpgQuality' => 100,
-				'transColor' => $transColor
+				'transColor' => null, #'transColor' => $transColor
 			);
     	}
     	else {

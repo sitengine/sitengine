@@ -177,8 +177,9 @@ class Sitengine_Permiso_Model_Account_Form extends Zend_Form
         	->setValue($default)
         ;
         
-        if($this->getPermiso()->getRequest()->getPost($this->getNameParam()))
-		{
+        #if($this->getPermiso()->getRequest()->getPost($this->getNameParam()))
+        #if((isset($_POST[$this->getNameParam()]))
+		#{
 			require_once 'Zend/Validate/EmailAddress.php';
 			$emailAddress = new Zend_Validate_EmailAddress();
 			$emailAddressMessage = $this->getTranslator()->translate('accountFormHintNameEmailAddressInvalid');
@@ -197,7 +198,7 @@ class Sitengine_Permiso_Model_Account_Form extends Zend_Form
 			$element
 				->addValidator($emailAddress)
 			;
-		}
+		#}
 		
         $this->addElement($element);
         return $this;
@@ -249,7 +250,8 @@ class Sitengine_Permiso_Model_Account_Form extends Zend_Form
 			->setRenderPassword(true)
         ;
         
-        $password = $this->getPermiso()->getRequest()->getPost($this->getPasswordParam());
+        #$password = $this->getPermiso()->getRequest()->getPost($this->getPasswordParam());
+        $password = (isset($_POST[$this->getPasswordParam()])) ? $_POST[$this->getPasswordParam()] : null;
         
         if($isInsert || $password)
 		{
@@ -336,8 +338,10 @@ class Sitengine_Permiso_Model_Account_Form extends Zend_Form
 			->setRenderPassword(true)
         ;
         
-        $password = $this->getPermiso()->getRequest()->getPost($this->getPasswordParam());
-        $passwordVerify = $this->getPermiso()->getRequest()->getPost($this->getPasswordVerifyParam());
+        #$password = $this->getPermiso()->getRequest()->getPost($this->getPasswordParam());
+        #$passwordVerify = $this->getPermiso()->getRequest()->getPost($this->getPasswordVerifyParam());
+        $password = (isset($_POST[$this->getPasswordParam()])) ? $_POST[$this->getPasswordParam()] : null;
+        $passwordVerify = (isset($_POST[$this->getPasswordVerifyParam()])) ? $_POST[$this->getPasswordVerifyParam()] : null;
         
         if($isInsert || $password)
 		{

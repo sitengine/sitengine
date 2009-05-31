@@ -78,8 +78,8 @@ abstract class Sitengine_Permiso
     )
     {
 		$this->_env = $env;
-		$this->_request = $request;
-		$this->_response = $response;
+		#$this->_request = $request;
+		#$this->_response = $response;
 		$this->_config = $config;
 		if($config !== null)
 		{
