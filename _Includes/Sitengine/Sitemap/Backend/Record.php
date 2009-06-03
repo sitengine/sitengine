@@ -44,7 +44,7 @@ abstract class Sitengine_Sitemap_Backend_Record extends Sitengine_Record {
         $this->_files[self::FILE1THUMBNAIL_ID] = array();
         
         # files
-        $transColor = $this->_controller->getRequest()->getPost('transColor');
+        #$transColor = $this->_controller->getRequest()->getPost('transColor');
         
         $this->_configs[self::FILE1ORIGINAL_ID] = array(
             'dir' => $this->_controller->getFrontController()->getSitemapPackage()->getFile1OriginalDir(),

@@ -57,7 +57,7 @@ class Sitengine_Proto_Shouldies_Table extends Sitengine_Db_TableWithFiles
 			$this->_files[self::FILE2THUMBNAIL_ID] = array();
 			$this->_files[self::FILE2FITTED_ID] = array();
 			
-			$transColor = $this->_protoPackage->getRequest()->getPost('transColor');
+			#$transColor = $this->_protoPackage->getRequest()->getPost('transColor');
 			
 			# upload 1
 			$this->_configs[self::FILE1ORIGINAL_ID] = array(
