@@ -33,6 +33,11 @@ class Sitengine_Env
     protected static $_instance = null;
     
     
+    const PRODUCTION = 'production';
+    const STAGING = 'staging';
+    const DEVELOPMENT = 'development';
+    
+    
     const METHOD_GET = 'GET';
     const METHOD_POST = 'POST';
     const METHOD_PUT = 'PUT';
@@ -127,6 +132,26 @@ class Sitengine_Env
     const ERROR_METHOD_NOT_SUPPORTED = 405;
     const ERROR_INTERNAL_SERVER_ERROR = 500;
     const ERROR_NOT_IMPLEMENTED = 501;
+    
+    
+    
+    
+    protected $_type = null;
+    
+    public function setType($type)
+    {
+    	$this->_type = $type;
+    	return $this;
+    }
+    
+    
+    public function getType()
+    {
+    	return $this->_type;
+    }
+    
+    
+    
     
 	protected $_customConfigs = array();
 	
@@ -1569,7 +1594,22 @@ class Sitengine_Env
     	throw new Kompakt_Shop_Exception("Unrecognized method: ".__METHOD__);
     }
     
-    /*
+    
+    
+    protected $_bootstrap = null;
+
+    public function setBootstrap($bootstrap)
+    {
+    	$this->_bootstrap = $bootstrap;
+    	return $this;
+    }
+    
+    public function getBootstrap()
+    {
+    	return $this->_bootstrap;
+    }
+    
+    
     protected $_config = null;
 
     public function setConfig($config)
@@ -1582,7 +1622,10 @@ class Sitengine_Env
     {
     	return $this->_config;
     }
-    */
+    
+    
+    
+    
 }
 
 ?>
